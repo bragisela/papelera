@@ -1,0 +1,11 @@
+revisar total
+falta cuenta total, registro de Compras
+
+
+comprobantes agregar campo importe bruto
+
+tabla inventario no va
+
+presupuesto
+
+agregar porc utilidad en listado productos
