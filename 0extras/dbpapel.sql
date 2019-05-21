@@ -6,6 +6,9 @@
 -- Tiempo de generación: 28-02-2019 a las 03:32:49
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
+DROP DATABASE IF EXISTS dbpapel;
+CREATE DATABASE dbpapel;
+USE dbpapel;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -24,9 +27,63 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+
+CREATE TABLE `roles` (
+  `codRol` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombreRol` varchar(50) NOT NULL,
+  PRIMARY KEY (`CodRol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`codRol`, `nombreRol`) VALUES
+(1, 'administrador'),
+(2, 'usuario');
+
+CREATE TABLE `permisos` (
+  `codPermiso` int(10) NOT NULL,
+  codRol int(10)  UNSIGNED NOT NULL,
+  `tipoAcceso` varchar(10) NOT NULL,
+  `pagina` varchar(50) NOT NULL,
+  PRIMARY KEY (`codPermiso`),
+  FOREIGN KEY (`CodRol`) REFERENCES `roles` (`CodRol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO permisos (`codPermiso`, `codRol`,`tipoAcceso`, `pagina`) VALUES
+(1,1,'','clientesPHP'),
+(2,1,'','clientesModificarPHP'),
+(3,1,'','comprasBuscarPHP'),
+(4,1,'','historialPrecioPHP'),
+(5,1,'','pedidosBuscarPHP'),
+(6,1,'','productosPHP'),
+(7,1,'','productosModificarPHP'),
+(8,1,'','ProveedoresPHP'),
+(9,1,'','proveedoresModificarPHP'),
+(10,1,'','ProveedoresPHP'),
+(11,1,'','proveedoresModificarPHP'),
+(12,1,'','registroComprasPHP'),
+(13,1,'','registroPedidosPHP'),
+(14,1,'','reportesPHP');
 --
 -- Estructura de tabla para la tabla `clientes`
---
+
+
+CREATE TABLE `usuarios` (
+  `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `CodRol` int(10)  UNSIGNED NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `contrasenia` varchar(50) NOT NULL,
+  PRIMARY KEY (`idUsuario`),
+  FOREIGN KEY (`CodRol`) REFERENCES `roles` (`CodRol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO usuarios (`idUsuario`, `CodRol`,`usuario`,`contrasenia`) VALUES
+(1,1,'admin','admin'),
+(2,2,'usuario','usuario');
+
 
 CREATE TABLE `clientes` (
   `idCliente` int(10) NOT NULL,

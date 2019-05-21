@@ -1,6 +1,6 @@
 <?php
 include("sesion.php");
-$pagina='nombrePaginaPHP';
+$pagina='reportesPHP';
 include("encabezado.php");
 include("sql/conexion.php");
 //include("segguridad.php");

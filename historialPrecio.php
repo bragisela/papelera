@@ -1,6 +1,6 @@
 <?php
 include("sesion.php");
-$pagina='productosModificarPHP';
+$pagina='historialPrecioPHP';
 include("encabezado.php");
 include("sql/conexion.php");
 $idProducto = $_REQUEST['idProducto'];

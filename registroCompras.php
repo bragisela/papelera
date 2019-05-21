@@ -1,6 +1,6 @@
 <?php
 include("sesion.php");
-$pagina='clientesPHP';
+$pagina='registroComprasPHP';
 include("encabezado.php");
 include("sql/conexion.php");
 include("sql/insert.php");
