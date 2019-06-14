@@ -43,4 +43,26 @@
     return $sqlProveedoresModificar;
   }
 
+  function updatePrecios($idProducto,$porcUtil){
+
+    $sqlPrecioAct="UPDATE precios SET
+    porcUtil = '$porcUtil'
+
+
+    WHERE idProducto='$idProducto'";
+
+    return $sqlPrecioAct;
+  }
+
+  function updatePreciosInd($idPrecio,$porcUtil){
+
+    $sqlPrecioInd="UPDATE precios SET
+    porcUtil = '$porcUtil'
+
+
+    WHERE idPrecio='$idPrecio'";
+
+    return $sqlPrecioInd;
+  }
+
 ?>

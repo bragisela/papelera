@@ -5,11 +5,14 @@ include("encabezado.php");
 include("sql/conexion.php");
 $idProducto = $_REQUEST['idProducto'];
 
+
 include('sql/mostrarProductos.php');
 include('sql/mostrarPrecio.php');
 include('sql/update.php');
 //include("segguridad.php");
 include("menu.php");
+$fech = Date("Y-m-d");
+$Fecha = Date("Y-m-d H:i:s");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -49,10 +52,12 @@ include("menu.php");
               <table class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
                 <thead>
                   <tr>
-                    <th class="th-sm">Importe</th>
-                    <th class="th-sm">% Descuento</th>
+                    <th class="th-sm">Costo</th>
                     <th class="th-sm">% Utilidad</th>
+                    <th class="th-sm">Venta</th>
+                    <th class="th-sm">Ganancia</th>
                     <th class="th-sm">Fecha</th>
+                    <th class="th-sm" style="width: 20px;">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -60,11 +65,14 @@ include("menu.php");
                   while($rowMPrecio = $mostrarPrecios->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                   <tr>
-                    <td><?php echo $rowMPrecio['importe']; ?></td>
-                    <td><?php echo $rowMPrecio['porcDesc']; ?></td>
+                    <?php  $rowMPrecio['idPrecio']; $idPrecio = $rowMPrecio['idPrecio']; ?>
+                    <td>$ <?php echo ($rowMPrecio['importe']-(($rowMPrecio['porcDesc']*$rowMPrecio['importe'])/100)); ?></td>
                     <td><?php echo $rowMPrecio['porcUtil']; ?></td>
+                    <td>$ <?php echo ($rowMPrecio['porcUtil']*$rowMPrecio['importe']/100+($rowMPrecio['importe'])); ?></td>
+                    <td>$ <?php echo ($rowMPrecio['porcUtil']*$rowMPrecio['importe']/100+($rowMPrecio['importe'])) - ($rowMPrecio['importe']-(($rowMPrecio['porcDesc']*$rowMPrecio['importe'])/100)); ?></td>
                     <td><?php $date = new DateTime($rowMPrecio['fecha']);
                       echo $date->format('d/m/Y H:i:s');?></td>
+                    <td><?php echo " <a href='precioModificar.php?idPrecio=$idPrecio&idProducto=$idProducto' ><i class='far fa-edit'></i></a>"; ?></td>
                   </tr>
                 <?php
                   }
@@ -77,16 +85,16 @@ include("menu.php");
           </form>
             <!--FIN -->
             <?php
-              // if (isset($_POST['Actualizar'])){
-              //   $sqlMProducto = updateProductos($_POST['codProducto'],$_POST['descripcion'],$_POST['material'],$_POST['unidadEmbalaje'],$_POST['medidas'],$_POST['unidadMedida'],$idProducto);
-              //   $conexiones->exec($sqlMProducto);
-              //
-              //   echo "<script language='javascript'>";
-              //   echo "alert('El Producto se Actualizo correctamente');";
-              //   echo "window.location='productos.php';";
-              //   echo "</script>";
-              //
-              // }
+               if (isset($_POST['Actualizar'])){
+                 $sqlPrec = updatePrecios($idProducto,$_POST['porcUtil']);
+                 $conexiones->exec($sqlPrec);
+
+                 echo "<script language='javascript'>";
+                 echo "alert('El precio del producto fue modificado exitosamente');";
+                 echo "window.location='historialPrecio.php?idProducto=$idProducto';";
+                echo "</script>";
+
+               }
             ?>
         </div>
       </div>
