@@ -65,20 +65,20 @@ include("menu.php");
                 </thead>
                 <tbody>
                   <?php
-                  while($rowProveedores = $resultadoProveedor->fetch(PDO::FETCH_ASSOC)) {
+                  while($rowComprobante= $resultadoCompras->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
-                      <td><?php echo $rowProveedores['nombre'];  $idProveedor = $rowProveedores['idProveedor']; ?></td>
-                      <td><?php echo $rowProveedores['domicilio']; ?></td>
-                      <td><?php echo $rowProveedores['cuit']; ?></td>
-                      <td><?php echo $rowProveedores['condicionIVA']; ?></td>
+                      <td><?php $idComprobante = $rowComprobante['idComprobante']; echo $rowComprobante['nroComprobante']; ?></td>
+                      <td><?php echo $rowComprobante['nombre']; ?></td>
+                      <td><?php echo $rowComprobante['domicilio']; ?></td>
+                      <td><?php echo $rowComprobante['fecha']; ?></td>
                       <td><?php echo "
-                      <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Editar'><i class='far fa-edit'></i></a>
-                      <a onClick='pDelete(this);' id='$idProveedor' title='Imprimir'><i class='fas fa-print'></i></a>
-                      <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Eliminar'><i class='far fa-trash-alt'></i></a>
-                      <a onClick='pDelete(this);' id='$idProveedor' title='Remito'><i class='fas fa-sticky-note'></i></a>
-                      <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Factura'><i class='fas fa-file-invoice-dollar'></i></a>
-                      <a onClick='pDelete(this);' id='$idProveedor' title='Historial'><i class='fas fa-history'></i></a>"; ?></td>
+                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Editar'><i class='far fa-edit'></i></a>
+                      <a onClick='pDelete(this);' id='$idComprobante' title='Imprimir'><i class='fas fa-print'></i></a>
+                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Eliminar'><i class='far fa-trash-alt'></i></a>
+                      <a onClick='pDelete(this);' id='$idComprobante' title='Remito'><i class='fas fa-sticky-note'></i></a>
+                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Factura'><i class='fas fa-file-invoice-dollar'></i></a>
+                      <a onClick='pDelete(this);' id='$idComprobante' title='Historial'><i class='fas fa-history'></i></a>"; ?></td>
                     </tr>
                     <?php
                   }
