@@ -74,11 +74,12 @@ include("menu.php");
                       <td><?php echo $rowComprobante['fecha']; ?></td>
                       <td><?php echo "
                       <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Editar'><i class='far fa-edit'></i></a>
-                      <a onClick='pDelete(this);' id='$idComprobante' title='Imprimir'><i class='fas fa-print'></i></a>
-                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Eliminar'><i class='far fa-trash-alt'></i></a>
-                      <a onClick='pDelete(this);' id='$idComprobante' title='Remito'><i class='fas fa-sticky-note'></i></a>
+
+                      <a  target='_blank' href='imprimir.php?idComprobante=$idComprobante' title='Imprimir'><i class='fas fa-print'></i></a>
+                      <a  id='$idComprobante' title='Remito'><i class='fas fa-sticky-note'></i></a>
                       <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Factura'><i class='fas fa-file-invoice-dollar'></i></a>
-                      <a onClick='pDelete(this);' id='$idComprobante' title='Historial'><i class='fas fa-history'></i></a>"; ?></td>
+                      <a onClick='pDelete(this);' id='$idComprobante' title='Historial'><i class='fas fa-history'></i></a>
+                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Eliminar'><i class='far fa-trash-alt'></i></a>" ; ?></td>
                     </tr>
                     <?php
                   }

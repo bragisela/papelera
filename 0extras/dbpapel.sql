@@ -6,6 +6,9 @@
 -- Tiempo de generación: 10-06-2019 a las 21:45:50
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.2.15
+drop database if exists dbpapel;
+create database dbpapel;
+use dbpapel;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
