@@ -248,6 +248,7 @@ include("menu.php");
                                 </div>
                               </div>
                             </div>
+                            <!--
                             <div class="row">
                               <div class="col-md-4 mb-4">
                                 <div class="md-form">
@@ -255,16 +256,16 @@ include("menu.php");
                                   <label for="form8" class="">Descripcion</label>
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                               <div class="col-md-4 mb-4">
                                 <div class="md-form">
                                   <input type="text" id="form9" class="form-control" name="importe" value="<?php echo $cierreTotal ?>">
                                   <label for="form9" class="" >Importe</label>
-
                                 </div>
                               </div>
                             </div>
+                                                         
 
                             <input type="submit" name="GuardarCierreCaja" value="Guardar" class="btn btn-success">
                             <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='caja.php'">
