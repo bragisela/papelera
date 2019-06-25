@@ -65,4 +65,15 @@
     return $sqlPrecioInd;
   }
 
+  function updateCajaIngreso($idCaja,$descripcion,$importe){
+
+    $sqlCajaModificar="UPDATE caja SET
+    descripcion = '$descripcion',
+    importe = '$importe'
+
+    WHERE idCaja='$idCaja'";
+
+    return $sqlCajaModificar;
+  }
+
 ?>

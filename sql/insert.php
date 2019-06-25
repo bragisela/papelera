@@ -36,4 +36,28 @@
 
     return $sqlComprobantes;
   }
+  function insertCajaIngreso($fecha,$tipoMov, $descripcion, $importe){
+
+    $sqlCajaIngreso = "INSERT INTO caja(fecha,tipoMov, descripcion, importe)
+
+    VALUES ('$fecha','I', '$descripcion', '$importe')";
+
+    return $sqlCajaIngreso;
+  }
+  function insertCajaEgreso($fecha,$tipoMov, $descripcion, $importe){
+
+    $sqlCajaEgreso = "INSERT INTO caja(fecha,tipoMov, descripcion, importe)
+
+    VALUES ('$fecha','E', '$descripcion','-' '$importe')";
+
+    return $sqlCajaEgreso;
+  }
+  function cierreCaja($fecha,$tipoMov, $descripcion, $importe){
+
+    $sqlCierreCaja = "INSERT INTO caja(fecha,tipoMov, descripcion, importe)
+
+    VALUES ('$fecha','E', 'Cierre de Caja','-' '$importe')";
+
+    return $sqlCierreCaja;
+  }
 ?>
