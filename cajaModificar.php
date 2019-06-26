@@ -25,14 +25,12 @@ include("menu.php");
         <h3 class="card-header primary-color white-text">Modificacion de Caja</h3>
         <div class="card-body">
           <form method="post">
-            <!--<div class="row">
+            <div class="row">
                <div class="col-md-4 mb-4">
                 <div class="md-form">
                   <input type="date" class="form-control" name="fecha" value="<?php echo $fech; ?>">
                 </div>
-              </div> //por ahora sin fecha
-            -->
-
+              </div> 
             <div class="col-md-4 mb-4">
               <div class="md-form">
                 <input type="text" id="form1" class="form-control" name="descripcion" value="<?php echo $PDescripcion; ?>">
