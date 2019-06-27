@@ -46,14 +46,14 @@ include("menu.php");
                       <div class="card-body">
                         <form method="post">
                           <div class="row">
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-12 mb-4">
                               <div class="md-form">
                                 <input type="date" class="form-control" name="fecha" value="<?php echo $fecha; ?>">
                               </div>
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-12 mb-4">
                               <div class="md-form">
                                 <input type="text" id="form3" class="form-control" name="descripcion">
                                 <label for="form3" class="">Descripcion</label>
@@ -61,7 +61,7 @@ include("menu.php");
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-12 mb-4">
                               <div class="md-form">
                                 <input type="text" id="form4" class="form-control" name="importe">
                                 <label for="form4" class="">Importe</label>
@@ -112,14 +112,14 @@ include("menu.php");
                       <div class="card-body">
                         <form method="post">
                           <div class="row">
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-12 mb-4">
                               <div class="md-form">
                                 <input type="date" class="form-control" name="fecha" value="<?php echo $fecha; ?>">
                               </div>
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-12 mb-4">
                               <div class="md-form">
                                 <input type="text" id="form5" class="form-control" name="descripcion">
                                 <label for="form5" class="">Descripcion</label>
@@ -127,7 +127,7 @@ include("menu.php");
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-12 mb-4">
                               <div class="md-form">
                                 <input type="text" id="form6" class="form-control" name="importe">
                                 <label for="form6" class="">Importe</label>
@@ -242,7 +242,7 @@ include("menu.php");
                         <div class="card-body">
                           <form method="post">
                             <div class="row">
-                              <div class="col-md-4 mb-4">
+                              <div class="col-md-12 mb-4">
                                 <div class="md-form">
                                   <input type="date" class="form-control" name="fecha" value="<?php echo $fecha; ?>">
                                 </div>
@@ -258,7 +258,7 @@ include("menu.php");
                               </div>
                             </div> -->
                             <div class="row">
-                              <div class="col-md-4 mb-4">
+                              <div class="col-md-12 mb-4">
                                 <div class="md-form">
                                   <input type="text" id="form9" class="form-control" name="importe" value="<?php echo $cierreTotal ?>">
                                   <label for="form9" class="" >Importe</label>
