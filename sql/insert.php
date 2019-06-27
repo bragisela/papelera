@@ -60,4 +60,18 @@
 
     return $sqlCierreCaja;
   }
+
+  function temporalaCaja(){
+
+    $sqlTemporalaCaja = "INSERT INTO caja SELECT * FROM cajatemporal";
+
+    return $sqlTemporalaCaja;
+  }
+
+  function resetCajaTemporal(){
+
+    $sqlResetTemporal = "DELETE * FROM cajatemporal";
+
+    return $sqlResetTemporal;
+  }
 ?>

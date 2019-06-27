@@ -274,7 +274,12 @@ include("menu.php");
                             <?php
                               if (isset($_POST['GuardarCierreCaja'])){
                                 $sqlCierreCaja = cierreCaja($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe']);
+                                $sqlTemporalaCaja = temporalaCaja();
+                                $sqlResetTemporal = resetCajaTemporal();
                                 $conexiones->exec($sqlCierreCaja);
+                                $conexiones->exec($sqlTemporalaCaja);
+                                $conexiones->exec($sqlResetTemporal);
+
 
                                 echo "<script language='javascript'>";
                                 echo "alert('El Cierre de Caja se realizó correctamente');";
