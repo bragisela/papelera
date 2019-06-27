@@ -70,7 +70,7 @@
 
   function resetCajaTemporal(){
 
-    $sqlResetTemporal = "TRUNCATE TABLE cajatemporal";
+    $sqlResetTemporal = "DELETE FROM cajatemporal";
 
     return $sqlResetTemporal;
   }
