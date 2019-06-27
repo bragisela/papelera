@@ -16,6 +16,9 @@
   $resultadoCaja = $conexiones->query("SELECT fecha,idCaja,descripcion,tipoMov,importe FROM caja ORDER BY idCaja")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
-  $totalCaja = $conexiones->query("SELECT SUM(importe) as totalCaja FROM caja")
+  $resultadoCajaTemporal = $conexiones->query("SELECT fecha,idCaja,descripcion,tipoMov,importe FROM cajaTemporal ORDER BY idCaja")
+  or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
+
+  $totalCaja = $conexiones->query("SELECT SUM(importe) as totalCajaTemporal FROM caja")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 ?>
