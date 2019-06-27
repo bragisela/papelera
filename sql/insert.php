@@ -38,7 +38,7 @@
   }
   function insertCajaIngreso($fecha,$tipoMov, $descripcion, $importe){
 
-    $sqlCajaIngreso = "INSERT INTO cajaTemporal(fecha,tipoMov, descripcion, importe)
+    $sqlCajaIngreso = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe)
 
     VALUES ('$fecha','I', '$descripcion', '$importe')";
 
@@ -46,7 +46,7 @@
   }
   function insertCajaEgreso($fecha,$tipoMov, $descripcion, $importe){
 
-    $sqlCajaEgreso = "INSERT INTO cajaTemporal(fecha,tipoMov, descripcion, importe)
+    $sqlCajaEgreso = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe)
 
     VALUES ('$fecha','E', '$descripcion','-' '$importe')";
 
@@ -54,7 +54,7 @@
   }
   function cierreCaja($fecha,$tipoMov, $descripcion, $importe){
 
-    $sqlCierreCaja = "INSERT INTO cajaTemporal(fecha,tipoMov, descripcion, importe)
+    $sqlCierreCaja = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe)
 
     VALUES ('$fecha','E', 'Cierre de Caja','-' '$importe')";
 

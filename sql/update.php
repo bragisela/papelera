@@ -67,7 +67,18 @@
 
   function updateCajaIngreso($idCaja,$descripcion,$importe){
 
-    $sqlCajaModificar="UPDATE caja SET
+    $sqlCajaModificar="UPDATE cajatemporal SET
+    descripcion = '$descripcion',
+    importe = '$importe'
+
+    WHERE idCaja='$idCaja'";
+
+    return $sqlCajaModificar;
+  }
+
+  function updateCajaEgreso($idCaja,$descripcion,$importe){
+
+    $sqlCajaModificar="UPDATE cajatemporal SET
     descripcion = '$descripcion',
     importe = '$importe'
 

@@ -172,7 +172,7 @@ include("menu.php");
                 </thead>
                 <tbody>
                   <?php
-                  while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
+                  while($rowCaja = $resultadoCajaTemporal->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
                       <td><?php echo ($rowCaja['fecha']) ;?></td>
@@ -209,10 +209,10 @@ include("menu.php");
                <td>Saldo de Caja  </td>
                <td>
                  <?php global $cierreTotal;
-                 while($rowCajaTotal = $totalCaja->fetch(PDO::FETCH_ASSOC)) {
+                 while($rowCajaTotal = $totalCajaTemporal->fetch(PDO::FETCH_ASSOC)) {
 
 
-                    $cierreTotal = ($rowCajaTotal['totalCaja']);
+                    $cierreTotal = ($rowCajaTotal['totalCajaTemporal']);
                     echo '$' . number_format ($cierreTotal,2,",",".");
 
 
@@ -265,7 +265,7 @@ include("menu.php");
                                 </div>
                               </div>
                             </div>
-                                                         
+
 
                             <input type="submit" name="GuardarCierreCaja" value="Guardar" class="btn btn-success">
                             <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='caja.php'">

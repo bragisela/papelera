@@ -30,7 +30,7 @@ include("menu.php");
                 <div class="md-form">
                   <input type="date" class="form-control" name="fecha" value="<?php echo $fech; ?>">
                 </div>
-              </div> 
+              </div>
             <div class="col-md-4 mb-4">
               <div class="md-form">
                 <input type="text" id="form1" class="form-control" name="descripcion" value="<?php echo $PDescripcion; ?>">
@@ -63,8 +63,8 @@ include("menu.php");
             <!--FIN -->
             <?php
               if (isset($_POST['GuardarEgreso'])){
-                $sqlMProducto = updateProductos($_POST['codProducto'],$_POST['descripcion'],$_POST['material'],$_POST['unidadEmbalaje'],$_POST['medidas'],$_POST['unidadMedida'],$idCaja);
-                $conexiones->exec($sqlMProducto);
+                $sqlMCaja = updateCajaEgreso($idCaja,$_POST['descripcion'],$_POST['importe']);
+                $conexiones->exec($sqlMCaja);
 
                 echo "<script language='javascript'>";
                 echo "alert('El Producto se Actualizo correctamente');";

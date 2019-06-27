@@ -4,7 +4,7 @@
 
   $idCaja = $_REQUEST['idCaja'];
 
-  $conexiones->exec("DELETE FROM cajaTemporal WHERE idCaja='$idCaja'")or die ('Problemas en la Baja'.mysqli_error($conexiones));
+  $conexiones->exec("DELETE FROM cajatemporal WHERE idCaja='$idCaja'")or die ('Problemas en la Baja'.mysqli_error($conexiones));
 
   header("Location:../caja.php");
 ?>
