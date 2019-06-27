@@ -273,7 +273,8 @@ include("menu.php");
                             <!--FIN -->
                             <?php
                               if (isset($_POST['GuardarCierreCaja'])){
-                                $sqlCierreCaja = cierreCaja($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe']);
+                                $nroCaja++;
+                                $sqlCierreCaja = cierreCaja($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe'],$_POST['nroCaja']);
                                 $sqlTemporalaCaja = temporalaCaja();
                                 $sqlResetTemporal = resetCajaTemporal();
                                 $conexiones->exec($sqlCierreCaja);
