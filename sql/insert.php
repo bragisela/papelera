@@ -74,4 +74,21 @@
 
     return $sqlResetTemporal;
   }
+
+  function incNroCaja(){
+    global $nroCaja;
+    $nroCaja++;
+    $sqlincoNroCaja = "UPDATE cajatemporal SET nroCaja = nroCaja +1";
+
+    return $sqlincoNroCaja;
+  }
+
+  function inicioCaja(){
+
+    $sqlInicioCaja = "INSERT INTO cajatemporal(tipoMov, descripcion, importe, nroCaja)
+
+    VALUES ('I', 'Inicio de caja','0', '$nroCaja + 1')";
+
+    return $sqlInicioCaja;
+  }
 ?>

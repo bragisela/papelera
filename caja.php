@@ -211,10 +211,8 @@ include("menu.php");
                  <?php global $cierreTotal;
                  while($rowCajaTotal = $totalCajaTemporal->fetch(PDO::FETCH_ASSOC)) {
 
-
                     $cierreTotal = ($rowCajaTotal['totalCajaTemporal']);
                     echo '$' . number_format ($cierreTotal,2,",",".");
-
 
                     }
                     ?>
@@ -273,13 +271,18 @@ include("menu.php");
                             <!--FIN -->
                             <?php
                               if (isset($_POST['GuardarCierreCaja'])){
-                                $nroCaja++;
+                                global $nroCajaCierre;
                                 $sqlCierreCaja = cierreCaja($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe'],$_POST['nroCaja']);
                                 $sqlTemporalaCaja = temporalaCaja();
                                 $sqlResetTemporal = resetCajaTemporal();
+                                $sqlInicioCaja = inicioCaja();
+                                $sqlincoNroCaja = incNroCaja();
                                 $conexiones->exec($sqlCierreCaja);
                                 $conexiones->exec($sqlTemporalaCaja);
                                 $conexiones->exec($sqlResetTemporal);
+                                $nroCajaCierre++;
+                                $conexiones->exec($sqlInicioCaja);
+                                $conexiones->exec($sqlincoNroCaja);
 
 
                                 echo "<script language='javascript'>";
@@ -288,6 +291,7 @@ include("menu.php");
                                 echo "</script>";
 
                               }
+
                             ?>
                         </div>
                       </div>
