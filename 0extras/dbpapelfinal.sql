@@ -2,8 +2,8 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 28-06-2019 a las 14:17:08
+-- Servidor: localhost
+-- Tiempo de generación: 29-06-2019 a las 22:49:46
 -- Versión del servidor: 10.3.15-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `caja` (
   `idCajaTotal` int(15) NOT NULL,
-  `nroCaja` int(11) NOT NULL,
+  `nroCaja` int(11) DEFAULT NULL,
   `fecha` date NOT NULL,
   `tipoMov` tinytext CHARACTER SET latin1 NOT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
@@ -42,30 +42,7 @@ CREATE TABLE `caja` (
 --
 
 INSERT INTO `caja` (`idCajaTotal`, `nroCaja`, `fecha`, `tipoMov`, `descripcion`, `importe`) VALUES
-(4, 0, '2019-06-27', 'I', 'Apertura de caja', '10000.00'),
-(5, 0, '2019-06-27', 'E', 'Cierre de Caja', '-10000.00'),
-(6, 0, '2019-06-27', 'I', 'Apertura de caja', '20000.00'),
-(7, 0, '2019-06-27', 'E', 'Cierre de Caja', '-20000.00'),
-(8, 0, '2019-06-27', 'I', 'Venta', '30000.00'),
-(9, 0, '2019-06-27', 'I', 'Apertura de caja', '10000.00'),
-(10, 0, '2019-06-27', 'E', 'Cierre de Caja', '-40000.00'),
-(11, 0, '2019-06-27', 'I', 'Venta', '8000.00'),
-(13, 0, '2019-06-27', 'E', 'Cierre de Caja', '-8000.00'),
-(14, 0, '2019-06-27', 'I', 'Venta', '75000.00'),
-(15, 0, '2019-06-27', 'E', 'Cierre de Caja', '-75000.00'),
-(16, 0, '2019-06-27', 'I', 'Venta', '1000.00'),
-(17, 0, '2019-06-27', 'E', 'Cierre de Caja', '-1000.00'),
-(18, 0, '2019-06-27', 'I', 'Venta', '2000.00'),
-(19, 0, '2019-06-27', 'E', 'Cierre de Caja', '-2000.00'),
-(20, 0, '2019-06-28', 'I', 'Prueba', '7500.00'),
-(21, 0, '2019-06-28', 'E', 'Pago de luz', '-4500.00'),
-(22, 0, '2019-06-28', 'E', 'Cierre de Caja', '-3000.00'),
-(23, 0, '2019-06-28', 'I', 'fef', '4234.00'),
-(24, 0, '2019-06-28', 'E', 'Cierre de Caja', '-4234.00'),
-(25, 0, '2019-06-28', 'I', 'Inicio de caja', '40000.00'),
-(26, 0, '2019-06-28', 'E', 'Cierre de Caja', '-40000.00'),
-(27, 0, '2019-06-28', 'I', 'Nuevo inicio de caja', '42000.00'),
-(28, 0, '2019-06-28', 'E', 'Cierre de Caja', '-42000.00');
+(45, 0, '2019-06-29', 'I', 'Movimiento inicial.', '0.00');
 
 -- --------------------------------------------------------
 
@@ -75,19 +52,12 @@ INSERT INTO `caja` (`idCajaTotal`, `nroCaja`, `fecha`, `tipoMov`, `descripcion`,
 
 CREATE TABLE `cajatemporal` (
   `idCaja` int(15) NOT NULL,
-  `nroCaja` int(11) NOT NULL,
+  `nroCaja` int(11) DEFAULT NULL,
   `fecha` date NOT NULL,
   `tipoMov` tinytext CHARACTER SET latin1 NOT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
   `importe` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `cajatemporal`
---
-
-INSERT INTO `cajatemporal` (`idCaja`, `nroCaja`, `fecha`, `tipoMov`, `descripcion`, `importe`) VALUES
-(29, 0, '2019-06-28', 'I', 'Apertura de Caja', '15000.00');
 
 -- --------------------------------------------------------
 
@@ -215,6 +185,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`idProducto`, `codProducto`, `descripcion`, `material`, `unidadEmbalaje`, `medidas`, `unidadMedida`) VALUES
+(1, 'zxccccccccc', 'sczxc', '', 1, '', ''),
 (3, 'assdaaaaaaasss', 'asd', 'asd', 12, '123', '123');
 
 -- --------------------------------------------------------
@@ -364,13 +335,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `caja`
 --
 ALTER TABLE `caja`
-  MODIFY `idCajaTotal` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idCajaTotal` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `cajatemporal`
 --
 ALTER TABLE `cajatemporal`
-  MODIFY `idCaja` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idCaja` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
