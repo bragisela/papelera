@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-06-2019 a las 22:49:46
+-- Tiempo de generación: 29-06-2019 a las 22:53:58
 -- Versión del servidor: 10.3.15-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -42,7 +42,7 @@ CREATE TABLE `caja` (
 --
 
 INSERT INTO `caja` (`idCajaTotal`, `nroCaja`, `fecha`, `tipoMov`, `descripcion`, `importe`) VALUES
-(45, 0, '2019-06-29', 'I', 'Movimiento inicial.', '0.00');
+(1, 0, '2017-11-01', 'I', 'Movimiento inicial.', '0.00');
 
 -- --------------------------------------------------------
 
@@ -341,7 +341,7 @@ ALTER TABLE `caja`
 -- AUTO_INCREMENT de la tabla `cajatemporal`
 --
 ALTER TABLE `cajatemporal`
-  MODIFY `idCaja` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `idCaja` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
