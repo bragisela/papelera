@@ -36,59 +36,51 @@
 
     return $sqlComprobantes;
   }
-  function insertCajaIngreso($fecha,$tipoMov, $descripcion, $importe){
+  function insertCajaIngreso($fecha,$tipoMov, $descripcion, $importe,$nroCaja){
 
-    $sqlCajaIngreso = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe)
+    $sqlCajaIngreso = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','I', '$descripcion', '$importe')";
+    VALUES ('$fecha','I', '$descripcion', '$importe', '0')";
 
     return $sqlCajaIngreso;
   }
-  function insertCajaEgreso($fecha,$tipoMov, $descripcion, $importe){
+  function insertCajaEgreso($fecha,$tipoMov, $descripcion, $importe,$nroCaja){
 
-    $sqlCajaEgreso = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe)
+    $sqlCajaEgreso = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','E', '$descripcion','-' '$importe')";
+    VALUES ('$fecha','E', '$descripcion','-' '$importe', '0')";
 
     return $sqlCajaEgreso;
   }
-  function cierreCaja($fecha,$tipoMov, $descripcion, $importe){
+  function cierreCaja($fecha,$tipoMov, $descripcion, $importe,$nroCaja){
 
-    $sqlCierreCaja = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe)
+    $sqlCierreCaja = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','E', 'Cierre de Caja','-' '$importe')";
+    VALUES ('$fecha','E', 'Cierre de Caja','-' '$importe', '0')";
 
     return $sqlCierreCaja;
   }
 
-  function temporalaCaja(){
+  function temporalaCaja(){ //inserte toda la tabla temporal en la de caja.
 
     $sqlTemporalaCaja = "INSERT INTO caja SELECT * FROM cajatemporal";
 
     return $sqlTemporalaCaja;
   }
 
-  function resetCajaTemporal(){
+  function resetCajaTemporal(){//vacía la tabla temporal.
 
     $sqlResetTemporal = "DELETE FROM cajatemporal";
 
     return $sqlResetTemporal;
   }
 
-  function incNroCaja(){
-    global $nroCaja;
-    $nroCaja++;
-    $sqlincoNroCaja = "UPDATE cajatemporal SET nroCaja = nroCaja +1";
+  function incNroCaja(){//incrementa el número de caja antes de migrarlo.
 
-    return $sqlincoNroCaja;
+    $sqlincNroCaja = "UPDATE cajatemporal SET nroCaja = ((SELECT MAX(nroCaja) FROM caja )+1)";
+
+    return $sqlincNroCaja;
   }
 
-  function inicioCaja(){
 
-    $sqlInicioCaja = "INSERT INTO cajatemporal(tipoMov, descripcion, importe, nroCaja)
-
-    VALUES ('I', 'Inicio de caja','0', '$nroCaja + 1')";
-
-    return $sqlInicioCaja;
-  }
 ?>

@@ -74,8 +74,8 @@ include("menu.php");
                           <!--FIN -->
                           <?php //Acción al presionar GuardarIngreso
                             if (isset($_POST['GuardarIngreso'])){
-                              $sqlCaja = insertCajaIngreso($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe']);
-                              $conexiones->exec($sqlCaja);
+                              $sqlCajaIngreso = insertCajaIngreso($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
+                              $conexiones->exec($sqlCajaIngreso);
 
                               echo "<script language='javascript'>";
                               echo "alert('El Ingreso se realizó correctamente');";
@@ -140,7 +140,7 @@ include("menu.php");
                           <!--FIN -->
                           <?php //Acción al presionar GuardarEgreso
                             if (isset($_POST['GuardarEgreso'])){
-                              $sqlCajaEgreso = insertCajaEgreso($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe']);
+                              $sqlCajaEgreso = insertCajaEgreso($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
                               $conexiones->exec($sqlCajaEgreso);
 
                               echo "<script language='javascript'>";
@@ -271,19 +271,16 @@ include("menu.php");
                             <!--FIN -->
                             <?php
                               if (isset($_POST['GuardarCierreCaja'])){
-                                global $nroCajaCierre;
+
                                 $sqlCierreCaja = cierreCaja($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe'],$_POST['nroCaja']);
+                                $sqlincNroCaja = incNroCaja();
                                 $sqlTemporalaCaja = temporalaCaja();
                                 $sqlResetTemporal = resetCajaTemporal();
-                                $sqlInicioCaja = inicioCaja();
-                                $sqlincoNroCaja = incNroCaja();
-                                $conexiones->exec($sqlCierreCaja);
-                                $conexiones->exec($sqlTemporalaCaja);
-                                $conexiones->exec($sqlResetTemporal);
-                                $nroCajaCierre++;
-                                $conexiones->exec($sqlInicioCaja);
-                                $conexiones->exec($sqlincoNroCaja);
 
+                                $conexiones->exec($sqlCierreCaja);//cierra la caja
+                                $conexiones->exec($sqlincNroCaja);//incrementa el nroCaja de toda la cajaTemporal.
+                                $conexiones->exec($sqlTemporalaCaja);//migra caja temporal a caja.
+                                $conexiones->exec($sqlResetTemporal);//vacía caja temporal.
 
                                 echo "<script language='javascript'>";
                                 echo "alert('El Cierre de Caja se realizó correctamente');";
