@@ -25,7 +25,58 @@ SET time_zone = "+00:00";
 -- Base de datos: `dbpapel`
 --
 
--- --------------------------------------------------------
+CREATE TABLE `roles` (
+  `codRol` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombreRol` varchar(50) NOT NULL,
+  PRIMARY KEY (`CodRol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+INSERT INTO `roles` (`codRol`, `nombreRol`) VALUES
+(1, 'administrador');
+
+
+CREATE TABLE `usuarios` (
+  `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL,
+  `contrasenia` varchar(50) NOT NULL,
+  `codRol` int(10)  UNSIGNED NOT NULL,
+  PRIMARY KEY (`idUsuario`),
+  FOREIGN KEY (`CodRol`) REFERENCES `roles` (`CodRol`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `usuarios` (`idUsuario`, `usuario`,`contrasenia`,`codRol`) VALUES
+(1, 'admin','admin',1);
+
+
+
+CREATE TABLE `permisos` (
+  `codPermiso` int(10) NOT NULL,
+  `codRol` int(10)  UNSIGNED NOT NULL,
+  `tipoAcceso` varchar(10) NOT NULL,
+  `pagina` varchar(50) NOT NULL,
+  PRIMARY KEY (`codPermiso`),
+  FOREIGN KEY (`CodRol`) REFERENCES `roles` (`CodRol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO permisos (`codPermiso`, `codRol`,`tipoAcceso`, `pagina`) VALUES
+(1,1,'','clientesPHP'),
+(2,1,'','clientesModificarPHP'),
+(3,1,'','comprasBuscarPHP'),
+(4,1,'','historialPrecioPHP'),
+(5,1,'','pedidosBuscarPHP'),
+(6,1,'','precioModificarPHP'),
+(7,1,'','productosPHP'),
+(8,1,'','productosModificarPHP'),
+(9,1,'','ProveedoresPHP'),
+(94,1,'','proveedoresModificarPHP'),
+(92,1,'','registroComprasPHP'),
+(10,1,'','registroPedidosPHP'),
+(14,1,'','reportesPHP');
+
 
 --
 -- Estructura de tabla para la tabla `clientes`

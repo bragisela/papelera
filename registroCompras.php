@@ -99,11 +99,6 @@ include("menu.php");
          <br>
            <button type="button" class="btn btn-primary btn-sm" onclick="agregarProducto();" id="resetear">Agregar</button>
          </div>
-         <div class="col-md-4 mb-4">
-           <input type="submit" name="insertar" value="insertar" class="btn btn-success">
-
-           <input type="reset" name="" value="Cancelar" class="btn btn-info">
-         </div>
        </div>
 
      <div class="table-responsive text-nowrap">
@@ -153,6 +148,13 @@ include("menu.php");
          </tfoot>
        </table>
      </div>
+      <div class="row">
+        <div class="col-md-8 mb-8"> </div>
+        <div class="col-md-4 mb-4">
+          <input type="submit" name="insertar" value="Guardar" class="btn btn-success">
+          <input type="reset" name="" value="Cancelar" class="btn btn-info">
+        </div>
+      </div>
    </form>
     <?php
 
@@ -203,6 +205,11 @@ include("menu.php");
               // );
 
             }
+
+            echo "<script language='javascript'>";
+            echo "alert('El Producto se ingreso correctamente');";
+            echo "window.location='historialPrecio2.php?idComprobante=$idComprobante';";
+            echo "</script>";
 
         }
      ?>

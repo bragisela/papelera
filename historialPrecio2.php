@@ -1,10 +1,9 @@
 <?php
 include("sesion.php");
-$pagina='historialPrecioPHP';
+$pagina='historialPrecio2PHP';
 include("encabezado.php");
 include("sql/conexion.php");
-$idProducto = $_REQUEST['idProducto'];
-
+$idComprobante = $_REQUEST['idComprobante'];
 
 include('sql/mostrarProductos.php');
 include('sql/mostrarPrecio.php');
@@ -13,6 +12,7 @@ include('sql/update.php');
 include("menu.php");
 $fech = Date("Y-m-d");
 $Fecha = Date("Y-m-d H:i:s");
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,16 +29,22 @@ $Fecha = Date("Y-m-d H:i:s");
         <div class="card-body">
           <form method="post">
             <div class="row">
-              <div class="col-md-6 mb-6">
+              <div class="col-md-4 mb-4">
                 <div class="md-form">
                   <input type="text" id="form1" class="form-control" name="codProducto" value="<?php echo $PcodProdcuto; ?>" readonly>
                   <label for="form1" class="">Cod Producto</label>
                 </div>
               </div>
-              <div class="col-md-6 mb-6">
+              <div class="col-md-4 mb-4">
                 <div class="md-form">
                   <input type="text" id="form5" class="form-control" name="descripcion" value="<?php echo $PDescripcion; ?>" readonly>
                   <label for="form5" class="">Descripcion</label>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <div class="md-form">
+                  <input type="number" id="form5" class="form-control" name="porcUtil" value="<?php echo $porcUtil; ?>">
+                  <label for="form5" class="">% Utilidad</label>
                 </div>
               </div>
             </div>
@@ -59,17 +65,11 @@ $Fecha = Date("Y-m-d H:i:s");
                   while($rowMPrecio = $mostrarPrecios->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                   <tr>
-                    <?php  $rowMPrecio['idPrecio']; $idPrecio = $rowMPrecio['idPrecio'];
-                    $desc=$rowMPrecio['porcDesc'];
-                    $util=$rowMPrecio['porcUtil'];
-                    $importe=$rowMPrecio['importe'];
-                    $costo=$importe-(($desc*$importe)/100);
-                    $venta=(($util/100)*$costo)+$costo; ?>
-                    
-                    <td>$ <?php echo $costo; ?></td>
-                    <td>% <?php  echo  $util; ?></td>
-                    <td>$<?php echo $venta ?></td>
-                    <td>$<?php echo $venta=($util/100)*$costo; ?></td>
+                    <?php  $rowMPrecio['idPrecio']; $idPrecio = $rowMPrecio['idPrecio']; ?>
+                    <td>$ <?php echo ($rowMPrecio['importe']-(($rowMPrecio['porcDesc']*$rowMPrecio['importe'])/100)); ?></td>
+                    <td><?php echo $rowMPrecio['porcUtil']; ?></td>
+                    <td>$ <?php echo ($rowMPrecio['porcUtil']*$rowMPrecio['importe']/100+($rowMPrecio['importe'])); ?></td>
+                    <td>$ <?php echo ($rowMPrecio['porcUtil']*$rowMPrecio['importe']/100+($rowMPrecio['importe'])) - ($rowMPrecio['importe']-(($rowMPrecio['porcDesc']*$rowMPrecio['importe'])/100)); ?></td>
                     <td><?php $date = new DateTime($rowMPrecio['fecha']);
                       echo $date->format('d/m/Y H:i:s');?></td>
                     <td><?php echo " <a href='precioModificar.php?idPrecio=$idPrecio&idProducto=$idProducto' ><i class='far fa-edit'></i></a>"; ?></td>
@@ -80,9 +80,22 @@ $Fecha = Date("Y-m-d H:i:s");
                 </tbody>
               </table>
             </div>
+            <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-success">
             <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='productos.php'">
           </form>
+            <!--FIN -->
+            <?php
+               if (isset($_POST['Actualizar'])){
+                 $sqlPrec = updatePrecios($idProducto,$_POST['porcUtil']);
+                 $conexiones->exec($sqlPrec);
 
+                 echo "<script language='javascript'>";
+                 echo "alert('El precio del producto fue modificado exitosamente');";
+                 echo "window.location='historialPrecio.php?idProducto=$idProducto';";
+                echo "</script>";
+
+               }
+            ?>
         </div>
       </div>
     </section>

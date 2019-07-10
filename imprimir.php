@@ -1,12 +1,8 @@
 <?php
 $idComprobante = $_REQUEST['idComprobante'];
 include('sql/mostrarImprimirPedido.php');
-?>
-<?php
 
 // Cargamos la librería dompdf que hemos instalado en la carpeta dompdf
-
-
 require_once ('lib/pdf/autoload.inc.php');
 ob_start();
 
@@ -21,16 +17,15 @@ $html= '
 </head>
 <table>
             <tr>
-                <td colspan="4" class="center bor" ><h2>Presupuesto '.$nroComprobante2.'
-                   </h2></td>
+                <td colspan="4" class="center bor" ><h2>Presupuesto '.$nroComprobante2.' </h2></td>
             </tr>
             <tr>
-                <td colspan="2" class="izq bor" >Sres: '. $nombre2 .' </td>
-                <td colspan="2" class="der bor" >CUIT '. $cuit2 .'</td>
+                <td colspan="2" class="izq bor" >Sres: ' . $nombre2 .' </td>
+                <td colspan="2" class="der bor" >CUIT: ' . $cuit2 .' </td>
             </tr>
             <tr>
-                <td colspan="2" class="izq bor bot" >Domicilio: '. $domicilio2 .'</td>
-                <td colspan="2" class="der bor bot1" >Fecha '. $fecha2 .'</td>
+                <td colspan="2" class="izq bor bot" >Domicilio:  '. $domicilio2 .'</td>
+                <td colspan="2" class="der bor bot1" >Fecha:  '. $fecha2 .'</td>
             </tr>
             <tr>
                 <th  class="center bor size0"> CANTIDAD </th>
@@ -38,7 +33,7 @@ $html= '
                 <th  class="center bor size2"> P UNITARIO </th>
                 <th  class="center bor size3"> TOTAL </th>
               </tr>';
-            $i=0;
+            $i=1;
             $subtotal=0;
             $iva=0.21;
             $import=0;
@@ -55,6 +50,7 @@ $html= '
           $i=$i+1;
           $rowImprimir['importe']=0;
           $rowImprimir['cant']=0;
+
           }
           $iva= $subtotal*$iva;
           $total= $subtotal+$iva;
