@@ -3,6 +3,7 @@ include("sesion.php");
 $pagina='reportesCajaPHP';
 include("encabezado.php");
 include("sql/conexion.php");
+include("sql/consultas.php");
 //include("segguridad.php");
 include("menu.php");
 ?>
@@ -74,16 +75,16 @@ include("menu.php");
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <?php
+                    <?php
                     while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
                       ?>
                       <tr>
                         <td><?php $idCaja = $rowCaja['idCaja'];?></td>
-                        <td><?php echo $rowProductos['fecha']; ?></td>
-                        <td><?php echo $rowProductos['nroCaja']; ?></td>
-                        <td><?php echo $rowProductos['descripcion']; ?></td>
-                        <td><?php echo $rowProductos['importe']; ?></td>
-                        <td><?php echo $rowProductos['unidadMedida']; ?></td>
+                        <td><?php echo $rowCaja['fecha']; ?></td>
+                        <td><?php echo $rowCaja['nroCaja']; ?></td>
+                        <td><?php echo $rowCaja['descripcion']; ?></td>
+                        <td><?php echo $rowCaja['importe']; ?></td>
+                        <td><?php echo $rowCaja['unidadMedida']; ?></td>
                         <td><?php echo "
                         <a href='cajaModificar.php?idCaja=$idCaja'><i class='far fa-edit'></i></i></a>
                         <a onClick='pDelete(this);' id='$idCaja'><i class='far fa-trash-alt'></i></a>"; ?></td>
