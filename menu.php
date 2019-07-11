@@ -49,6 +49,9 @@
                   <li>
                     <a href="reportesVentas.php" class="waves-effect">Ventas</a>
                   </li>
+                  <li>
+                    <a href="reportesCaja.php" class="waves-effect">Caja</a>
+                  </li>
                 </ul>
               </div>
             </li>
