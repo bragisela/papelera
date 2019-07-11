@@ -25,6 +25,43 @@ SET time_zone = "+00:00";
 -- Base de datos: `dbpapel`
 --
 
+
+
+CREATE TABLE `caja` (
+  `idCajaTotal` int(15) NOT NULL,
+  `nroCaja` int(11) DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `tipoMov` tinytext CHARACTER SET latin1 NOT NULL,
+  `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `importe` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `caja`
+--
+
+INSERT INTO `caja` (`idCajaTotal`, `nroCaja`, `fecha`, `tipoMov`, `descripcion`, `importe`) VALUES
+(1, 0, '2017-11-01', 'I', 'Movimiento inicial.', '0.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cajatemporal`
+--
+
+CREATE TABLE `cajatemporal` (
+  `idCaja` int(15) NOT NULL,
+  `nroCaja` int(11) DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `tipoMov` tinytext CHARACTER SET latin1 NOT NULL,
+  `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `importe` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+
+
+
 CREATE TABLE `roles` (
   `codRol` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombreRol` varchar(50) NOT NULL,
@@ -177,7 +214,7 @@ CREATE TABLE `precios` (
   `importe` decimal(10,0) NOT NULL,
   `porcDesc` decimal(10,0) NOT NULL,
   `porcUtil` decimal(10,0) NOT NULL,
-  `fecha` datetime NOT NULL
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -642,3 +679,23 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+ALTER TABLE `caja`
+  ADD PRIMARY KEY (`idCajaTotal`);
+
+--
+-- Indices de la tabla `cajatemporal`
+--
+ALTER TABLE `cajatemporal`
+  ADD PRIMARY KEY (`idCaja`);
+
+  --
+  ALTER TABLE `caja`
+    MODIFY `idCajaTotal` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+  --
+  -- AUTO_INCREMENT de la tabla `cajatemporal`
+  --
+  ALTER TABLE `cajatemporal`
+    MODIFY `idCaja` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;

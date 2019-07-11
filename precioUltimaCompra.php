@@ -1,12 +1,12 @@
 <?php
+//Una vez que se registro una compra, se llega a esta pagina para dar valor de utilidad a todos los productos comprados en ese pedidos
+// Tambien hay una opcion de poder modificar una fila cualquiera sea redirigiendose a la pagina precioUltimaCompraModificar.php
 include("sesion.php");
-$pagina='historialPrecio2PHP';
+$pagina='precioUltimaCompraPHP';
 include("encabezado.php");
 include("sql/conexion.php");
 $idComprobante = $_REQUEST['idComprobante'];
-
-include('sql/mostrarProductos.php');
-include('sql/mostrarPrecio.php');
+include('sql/mostrarUltimaCompra.php');
 include('sql/update.php');
 //include("segguridad.php");
 include("menu.php");
@@ -30,20 +30,13 @@ $Fecha = Date("Y-m-d H:i:s");
           <form method="post">
             <div class="row">
               <div class="col-md-4 mb-4">
-                <div class="md-form">
-                  <input type="text" id="form1" class="form-control" name="codProducto" value="<?php echo $PcodProdcuto; ?>" readonly>
-                  <label for="form1" class="">Cod Producto</label>
+                <div class="md-form" align="left">
+                  <p>Insertar valor de Utilidad para los ultimos productos comprados</p>
                 </div>
               </div>
               <div class="col-md-4 mb-4">
                 <div class="md-form">
-                  <input type="text" id="form5" class="form-control" name="descripcion" value="<?php echo $PDescripcion; ?>" readonly>
-                  <label for="form5" class="">Descripcion</label>
-                </div>
-              </div>
-              <div class="col-md-4 mb-4">
-                <div class="md-form">
-                  <input type="number" id="form5" class="form-control" name="porcUtil" value="<?php echo $porcUtil; ?>">
+                  <input type="number" id="form5" class="form-control" name="porcUtil" value="">
                   <label for="form5" class="">% Utilidad</label>
                 </div>
               </div>
@@ -62,17 +55,24 @@ $Fecha = Date("Y-m-d H:i:s");
                 </thead>
                 <tbody>
                 <?php
-                  while($rowMPrecio = $mostrarPrecios->fetch(PDO::FETCH_ASSOC)) {
+                  while($rowMPrecio = $MostrarUltCompra->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                   <tr>
-                    <?php  $rowMPrecio['idPrecio']; $idPrecio = $rowMPrecio['idPrecio']; ?>
-                    <td>$ <?php echo ($rowMPrecio['importe']-(($rowMPrecio['porcDesc']*$rowMPrecio['importe'])/100)); ?></td>
-                    <td><?php echo $rowMPrecio['porcUtil']; ?></td>
-                    <td>$ <?php echo ($rowMPrecio['porcUtil']*$rowMPrecio['importe']/100+($rowMPrecio['importe'])); ?></td>
-                    <td>$ <?php echo ($rowMPrecio['porcUtil']*$rowMPrecio['importe']/100+($rowMPrecio['importe'])) - ($rowMPrecio['importe']-(($rowMPrecio['porcDesc']*$rowMPrecio['importe'])/100)); ?></td>
+                    <?php  $rowMPrecio['idPrecio']; $idPrecio = $rowMPrecio['idPrecio'];
+                    $rowMPrecio['idProducto']; $idProducto = $rowMPrecio['idProducto'];
+                    $desc=$rowMPrecio['porcDesc'];
+                    $util=$rowMPrecio['porcUtil'];
+                    $importe=$rowMPrecio['importe'];
+                    $costo=$importe-(($desc*$importe)/100);
+                    $venta=(($util/100)*$costo)+$costo; ?>
+
+                    <td>$ <?php echo $costo; ?></td>
+                    <td>% <?php  echo  $util; ?></td>
+                    <td>$<?php echo $venta ?></td>
+                    <td>$<?php echo $venta=($util/100)*$costo; ?></td>
                     <td><?php $date = new DateTime($rowMPrecio['fecha']);
                       echo $date->format('d/m/Y H:i:s');?></td>
-                    <td><?php echo " <a href='precioModificar.php?idPrecio=$idPrecio&idProducto=$idProducto' ><i class='far fa-edit'></i></a>"; ?></td>
+                    <td><?php echo " <a href='precioUltimaCompraModificar.php?idPrecio=$idPrecio&idComprobante=$idComprobante&idProducto=$idProducto' ><i class='far fa-edit'></i></a>"; ?></td>
                   </tr>
                 <?php
                   }
@@ -86,12 +86,12 @@ $Fecha = Date("Y-m-d H:i:s");
             <!--FIN -->
             <?php
                if (isset($_POST['Actualizar'])){
-                 $sqlPrec = updatePrecios($idProducto,$_POST['porcUtil']);
+                 $sqlPrec = updatePrecios($_POST['porcUtil'],$idComprobante);
                  $conexiones->exec($sqlPrec);
 
                  echo "<script language='javascript'>";
                  echo "alert('El precio del producto fue modificado exitosamente');";
-                 echo "window.location='historialPrecio.php?idProducto=$idProducto';";
+                 echo "window.location='precioUltimaCompra.php?idComprobante=$idComprobante';";
                 echo "</script>";
 
                }

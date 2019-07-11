@@ -43,13 +43,13 @@
     return $sqlProveedoresModificar;
   }
 
-  function updatePrecios($idProducto,$porcUtil){
+  function updatePrecios($porcUtil,$idComprobante){
 
-    $sqlPrecioAct="UPDATE precios SET
-    porcUtil = '$porcUtil'
+    $sqlPrecioAct="UPDATE precios as pre
+    inner join items as i on i.idItems=pre.idPrecio
+    SET pre.porcUtil='$porcUtil' where i.idComprobante='$idComprobante'";
 
 
-    WHERE idProducto='$idProducto'";
 
     return $sqlPrecioAct;
   }
@@ -64,6 +64,8 @@
 
     return $sqlPrecioInd;
   }
+
+
 
   function updateCajaIngreso($idCaja,$descripcion,$importe){
 

@@ -208,7 +208,7 @@ include("menu.php");
 
             echo "<script language='javascript'>";
             echo "alert('El Producto se ingreso correctamente');";
-            echo "window.location='historialPrecio2.php?idComprobante=$idComprobante';";
+            echo "window.location='precioUltimaCompra.php?idComprobante=$idComprobante';";
             echo "</script>";
 
         }
