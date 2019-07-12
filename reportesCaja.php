@@ -25,7 +25,7 @@ include("menu.php");
            ?>
 
         <div class="card text-center">
-          <h3 class="card-header primary-color-dark white-text">Reporte de Caja</h3>
+          <h3 class="card-header primary-color-dark white-text"> Reporte de Caja </h3>
             <div class="card-body">
               <div class="table-responsive text-nowrap">
                 <table class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
@@ -52,7 +52,7 @@ include("menu.php");
                       </tr>
                       <?php
                     }
-                    ?> 
+                    ?>
                   </tbody>
                 </table>
               </div>
