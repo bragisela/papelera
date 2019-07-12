@@ -14,17 +14,12 @@ include("menu.php");
 </style>
 <body class="hidden-sn mdb-skin">
 <!--Main Layout-->
+
 <main>
   <div class="container-fluid mt-5">
     <section class="pb-5">
       <div class="card text-center">
 
-        <?php
-
-         if (isset($_POST['buscar']) && ($_POST['fechaD'] !='') && ($_POST['fechaH']!='')) {
-           ?>
-
-        <div class="card text-center">
           <h3 class="card-header primary-color-dark white-text"> Reporte de Caja </h3>
             <div class="card-body">
               <div class="table-responsive text-nowrap">
@@ -37,6 +32,7 @@ include("menu.php");
                       <th class="th-sm">Importe</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     <?php
                     while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
@@ -58,13 +54,11 @@ include("menu.php");
               </div>
             </div>
         </div>
-      <?php } ?>
       </div>
     </section>
   </div>
-
-
 </main>
+
 
 <?php
 include("pie.php");
