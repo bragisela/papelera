@@ -13,7 +13,7 @@
   $resultadoCompras = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, p.nombre, p.domicilio FROM comprobantes c, proveedores p WHERE c.tipo='C' AND c.IdCliPro=p.idProveedor")
   or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
 
-  $resultadoCaja = $conexiones->query("SELECT fecha,idCaja,descripcion,tipoMov,importe FROM cajatemporal ORDER BY idCaja")
+  $resultadoCaja = $conexiones->query("SELECT fecha,idCajaTotal,descripcion,tipoMov,importe,nroCaja,importe FROM caja ORDER BY idCajaTotal")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
   $resultadoCajaTemporal = $conexiones->query("SELECT fecha,idCaja,descripcion,tipoMov,importe FROM cajatemporal ORDER BY idCaja")
