@@ -54,14 +54,7 @@ $html= '
           }
           $iva= $subtotal*$iva;
           $total= $subtotal+$iva;
-          for($i;$i<18;$i++){
-            $html.=' <tr>
-                <td  class="center bor size0" > </td>
-                <td class="center bor size1">  </td>
-                <td  class="center bor size2">  </td>
-                <td  class="center bor size3"> </td>
-              </tr>';
-          }
+          
 
         $html.= '
         <tr>
