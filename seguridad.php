@@ -34,7 +34,7 @@ if (!isset($_SESSION)) { session_start(); }
         if ($row_cnt==1)	{
           mysqli_free_result($result);
                           if($codRol==1){
-                            include("index.php");
+                            include("menu.php");
                           }
         }
       }
