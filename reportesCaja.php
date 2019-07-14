@@ -77,6 +77,15 @@ $(".button-collapse").sideNav();
 // SideNav Scrollbar Initialization
 var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 Ps.initialize(sideNavScrollbar);
+
+var totalcaja= document.getElementById("totalcaja");
+var fac = parseFloat(totalcaja.value) - (parseFloat(totalEli)  + parseFloat(((totalEli * 2.5)/100)) + parseFloat(((totalEli * 21)/100)));
+var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+if (totafac.toFixed(2)<=0) {
+  totalFac.value = 0;
+}else{
+  totalFac.value =  totafac.toFixed(2);
+}
 </script>
 </body>
 </html>
