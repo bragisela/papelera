@@ -19,7 +19,6 @@ include("menu.php");
   <div class="container-fluid mt-5">
     <section class="pb-5">
       <div class="card text-center">
-
           <h3 class="card-header primary-color-dark white-text"> Reporte de Caja </h3>
             <div class="card-body">
               <div class="table-responsive text-nowrap">
@@ -39,9 +38,9 @@ include("menu.php");
                       ?>
                       <tr>
                         <td><?php echo $rowCaja['fecha']; ?></td>
-                        <td><?php echo $rowCaja['nroCaja']; ?></td>
+                        <td><?php echo "c " . $rowCaja['nroCaja']; ?></td>
                         <td><?php echo $rowCaja['descripcion']; ?></td>
-                        <td><?php echo $rowCaja['importe']; ?></td>
+                        <td><id="importe"  name="importe"><?php echo $rowCaja['importe']; ?></td>
                         <!--<td><?php echo "
                         <a href='cajaModificar.php?idCaja=$idCaja'><i class='far fa-edit'></i></i></a>
                         <a onClick='pDelete(this);' id='$idCaja'><i class='far fa-trash-alt'></i></a>"; ?></td>-->
@@ -49,8 +48,17 @@ include("menu.php");
                       <?php
                     }
                     ?>
+
+
                   </tbody>
+                  <tr>
+                    <td colspan=""></td>
+                    <td>Total</td>
+                    <td><input class="form-control" type="number" id="totalcaja"  name="totalcaja" readonly></td>
+                    <td></td>
+                  </tr>
                 </table>
+
               </div>
             </div>
         </div>
