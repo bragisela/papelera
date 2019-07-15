@@ -19,72 +19,22 @@ include("menu.php");
   <div class="container-fluid mt-3 col col-md-11">
     <section class="pb-5">
       <div class="card text-center">
-        <h3 class="card-header primary-color white-text">Registro de Compras</h3>
+        <h3 class="card-header primary-color white-text">Reporte de Caja</h3>
         <div class="card-body">
         <form method="post" id="total">
-          <div class="card">
-            <div class="card-header bg-light">Datos del Proveedor</div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-4 mb-4">
-                    <select class="mdb-select md-form" searchable="Buscar.." id="proveedor" name="proveedor">
-                      <option value="" disabled selected>Razon Social</option>
-                      <?php
-                      while($rowProveedores = $resultadoProveedor->fetch(PDO::FETCH_ASSOC)) {
-                      ?>
-                      <option value="<?php echo $rowProveedores['idProveedor']; ?>"><?php echo  $rowProveedores['nombre']; ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                  </div>
-                    <div class="col-md-4 mb-4">
-                      <div class="md-form">
-                        <input type="date" class="form-control" name="fecha" value="<?php echo $fech; ?>">
-                      </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                      <div class="md-form">
-                        <input type="number" id="form3" class="form-control" name="Nro">
-                        <label for="form3" class="">Nro</label>
-                      </div>
-                    </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4 mb-4">
-                    <div class="md-form">
-                      <input type="text" class="form-control" name="Domicilio" value="" id="domicilio" placeholder=" " readonly>
-                      <label for="form3" class="">Domicilio</label>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                    <div class="md-form">
-                      <input type="text" class="form-control" id="cuit" placeholder=" " readonly>
-                      <label for="">CUIT</label>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                    <div class="md-form">
-                      <input type="text" class="form-control" name="CondicionIVA" id="condiIVA" placeholder=" " readonly>
-                      <label for="form3" class="">Condicion IVA</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
           <br>
           <div class="text-left header">
-               <h5>Listado de Productos</h5>
-             </div>
+               <h5>Listado de Cajas</h5>
+          </div>
        <div class="row">
 
          <div class="col-md-6 mb-6">
            <select class="mdb-select md-form" searchable="Buscar.." data-width="auto" id="producto">
              <option value="" disabled selected="selected">Buscar Productos</option>
              <?php
-               while($rowProductos = $resultadoProductos->fetch(PDO::FETCH_ASSOC)) {
+               while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
              ?>
-             <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion'];; ?></option>
+             <option value="<?php echo $rowCaja['idCaja']; ?>"><?php echo $rowCaja['nroCaja']; ?></option>
              <?php
              }
              ?>
@@ -92,7 +42,7 @@ include("menu.php");
          </div>
          <div class="col-md-2 mb-2">
          <br>
-           <button type="button" class="btn btn-primary btn-sm" onclick="agregarProducto();" id="resetear">Agregar</button>
+           <button type="button" class="btn btn-primary btn-sm" onclick="agregarProducto();" id="resetear">Seleccionar</button>
          </div>
        </div>
 
@@ -100,56 +50,27 @@ include("menu.php");
        <table class="table table-bordered table-hover table-striped text-left " cellspacing="0" width="100%" id="item_table">
          <thead>
            <tr>
-             <th class="th-sm">cod Producto</th>
-             <th class="th-sm">Producto</th>
-             <th class="th-sm">Cantidad</th>
-             <th class="th-sm">Precio</th>
-             <th class="th-sm">% Desc</th>
+             <th class="th-sm">Fecha</th>
+             <th class="th-sm">Descipcion</th>
              <th class="th-sm">Importe</th>
-             <th class="th-sm">Total</th>
-             <th class="th-sm">Acciones<!--<button type="button" name="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#basicExampleModal"><i class="fas fa-plus fa-l"></i></button>--></th>
            </tr>
          </thead>
-         <tbody id="lista">
-
+         <tbody >
+           <?php
+           while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
+             ?>
+           <tr>
+             <td><?php echo ($rowCaja['fecha']) ;?></td>
+             <td><?php echo $rowCaja['descripcion']; $idCaja = $rowCaja['idCaja']; ?></td>
+             <td><?php echo ($rowCaja['importe']);?>
+             </td>
+           </tr>
+           <?php
+           }
+           ?>
          </tbody>
-         <tfoot>
-           <tr>
-           <td colspan="5"></td>
-            <td>Importe Bruto</td>
-            <td>
-              <input class="form-control" type="number" id="totalImporte"  name="importebruto"  value="" readonly>
-            </td>
-            <td></td>
-           </tr>
-           <tr>
-             <td colspan="5"></td>
-             <td>Retencion IIBB</td>
-             <td><input class="form-control" type="number" id="retencion"  name="retencion" readonly></td>
-             <td></td>
-           </tr>
-           <tr>
-             <td colspan="5"></td>
-             <td>IVA</td>
-             <td><input class="form-control" type="number" id="iva"  name="iva" readonly></td>
-             <td></td>
-           </tr>
-           <tr>
-             <td colspan="5"></td>
-             <td>Total Facturado</td>
-             <td><input class="form-control" type="number" id="totalfac"  name="totalfacturado" readonly></td>
-             <td></td>
-           </tr>
-         </tfoot>
        </table>
      </div>
-      <div class="row">
-        <div class="col-md-8 mb-8"> </div>
-        <div class="col-md-4 mb-4">
-          <input type="submit" name="insertar" value="Guardar" class="btn btn-success">
-          <input type="reset" name="" value="Cancelar" class="btn btn-info">
-        </div>
-      </div>
    </form>
     <?php
 
