@@ -11,7 +11,7 @@ include("menu.php");
 
 //INICIO EXCEL
 
-$total_rows = $getCaja->rowCount();
+$total_rows = $getRepCaja->rowCount();
 
 $download_filelink = '<ul class="list-unstyled">';
 
@@ -82,7 +82,7 @@ if(isset($_POST["export"]))
                    <?php
                      while($rowCaja = $resultadoRepCaja->fetch(PDO::FETCH_ASSOC)) {
                        ?>
-                         <option value="<?php echo $rowCaja['idCaja']; ?>"><?php echo  $rowCaja['nroCaja']; ?></option>
+                         <option value="<?php echo $rowCaja['nroCaja']; ?>"><?php echo  $rowCaja['nroCaja']; ?></option>
                        <?php
                      }
                    ?>
@@ -118,11 +118,11 @@ if(isset($_POST["export"]))
                 </thead>
                <tbody>
                  <?php
-                 while($rowCaja = $resultadoRepCaja->fetch(PDO::FETCH_ASSOC)) {
+                 while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
                    ?>
                    <tr>
                      <td><?php echo $rowCaja['fecha']; ?></td>
-                     <td><?php echo "c " . $rowCaja['nroCaja']; ?></td>
+                     <td><?php echo $rowCaja['nroCaja']; ?></td>
                      <td><?php echo $rowCaja['descripcion']; ?></td>
                      <td><id="importe"  name="importe"><?php echo $rowCaja['importe']; ?></td>
                      <!--<td><?php echo "
