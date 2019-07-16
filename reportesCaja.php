@@ -119,13 +119,16 @@ if(isset($_POST["export"]))
                <tbody>
                  <?php
                  while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
-
+									 if(($_POST["caja_no"])==($rowCaja['nroCaja']))
+									 {
 									 echo "<tr>";
 									 echo "<th>" . $rowCaja['fecha'] . "</th>";
 									 echo "<th>" . $rowCaja['descripcion'] . "</th>";
 									 echo "<th>" . $rowCaja['importe'] . "</th>";
-                 
+
+									
 							 }
+						 }
                  ?>
                 </tbody>
                </table>
