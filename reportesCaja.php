@@ -5,6 +5,7 @@ include("encabezado.php");
 include("sql/conexion.php");
 include("sql/consultas.php");
 include("sql/listados.php");
+include("sql/selectCaja.php");
 //include("segguridad.php");
 include("menu.php");
 
@@ -25,7 +26,7 @@ if(isset($_POST["export"]))
 		$file_number++;
 		$object = new PHPExcel();
 		$object->setActiveSheetIndex(0);
-		$table_columns = array("Fecha","idCajaTotal", "descripcion", "tipoMov" , "Importe" , "NroCaja");
+		$table_columns = array("Fecha","Descripcion","Importe");
 		$column = 0;
 		foreach($table_columns as $field)
 		{
@@ -43,18 +44,16 @@ if(isset($_POST["export"]))
 		$excel_result = $statement->fetchAll();
 		$excel_row = 2;
 
-    //recorrer array con los datos filtrados por campaña para descargar
+    //recorrer array con los datos filtrados por caja para descargar
 		foreach($excel_result as $sub_row)
 		{
 			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["fecha"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["idCajaTotal"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["descripcion"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $sub_row["importe"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $sub_row["nroCaja"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["descripcion"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["importe"]);
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
-		$file_name = 'ReporteCaja-'.(isset($_POST["caja_no"])).'.xls';
+		$file_name = 'ReporteCaja-'.($_POST["caja_no"]).'.xls';
 		$object_writer->save($file_name);
     // nombre archivo exceñ
 		$download_filelink .= '<li><label><a href="download.php?filename='.$file_name.'" target="_blank">Descargar - '.$file_name.'</a></label></li>';
@@ -81,7 +80,7 @@ if(isset($_POST["export"]))
                <select name="caja_no"  class="mdb-select md-form" >
                  <option value="" disabled selected>Descargar reporte</option>
                    <?php
-                     while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
+                     while($rowCaja = $resultadoRepCaja->fetch(PDO::FETCH_ASSOC)) {
                        ?>
                          <option value="<?php echo $rowCaja['idCaja']; ?>"><?php echo  $rowCaja['nroCaja']; ?></option>
                        <?php
@@ -119,7 +118,7 @@ if(isset($_POST["export"]))
                 </thead>
                <tbody>
                  <?php
-                 while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
+                 while($rowCaja = $resultadoRepCaja->fetch(PDO::FETCH_ASSOC)) {
                    ?>
                    <tr>
                      <td><?php echo $rowCaja['fecha']; ?></td>
