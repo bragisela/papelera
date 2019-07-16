@@ -37,6 +37,7 @@ if(isset($_POST["export"]))
 		$query = "
     SELECT idCajaTotal,fecha, descripcion, importe, nroCaja
     from caja
+		WHERE nroCaja=".$_POST["caja_no"]."
     GROUP by idCajaTotal
 		";
 		$statement = $conexiones->prepare($query);
@@ -80,7 +81,7 @@ if(isset($_POST["export"]))
                <select name="caja_no"  class="mdb-select md-form" >
                  <option value="" disabled selected>Descargar reporte</option>
                    <?php
-                     while($rowCaja = $resultadoRepCaja->fetch(PDO::FETCH_ASSOC)) {
+                     while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
                        ?>
                          <option value="<?php echo $rowCaja['nroCaja']; ?>"><?php echo  $rowCaja['nroCaja']; ?></option>
                        <?php
@@ -111,26 +112,20 @@ if(isset($_POST["export"]))
                 <thead>
                  <tr>
                    <th class="th-sm">Fecha</th>
-                   <th class="th-sm">NroCaja</th>
                    <th class="th-sm">Descripcion</th>
                    <th class="th-sm">Importe</th>
                  </tr>
                 </thead>
                <tbody>
                  <?php
-                 while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
-                   ?>
-                   <tr>
-                     <td><?php echo $rowCaja['fecha']; ?></td>
-                     <td><?php echo $rowCaja['nroCaja']; ?></td>
-                     <td><?php echo $rowCaja['descripcion']; ?></td>
-                     <td><id="importe"  name="importe"><?php echo $rowCaja['importe']; ?></td>
-                     <!--<td><?php echo "
-                     <a href='cajaModificar.php?idCaja=$idCaja'><i class='far fa-edit'></i></i></a>
-                     <a onClick='pDelete(this);' id='$idCaja'><i class='far fa-trash-alt'></i></a>"; ?></td>-->
-                   </tr>
-                   <?php
-                 }
+                 while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
+
+									 echo "<tr>";
+									 echo "<th>" . $rowCaja['fecha'] . "</th>";
+									 echo "<th>" . $rowCaja['descripcion'] . "</th>";
+									 echo "<th>" . $rowCaja['importe'] . "</th>";
+                 
+							 }
                  ?>
                 </tbody>
                </table>
