@@ -5,7 +5,6 @@ include("encabezado.php");
 include("sql/conexion.php");
 include("sql/consultas.php");
 include("sql/listados.php");
-include("sql/selectCaja.php");
 //include("segguridad.php");
 include("menu.php");
 
@@ -80,7 +79,7 @@ if(isset($_POST["export"]))
            <div class="col-md-3 col-sm-6" >
                <select name="caja_no"  class="mdb-select md-form" >
                  <option value="" disabled selected>Número de caja</option>
-                   <?php
+                   <?php //Select de los números de caja.
                      while($rowCaja = $resultadoCajaInd->fetch(PDO::FETCH_ASSOC)) {
                        ?>
                          <option value="<?php echo $rowCaja['nroCaja']; ?>"><?php echo  $rowCaja['nroCaja']; ?></option>
