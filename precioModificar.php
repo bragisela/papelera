@@ -2,13 +2,12 @@
 include("sesion.php");
 $pagina='precioModificarPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 $idProducto = $_REQUEST['idProducto'];
 $idPrecio = $_REQUEST['idPrecio'];
 include('sql/mostrarProductoPrecio.php');
 include('sql/update.php');
-//include("segguridad.php");
-include("menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">

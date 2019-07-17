@@ -3,14 +3,12 @@ include("sesion.php");
 $pagina='historialPrecioPHP';
 include("encabezado.php");
 include("sql/conexion.php");
+include("seguridad.php");
 $idProducto = $_REQUEST['idProducto'];
-
-
 include('sql/mostrarProductos.php');
 include('sql/mostrarPrecio.php');
 include('sql/update.php');
-//include("segguridad.php");
-include("menu.php");
+
 $fech = Date("Y-m-d");
 $Fecha = Date("Y-m-d H:i:s");
 ?>
@@ -65,7 +63,7 @@ $Fecha = Date("Y-m-d H:i:s");
                     $importe=$rowMPrecio['importe'];
                     $costo=$importe-(($desc*$importe)/100);
                     $venta=(($util/100)*$costo)+$costo; ?>
-                    
+
                     <td>$ <?php echo $costo; ?></td>
                     <td>% <?php  echo  $util; ?></td>
                     <td>$<?php echo $venta ?></td>

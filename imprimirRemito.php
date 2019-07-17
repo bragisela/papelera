@@ -59,7 +59,7 @@ $html.= '
             while($rowImprimir = $mostrarPedidoImprimirCalculos->fetch(PDO::FETCH_ASSOC)) {
             $html.=' <tr>
                 <td  class="center bor size0 fila0" > '.    $rowImprimir['cant'] .'  </td>
-                <td class="center bor size1 fila1 "> '. $rowImprimir['descripcion'] .'  </td>
+                <td class=" bor size1 fila1 "> '. $rowImprimir['descripcion'] .'  </td>
               </tr>';
           $cantidad = $cantidad + $rowImprimir['cant'];
           $subtotal = $subtotal + $rowImprimir['importe'] * $rowImprimir['cant'];
@@ -70,7 +70,7 @@ $html.= '
           }
           $iva= $subtotal*$iva;
           $total= $subtotal+$iva;
-          for($i;$i<25;$i++){
+          for($i;$i<26;$i++){
             $html.=' <tr>
                 <td  class="center bor size0 fila0" > </td>
                 <td class="center bor size1 fila1">  </td>

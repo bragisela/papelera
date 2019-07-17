@@ -2,11 +2,10 @@
 include("sesion.php");
 $pagina='reportesCajaPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/consultas.php");
 include("sql/listados.php");
-//include("segguridad.php");
-include("menu.php");
 
 //INICIO EXCEL
 

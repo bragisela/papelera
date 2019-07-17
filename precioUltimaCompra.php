@@ -4,12 +4,11 @@
 include("sesion.php");
 $pagina='precioUltimaCompraPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 $idComprobante = $_REQUEST['idComprobante'];
 include('sql/mostrarUltimaCompra.php');
 include('sql/update.php');
-//include("segguridad.php");
-include("menu.php");
 $fech = Date("Y-m-d");
 $Fecha = Date("Y-m-d H:i:s");
 

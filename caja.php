@@ -2,11 +2,11 @@
 include("sesion.php");
 $pagina='cajaPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
-//include("segguridad.php");
-include("menu.php");
+
 
 ?>
 <!DOCTYPE html>

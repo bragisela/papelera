@@ -2,9 +2,8 @@
 include("sesion.php");
 $pagina='reportesPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
-//include("segguridad.php");
-include("menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">

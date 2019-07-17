@@ -6,7 +6,7 @@
         <!-- Logo -->
         <li>
           <div class="logo-wrapper waves-light">
-            <a href="index.php"><img src="img/logonatbra.png" class="img-fluid flex-center"></a>
+            <a href="inicioAdmin.php"><img src="img/logonatbra.png" class="img-fluid flex-center"></a>
           </div>
         </li>
         <!--/. Logo -->
@@ -119,24 +119,7 @@
       </div>
       <ul class="nav navbar-nav nav-flex-icons ml-auto">
         <li class="nav-item">
-          <a class="nav-link"><i class="fas fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"><i class="far fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"><i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Account</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+          <a href="logout.php" class="nav-link"> <span class="clearfix d-none d-sm-inline-block">Cerrar sesión</span></a>
         </li>
       </ul>
     </nav>

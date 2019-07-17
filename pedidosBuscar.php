@@ -2,11 +2,11 @@
 include("sesion.php");
 $pagina='pedidosBuscarPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
-//include("segguridad.php");
 include('sql/consultas.php');
-include("menu.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -2,14 +2,13 @@
 include("sesion.php");
 $pagina='proveedoresModificarPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
-//include("segguridad.php");
 include('sql/consultas.php');
 include('sql/update.php');
 $idProveedor = $_REQUEST['idProveedor'];
 include('sql/mostrarProveedor.php');
-include("menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">

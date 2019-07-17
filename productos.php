@@ -2,11 +2,10 @@
 include("sesion.php");
 $pagina='productosPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
-//include("segguridad.php");
-include("menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,9 +61,22 @@ include("menu.php");
                   <label for="form6" class="">Unidad Medida</label>
                 </div>
               </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="md-form">
+                  <select class="mdb-select " searchable="Search here..">
+                    <option value="" disabled selected>Choose your country</option>
+                    <option value="1">USA</option>
+                    <option value="2">Germany</option>
+                    <option value="3">France</option>
+                    <option value="3">Poland</option>
+                    <option value="3">Japan</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <input type="submit" name="Guardar" value="Guardar" class="btn btn-success">
-            <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='index.php'">
+            <input type="reset" name="Guardar" value="Cancelar" class="btn btn-info">
           </form>
             <!--FIN -->
             <?php
@@ -141,6 +153,11 @@ include("pie.php");
     if(confirm('Esta seguro que quiere eliminar el producto?'))
       window.location.href = "sql/productosBorrar.php? idProducto=" + element.id;
   }
+
+  // Material Select Initialization
+$(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
 </script>
 </body>
 </html>

@@ -2,11 +2,12 @@
 include("sesion.php");
 $pagina='clientesPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
-//include("segguridad.php");
-include("menu.php");
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -57,6 +58,8 @@ include("menu.php");
                   <label for="form3" class="">Domicilio Fiscal</label>
                 </div>
               </div>
+
+  
             </div>
             <input type="submit" name="Guardar" value="Guardar" class="btn btn-success">
             <input type="reset" name="Guardar" value="Cancelar" class="btn btn-info">
@@ -130,6 +133,7 @@ function pDelete(element) {
   if(confirm('Esta seguro que quiere eliminar el producto?'))
     window.location.href = "sql/clientesBorrar.php?idCliente=" + element.id;
 }
+
 </script>
 </body>
 </html>

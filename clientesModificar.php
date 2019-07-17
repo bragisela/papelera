@@ -2,14 +2,13 @@
 include("sesion.php");
 $pagina='clientesModificarPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
 $idCliente = $_REQUEST['idCliente'];
 include('sql/mostrarCliente.php');
 include('sql/update.php');
-//include("segguridad.php");
-include("menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
