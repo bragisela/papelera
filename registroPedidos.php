@@ -160,7 +160,7 @@ include('sql/selectProductos.php');
 
         if (isset($_POST['insertar'])) {
 
-            $proveedor = $_POST['proveedor'];
+            $proveedor = $_POST['cliente'];
             $fecha = $_POST['fecha'];
             $nro = $_POST['Nro'];
             $totalComprado = $_POST['importebruto'];
