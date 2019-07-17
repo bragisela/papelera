@@ -102,46 +102,33 @@ if(isset($_POST["export"]))
       </form>
    </section>
 
-    <section id="margen2">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card-body ">
-            <div class="table-responsive text-nowrap">
-              <table   class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
-                <thead>
-                 <tr>
-                   <th class="th-sm">Fecha</th>
-                   <th class="th-sm">Descripcion</th>
-                   <th class="th-sm">Importe</th>
-                 </tr>
-                </thead>
-               <tbody>
-                 <?php
-								 if ((isset($_POST["export"]))){
-                 	while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
-									 if(($_POST["caja_no"])==($rowCaja['nroCaja']))
-									 {
-									 echo "<tr>";
-									 echo "<th>" . $rowCaja['fecha'] . "</th>";
-									 echo "<th>" . $rowCaja['descripcion'] . "</th>";
-									 echo "<th>" . $rowCaja['importe'] . "</th>";
-
-								 }
-							 }
-						 }
+    <section >
+    	<table   class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
+      	<thead>
+        	<tr>
+          	<th class="th-sm">Fecha</th>
+            <th class="th-sm">Descripcion</th>
+            <th class="th-sm">Importe</th>
+          </tr>
+        </thead>
+      	<tbody>
+          <?php
+					if ((isset($_POST["export"]))){
+          	while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
+							if(($_POST["caja_no"])==($rowCaja['nroCaja'])) {
+								echo "<tr>";
+								echo "<th>" . $rowCaja['fecha'] . "</th>";
+								echo "<th>" . $rowCaja['descripcion'] . "</th>";
+								echo "<th>" . $rowCaja['importe'] . "</th>";
+								 		}
+							 		}
+						 		}
                  ?>
-                </tbody>
-               </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    </div>
-   </main>
-
-
-
+        </tbody>
+      </table>
+  	</section>
+	</div>
+</main>
 
 <?php
 include("pie.php");
@@ -156,7 +143,6 @@ Ps.initialize(sideNavScrollbar);
 $(document).ready(function() {
   $('.mdb-select').materialSelect();
 });
-
 
 </script>
 </body>
