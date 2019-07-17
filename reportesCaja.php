@@ -79,9 +79,9 @@ if(isset($_POST["export"]))
          <div class="form-row mb-4">
            <div class="col-md-3 col-sm-6" >
                <select name="caja_no"  class="mdb-select md-form" >
-                 <option value="" disabled selected>Descargar reporte</option>
+                 <option value="" disabled selected>Número de caja</option>
                    <?php
-                     while($rowCaja = $resultadoCaja->fetch(PDO::FETCH_ASSOC)) {
+                     while($rowCaja = $resultadoCajaInd->fetch(PDO::FETCH_ASSOC)) {
                        ?>
                          <option value="<?php echo $rowCaja['nroCaja']; ?>"><?php echo  $rowCaja['nroCaja']; ?></option>
                        <?php
@@ -118,7 +118,8 @@ if(isset($_POST["export"]))
                 </thead>
                <tbody>
                  <?php
-                 while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
+								 if ((isset($_POST["export"]))){
+                 	while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
 									 if(($_POST["caja_no"])==($rowCaja['nroCaja']))
 									 {
 									 echo "<tr>";
@@ -126,7 +127,7 @@ if(isset($_POST["export"]))
 									 echo "<th>" . $rowCaja['descripcion'] . "</th>";
 									 echo "<th>" . $rowCaja['importe'] . "</th>";
 
-									
+								 }
 							 }
 						 }
                  ?>

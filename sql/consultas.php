@@ -16,6 +16,9 @@
   $resultadoCaja = $conexiones->query("SELECT fecha,idCajaTotal,descripcion,tipoMov,importe,nroCaja FROM caja ORDER BY idCajaTotal")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
+  $resultadoCajaInd = $conexiones->query("SELECT DISTINCT nroCaja FROM caja ORDER BY idCajaTotal")
+  or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
+
   $resultadoCajaTemporal = $conexiones->query("SELECT fecha,idCaja,descripcion,tipoMov,importe FROM cajatemporal ORDER BY idCaja")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
