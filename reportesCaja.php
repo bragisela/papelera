@@ -76,7 +76,7 @@ if(isset($_POST["export"]))
       <form class=" text-left border border-light p-5" method="post">
          <div class="form-row mb-4">
            <div class="col-md-3 col-sm-6" >
-               <select name="caja_no"  class="mdb-select md-form" >
+               <select name="caja_no"  class="mdb-select md-form" searchable="Nro de caja..">
                  <option value="" disabled selected>Número de caja</option>
                    <?php //Select de los números de caja.
                      while($rowCaja = $resultadoCajaInd->fetch(PDO::FETCH_ASSOC)) {
