@@ -13,7 +13,7 @@ $total_rows = $getRepCaja->rowCount();
 
 $download_filelink = '<ul class="list-unstyled">';
 
-if(isset($_POST["export"]))
+if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
 {
 	require_once 'class/PHPExcel.php';
 	$last_page = ceil($total_rows/10000);
@@ -59,6 +59,9 @@ if(isset($_POST["export"]))
 	}
 	$download_filelink .= '</ul>';
 }
+else {
+	echo "Seleccione un número de caja";
+}
 // FIN EXCEL
 
 ?>
@@ -77,7 +80,7 @@ if(isset($_POST["export"]))
          <div class="form-row mb-4">
            <div class="col-md-3 col-sm-6" >
                <select name="caja_no"  class="mdb-select md-form" searchable="Nro de caja..">
-                 <option value="" disabled selected>Número de caja</option>
+                 <option value="" disabled selected>Elija el número de caja</option>
                    <?php //Select de los números de caja.
                      while($rowCaja = $resultadoCajaInd->fetch(PDO::FETCH_ASSOC)) {
                        ?>
@@ -112,9 +115,9 @@ if(isset($_POST["export"]))
         </thead>
       	<tbody>
           <?php
-					if ((isset($_POST["export"]))){
+					if (isset($_POST["export"]) && isset($_POST["caja_no"])!=""){
           	while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
-							if(($_POST["caja_no"])==($rowCaja['nroCaja'])) {
+							if(($_POST["caja_no"])==($rowCaja['nroCaja']) ) {
 								echo "<tr>";
 								echo "<th>" . $rowCaja['fecha'] . "</th>";
 								echo "<th>" . $rowCaja['descripcion'] . "</th>";
