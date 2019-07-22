@@ -65,7 +65,7 @@ include('sql/consultas.php');
                 </thead>
                 <tbody>
                   <?php
-                  while($rowComprobante= $resultadoCompras->fetch(PDO::FETCH_ASSOC)) {
+                  while($rowComprobante= $resultadoPedidos->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
                       <td><?php $idComprobante = $rowComprobante['idComprobante']; echo $rowComprobante['nroComprobante']; ?></td>

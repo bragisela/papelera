@@ -125,7 +125,14 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
+<<<<<<< HEAD
             	<?php echo $_SESSION['usuario']; ?>
+=======
+            	<?php echo $_SESSION['usuario'];
+              	// echo $_SESSION['Nombreusuario'];  para esto agregar campo a base de datos con nombre del admin//
+              ?>
+
+>>>>>>> c65d04df1ab50efedda339d08308852e122fc74c
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">          
             <a class="dropdown-item" href="logout.php">Salir</a>
