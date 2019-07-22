@@ -61,7 +61,7 @@ include('sql/update.php');
               </div>
             </div>
             <input type="submit" name="Guardar" value="Guardar" class="btn btn-success">
-            <input type="reset" name="Guardar" value="Cancelar" class="btn btn-info">
+                  <input type="reset" name="Cancelar" value="Volver" class="btn btn-info" onClick="location.href='clientes.php'">
           </form>
             <!--FIN -->
             <?php
