@@ -32,7 +32,7 @@ include('sql/selectProductos.php');
                 <div class="row">
                   <div class="col-md-4 mb-4">
                     <select class="mdb-select md-form" searchable="Buscar.." id="cliente" name="cliente">
-                      <option value="" disabled selected>Cliente</option>
+                      <option value="" disabled selected>Proveedor</option>
                       <?php
                       while($rowCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) {
                       ?>
@@ -204,6 +204,11 @@ include('sql/selectProductos.php');
               // );
 
             }
+
+            echo "<script language='javascript'>";
+            echo "alert('El pedido fue realizado correctamente');";
+            echo "window.location='pedidosBuscar.php';";
+            echo "</script>";
 
         }
      ?>
