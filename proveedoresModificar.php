@@ -4,7 +4,7 @@ $pagina='proveedoresModificarPHP';
 include("encabezado.php");
 include("sql/conexion.php");
 include("sql/insert.php");
-//include("segguridad.php");
+//include("seguridad.php");
 include('sql/consultas.php');
 include('sql/update.php');
 $idProveedor = $_REQUEST['idProveedor'];
@@ -56,7 +56,7 @@ include("menu.php");
               </div>
             </div>
             <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-success">
-            <input type="reset" name="" value="Cancelar" class="btn btn-info">
+            <input type="reset" name="" value="Cancelar" class="btn btn-info" onClick="location.href='proveedores.php'">
           </form>
             <!--FIN -->
             <?php

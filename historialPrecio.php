@@ -9,7 +9,7 @@ $idProducto = $_REQUEST['idProducto'];
 include('sql/mostrarProductos.php');
 include('sql/mostrarPrecio.php');
 include('sql/update.php');
-//include("segguridad.php");
+//include("seguridad.php");
 include("menu.php");
 $fech = Date("Y-m-d");
 $Fecha = Date("Y-m-d H:i:s");
@@ -65,9 +65,9 @@ $Fecha = Date("Y-m-d H:i:s");
                     $importe=$rowMPrecio['importe'];
                     $costo=$importe-(($desc*$importe)/100);
                     $venta=(($util/100)*$costo)+$costo; ?>
-                    
+
                     <td>$ <?php echo $costo; ?></td>
-                    <td>% <?php  echo  $util; ?></td>
+                    <td> <?php  echo  $util; ?>%</td>
                     <td>$<?php echo $venta ?></td>
                     <td>$<?php echo $venta=($util/100)*$costo; ?></td>
                     <td><?php $date = new DateTime($rowMPrecio['fecha']);
@@ -80,7 +80,7 @@ $Fecha = Date("Y-m-d H:i:s");
                 </tbody>
               </table>
             </div>
-            <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='productos.php'">
+            <input type="reset" name="Cancelar" value="Volver" class="btn btn-info" onClick="location.href='productos.php'">
           </form>
 
         </div>

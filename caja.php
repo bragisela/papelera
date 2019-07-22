@@ -78,8 +78,7 @@ include("menu.php");
                               $conexiones->exec($sqlCajaIngreso);
 
                               echo "<script language='javascript'>";
-                              echo "alert('El Ingreso se realizó correctamente');";
-                              echo "window.location='caja.php';";
+                             echo "window.location='caja.php';";
                               echo "</script>";
 
                             }
@@ -144,7 +143,6 @@ include("menu.php");
                               $conexiones->exec($sqlCajaEgreso);
 
                               echo "<script language='javascript'>";
-                              echo "alert('El Egreso se realizó correctamente');";
                               echo "window.location='caja.php';";
                               echo "</script>";
 
