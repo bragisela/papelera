@@ -2,9 +2,9 @@
   $pagina='pedidosBorrarPHP';
   include('conexion.php');
 
-  $idProducto = $_REQUEST['idProducto'];
+  $idComprobante = $_REQUEST['idComprobante'];
 
-  $conexiones->exec("DELETE FROM predidos WHERE idComprobante='$idComprobante'")or die ('Problemas en la Baja'.mysqli_error($conexiones));
+  $conexiones->exec("DELETE FROM comprobantes WHERE idComprobante='$idComprobante'")or die ('Problemas en la Baja'.mysqli_error($conexiones));
 
   header("Location:../pedidosBuscar.php");
 ?>
