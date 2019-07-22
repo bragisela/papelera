@@ -2,11 +2,10 @@
 include("sesion.php");
 $pagina='reportesCajaPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/consultas.php");
 include("sql/listados.php");
-//include("segguridad.php");
-include("menu.php");
 
 //INICIO EXCEL
 
@@ -14,7 +13,7 @@ $total_rows = $getRepCaja->rowCount();
 
 $download_filelink = '<ul class="list-unstyled">';
 
-if(isset($_POST["export"]))
+if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
 {
 	require_once 'class/PHPExcel.php';
 	$last_page = ceil($total_rows/10000);
@@ -60,6 +59,9 @@ if(isset($_POST["export"]))
 	}
 	$download_filelink .= '</ul>';
 }
+else {
+	echo "Seleccione un número de caja";
+}
 // FIN EXCEL
 
 ?>
@@ -77,8 +79,8 @@ if(isset($_POST["export"]))
       <form class=" text-left border border-light p-5" method="post">
          <div class="form-row mb-4">
            <div class="col-md-3 col-sm-6" >
-               <select name="caja_no"  class="mdb-select md-form" >
-                 <option value="" disabled selected>Número de caja</option>
+               <select name="caja_no"  class="mdb-select md-form" searchable="Nro de caja..">
+                 <option value="" disabled selected>Elija el número de caja</option>
                    <?php //Select de los números de caja.
                      while($rowCaja = $resultadoCajaInd->fetch(PDO::FETCH_ASSOC)) {
                        ?>
@@ -102,46 +104,33 @@ if(isset($_POST["export"]))
       </form>
    </section>
 
-    <section id="margen2">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card-body ">
-            <div class="table-responsive text-nowrap">
-              <table   class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
-                <thead>
-                 <tr>
-                   <th class="th-sm">Fecha</th>
-                   <th class="th-sm">Descripcion</th>
-                   <th class="th-sm">Importe</th>
-                 </tr>
-                </thead>
-               <tbody>
-                 <?php
-								 if ((isset($_POST["export"]))){
-                 	while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
-									 if(($_POST["caja_no"])==($rowCaja['nroCaja']))
-									 {
-									 echo "<tr>";
-									 echo "<th>" . $rowCaja['fecha'] . "</th>";
-									 echo "<th>" . $rowCaja['descripcion'] . "</th>";
-									 echo "<th>" . $rowCaja['importe'] . "</th>";
-
-								 }
-							 }
-						 }
+    <section >
+    	<table   class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
+      	<thead>
+        	<tr>
+          	<th class="th-sm">Fecha</th>
+            <th class="th-sm">Descripcion</th>
+            <th class="th-sm">Importe</th>
+          </tr>
+        </thead>
+      	<tbody>
+          <?php
+					if (isset($_POST["export"]) && isset($_POST["caja_no"])!=""){
+          	while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
+							if(($_POST["caja_no"])==($rowCaja['nroCaja']) ) {
+								echo "<tr>";
+								echo "<th>" . $rowCaja['fecha'] . "</th>";
+								echo "<th>" . $rowCaja['descripcion'] . "</th>";
+								echo "<th>" . $rowCaja['importe'] . "</th>";
+								 		}
+							 		}
+						 		}
                  ?>
-                </tbody>
-               </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    </div>
-   </main>
-
-
-
+        </tbody>
+      </table>
+  	</section>
+	</div>
+</main>
 
 <?php
 include("pie.php");
@@ -156,7 +145,6 @@ Ps.initialize(sideNavScrollbar);
 $(document).ready(function() {
   $('.mdb-select').materialSelect();
 });
-
 
 </script>
 </body>

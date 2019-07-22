@@ -2,15 +2,13 @@
 include("sesion.php");
 $pagina='precioUltimaCompraModificarPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 $idProducto = $_REQUEST['idProducto'];
 $idComprobante = $_REQUEST['idComprobante'];
 $idPrecio = $_REQUEST['idPrecio'];
-
 include('sql/mostrarProductoPrecioUltimaCompra.php');
 include('sql/update.php');
-//include("segguridad.php");
-include("menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">

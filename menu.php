@@ -6,7 +6,7 @@
         <!-- Logo -->
         <li>
           <div class="logo-wrapper waves-light">
-            <a href="index.php"><img src="img/logonatbra.png" class="img-fluid flex-center"></a>
+            <a href="inicioAdmin.php"><img src="img/logonatbra.png" class="img-fluid flex-center"></a>
           </div>
         </li>
         <!--/. Logo -->

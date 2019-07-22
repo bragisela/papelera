@@ -2,13 +2,11 @@
 include("sesion.php");
 $pagina='productosModificarPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 $idProducto = $_REQUEST['idProducto'];
-
 include('sql/mostrarProductos.php');
 include('sql/update.php');
-//include("segguridad.php");
-include("menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">

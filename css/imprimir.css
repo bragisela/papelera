@@ -52,23 +52,28 @@ border-bottom-color: #black;
 
 .size0{
 width: 15%;
-height: 15px;
 font-size: 12px;
-padding: 0;
+height: 17px;
+padding: 4px;
 }
 
 .size1{
 width: 50%;
+height: 17px;
 font-size: 12px;
-
+padding: 4px;
 }
 
 .size2{
 width: 20%;
 font-size: 12px;
+height: 17px;
+padding: 4px;
 }
 
 .size3{
 width: 20%;
 font-size: 12px;
+height: 17px;
+padding: 4px;
 }

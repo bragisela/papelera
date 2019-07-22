@@ -3,14 +3,12 @@ include("sesion.php");
 $pagina='historialPrecioPHP';
 include("encabezado.php");
 include("sql/conexion.php");
+include("seguridad.php");
 $idProducto = $_REQUEST['idProducto'];
-
-
 include('sql/mostrarProductos.php');
 include('sql/mostrarPrecio.php');
 include('sql/update.php');
-//include("seguridad.php");
-include("menu.php");
+
 $fech = Date("Y-m-d");
 $Fecha = Date("Y-m-d H:i:s");
 ?>

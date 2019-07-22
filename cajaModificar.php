@@ -2,13 +2,13 @@
 include("sesion.php");
 $pagina='cajaModificarPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
 include('sql/mostrarCaja.php');
 include('sql/update.php');
 $idCaja = $_REQUEST['idCaja'];
-//include("segguridad.php");
 include("menu.php");
 ?>
 <!DOCTYPE html>

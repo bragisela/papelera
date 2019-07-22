@@ -2,12 +2,11 @@
 include("sesion.php");
 $pagina='registroPedidosPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
 include('sql/selectProductos.php');
-//include("segguridad.php");
-include("menu.php");
   $fech = Date("Y-m-d");
   $Fecha = Date("Y-m-d H:i:s");
 ?>
@@ -99,11 +98,6 @@ include("menu.php");
          <br>
            <button type="button" class="btn btn-primary btn-sm" onclick="agregarProducto();" id="resetear">Agregar</button>
          </div>
-         <div class="col-md-4 mb-4">
-           <input type="submit" name="insertar" value="insertar" class="btn btn-success">
-
-           <input type="reset" name="" value="Cancelar" class="btn btn-info">
-         </div>
        </div>
 
      <div class="table-responsive text-nowrap">
@@ -153,13 +147,20 @@ include("menu.php");
          </tfoot>
        </table>
      </div>
+     <div class="row">
+       <div class="col-md-8 mb-8"> </div>
+       <div class="col-md-4 mb-4">
+         <input type="submit" name="insertar" value="Guardar" class="btn btn-success">
+         <input type="reset" name="" value="Cancelar" class="btn btn-info">
+       </div>
+     </div>
    </form>
     <?php
 
 
         if (isset($_POST['insertar'])) {
 
-            $proveedor = $_POST['proveedor'];
+            $proveedor = $_POST['cliente'];
             $fecha = $_POST['fecha'];
             $nro = $_POST['Nro'];
             $totalComprado = $_POST['importebruto'];

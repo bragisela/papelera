@@ -2,12 +2,11 @@
 include("sesion.php");
 $pagina='registroComprasPHP';
 include("encabezado.php");
+include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
 include('sql/selectProductos.php');
-//include("segguridad.php");
-include("menu.php");
   $fech = Date("Y-m-d");
   $Fecha = Date("Y-m-d H:i:s");
 ?>
