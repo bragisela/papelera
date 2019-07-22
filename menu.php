@@ -125,10 +125,9 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            	<?php echo $_SESSION['nombreUsuario']; ?>
+            	<?php echo $_SESSION['usuario']; ?>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="perfil.php">Perfil</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">          
             <a class="dropdown-item" href="logout.php">Salir</a>
           </div>
         </li>
