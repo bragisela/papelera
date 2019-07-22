@@ -61,19 +61,7 @@ include('sql/consultas.php');
                   <label for="form6" class="">Unidad Medida</label>
                 </div>
               </div>
-
-              <div class="col-md-4 mb-4">
-                <div class="md-form">
-                  <select class="mdb-select " searchable="Search here..">
-                    <option value="" disabled selected>Choose your country</option>
-                    <option value="1">USA</option>
-                    <option value="2">Germany</option>
-                    <option value="3">France</option>
-                    <option value="3">Poland</option>
-                    <option value="3">Japan</option>
-                  </select>
-                </div>
-              </div>
+              
             </div>
             <input type="submit" name="Guardar" value="Guardar" class="btn btn-success">
             <input type="reset" name="Guardar" value="Cancelar" class="btn btn-info">
