@@ -1,0 +1,149 @@
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+
+body {
+    margin: -52px;
+    background-color: #ffffff;
+}
+
+.margen  {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.bor {
+  border: 1px solid;
+  background-color: #ffffff;
+  font-size: 13px;
+}
+.center {
+text-align: center;
+}
+
+
+.bot{
+border-top-width: 1;
+border-bottom-width: 0;
+border-bottom-color: #black;
+}
+
+.r1{
+text-align: left;
+border-right-color: #CCC;
+border-bottom-color: #CCC;
+border-bottom-width: 0;
+border-right-width: 0;
+}
+
+.r2{
+text-align: left;
+border-right-color: #CCC;
+border-top-color: #CCC;
+border-top-width: 0;
+border-right-width: 0;
+border-bottom-color: #CCC;
+border-bottom-width: 0;
+}
+
+
+.bot1{
+border-top-width: 0;
+border-bottom-width: 1;
+border-bottom-color: #black;
+}
+
+
+.r3{
+text-align: left;
+border-left-color: #CCC;
+border-top-width: 1;
+border-bottom-width: 0;
+border-left-width: 0;
+}
+
+.r4{
+text-align: left;
+border-left-color: #CCC;
+border-top-width: 0;
+border-left-width: 0;
+border-bottom-width: 0;
+}
+
+
+.size0{
+width: 15%;
+height: 17px;
+font-size: 11px;
+padding: -3;
+
+}
+
+.size1{
+width: 85%;
+font-size: 11px;
+border-left-width: 1;
+border-right-width: 1;
+}
+
+.footer1{
+height: 80px;
+font-size: 11px;
+border-right-width: 0;
+border-bottom-width: 0;
+padding-bottom: -35px;
+}
+
+.footer2{
+height: 80px;
+font-size: 11px;
+border-left-width: 0;
+border-bottom-width: 0;
+padding-bottom: -35px;
+}
+
+.footer3{
+height: 7px;
+font-size: 11px;
+border-top-width: 0;
+border-right-width: 0;
+padding-top: 10px;
+
+
+}
+
+.footer4{
+height: 7px;
+font-size: 11px;
+border-top-width: 0;
+border-left-width: 0;
+padding-top: 10px;
+}
+
+.fila0{
+border-bottom-width: 0;
+border-top-width: 0;
+padding: 2px;
+
+}
+
+.fila1{
+border-bottom-width: 0;
+border-top-width: 0;
+padding: 2px;
+
+}
