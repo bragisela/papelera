@@ -10,7 +10,7 @@
     where c.idComprobante = $idComprobante")
   or die ('No se puede traer listado comprobante'.mysqli_error($conexiones));
 
-  $mostrarPedidoImprimirDatos = $conexiones->query("SELECT cl.nombre, cl.condicionIVA, cl.cuit, cl.domicilioComercio , c.nrocomprobante, c.fecha from comprobantes as c
+  $mostrarPedidoImprimirDatos = $conexiones->query("SELECT cl.nombre, cl.condicionIVA, cl.cuit, cl.domicilioComercio ,cl.domicilioFiscal , c.nrocomprobante, c.fecha from comprobantes as c
   inner join clientes as cl on c.IdCliPro=cl.idCliente
   where c.idComprobante = $idComprobante")
   or die ('No se puede traer listado comprobante'.mysqli_error($conexiones));
@@ -22,6 +22,7 @@
   $nombre2 = $rowImprimir2['nombre'];
   $cuit2 = $rowImprimir2['cuit'];
   $domicilio2 = $rowImprimir2['domicilioComercio'];
+  $domicilio3 = $rowImprimir2['domicilioFiscal'];
   $condIva2 = $rowImprimir2['condicionIVA'];
 
 ?>

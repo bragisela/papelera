@@ -31,7 +31,7 @@ $html.= '
               <th class="bor r3 bot1" colspan="2"></th>
             </tr>
             <tr>
-              <th class="bor r2" colspan="2">Domicilio:</th>
+              <th class="bor r2" colspan="2">Domicilio:' . $domicilio2 .'</th>
               <th class="bor r4 bot1" colspan="2">Cond IVA: '.$condIva2.'</th>
             </tr>
             <tr>
