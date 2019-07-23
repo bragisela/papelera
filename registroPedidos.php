@@ -31,7 +31,11 @@ include('sql/selectProductos.php');
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-4 mb-4">
+<<<<<<< HEAD
                     <select name="cliente" class="mdb-select md-form" searchable="Buscar.." id="cliente" >
+=======
+                    <select class="mdb-select md-form" searchable="Buscar.." id="cliente" name="cliente">
+>>>>>>> 4ad3f1d1be0dbed537a1fc2facf17705b3a595da
                       <option value="" disabled selected>Cliente</option>
                       <?php
                       while($rowCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) {
