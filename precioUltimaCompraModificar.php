@@ -55,7 +55,7 @@ include('sql/update.php');
             </div>
 
             <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-success">
-            <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='productos.php'">
+            <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='precioUltimaCompra.php?idComprobante=<?php echo $peUltIdComprobante;?>';">
           </form>
             <!--FIN -->
             <?php
