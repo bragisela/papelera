@@ -68,14 +68,12 @@ include('sql/consultas.php');
                   while($rowCompras = $resultadoCompras->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
-                      <td><?php echo $rowCompras['nroComprobante'];  $idProveedor = $rowCompras['nroComprobante']; ?></td>
+                      <td><?php echo $rowCompras['nroComprobante'];  $idCompra = $rowCompras['idComprobante']; ?></td>
                       <td><?php $date = new DateTime($rowCompras['fecha']); echo $date->format('d/m/Y'); ?></td>
                       <td><?php echo $rowCompras['nombre']; ?></td>
                       <td><?php echo $rowCompras['domicilio']; ?></td>
                       <td><?php echo "
-                      <a href='' title='Editar' class='btn-primary btn-sm'><i class='far fa-edit'></i></a>
-
-                      <a onClick='' id='$idProveedor' title='Eliminar' class='btn-primary btn-sm'><i class='far fa-trash-alt'></i></a>
+                      <a onClick='pDelete(this);' id='$idCompra'><i class='far fa-trash-alt'></i></a>
                       "; ?></td>
                     </tr>
                     <?php
@@ -106,9 +104,11 @@ var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 Ps.initialize(sideNavScrollbar);
 
 function pDelete(element) {
-  if(confirm('Esta seguro que quiere eliminar el producto?'))
-    window.location.href = "sql/proveedorBorrar.php?idProveedor=" + element.id;
+  if(confirm('Esta seguro que quiere eliminar la compra?'))
+    window.location.href = "sql/compraBorrar.php?idCompra=" + element.id;
 }
+
+
 </script>
 </body>
 </html>

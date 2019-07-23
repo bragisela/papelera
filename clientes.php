@@ -59,7 +59,7 @@ include('sql/consultas.php');
                 </div>
               </div>
 
-  
+
             </div>
             <input type="submit" name="Guardar" value="Guardar" class="btn btn-success">
             <input type="reset" name="Guardar" value="Cancelar" class="btn btn-info">
@@ -104,8 +104,8 @@ include('sql/consultas.php');
                 <td><?php echo $rowClientes['cuit']; ?></td>
                 <td><?php echo $rowClientes['condicionIVA']; ?></td>
                 <td><?php echo "
-                <a href='clientesModificar.php?idCliente=$idCliente'><i class='far fa-edit'></i></i></a>
-                <a onClick='pDelete(this);' id='$idCliente'><i class='far fa-trash-alt'></i></a>"; ?></td>
+                <a  href='clientesModificar.php?idCliente=$idCliente'><i class='far fa-edit'></i></a>
+                <a  onClick='pDelete(this);' id='$idCliente'><i class='fas fa-trash-alt'></i></a>"; ?></td>
               </tr>
               <?php
               }

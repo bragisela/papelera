@@ -60,3 +60,7 @@
     $(this).toggleClass('share-expanded').parent().find('div').toggleClass('social-reveal-active');
   });
 })(jQuery);
+
+$('.map-card').click(function () {
+  $('.card-body').toggleClass('closed');
+});

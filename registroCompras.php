@@ -50,7 +50,7 @@ include('sql/selectProductos.php');
                     <div class="col-md-4 mb-4">
                       <div class="md-form">
                         <input type="number" id="form3" class="form-control" name="Nro">
-                        <label for="form3" class="">Nro</label>
+                        <label for="form3" class="">Nro Comprobante</label>
                       </div>
                     </div>
                 </div>

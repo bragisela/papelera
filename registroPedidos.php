@@ -31,8 +31,8 @@ include('sql/selectProductos.php');
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-4 mb-4">
-                    <select class="mdb-select md-form" searchable="Buscar.." id="cliente" name="cliente">
-                      <option value="" disabled selected>Proveedor</option>
+                    <select name="cliente" class="mdb-select md-form" searchable="Buscar.." id="cliente" >
+                      <option value="" disabled selected>Cliente</option>
                       <?php
                       while($rowCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) {
                       ?>
@@ -50,7 +50,7 @@ include('sql/selectProductos.php');
                     <div class="col-md-4 mb-4">
                       <div class="md-form">
                         <input type="number" id="form3" class="form-control" name="Nro">
-                        <label for="form3" class="">Nro</label>
+                        <label for="form3" class="">Nro Comprobante</label>
                       </div>
                     </div>
                 </div>
@@ -222,11 +222,11 @@ include("pie.php");
 ?>
 <script type="text/javascript" src="scripts/getCliente.js"></script>
 <script>
-  // SideNav Button Initialization
-  $(".button-collapse").sideNav();
-  // SideNav Scrollbar Initialization
-  var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-  Ps.initialize(sideNavScrollbar);
+// SideNav Button Initialization
+$(".button-collapse").sideNav();
+// SideNav Scrollbar Initialization
+var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+var ps = new PerfectScrollbar(sideNavScrollbar);
 
   $(document).ready(function() {
     $('.mdb-select').materialSelect();

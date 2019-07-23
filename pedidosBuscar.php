@@ -69,16 +69,15 @@ include('sql/consultas.php');
                     ?>
                     <tr>
                       <td><?php $idComprobante = $rowComprobante['idComprobante']; echo $rowComprobante['nroComprobante']; ?></td>
-                      <td><?php echo $rowComprobante['nombre']; ?></td>
-                      <td><?php echo $rowComprobante['domicilio']; ?></td>
                       <td><?php echo $rowComprobante['fecha']; ?></td>
+                      <td><?php echo $rowComprobante['nombre']; ?></td>
+                      <td><?php echo $rowComprobante['domicilioComercio']; ?></td>
                       <td><?php echo "
-                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Editar'><i class='far fa-edit'></i></a>
-                      <a  target='_blank' href='imprimir.php?idComprobante=$idComprobante' title='Imprimir'><i class='fas fa-print'></i></a>
-                      <a  target='_blank' href='imprimirRemito.php?idComprobante=$idComprobante' title='Remito'><i class='fas fa-sticky-note'></i></a>
-                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Factura'><i class='fas fa-file-invoice-dollar'></i></a>
-                      <a onClick='pDelete(this);' id='$idComprobante' title='Historial'><i class='fas fa-history'></i></a>
-                      <a onClick='pDelete(this);' id='$idComprobante' title='Eliminar'><i class='far fa-trash-alt'></i></a>" ; ?></td>
+                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Editar'><i class='far fa-edit fa-lg'></i></a>
+                      <a target='_blank' href='imprimir.php?idComprobante=$idComprobante' title='Imprimir'><i class='fas fa-print fa-lg'></i></a>
+                      <a target='_blank' href='imprimirRemito.php?idComprobante=$idComprobante' title='Remito'><i class='fas fa-sticky-note fa-lg'></i></a>
+                      <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Factura'><i class='fas fa-file-invoice-dollar fa-lg'></i></a>
+                      <a onClick='pDelete(this);' id='$idComprobante' title='Eliminar'><i class='far fa-trash-alt fa-lg'></i></a>" ; ?></td>
                     </tr>
                     <?php
                   }
@@ -104,8 +103,8 @@ var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 Ps.initialize(sideNavScrollbar);
 
 function pDelete(element) {
-  if(confirm('Esta seguro que quiere eliminar el producto?'))
-    window.location.href = "sql/proveedorBorrar.php?idProveedor=" + element.id;
+  if(confirm('Esta seguro que quiere eliminar el pedido?'))
+    window.location.href = "sql/pedidosBorrar.php?idComprobante=" + element.id;
 }
 </script>
 </body>
