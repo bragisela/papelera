@@ -73,19 +73,11 @@ include('sql/consultas.php');
                       <td><?php echo $rowComprobante['nombre']; ?></td>
                       <td><?php echo $rowComprobante['domicilioComercio']; ?></td>
                       <td><?php echo "
-<<<<<<< HEAD
                       <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Editar'><i class='far fa-edit fa-lg'></i></a>
                       <a target='_blank' href='imprimir.php?idComprobante=$idComprobante' title='Imprimir'><i class='fas fa-print fa-lg'></i></a>
                       <a target='_blank' href='imprimirRemito.php?idComprobante=$idComprobante' title='Remito'><i class='fas fa-sticky-note fa-lg'></i></a>
                       <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Factura'><i class='fas fa-file-invoice-dollar fa-lg'></i></a>
                       <a onClick='pDelete(this);' id='$idComprobante' title='Eliminar'><i class='far fa-trash-alt fa-lg'></i></a>" ; ?></td>
-=======
-                      <a class='btn-primary btn-sm' href='proveedoresModificar.php?idProveedor=$idComprobante' title='Editar'><i class='far fa-edit'></i></a>
-                      <a class='btn-primary btn-sm' target='_blank' href='imprimir.php?idComprobante=$idComprobante' title='Imprimir'><i class='fas fa-print'></i></a>
-                      <a class='btn-primary btn-sm' target='_blank' href='imprimirRemito.php?idComprobante=$idComprobante' title='Remito'><i class='fas fa-sticky-note'></i></a>
-                      <a class='btn-primary btn-sm' href='proveedoresModificar.php?idProveedor=$idComprobante' title='Factura'><i class='fas fa-file-invoice-dollar'></i></a>
-                      <a class='btn-primary btn-sm' onClick='pDelete(this);' id='$idComprobante' title='Eliminar'><i class='far fa-trash-alt'></i></a>" ; ?></td>
->>>>>>> 4ad3f1d1be0dbed537a1fc2facf17705b3a595da
                     </tr>
                     <?php
                   }
