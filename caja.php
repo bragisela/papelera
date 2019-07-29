@@ -173,7 +173,7 @@ include('sql/consultas.php');
                   while($rowCaja = $resultadoCajaTemporal->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
-                      <td><?php echo ($rowCaja['fecha']) ;?></td>
+                      <td><?php echo  date("d/m/Y", strtotime($rowCaja['fecha'])); ?></td>
                       <td><?php echo $rowCaja['descripcion']; $idCaja = $rowCaja['idCaja']; ?></td>
                       <td><?php
                         if ($rowCaja['importe']>0){

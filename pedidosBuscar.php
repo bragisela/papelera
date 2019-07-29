@@ -69,7 +69,7 @@ include('sql/consultas.php');
                     ?>
                     <tr>
                       <td><?php $idComprobante = $rowComprobante['idComprobante']; echo $rowComprobante['nroComprobante']; ?></td>
-                      <td><?php echo $rowComprobante['fecha']; ?></td>
+                    <td><?php $date = new DateTime($rowComprobante['fecha']); echo $date->format('d/m/Y'); ?></td>
                       <td><?php echo $rowComprobante['nombre']; ?></td>
                       <td><?php echo $rowComprobante['domicilioComercio']; ?></td>
                       <td><?php echo "
