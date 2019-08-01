@@ -9,3 +9,25 @@ tabla inventario no va
 presupuesto
 
 agregar porc utilidad en listado productos
+
+
+tomi)
+
+Pedidos retencion iibb no va.
+registro pedidos, precio ya tiene que venir cargado.
+agregar select con R o F recibo factura, agregar campo a comprobante.
+
+registro Compras
+agregar ver detalles
+
+registro Pedidos
+eliminar
+ver detalles
+funcion editar
+actualizar precio cantidad
+poder eliminar
+
+descargar excel
+ventas
+Compras
+fecha desde hasta y descargar
