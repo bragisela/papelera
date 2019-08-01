@@ -53,7 +53,11 @@
                     <a href="reportesCaja.php" class="waves-effect"><i class="fas fa-cash-register"></i>Caja</a>
                   </li>
                   <li>
+<<<<<<< HEAD
                     <a href="reportesUtilidad.php" class="waves-effect"><i class="fas fa-cash-register"></i>Utilidad</a>
+=======
+                    <a href="reportesUtilidad.php" class="waves-effect"><i class="fas fa-cash-register"></i>Caja</a>
+>>>>>>> 92c9fe4f233d094cca34f47e5ce6014d20c67e88
                   </li>
                 </ul>
               </div>
