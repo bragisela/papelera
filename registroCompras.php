@@ -166,7 +166,9 @@ $Fecha = Date("Y-m-d H:i:s");
               $totalComprado = $_POST['importebruto'];
               $tipo = "C";
               $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$totalComprado);
+              $sqlCaja = insertCajaEgreso ($fecha,"E",$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
               $conexiones->exec($sqlCompro);
+              $conexiones->exec($sqlCaja);
               $idComprobante = $conexiones->lastInsertId();
 
               for($count = 0; $count < count($_POST["sele"]); $count++)
@@ -202,6 +204,18 @@ $Fecha = Date("Y-m-d H:i:s");
                 //     ':totalComprado'  => $_POST["precio"][$count]
                 //   )
                 // );
+
+                $queryItems = "INSERT INTO items(idComprobante, idProducto, fecha, cant) VALUES (:idComprobante, :idProducto, :fecha, :cant)";
+                $iItems = $conexiones->prepare($queryItems);
+                $iItems->execute(
+                  array(
+                    ':idComprobante'   => $idComprobante,
+                    ':idProducto'  => $_POST["sele"][$count],
+                    ':fecha' => $Fecha,
+                    ':cant'  => $_POST["cantidad"][$count]
+                  )
+                );
+
 
               }
 
