@@ -166,7 +166,9 @@ include('sql/selectProductos.php');
             $totalComprado = $_POST['importebruto'];
             $tipo = "V";
             $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$totalComprado);
+            $sqlCaja = insertCajaIngreso($fecha,"I",$nro,$totalComprado,"0");
             $conexiones->exec($sqlCompro);
+            $conexiones->exec($sqlCaja);
             $idComprobante = $conexiones->lastInsertId();
 
             for($count = 0; $count < count($_POST["sele"]); $count++)
