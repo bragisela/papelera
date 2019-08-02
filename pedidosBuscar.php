@@ -74,10 +74,13 @@ include('sql/consultas.php');
                       <td><?php echo $rowComprobante['domicilioComercio']; ?></td>
                       <td><?php echo "
                       <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Editar'><i class='far fa-edit fa-lg'></i></a>
+                      <a href='detallePedidos.php?idPedido=$idComprobante' title='Ver Detalles'><i class='fas fa-asterisk'></i></a>
                       <a target='_blank' href='imprimir.php?idComprobante=$idComprobante' title='Imprimir'><i class='fas fa-print fa-lg'></i></a>
                       <a target='_blank' href='imprimirRemito.php?idComprobante=$idComprobante' title='Remito'><i class='fas fa-sticky-note fa-lg'></i></a>
                       <a href='proveedoresModificar.php?idProveedor=$idComprobante' title='Factura'><i class='fas fa-file-invoice-dollar fa-lg'></i></a>
-                      <a onClick='pDelete(this);' id='$idComprobante' title='Eliminar'><i class='far fa-trash-alt fa-lg'></i></a>" ; ?></td>
+                      <a onClick='pDelete(this);' id='$idComprobante'><i class='far fa-trash-alt'></i></a>
+                      " ; ?></td>
+
                     </tr>
                     <?php
                   }
@@ -103,8 +106,8 @@ var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 Ps.initialize(sideNavScrollbar);
 
 function pDelete(element) {
-  if(confirm('Esta seguro que quiere eliminar el pedido?'))
-    window.location.href = "sql/pedidosBorrar.php?idComprobante=" + element.id;
+  if(confirm('Esta seguro que quiere eliminar la venta?'))
+    window.location.href = "sql/VentaBorrar.php?idComprobante=" + element.id;
 }
 </script>
 </body>

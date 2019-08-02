@@ -74,6 +74,7 @@ include('sql/consultas.php');
                       <td><?php echo $rowCompras['domicilio']; ?></td>
                       <td><?php echo "
                       <a onClick='pDelete(this);' id='$idCompra'><i class='far fa-trash-alt'></i></a>
+                      <a href='detalleCompras.php?idCompra=$idCompra ' class='btn btn-outline-default  waves-effect btn-sm'> Ver detalles</a>
                       "; ?></td>
                     </tr>
                     <?php

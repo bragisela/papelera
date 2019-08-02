@@ -115,9 +115,11 @@ INSERT INTO permisos (`codPermiso`, `codRol`,`tipoAcceso`, `pagina`) VALUES
 (93,1,'','precioUltimaCompraPHP'),
 (100,1,'','precioUltimaCompraModificarPHP'),
 (101,1,'','cajaPHP'),
+(108,1,'','detallePedidosPHP'),
 (102,1,'','cajaModificarPHP'),
 (106,1,'','reportesCajaPHP'),
 (109,1,'','inicioAdminPHP'),
+(119,1,'','detalleComprasPHP'),
 (14,1,'','reportesPHP');
 
 
