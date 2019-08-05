@@ -53,6 +53,7 @@ $Fecha = Date("Y-m-d H:i:s");
                         <label for="form3" class="">Nro Comprobante</label>
                       </div>
                     </div>
+
                   </div>
                   <div class="row">
                     <div class="col-md-4 mb-4">
@@ -163,9 +164,10 @@ $Fecha = Date("Y-m-d H:i:s");
               $proveedor = $_POST['proveedor'];
               $fecha = $_POST['fecha'];
               $nro = $_POST['Nro'];
+              $justificante = "F";
               $totalComprado = $_POST['importebruto'];
               $tipo = "C";
-              $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$totalComprado);
+              $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado);
               $sqlCaja = insertCajaEgreso ($fecha,"E",$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
               $conexiones->exec($sqlCompro);
               $conexiones->exec($sqlCaja);

@@ -47,11 +47,19 @@ include('sql/selectProductos.php');
                         <input type="date" class="form-control" name="fecha" value="<?php echo $fech; ?>">
                       </div>
                     </div>
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-2 mb-2">
                       <div class="md-form">
                         <input type="number" id="form3" class="form-control" name="Nro">
                         <label for="form3" class="">Nro Comprobante</label>
                       </div>
+                    </div>
+
+                    <div class="col-md-2 mb-2">
+                      <select class="mdb-select md-form" searchable="Buscar.."  name="justificante">
+                        <option value="" disabled selected>Justificante</option>
+                        <option value="R">Recibo</option>
+                        <option value="F">Factura</option>
+                      </select>
                     </div>
                 </div>
                 <div class="row">
@@ -128,12 +136,6 @@ include('sql/selectProductos.php');
            </tr>
            <tr>
              <td colspan="5"></td>
-             <td>Retencion IIBB</td>
-             <td><input class="form-control" type="number" id="retencion"  name="retencion" readonly></td>
-             <td></td>
-           </tr>
-           <tr>
-             <td colspan="5"></td>
              <td>IVA</td>
              <td><input class="form-control" type="number" id="iva"  name="iva" readonly></td>
              <td></td>
@@ -163,9 +165,11 @@ include('sql/selectProductos.php');
             $proveedor = $_POST['cliente'];
             $fecha = $_POST['fecha'];
             $nro = $_POST['Nro'];
+            //recibo factura $pago
+            $justificante = $_POST['justificante'];
             $totalComprado = $_POST['importebruto'];
             $tipo = "V";
-            $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$totalComprado);
+            $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado);
             $sqlCaja = insertCajaIngreso($fecha,"I",$nro,$totalComprado,"0");
             $conexiones->exec($sqlCompro);
             $conexiones->exec($sqlCaja);
@@ -256,13 +260,7 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
     }
     $(document).on('click', '.remove', function(){
       var totalEli = this.parentNode.parentNode.childNodes[6].childNodes[0].value;
-      var retencion = document.getElementById("retencion");
       var rete =  parseFloat(retencion.value) - parseFloat(((totalEli * 2.5)/100));
-      if (rete.toFixed(2)<=0) {
-        retencion.value = 0;
-      }else{
-        retencion.value =  rete.toFixed(2);
-      }
       var iva = document.getElementById("iva");
       var iv = parseFloat(iva.value) - parseFloat(((totalEli * 21)/100));
       if (iv.toFixed(2)<=0) {
@@ -336,13 +334,10 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
       var h = totalI +tot - anterior;
       totalI = h.toFixed(2);
       document.getElementById("totalImporte").value = totalI;
-      var retencion = (totalI*2.5)/100;
-      retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-      document.getElementById("retencion").value = retencion.toFixed(2);
       var iva = (totalI*21)/100;
       iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
       document.getElementById("iva").value = iva.toFixed(2);
-      var totalfactu = parseFloat(totalI) + parseFloat(retencion) + parseFloat(iva);
+      var totalfactu = parseFloat(totalI) + parseFloat(iva);
       totalfactu = isNaN(parseFloat(totalfactu)) ? 0 : parseFloat(totalfactu);
       document.getElementById("totalfac").value = totalfactu.toFixed(2);
 

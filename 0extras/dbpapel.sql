@@ -119,6 +119,8 @@ INSERT INTO permisos (`codPermiso`, `codRol`,`tipoAcceso`, `pagina`) VALUES
 (102,1,'','cajaModificarPHP'),
 (106,1,'','reportesCajaPHP'),
 (109,1,'','inicioAdminPHP'),
+(189,1,'','reporteComprasPHP'),
+(190,1,'','reporteVentasPHP'),
 (119,1,'','detalleComprasPHP'),
 (14,1,'','reportesPHP');
 
@@ -155,6 +157,7 @@ CREATE TABLE `comprobantes` (
   `IdCliPro` int(10) NOT NULL,
   `fecha` date NOT NULL,
   `tipo` varchar(2) DEFAULT NULL,
+  `justificante` varchar(2) DEFAULT NULL,
   `totalcomprado` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
