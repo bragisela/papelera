@@ -24,10 +24,12 @@ registro pedidos agregar select con R o F recibo factura, agregar campo a compro
 registro compras agregar select con R o F recibo factura, agregar campo a comprobante bdd. (listo)
 
 05 08 2019
-reportes iva descargar excel ventas fecha desde hasta y descargar factura (%90 listo) // FALTA DESC, EXENTOS, NETO GRAVADO AVERIGURAR QUE ES,diseño celda
-reportes iva descargar excel compras  fecha desde hasta y descargar factura (%90 listo)// FALTA DESC, EXENTOS, NETO GRAVADO AVERIGURAR QUE ES, diseño celda
+reportes iva descargar excel ventas fecha desde hasta y descargar factura (%100 listo)
+reportes iva descargar excel compras  fecha desde hasta y descargar factura (%100 listo)
+
+07/08/201
+registro Pedidos  funcion editar  actualizar precio cantidad (listo)
 
 
 
 registro pedidos precio ya tiene que venir cargado.
-registro Pedidos  funcion editar  actualizar precio cantidad

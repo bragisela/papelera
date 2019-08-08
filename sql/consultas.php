@@ -7,7 +7,8 @@
   $resultadoProveedor = $conexiones->query("SELECT idProveedor,nombre,cuit,condicionIVA,domicilio FROM proveedores ORDER BY nombre")
   or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
 
-  $resultadoProductos = $conexiones->query("SELECT idProducto,codProducto,descripcion,material,unidadEmbalaje,medidas,unidadMedida FROM productos ORDER BY codProducto")
+  $resultadoProductos = $conexiones->query("SELECT pro.idProducto,pro.codProducto,pro.descripcion,pro.material,pro.unidadEmbalaje,pro.medidas,pro.unidadMedida, pre.importe, pre.porcUtil, (pre.importe+(pre.porcUtil*pre.importe/100)) as importe2 FROM productos as pro
+  inner join precios as pre on pre.idProducto=pro.idProducto group by pro.idProducto ORDER BY pro.codProducto")
   or die ('No se puede traer listado Productos'.mysqli_error($conexiones));
 
   $resultadoPedidos = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, cl.nombre, cl.domicilioComercio FROM comprobantes c, clientes cl WHERE c.tipo='V' AND c.IdCliPro=cl.idCliente")

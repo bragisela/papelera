@@ -96,7 +96,7 @@ include('sql/selectProductos.php');
              <?php
                while($rowProductos = $resultadoProductos->fetch(PDO::FETCH_ASSOC)) {
              ?>
-             <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion'];; ?></option>
+             <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion']; echo " - ";echo $rowProductos['importe2'];; ?></option>
              <?php
              }
              ?>
@@ -244,11 +244,13 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
     var limite = 1;
     var cod = text.split(separador, limite);
     var cadena = text.split(separador)[1];
+    var precio = text.split(separador)[2];
+    var precio = parseFloat(precio);
     var item = '<tr>';
     item = item +'<td>'+cod+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
     item = item +'<td>'+cadena+'</td>';
     item = item +'<td><input class="form-control" type="number" id="cantidad[]" name="cantidad[]" oninput="calcularCantidad(this);" min="0"></td>';
-    item = item +'<td><input class="form-control" type="number" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" min="0"></td>';
+    item = item +'<td><input class="form-control" type="number" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" value="'+precio+'" min="0" readonly></td>';
     item = item +'<td><input class="form-control" type="number" id="descuento[]" name="desc[]" oninput="Calcular(this);calcularCantidad(this);" value="0" min="0" max="100"></td>';
     item = item +'<td><input class="form-control" type="number" id="importe[]"  name="importe[]" readonly></td>';
     item = item +'<td><input class="form-control" type="number" id="total[]"  name="total[]" readonly></td>';
