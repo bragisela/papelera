@@ -51,19 +51,37 @@ $totalCompra=0;
                         <td>$ <?php echo $importeDesc*$cant ?></td>
                       </tr>
                       <?php
+                      $retib=((2.5*$totalCompra)/100);
+                      $retib = bcdiv($retib, '1', 2);
                       $totalCompra=$totalCompra+($importeDesc*$cant);
+                      $totalCompra = bcdiv($totalCompra, '1', 2);
+                      $iva=((21*$totalCompra)/100);
+                      $iva = bcdiv($iva, '1', 2);
+                      $Totalfacturado=$iva+$totalCompra+$retib;
+                      $Totalfacturado = bcdiv($Totalfacturado, '1', 2);
                     }
-                    // <a href='pdf/PDFcompra.php?idProveedor=$idProveedor' title='Imprimir' class='btn-primary btn-sm'><i class='fas fa-print'></i></a>
-                    // <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Remito' class='btn-primary btn-sm'><i class='fas fa-sticky-note'></i></a>
-                    // <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Factura' class='btn-primary btn-sm'><i class='fas fa-file-invoice-dollar'></i></a>
-                    // <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Historial' class='btn-primary btn-sm'><i class='fas fa-history'></i></a>
                     ?>
                   </tbody>
                   <tfoot>
                     <tr>
                       <td colspan="4"></td>
-                      <td style="font-weight: bold; font-size:16px;">Total Facturado</td>
+                      <td style="font-weight: bold; font-size:16px;">Importe</td>
                       <td style="font-weight: bold; font-size:16px;"> $    <?php echo $totalCompra; ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="4"></td>
+                      <td style="font-weight: bold; font-size:16px;">RETENCION IBB</td>
+                      <td style="font-weight: bold; font-size:16px;"> $    <?php echo $retib; ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="4"></td>
+                      <td style="font-weight: bold; font-size:16px;">IVA </td>
+                      <td style="font-weight: bold; font-size:16px;"> $    <?php echo $iva; ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="4"></td>
+                      <td style="font-weight: bold; font-size:16px;">Total Facturado</td>
+                      <td style="font-weight: bold; font-size:16px;"> $    <?php echo $Totalfacturado; ?></td>
                     </tr>
                   </tfoot>
                 </table>
