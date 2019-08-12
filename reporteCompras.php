@@ -32,7 +32,7 @@ if(isset($_POST["export"]) && isset($_POST["desde"])!="" && isset($_POST["hasta"
 		foreach($table_columns as $field)
 		{
 			$object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
-		
+
 			$column++;
 		}
 
@@ -63,20 +63,31 @@ if(isset($_POST["export"]) && isset($_POST["desde"])!="" && isset($_POST["hasta"
       $facturado = bcdiv($facturado, '1', 2);
 
 			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["fecha"]);
+			$object->getActiveSheet()->getColumnDimension('A')->setWidth("15");
 			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["nrocomprobante"]);
+			$object->getActiveSheet()->getColumnDimension('B')->setWidth("15");
 			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["nombre"]);
+			$object->getActiveSheet()->getColumnDimension('C')->setWidth("15");
 			$object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $sub_row["cuit"]);
+			$object->getActiveSheet()->getColumnDimension('D')->setWidth("15");
 			$object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $sub_row["totalcomprado"]);
+			$object->getActiveSheet()->getColumnDimension('E')->setWidth("15");
 			$object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, 0);
+			$object->getActiveSheet()->getColumnDimension('F')->setWidth("15");
 			$object->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row, $sub_row["totalcomprado"]);
+			$object->getActiveSheet()->getColumnDimension('G')->setWidth("15");
       $object->getActiveSheet()->setCellValueByColumnAndRow(7, $excel_row, 0);
+			$object->getActiveSheet()->getColumnDimension('H')->setWidth("15");
       $object->getActiveSheet()->setCellValueByColumnAndRow(8, $excel_row, $retib);
+			$object->getActiveSheet()->getColumnDimension('I')->setWidth("15");
       $object->getActiveSheet()->setCellValueByColumnAndRow(9, $excel_row, $iva);
+			$object->getActiveSheet()->getColumnDimension('J')->setWidth("15");
       $object->getActiveSheet()->setCellValueByColumnAndRow(10, $excel_row, $facturado);
+			$object->getActiveSheet()->getColumnDimension('K')->setWidth("15");
       $totalImporte=$totalImporte+$sub_row["totalcomprado"];
       $totalDesc=$totalDesc;
       $totalNoExento=$totalNoExento;
-      $totalGravado=$totalGravado;
+      $totalGravado=$totalGravado+$sub_row["totalcomprado"];
       $totalFac=$totalFac+$facturado;
       $totalFac = bcdiv($totalFac, '1', 2);
       $totalIva=$totalIva+$iva;
