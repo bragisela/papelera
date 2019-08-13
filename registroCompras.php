@@ -168,10 +168,10 @@ $Fecha = Date("Y-m-d H:i:s");
               $totalComprado = $_POST['importebruto'];
               $tipo = "C";
               $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado);
-              $sqlCaja = insertCajaEgreso ($fecha,"E",$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
               $conexiones->exec($sqlCompro);
-              $conexiones->exec($sqlCaja);
               $idComprobante = $conexiones->lastInsertId();
+              //$sqlCaja = insertCajaEgreso ($fecha,"E",$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
+              //$conexiones->exec($sqlCaja);
 
               for($count = 0; $count < count($_POST["sele"]); $count++)
               {
@@ -194,27 +194,6 @@ $Fecha = Date("Y-m-d H:i:s");
                     ':importe'  => $_POST["precio"][$count],
                     ':porcDesc' => $_POST["desc"][$count],
                     ':fecha'  => $Fecha
-                  )
-                );
-
-                // $queryInventario = "INSERT INTO inventario(idProducto,fecha,totalComprado) VALUES (:idProducto,:fecha, :totalComprado)";
-                // $iInventario = $conexiones->prepare($queryInventario);
-                // $iInventario->execute(
-                //   array(
-                //     ':idProducto'   => $_POST["sele"][$count],
-                //     ':fecha'  => $Fecha,
-                //     ':totalComprado'  => $_POST["precio"][$count]
-                //   )
-                // );
-
-                $queryItems = "INSERT INTO items(idComprobante, idProducto, fecha, cant) VALUES (:idComprobante, :idProducto, :fecha, :cant)";
-                $iItems = $conexiones->prepare($queryItems);
-                $iItems->execute(
-                  array(
-                    ':idComprobante'   => $idComprobante,
-                    ':idProducto'  => $_POST["sele"][$count],
-                    ':fecha' => $Fecha,
-                    ':cant'  => $_POST["cantidad"][$count]
                   )
                 );
 
