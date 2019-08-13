@@ -94,7 +94,7 @@ include('sql/selectProductos.php');
            <select class="mdb-select md-form" searchable="Buscar.." data-width="auto" id="producto">
              <option value="" disabled selected="selected">Buscar Productos</option>
              <?php
-               while($rowProductos = $resultadoProductos->fetch(PDO::FETCH_ASSOC)) {
+               while($rowProductos = $resultadoProductosPedidos->fetch(PDO::FETCH_ASSOC)) {
              ?>
              <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion']; echo " - ";echo $rowProductos['importe2'];; ?></option>
              <?php
