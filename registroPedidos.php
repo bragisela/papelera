@@ -55,7 +55,7 @@ include('sql/selectProductos.php');
                     </div>
 
                     <div class="col-md-2 mb-2">
-                      <select class="mdb-select md-form" searchable="Buscar.."  name="justificante">
+                      <select class="mdb-select md-form" searchable="Buscar.."  name="Tipo">
                         <option value="" disabled selected>Justificante</option>
                         <option value="R">Recibo</option>
                         <option value="F">Factura</option>
