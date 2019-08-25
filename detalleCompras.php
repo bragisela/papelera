@@ -16,6 +16,7 @@ $totalCompra=0;
 <body class="hidden-sn mdb-skin">
   <main>
     <div class="container-fluid mt-5">
+      <button class="btn btn-rounded btn-deep-purple" role="link" onclick="window.location='comprasBuscar.php'"><i class="fas fa-undo" aria-hidden="true">Volver</i></button>
       <section class="pb-5">
         <div class="card text-center">
           <h3 class="card-header primary-color-dark white-text">Compras</h3>

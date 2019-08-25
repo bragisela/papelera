@@ -36,6 +36,8 @@ $totalCompra=0;
                   </thead>
                   <tbody>
                     <?php
+                    $iva=0;
+                    $Totalfacturado=0;
                     while($rowPedidos = $detallePedidos->fetch(PDO::FETCH_ASSOC)) {
                       ?>
                       <tr>
@@ -78,6 +80,8 @@ $totalCompra=0;
                     </tr>
                   </tfoot>
                 </table>
+                <button class="btn btn-rounded btn-deep-purple" role="link" onclick="window.location='pedidosbuscar.php'"><i class="fas fa-undo" aria-hidden="true">Volver</i></button>
+
 
               </div>
             </div>
