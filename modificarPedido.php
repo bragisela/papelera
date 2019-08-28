@@ -33,10 +33,13 @@ $totalCompra=0;
                       <th class="th-sm">Importe</th>
                       <th class="th-sm">PorcUtil</th>
                       <th class="th-sm">Subtotal</th>
+                      <th class="th-sm"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
+                    $iva=0;
+                    $Totalfacturado=0;
                     while($rowPedidos = $detallePedidos->fetch(PDO::FETCH_ASSOC)) {
                       ?>
                           <tr>
@@ -51,9 +54,12 @@ $totalCompra=0;
                             <td><?php echo $rowPedidos ['codProducto'];  ?></td>
                             <td><?php echo $rowPedidos ['descripcion']; ?></td>
                             <td> <input name="cant[]" class="form-control" value="<?php echo $cant;?>"></td>
-                            <td> <input name="importe[]" class="form-control" value="<?php echo $importe; ?>"></td>
+                            <td>$ <?php echo $rowPedidos ['importe']; ?></td>
+                            <!--<td> <input name="importe[]" class="form-control" value="<?php //echo $importe; ?>"></td> -->
                             <td>% <?php echo $porcUtil; ?></td>
                             <td>$ <?php echo $importeUtil*$cant ?></td>
+                            <td><?php echo "
+                            <a onClick='pDelete(this);' id='$idItems'><i class='far fa-trash-alt'></i></a>";?></td>
                           </tr>
                           <?php
                           $totalCompra=$totalCompra+($importeUtil*$cant);
@@ -84,6 +90,7 @@ $totalCompra=0;
                   </tfoot>
                 </table>
                 <input type="submit" name="actualizar" value="Actualizar pedido"   class="btn btn-danger  col-md-offset-10.9"> </input>
+
                 <?php
                 if(isset($_POST['actualizar'])){
 
@@ -99,17 +106,6 @@ $totalCompra=0;
                     );
                   }
 
-                  for($count = 0; $count < $total; $count++)
-                  {
-                    $queryItems2 = "UPDATE precios SET importe=:importe where idPrecio=:idItems";
-                    $iItems2 = $conexiones->prepare($queryItems2);
-                    $iItems2->execute(
-                      array(
-                        ':idItems'  => $_POST["idItems"][$count],
-                        ':importe'  => $_POST["importe"][$count]
-                      )
-                    );
-                  }
 
                   echo "<script language='javascript'>";
                   echo "alert('El pedido fue modificado exitosamente');";
@@ -121,6 +117,8 @@ $totalCompra=0;
 
                 ?>
                 </form>
+                <button class="btn btn-rounded btn-deep-purple" role="link" onclick="window.location='pedidosbuscar.php'"><i class="fas fa-undo" aria-hidden="true">Volver</i></button>
+
               </div>
             </div>
         </div>
@@ -138,6 +136,11 @@ $(".button-collapse").sideNav();
 // SideNav Scrollbar Initialization
 var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 Ps.initialize(sideNavScrollbar);
+
+function pDelete(element) {
+  if(confirm('Esta seguro que quiere eliminar el producto?'))
+    window.location.href = "sql/DetallePedidosBorrar.php? idItems=" + element.id;
+}
 
 
 </script>
