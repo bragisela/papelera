@@ -48,7 +48,7 @@ include('sql/consultas.php');
                           <div class="row">
                             <div class="col-md-12 mb-4">
                               <div class="md-form">
-                                <input type="date" class="form-control" name="fecha" value="<?php echo $fecha; ?>">
+                                <input type="date" class="form-control" name="fecha" value="<?php echo $fecha; ?>" required>
                               </div>
                             </div>
                           </div>
@@ -113,7 +113,7 @@ include('sql/consultas.php');
                           <div class="row">
                             <div class="col-md-12 mb-4">
                               <div class="md-form">
-                                <input type="date" class="form-control" name="fecha" value="<?php echo $fecha; ?>">
+                                <input type="date" class="form-control" name="fecha" value="<?php echo $fecha; ?>" required>
                               </div>
                             </div>
                           </div>

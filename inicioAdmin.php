@@ -10,8 +10,8 @@ include("sql/conexion.php");
 <html lang="es">
 <body class="hidden-sn mdb-skin">
 <main>
-  <div class="container-fluid  mt-5">
-    <img style="margin-left: 120px; margin-top: -50px;"src="0extras/logo.jpg" class="img-fluid" alt="Responsive image">
+  <div class="container-fluid">
+    <center><img style=" width:300px;" src="img/logo.jpg" class="img-fluid" alt="Responsive image"></center>
   </div>
 </main>
 <!--Main Layout-->

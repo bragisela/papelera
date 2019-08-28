@@ -140,7 +140,8 @@ include("pie.php");
 $(".button-collapse").sideNav();
 // SideNav Scrollbar Initialization
 var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-Ps.initialize(sideNavScrollbar);
+const ps = new PerfectScrollbar(sideNavScrollbar);
+//Ps.initialize(sideNavScrollbar);
 
 $(document).ready(function() {
   $('.mdb-select').materialSelect();
