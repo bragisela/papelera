@@ -196,6 +196,16 @@ $Fecha = Date("Y-m-d H:i:s");
                     ':fecha'  => $Fecha
                   )
                 );
+                          
+                $queryProducto = "UPDATE productos SET costoUni =  (:importe) WHERE idProducto=(:idProducto)";
+                $iProducto = $conexiones->prepare($queryProducto);
+                $iProducto->execute(
+                  array(
+                   ':idProducto'   => $_POST["sele"][$count],
+                   ':importe'  => $_POST["importe"][$count]
+
+                 )
+                );
 
 
               }
