@@ -1,6 +1,6 @@
 <?php
 include("sesion.php");
-$pagina='reportesCajaPHP';
+$pagina='reportesUtilidadPHP';
 include("encabezado.php");
 include("seguridad.php");
 include("sql/conexion.php");
@@ -9,11 +9,11 @@ include("sql/listados.php");
 
 //INICIO EXCEL
 
-$total_rows = $getRepCaja->rowCount();
+$total_rows = $getRepUtil->rowCount();
 
 $download_filelink = '<ul class="list-unstyled">';
 
-if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
+if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
 {
 	require_once 'class/PHPExcel.php';
 	$last_page = ceil($total_rows/10000);
@@ -24,7 +24,7 @@ if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
 		$file_number++;
 		$object = new PHPExcel();
 		$object->setActiveSheetIndex(0);
-		$table_columns = array("Fecha","Descripcion","Importe");
+		$table_columns = array("Comprobante","Utilidad");
 		$column = 0;
 		foreach($table_columns as $field)
 		{
@@ -33,26 +33,25 @@ if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
 		}
 
 		$query = "
-    SELECT idCajaTotal,fecha, descripcion, importe, nroCaja
-    from caja
-		WHERE nroCaja=".$_POST["caja_no"]."
-    GROUP by idCajaTotal
+    SELECT idUtilidad, comprobante, sum(impUtilidad)
+    from utilidad
+		WHERE comprobante=".$_POST["comprobante"]."
+    GROUP by idUtilidad
 		";
 		$statement = $conexiones->prepare($query);
 		$statement->execute();
 		$excel_result = $statement->fetchAll();
 		$excel_row = 2;
 
-    //recorrer array con los datos filtrados por caja para descargar
+    //recorrer array con los datos filtrados por comprobante para descargar
 		foreach($excel_result as $sub_row)
 		{
-			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["fecha"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["descripcion"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["importe"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["comprobante"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["impUtilidad"]);
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
-		$file_name = 'ReporteCaja-'.($_POST["caja_no"]).'.xls';
+		$file_name = 'ReporteUtilidad-'.($_POST["comprobante"]).'.xls';
 		$object_writer->save($file_name);
     // nombre archivo exceñ
 		$download_filelink .= '<li><label><a href="download.php?filename='.$file_name.'" target="_blank">Descargar - '.$file_name.'</a></label></li>';
@@ -60,7 +59,7 @@ if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
 	$download_filelink .= '</ul>';
 }
 else {
-	echo "Seleccione un número de caja";
+	echo "Seleccione un número de comprobante";
 }
 // FIN EXCEL
 
@@ -79,17 +78,17 @@ else {
       <form class=" text-left border border-light p-5" method="post">
          <div class="form-row mb-4">
            <div class="col-md-3 col-sm-6" >
-               <select name="caja_no"  class="mdb-select md-form" searchable="Nro de caja..">
-                 <option value="" disabled selected>Elija el número de caja</option>
-                   <?php //Select de los números de caja.
-                     while($rowCaja = $resultadoCajaInd->fetch(PDO::FETCH_ASSOC)) {
+               <select name="comprobante"  class="mdb-select md-form" searchable="Nro de comprobantes..">
+                 <option value="" disabled selected>Elija el número de comprobante</option>
+                   <?php //Select de los números de comprobantes.
+                     while($rowUtilidad = $resultadoUtilidad->fetch(PDO::FETCH_ASSOC)) {
                        ?>
-                         <option value="<?php echo $rowCaja['nroCaja']; ?>"><?php echo  $rowCaja['nroCaja']; ?></option>
+                         <option value="<?php echo $rowUtilidad['comprobante']; ?>"><?php echo  $rowUtilidad['comprobante']; ?></option>
                        <?php
                      }
                    ?>
                </select>
-               <label class="mdb-main-label">Caja</label>
+               <label class="mdb-main-label">Comprobantes</label>
            </div>
 
            <div class="md-form col-lg-3 col-md-4  col-sm-6  margen7 ">
@@ -108,24 +107,23 @@ else {
     	<table   class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
       	<thead>
         	<tr>
-          	<th class="th-sm">Fecha</th>
-            <th class="th-sm">Descripcion</th>
-            <th class="th-sm">Importe</th>
+            <th class="th-sm">Comprobante Nº</th>
+            <th class="th-sm">Utilidad Total</th>
           </tr>
         </thead>
       	<tbody>
           <?php
-					if (isset($_POST["export"]) && isset($_POST["caja_no"])!=""){
-          	while($rowCaja = $getRepCaja->fetch(PDO::FETCH_ASSOC)) {
-							if(($_POST["caja_no"])==($rowCaja['nroCaja']) ) {
+					if (isset($_POST["export"]) && isset($_POST["comprobante"])!=""){
+          	while(($rowUtilidad = $getRepUtil->fetch(PDO::FETCH_ASSOC)) && ($rowUtilidadTotal = $totalUtilidad->fetch(PDO::FETCH_ASSOC))) {
+							if(($_POST["comprobante"])==($rowUtilidad['comprobante']) ) {
 								echo "<tr>";
-								echo "<th>" . $rowCaja['fecha'] . "</th>";
-								echo "<th>" . $rowCaja['descripcion'] . "</th>";
-								echo "<th>" . $rowCaja['importe'] . "</th>";
+								echo "<th>" . $rowUtilidad['comprobante'] . "</th>";
+								echo "<th>" . $rowUtilidadTotal['totalUtilidad'] . "</th>";
 								 		}
 							 		}
 						 		}
                  ?>
+
         </tbody>
       </table>
   	</section>

@@ -201,11 +201,11 @@ include('sql/selectProductos.php');
                 )
               );
 
-              $queryUtilidad = "INSERT INTO utilidad(idComprobante,idProducto, impVenta, impCosto, impUtilidad) VALUES (:idComprobante, :idProducto, :impVenta, ((SELECT costoUni FROM productos WHERE idProducto=(:idProducto))*:cant), ((:impVenta) - ((SELECT costoUni FROM productos WHERE idProducto=(:idProducto))*:cant)))";
+              $queryUtilidad = "INSERT INTO utilidad(Comprobante,idProducto, impVenta, impCosto, impUtilidad) VALUES (:Comprobante, :idProducto, :impVenta, ((SELECT costoUni FROM productos WHERE idProducto=(:idProducto))*:cant), ((:impVenta) - ((SELECT costoUni FROM productos WHERE idProducto=(:idProducto))*:cant)))";
               $iUtilidad = $conexiones->prepare($queryUtilidad);
               $iUtilidad->execute(
                 array(
-                  ':idComprobante'   => $idComprobante,
+                  ':Comprobante'   => $nro,
                   ':idProducto'   => $_POST["sele"][$count],
                   ':impVenta'  => $_POST["importe"][$count]*$_POST["cantidad"][$count],
                   ':cant'  => $_POST["cantidad"][$count]
