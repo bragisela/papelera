@@ -24,7 +24,7 @@ if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
 		$file_number++;
 		$object = new PHPExcel();
 		$object->setActiveSheetIndex(0);
-		$table_columns = array("Comprobante","Utilidad");
+		$table_columns = array("Fecha","Comprobante","Utilidad");
 		$column = 0;
 		foreach($table_columns as $field)
 		{
@@ -33,21 +33,23 @@ if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
 		}
 
 		$query = "
-    SELECT idUtilidad, comprobante, sum(impUtilidad)
+    SELECT idUtilidad, tipo, fecha, comprobante, (SUM(impUtilidad))
     from utilidad
 		WHERE comprobante=".$_POST["comprobante"]."
-    GROUP by idUtilidad
+    GROUP by comprobante
 		";
 		$statement = $conexiones->prepare($query);
 		$statement->execute();
 		$excel_result = $statement->fetchAll();
 		$excel_row = 2;
 
+
     //recorrer array con los datos filtrados por comprobante para descargar
 		foreach($excel_result as $sub_row)
 		{
-			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["comprobante"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["impUtilidad"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["fecha"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["comprobante"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["(SUM(impUtilidad))"]);
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
@@ -83,7 +85,7 @@ else {
                    <?php //Select de los números de comprobantes.
                      while($rowUtilidad = $resultadoUtilidad->fetch(PDO::FETCH_ASSOC)) {
                        ?>
-                         <option value="<?php echo $rowUtilidad['comprobante']; ?>"><?php echo  $rowUtilidad['comprobante']; ?></option>
+                         <option value="<?php echo $rowUtilidad['comprobante']; ?>"><?php echo $rowUtilidad['tipo']; ?>-<?php echo  $rowUtilidad['comprobante']; ?></option>
                        <?php
                      }
                    ?>
@@ -107,6 +109,7 @@ else {
     	<table   class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
       	<thead>
         	<tr>
+						<th class="th-sm">Fecha</th>
             <th class="th-sm">Comprobante Nº</th>
             <th class="th-sm">Utilidad Total</th>
           </tr>
@@ -117,7 +120,8 @@ else {
           	while(($rowUtilidad = $getRepUtil->fetch(PDO::FETCH_ASSOC)) && ($rowUtilidadTotal = $totalUtilidad->fetch(PDO::FETCH_ASSOC))) {
 							if(($_POST["comprobante"])==($rowUtilidad['comprobante']) ) {
 								echo "<tr>";
-								echo "<th>" . $rowUtilidad['comprobante'] . "</th>";
+								echo "<th>" . $rowUtilidad['fecha'] . "</th>";
+								echo "<th>" . $rowUtilidad['tipo'] . "-" . $rowUtilidad['comprobante'] . "</th>";
 								echo "<th>" . $rowUtilidadTotal['totalUtilidad'] . "</th>";
 								 		}
 							 		}

@@ -6,7 +6,7 @@ $getRepCaja = $conexiones->query("SELECT idCajaTotal,fecha, descripcion, importe
 from caja
 GROUP by idCajaTotal");
 
-$getRepUtil = $conexiones->query("SELECT idUtilidad, comprobante, sum(impUtilidad)
+$getRepUtil = $conexiones->query("SELECT idUtilidad, comprobante, impUtilidad, fecha, tipo
 from utilidad
 GROUP by comprobante");
 
