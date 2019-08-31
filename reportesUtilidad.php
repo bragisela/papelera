@@ -24,7 +24,7 @@ if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
 		$file_number++;
 		$object = new PHPExcel();
 		$object->setActiveSheetIndex(0);
-		$table_columns = array("Fecha","Comprobante","Utilidad");
+		$table_columns = array("Fecha","Tipo","Comprobante","Utilidad");
 		$column = 0;
 		foreach($table_columns as $field)
 		{
@@ -48,8 +48,9 @@ if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
 		foreach($excel_result as $sub_row)
 		{
 			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["fecha"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["comprobante"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["(SUM(impUtilidad))"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["tipo"] );
+			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["comprobante"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $sub_row["(SUM(impUtilidad))"]);
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
