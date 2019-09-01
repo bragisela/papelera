@@ -54,7 +54,7 @@ if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
-		$file_name = 'ReporteUtilidad-'.($_POST["comprobante"]).'.xls';
+		$file_name = 'ReporteUtilidad-'.$sub_row["tipo"]."-".($_POST["comprobante"]).'.xls';
 		$object_writer->save($file_name);
     // nombre archivo exceñ
 		$download_filelink .= '<li><label><a href="download.php?filename='.$file_name.'" target="_blank">Descargar - '.$file_name.'</a></label></li>';
