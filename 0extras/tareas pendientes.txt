@@ -33,3 +33,9 @@ registro Pedidos  funcion editar  actualizar precio cantidad (listo)
 
 
 registro pedidos precio ya tiene que venir cargado.
+
+tomi)
+Pedidos
+caja
+utilidad
+reporte caja
