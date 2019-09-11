@@ -47,14 +47,26 @@ include('sql/selectProductos.php');
                         <input type="date" class="form-control" name="fecha" value="<?php echo $fech; ?>">
                       </div>
                     </div>
+                    <?php
+                    if($codRol==1) { ?>
+                      <div class="col-md-1 mb-2">
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" required>
+                          <option value="" disabled selected>Tipo</option>
+                          <option value="R">Recibo</option>
+                          <option value="F">Factura</option>
+                        </select>
+                      </div>
+                    <?php }  ?>
 
-                    <div class="col-md-1 mb-2">
-                      <select class="mdb-select md-form" searchable="Buscar.."  name="justificante">
-                        <option value="" disabled selected>Tipo</option>
-                        <option value="R">Recibo</option>
-                        <option value="F">Factura</option>
-                      </select>
-                    </div>
+                    <?php
+                    if($codRol==2) { ?>
+                      <div class="col-md-1 mb-2">
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante">
+                          <option value="F" selected>Factura</option>
+                        </select>
+                      </div>
+                    <?php }  ?>
+
                     <div class="col-md-3 mb-2">
                       <div class="md-form">
                         <input type="number" id="form3" class="form-control" name="Nro">

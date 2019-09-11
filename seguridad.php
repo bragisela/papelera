@@ -22,6 +22,7 @@ if (!isset($_SESSION)) { session_start(); }
 			if ($row_cnt==0)	{
 				echo "<script languaje= 'javascript'>";
 				echo "alert ('No posee acceso a esta sección.');";
+        echo "window.location='login.php';";
 				echo "</script>";
 
 					if($codRol==1){
@@ -34,7 +35,9 @@ if (!isset($_SESSION)) { session_start(); }
         if ($row_cnt==1)	{
           mysqli_free_result($result);
                           if($codRol==1){
-                            include("menu.php");
+                            include("menuSuperAdmin.php");
+                          } else   if($codRol==2){
+                            include("menuAdmin.php");
                           }
         }
       }

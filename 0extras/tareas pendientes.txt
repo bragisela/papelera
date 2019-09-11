@@ -35,7 +35,9 @@ registro Pedidos  funcion editar  actualizar precio cantidad (listo)
 registro pedidos precio ya tiene que venir cargado.
 
 tomi)
-Pedidos
-caja
+Pedidos (listo f o r)
+caja (listo)
 utilidad
 reporte caja
+
+admin solo ve todo lo blanco

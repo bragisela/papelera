@@ -32,6 +32,9 @@
   $resultadoCajaTemporal = $conexiones->query("SELECT fecha,idCaja,descripcion,tipoMov,importe FROM cajatemporal ORDER BY idCaja")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
+  $resultadoCajaTemporalAdmin = $conexiones->query("SELECT cj.fecha, cj.idCaja,cj.descripcion,cj.tipoMov,cj.importe FROM cajatemporal as cj inner JOIN comprobantes as c on cj.descripcion=c.nroComprobante where c.justificante='F' ORDER BY idCaja")
+  or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
+
   $totalCajaTemporal = $conexiones->query("SELECT SUM(importe) as totalCajaTemporal FROM cajatemporal")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 

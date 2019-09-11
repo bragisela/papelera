@@ -170,7 +170,9 @@ include('sql/consultas.php');
                 </thead>
                 <tbody>
                   <?php
-                  while($rowCaja = $resultadoCajaTemporal->fetch(PDO::FETCH_ASSOC)) {
+                  if($codRol==1) {
+                    while($rowCaja = $resultadoCajaTemporal->fetch(PDO::FETCH_ASSOC)) {
+
                     ?>
                     <tr>
                       <td><?php echo  date("d/m/Y", strtotime($rowCaja['fecha'])); ?></td>
@@ -196,7 +198,37 @@ include('sql/consultas.php');
                       </td>
                     </tr>
                     <?php
-                    }
+                  }}
+
+                  if($codRol==2) {
+                    while($rowCaja = $resultadoCajaTemporalAdmin->fetch(PDO::FETCH_ASSOC)) {
+
+                    ?>
+                    <tr>
+                      <td><?php echo  date("d/m/Y", strtotime($rowCaja['fecha'])); ?></td>
+                      <td><?php echo $rowCaja['descripcion']; $idCaja = $rowCaja['idCaja']; ?></td>
+                      <td><?php
+                        if ($rowCaja['importe']>0){
+                          echo "$", number_format (($rowCaja['importe']),2,",",".") ;
+                        } else {
+                          echo "-";
+                        }
+                          ?>
+                      </td>
+                      <td><?php
+                        if ($rowCaja['importe']<0){
+                          echo "$", number_format (($rowCaja['importe']),2,",",".");
+                        } else {
+                          echo "-";
+                        }
+                        ?></td>
+                      <td><?php echo "
+                        <a href='cajaModificar.php?idCaja=$idCaja'><i class='far fa-edit'></i></a>
+                        <a onClick='pDelete(this);' id='$idCaja'><i class='far fa-trash-alt'></i></a>";?></td>
+                      </td>
+                    </tr>
+                    <?php
+                  }}
                     ?>
                 </tbody>
               </table>

@@ -34,6 +34,9 @@ if(isset($_POST['login'])) {
             $_SESSION['codRol'] = $data['codrol'];
 						$codRol=$_SESSION['codRol'];
 						if ($codRol==1) {
+							header('Location: inicioSuperAdmin.php');
+						}
+						if ($codRol==2) {
 							header('Location: inicioAdmin.php');
 						}
 						exit;
