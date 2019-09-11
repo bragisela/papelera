@@ -82,23 +82,48 @@ $Fecha = Date("Y-m-d H:i:s");
                 <h5>Listado de Productos</h5>
               </div>
               <div class="row">
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-bordered table-hover table-striped text-left " cellspacing="0" width="100%" id="item_table">
+                    <thead>
+                      <tr>
+                        <th class="th-sm">cod Producto</th>
+                        <th class="th-sm">Producto</th>
+                        <th class="th-sm">Cantidad</th>
+                        <th class="th-sm">Precio</th>
+                        <th class="th-sm">% Desc</th>
+                        <th class="th-sm">Importe</th>
+                        <th class="th-sm">Total</th>
+                        <th class="th-sm">Acciones<!--<button type="button" name="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#basicExampleModal"><i class="fas fa-plus fa-l"></i></button>--></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                      <td><input class="form-control" type="text" id="codProducto" name="codProducto"></td>
+                      <td>  <select class="mdb-select" searchable="Buscar.." data-width="auto" id="producto">
+                          <option value="" disabled selected="selected">Buscar Productos</option>
+                          <?php
+                          while($rowProductos = $resultadoProductos->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                            <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion'];; ?></option>
+                            <?php
+                          }
+                          ?>
+                        </select></td>
 
-                <div class="col-md-6 mb-6">
-                  <select class="mdb-select md-form" searchable="Buscar.." data-width="auto" id="producto">
-                    <option value="" disabled selected="selected">Buscar Productos</option>
-                    <?php
-                    while($rowProductos = $resultadoProductos->fetch(PDO::FETCH_ASSOC)) {
-                      ?>
-                      <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion'];; ?></option>
-                      <?php
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="col-md-2 mb-2">
-                  <br>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="agregarProducto();" id="resetear">Agregar</button>
-                </div>
+                      <td><input class="form-control" type="number" id="cantidad[]" name="cantidad[]" oninput="calcularCantidad(this);" min="0"></td>';
+                      <td><input class="form-control" type="number" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" min="0"></td>';
+                      <td><input class="form-control" type="number" id="descuento[]" name="desc[]" oninput="Calcular(this);calcularCantidad(this);" value="0" min="0" max="100"></td>';
+                      <td><input class="form-control" type="number" id="importe[]"  name="importe[]" readonly></td>
+                      <td><input class="form-control" type="number" id="total[]"  name="total[]" readonly></td>
+                      <td>  <div>
+
+                          <button type="button" class="btn btn-primary btn-sm" onclick="agregarProducto();" id="resetear">+</button>
+                        </div></td>
+                      </tr>
+                    </tbody>
+
+
+
               </div>
 
               <div class="table-responsive text-nowrap">
@@ -247,7 +272,7 @@ $Fecha = Date("Y-m-d H:i:s");
     item = item +'<td>'+cod+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
     item = item +'<td>'+cadena+'</td>';
     item = item +'<td><input class="form-control" type="number" id="cantidad[]" name="cantidad[]" oninput="calcularCantidad(this);" min="0"></td>';
-    item = item +'<td><input class="form-control" type="text" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" min="0"></td>';
+    item = item +'<td><input class="form-control" type="number" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" min="0"></td>';
     item = item +'<td><input class="form-control" type="number" id="descuento[]" name="desc[]" oninput="Calcular(this);calcularCantidad(this);" value="0" min="0" max="100"></td>';
     item = item +'<td><input class="form-control" type="number" id="importe[]"  name="importe[]" readonly></td>';
     item = item +'<td><input class="form-control" type="number" id="total[]"  name="total[]" readonly></td>';
