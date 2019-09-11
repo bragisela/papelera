@@ -35,7 +35,7 @@ $Fecha = Date("Y-m-d H:i:s");
               </div>
               <div class="col-md-4 mb-4">
                 <div class="md-form">
-                  <input type="number" id="form5" class="form-control" name="porcUtil" value="">
+                  <input type="number" step="0.01" id="form5" class="form-control" name="porcUtil" value="">
                   <label for="form5" class="">% Utilidad</label>
                 </div>
               </div>
@@ -63,12 +63,16 @@ $Fecha = Date("Y-m-d H:i:s");
                     $util=$rowMPrecio['porcUtil'];
                     $importe=$rowMPrecio['importe'];
                     $costo=$importe-(($desc*$importe)/100);
-                    $venta=(($util/100)*$costo)+$costo; ?>
+                    $venta=(($util/100)*$costo)+$costo;
+                    $venta = bcdiv($venta, '1', 2);
+                    $ganancia2=($util/100)*$costo;
+                    $ganancia2 = bcdiv($ganancia2, '1', 2);?>
+
 
                     <td>$ <?php echo $costo; ?></td>
                     <td>% <?php  echo  $util; ?></td>
                     <td>$<?php echo $venta ?></td>
-                    <td>$<?php echo $venta=($util/100)*$costo; ?></td>
+                    <td>$<?php echo $ganancia2; ?></td>
                     <td><?php $date = new DateTime($rowMPrecio['fecha']);
                       echo $date->format('d/m/Y H:i:s');?></td>
                     <td><?php echo " <a href='precioUltimaCompraModificar.php?idPrecio=$idPrecio&idComprobante=$idComprobante&idProducto=$idProducto' ><i class='far fa-edit'></i></a>"; ?></td>

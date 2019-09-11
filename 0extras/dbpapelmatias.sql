@@ -7,6 +7,10 @@
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
+drop database if exists dbpapel;
+create database dbpapel;
+use dbpapel;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -322,7 +326,7 @@ CREATE TABLE `precios` (
   `idProducto` int(10) NOT NULL,
   `importe` decimal(10,0) NOT NULL,
   `porcDesc` decimal(10,0) NOT NULL,
-  `porcUtil` decimal(10,0) NOT NULL,
+  `porcUtil` float(10,2) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
