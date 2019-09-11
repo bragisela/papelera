@@ -44,6 +44,7 @@ $Fecha = Date("Y-m-d H:i:s");
               <table class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
                 <thead>
                   <tr>
+                    <th class="th-sm">Producto</th>
                     <th class="th-sm">Costo</th>
                     <th class="th-sm">% Utilidad</th>
                     <th class="th-sm">Venta</th>
@@ -57,7 +58,9 @@ $Fecha = Date("Y-m-d H:i:s");
                   while($rowMPrecio = $MostrarUltCompra->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                   <tr>
-                    <?php  $rowMPrecio['idPrecio']; $idPrecio = $rowMPrecio['idPrecio'];
+                    <?php
+                    $descripcion=$rowMPrecio['descripcion'];
+                    $rowMPrecio['idPrecio']; $idPrecio = $rowMPrecio['idPrecio'];
                     $rowMPrecio['idProducto']; $idProducto = $rowMPrecio['idProducto'];
                     $desc=$rowMPrecio['porcDesc'];
                     $util=$rowMPrecio['porcUtil'];
@@ -68,7 +71,7 @@ $Fecha = Date("Y-m-d H:i:s");
                     $ganancia2=($util/100)*$costo;
                     $ganancia2 = bcdiv($ganancia2, '1', 2);?>
 
-
+                    <td>$ <?php echo $descripcion; ?></td>
                     <td>$ <?php echo $costo; ?></td>
                     <td>% <?php  echo  $util; ?></td>
                     <td>$<?php echo $venta ?></td>
