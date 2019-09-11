@@ -7,6 +7,10 @@
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
+drop database if exists dbpapel;
+create database dbpapel;
+use dbpapel;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -135,6 +139,7 @@ CREATE TABLE `permisos` (
 -- Volcado de datos para la tabla `permisos`
 --
 
+
 INSERT INTO `permisos` (`codPermiso`, `codRol`, `tipoAcceso`, `pagina`) VALUES
 (1, 1, '', 'clientesPHP'),
 (2, 1, '', 'clientesModificarPHP'),
@@ -154,13 +159,40 @@ INSERT INTO `permisos` (`codPermiso`, `codRol`, `tipoAcceso`, `pagina`) VALUES
 (101, 1, '', 'cajaPHP'),
 (102, 1, '', 'cajaModificarPHP'),
 (106, 1, '', 'reportesCajaPHP'),
+(107, 1, '', 'reportesUtilidadPHP'),
 (108, 1, '', 'detallePedidosPHP'),
-(109, 1, '', 'inicioAdminPHP'),
+(109, 2, '', 'inicioAdminPHP'),
 (119, 1, '', 'detalleComprasPHP'),
 (189, 1, '', 'reporteComprasPHP'),
 (190, 1, '', 'reporteVentasPHP'),
 (210, 1, '', 'modificarPedidoPHP'),
-(220, 1, '', 'modificarCompraPHP');
+(220, 1, '', 'modificarCompraPHP'),
+(221, 1, '', 'inicioSuperAdminPHP'),
+(222, 2, '', 'clientesPHP'),
+(223, 2, '', 'clientesModificarPHP'),
+(224, 2, '', 'comprasBuscarPHP'),
+(225, 2, '', 'historialPrecioPHP'),
+(226, 2, '', 'pedidosBuscarPHP'),
+(227, 2, '', 'precioModificarPHP'),
+(228, 2, '', 'productosPHP'),
+(229, 2, '', 'productosModificarPHP'),
+(300, 2, '', 'ProveedoresPHP'),
+(301, 2, '', 'reportesPHP'),
+(302, 2, '', 'registroPedidosPHP'),
+(303, 2, '', 'registroComprasPHP'),
+(304, 2, '', 'precioUltimaCompraPHP'),
+(305, 2, '', 'proveedoresModificarPHP'),
+(306, 2, '', 'precioUltimaCompraModificarPHP'),
+(307, 2, '', 'cajaPHP'),
+(308, 2, '', 'cajaModificarPHP'),
+(309, 2, '', 'reportesCajaPHP'),
+(310, 2, '', 'reportesUtilidadPHP'),
+(311, 2, '', 'detallePedidosPHP'),
+(312, 2, '', 'detalleComprasPHP'),
+(313, 2, '', 'reporteComprasPHP'),
+(314, 2, '', 'reporteVentasPHP'),
+(315, 2, '', 'modificarPedidoPHP'),
+(316, 2, '', 'modificarCompraPHP');
 
 -- --------------------------------------------------------
 
@@ -171,9 +203,9 @@ INSERT INTO `permisos` (`codPermiso`, `codRol`, `tipoAcceso`, `pagina`) VALUES
 CREATE TABLE `precios` (
   `idPrecio` int(10) NOT NULL,
   `idProducto` int(10) NOT NULL,
-  `importe` decimal(10,0) NOT NULL,
-  `porcDesc` decimal(10,0) NOT NULL,
-  `porcUtil` decimal(10,0) NOT NULL,
+  `importe` float(10,2) NOT NULL,
+  `porcDesc` float(10,2) NOT NULL,
+  `porcUtil` float(10,2) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -535,7 +567,6 @@ INSERT INTO `proveedores` (`idProveedor`, `nombre`, `cuit`, `condicionIVA`, `dom
 --
 -- Estructura de tabla para la tabla `roles`
 --
-
 CREATE TABLE `roles` (
   `codRol` int(10) UNSIGNED NOT NULL,
   `nombreRol` varchar(50) NOT NULL
@@ -546,7 +577,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`codRol`, `nombreRol`) VALUES
-(1, 'administrador');
+(1, 'Superadministrador'),
+(2, 'administrador');
 
 -- --------------------------------------------------------
 
@@ -566,7 +598,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `usuario`, `contrasenia`, `codRol`) VALUES
-(1, 'admin', 'admin', 1);
+(1, 'Superadmin', 'Superadmin', 1),
+(2, 'admin', 'admin', 2);
+
 
 -- --------------------------------------------------------
 

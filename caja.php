@@ -239,12 +239,23 @@ include('sql/consultas.php');
                <td>Saldo de Caja  </td>
                <td>
                  <?php global $cierreTotal;
+                 if ($codRol==1) {
                  while($rowCajaTotal = $totalCajaTemporal->fetch(PDO::FETCH_ASSOC)) {
 
                     $cierreTotal = ($rowCajaTotal['totalCajaTemporal']);
                     echo '$' . number_format ($cierreTotal,2,",",".");
 
                     }
+                  }
+                if ($codRol==2) {
+                  while($rowCajaTotal = $totalCajaTemporalAdmin->fetch(PDO::FETCH_ASSOC)) {
+
+                     $cierreTotal = ($rowCajaTotal['totalCajaTemporal']);
+                     echo '$' . number_format ($cierreTotal,2,",",".");
+
+                     }
+
+                }
                     ?>
                </td></button>
                <button type="button" data-toggle="modal" name="cierreCaja" data-target="#cierreCaja" class="btn btn-dark-green"><i class="fas fa-money-check-alt fa-1.5x"></i>    Cierre de Caja</button></td>
