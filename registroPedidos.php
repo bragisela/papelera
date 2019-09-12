@@ -181,7 +181,7 @@ include('sql/selectProductos.php');
             $nro = $_POST['Nro'];
             //recibo factura $pago
             $justificante = $_POST['justificante'];
-            $totalComprado = $_POST['importebruto'];
+            $totalComprado = $_POST['totalfacturado'];
             $tipo = "V";
             $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado);
             $conexiones->exec($sqlCompro);
