@@ -41,3 +41,15 @@ utilidad
 reporte caja
 
 admin solo ve todo lo blanco
+------------------------------------------------------
+Proveedores
+- Tambien diferenciar factura (blanco) y compra (negro).
+- Las compras con un radio diferenciar si tiene iva o no (iva en este caso 10,5 solo pq aumenta el precio de venta)
+
+Clientes
+- Los pedidos deben tener numeros automaticos por ahora que inicie en 6000
+- Todo lo que dice recibo es pedido.
+- Armar inventario: suma cuando compran y restar cuando se vende
+
+En Negro Pedido-Remito
+En blanco Factura-Remito-Recibo
