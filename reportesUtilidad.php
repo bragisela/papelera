@@ -84,11 +84,20 @@ else {
                <select name="comprobante"  class="mdb-select md-form" searchable="Nro de comprobantes..">
                  <option value="" disabled selected>Elija el número de comprobante</option>
                    <?php //Select de los números de comprobantes.
-                     while($rowUtilidad = $resultadoUtilidad->fetch(PDO::FETCH_ASSOC)) {
+									 	if ($codRol==1) {
+                     while($rowUtilidad = $resultadoUtilidadSuper->fetch(PDO::FETCH_ASSOC)) {
                        ?>
                          <option value="<?php echo $rowUtilidad['comprobante']; ?>"><?php echo $rowUtilidad['tipo']; ?>-<?php echo  $rowUtilidad['comprobante']; ?></option>
                        <?php
                      }
+									 }
+									 if ($codRol==2) {
+										while($rowUtilidad = $resultadoUtilidad->fetch(PDO::FETCH_ASSOC)) {
+											?>
+												<option value="<?php echo $rowUtilidad['comprobante']; ?>"><?php echo $rowUtilidad['tipo']; ?>-<?php echo  $rowUtilidad['comprobante']; ?></option>
+											<?php
+										}
+									}
                    ?>
                </select>
                <label class="mdb-main-label">Comprobantes</label>

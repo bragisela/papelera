@@ -26,7 +26,10 @@
   $resultadoCajaInd = $conexiones->query("SELECT DISTINCT nroCaja FROM caja ORDER BY idCajaTotal") //Consulta los nro de caja para que no se repitan en el select.
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
-  $resultadoUtilidad = $conexiones->query("SELECT DISTINCT comprobante, tipo FROM utilidad ORDER BY idUtilidad") //Consulta los nro de comprobante para que no se repitan en el select.
+  $resultadoUtilidadSuper = $conexiones->query("SELECT DISTINCT comprobante, tipo FROM utilidad ORDER BY idUtilidad") //Consulta los nro de comprobante para que no se repitan en el select. recibo y factura
+  or die ('No se puede traer listado Utilidad'.mysqli_error($conexiones));
+
+  $resultadoUtilidad = $conexiones->query("SELECT DISTINCT comprobante, tipo FROM utilidad where tipo='F' ORDER BY idUtilidad") //Consulta los nro de comprobante para que no se repitan en el select. solo factura
   or die ('No se puede traer listado Utilidad'.mysqli_error($conexiones));
 
   $resultadoCajaTemporal = $conexiones->query("SELECT fecha,idCaja,descripcion,tipoMov,importe FROM cajatemporal ORDER BY idCaja")
