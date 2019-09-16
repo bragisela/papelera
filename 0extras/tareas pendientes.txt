@@ -1,46 +1,17 @@
 revisar total
 falta cuenta total, registro de Compras
-
-
 comprobantes agregar campo importe bruto
-
 tabla inventario no va
-
 presupuesto
-
 agregar porc utilidad en listado productos
 
 
 tomi)
-
-02 08 2019
-registro Compras:  ver detalles (listo)
-registro Pedidos eliminar (listo)
-registro Pedidos   ver detalles (listo)
-
-04 08 2019
-registro pedidos retencion iibb no va. (listo)
-registro pedidos agregar select con R o F recibo factura, agregar campo a comprobante bdd. (listo)
-registro compras agregar select con R o F recibo factura, agregar campo a comprobante bdd. (listo)
-
-05 08 2019
-reportes iva descargar excel ventas fecha desde hasta y descargar factura (%100 listo)
-reportes iva descargar excel compras  fecha desde hasta y descargar factura (%100 listo)
-
-07/08/201
-registro Pedidos  funcion editar  actualizar precio cantidad (listo)
-
-
-
-registro pedidos precio ya tiene que venir cargado.
-
-tomi)
-Pedidos (listo f o r)
+Pedidos (listo)
 caja (listo)
-utilidad
-reporte caja
+utilidad(listo)
+reporte caja (necesito info)
 
-admin solo ve todo lo blanco
 ------------------------------------------------------
 Proveedores
 - Tambien diferenciar factura (blanco) y compra (negro).
