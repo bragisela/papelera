@@ -111,6 +111,9 @@ include('sql/selectProductos.php');
                while($rowProductos = $resultadoProductosPedidos->fetch(PDO::FETCH_ASSOC)) {
                  $importe3 = bcdiv($rowProductos['importe2'], '1', 2);
                  $stock = $rowProductos['Stock'];
+                 if ( $stock <= 0) {
+                   $stock = "Sin stock";
+                 }
 
              ?>
              <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion']; echo " - ";echo $importe3; echo " - ";echo $stock;     ; ?></option>
@@ -132,7 +135,7 @@ include('sql/selectProductos.php');
              <th class="th-sm">cod Producto</th>
              <th class="th-sm">Producto</th>
              <th class="th-sm">Cantidad</th>
-             <th class="th-sm">Stock Disponible</th>
+             <th class="th-sm">Stock</th>
              <th class="th-sm">Precio</th>
              <th class="th-sm">% Desc</th>
              <th class="th-sm">Importe</th>
@@ -290,12 +293,12 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
     var precio = text.split(separador)[2];
     var precio = parseFloat(precio);
     var cadena2 = text.split(separador)[3];
-    var cadena2 = parseFloat(cadena2);
+
     var item = '<tr>';
     item = item +'<td>'+cod+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
     item = item +'<td>'+cadena+'</td>';
     item = item +'<td><input class="form-control" type="number" id="cantidad[]" name="cantidad[]" oninput="calcularCantidad(this);" min="0"></td>';
-    item = item +'<td><input class="form-control" type="number" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" value="'+cadena2+'" min="0" readonly></td>';
+    item = item +'<td><input class="form-control" type="text"    value="'+cadena2+'"  readonly></td>';
     item = item +'<td><input class="form-control" type="number" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" value="'+precio+'" min="0" readonly></td>';
     item = item +'<td><input class="form-control" type="number" id="descuento[]" name="desc[]" oninput="Calcular(this);calcularCantidad(this);" value="0" min="0" max="100"></td>';
     item = item +'<td><input class="form-control" type="number" id="importe[]"  name="importe[]" readonly></td>';
