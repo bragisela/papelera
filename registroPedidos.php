@@ -52,7 +52,7 @@ include('sql/selectProductos.php');
                       <div class="col-md-1 mb-2">
                         <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" required>
                           <option value="" disabled selected>Tipo</option>
-                          <option value="R">Recibo</option>
+                          <option value="R">Pedido</option>
                           <option value="F">Factura</option>
                         </select>
                       </div>
@@ -109,8 +109,11 @@ include('sql/selectProductos.php');
              <option value="" disabled selected="selected">Buscar Productos</option>
              <?php
                while($rowProductos = $resultadoProductosPedidos->fetch(PDO::FETCH_ASSOC)) {
+                 $importe3 = bcdiv($rowProductos['importe2'], '1', 2);
+                 $stock = $rowProductos['Stock'];
+
              ?>
-             <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion']; echo " - ";echo $rowProductos['importe2'];; ?></option>
+             <option value="<?php echo $rowProductos['idProducto']; ?>"><?php echo $rowProductos['codProducto']; echo " - ";echo $rowProductos['descripcion']; echo " - ";echo $importe3; echo " - ";echo $stock;     ; ?></option>
              <?php
              }
              ?>
@@ -129,6 +132,7 @@ include('sql/selectProductos.php');
              <th class="th-sm">cod Producto</th>
              <th class="th-sm">Producto</th>
              <th class="th-sm">Cantidad</th>
+             <th class="th-sm">Stock Disponible</th>
              <th class="th-sm">Precio</th>
              <th class="th-sm">% Desc</th>
              <th class="th-sm">Importe</th>
@@ -141,7 +145,7 @@ include('sql/selectProductos.php');
          </tbody>
          <tfoot>
            <tr>
-           <td colspan="5"></td>
+           <td colspan="6"></td>
             <td>Importe Bruto</td>
             <td>
               <input class="form-control" type="number" id="totalImporte"  name="importebruto"  value="" readonly>
@@ -149,13 +153,13 @@ include('sql/selectProductos.php');
             <td></td>
            </tr>
            <tr>
-             <td colspan="5"></td>
+             <td colspan="6"></td>
              <td>IVA</td>
              <td><input class="form-control" type="number" id="iva"  name="iva" readonly></td>
              <td></td>
            </tr>
            <tr>
-             <td colspan="5"></td>
+             <td colspan="6"></td>
              <td>Total Facturado</td>
              <td><input class="form-control" type="number" id="totalfac"  name="totalfacturado" readonly></td>
              <td></td>
@@ -228,6 +232,16 @@ include('sql/selectProductos.php');
                 )
               );
 
+              $queryStock = "INSERT INTO inventario(idProducto,fecha,totalVendido) VALUES (:idProducto, :fecha, :totalVendido)";
+              $iStock = $conexiones->prepare($queryStock);
+              $iStock->execute(
+                array(
+                  ':idProducto'  => $_POST["sele"][$count],
+                  ':fecha' => $Fecha,
+                  ':totalVendido'  => $_POST["cantidad"][$count]
+                )
+              );
+
               // $queryInventario = "INSERT INTO inventario(idProducto,fecha,totalComprado) VALUES (:idProducto,:fecha, :totalComprado)";
               // $iInventario = $conexiones->prepare($queryInventario);
               // $iInventario->execute(
@@ -275,10 +289,13 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
     var cadena = text.split(separador)[1];
     var precio = text.split(separador)[2];
     var precio = parseFloat(precio);
+    var cadena2 = text.split(separador)[3];
+    var cadena2 = parseFloat(cadena2);
     var item = '<tr>';
     item = item +'<td>'+cod+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
     item = item +'<td>'+cadena+'</td>';
     item = item +'<td><input class="form-control" type="number" id="cantidad[]" name="cantidad[]" oninput="calcularCantidad(this);" min="0"></td>';
+    item = item +'<td><input class="form-control" type="number" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" value="'+cadena2+'" min="0" readonly></td>';
     item = item +'<td><input class="form-control" type="number" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" value="'+precio+'" min="0" readonly></td>';
     item = item +'<td><input class="form-control" type="number" id="descuento[]" name="desc[]" oninput="Calcular(this);calcularCantidad(this);" value="0" min="0" max="100"></td>';
     item = item +'<td><input class="form-control" type="number" id="importe[]"  name="importe[]" readonly></td>';

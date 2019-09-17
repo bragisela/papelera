@@ -24,3 +24,21 @@ Clientes
 
 En Negro Pedido-Remito
 En blanco Factura-Remito-Recibo
+
+tomi)
+
+registrocompras)
+  agregar factura o negro (listo)
+  n con iva 10,5 o sin iva
+  f como esta con iva
+  hacer stock de compras (listo)
+
+pedido
+  negro sin iva
+
+registropedidos
+  revisar decimales (listo)
+  traer stock (revisar)
+  hacer stock de venta (listo)
+
+forma de pago en pedidos y Compras
