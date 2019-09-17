@@ -170,8 +170,8 @@ $Fecha = Date("Y-m-d H:i:s");
               $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado);
               $conexiones->exec($sqlCompro);
               $idComprobante = $conexiones->lastInsertId();
-              //$sqlCaja = insertCajaEgreso ($fecha,"E",$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
-              //$conexiones->exec($sqlCaja);
+              $sqlCaja = insertCajaEgreso ($fecha,"E",$justificante,$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
+              $conexiones->exec($sqlCaja);
 
               for($count = 0; $count < count($_POST["sele"]); $count++)
               {

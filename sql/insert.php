@@ -40,15 +40,15 @@
 
     $sqlCajaIngreso = "INSERT INTO cajatemporal(fecha,tipoMov, tipo, descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','I', '$descripcion', '$tipo', '$importe', '0')";
+    VALUES ('$fecha','I', '$tipo','$descripcion', '$importe', '0')";
 
     return $sqlCajaIngreso;
   }
-  function insertCajaEgreso($fecha,$tipoMov, $descripcion, $importe,$nroCaja){
+  function insertCajaEgreso($fecha,$tipoMov, $tipo, $descripcion, $importe,$nroCaja){
 
-    $sqlCajaEgreso = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe, nroCaja)
+    $sqlCajaEgreso = "INSERT INTO cajatemporal(fecha,tipoMov, tipo, descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','E', '$descripcion','-' '$importe', '0')";
+    VALUES ('$fecha','E', '$tipo', '$descripcion','-' '$importe', '0')";
 
     return $sqlCajaEgreso;
   }
