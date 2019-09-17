@@ -1,15 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2019 a las 05:32:12
--- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 7.1.7
-
-drop database if exists dbpapel;
-create database dbpapel;
-use dbpapel;
+-- Servidor: localhost
+-- Tiempo de generación: 17-09-2019 a las 03:02:12
+-- Versión del servidor: 10.3.16-MariaDB
+-- Versión de PHP: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,6 +33,7 @@ CREATE TABLE `caja` (
   `nroCaja` int(11) DEFAULT NULL,
   `fecha` date NOT NULL,
   `tipoMov` tinytext CHARACTER SET latin1 NOT NULL,
+  `tipo` varchar(2) COLLATE utf8_spanish_ci DEFAULT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
   `importe` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -52,9 +49,23 @@ CREATE TABLE `cajatemporal` (
   `nroCaja` int(11) DEFAULT NULL,
   `fecha` date NOT NULL,
   `tipoMov` tinytext CHARACTER SET latin1 NOT NULL,
+  `tipo` varchar(2) COLLATE utf8_spanish_ci DEFAULT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
   `importe` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cajatemporal`
+--
+
+INSERT INTO `cajatemporal` (`idCaja`, `nroCaja`, `fecha`, `tipoMov`, `tipo`, `descripcion`, `importe`) VALUES
+(48, 0, '2019-09-16', 'I', NULL, '11111', '121.00'),
+(49, 0, '2019-09-16', 'I', NULL, '2222', '60.50'),
+(50, 0, '2019-09-16', 'I', 'F', '3333', '48.40'),
+(51, 0, '2019-09-16', 'I', 'F', '444', '96.80'),
+(52, 0, '2019-09-16', 'I', 'F', '5555', '72.60'),
+(53, 0, '2019-09-16', 'I', 'R', '666', '72.60'),
+(54, 0, '2019-09-16', 'I', 'F', '7777', '72.60');
 
 -- --------------------------------------------------------
 
@@ -94,6 +105,25 @@ CREATE TABLE `comprobantes` (
   `totalcomprado` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `comprobantes`
+--
+
+INSERT INTO `comprobantes` (`idComprobante`, `nroComprobante`, `IdCliPro`, `fecha`, `tipo`, `justificante`, `totalcomprado`) VALUES
+(16, '11111', 3, '2019-09-16', 'C', 'F', '250.00'),
+(17, '11111', 3, '2019-09-16', 'C', 'F', '250.00'),
+(18, '11111', 3, '2019-09-16', 'C', 'F', '250.00'),
+(19, '11111', 2, '2019-09-16', 'V', 'F', '121.00'),
+(20, '2222', 2, '2019-09-16', 'V', 'R', '60.50'),
+(21, '3333', 2, '2019-09-16', 'V', 'F', '108.90'),
+(22, '3333', 2, '2019-09-16', 'V', 'F', '48.40'),
+(23, '3333', 2, '2019-09-16', 'V', 'F', '48.40'),
+(24, '3333', 2, '2019-09-16', 'V', 'F', '48.40'),
+(25, '444', 2, '2019-09-16', 'V', 'F', '96.80'),
+(26, '5555', 2, '2019-09-16', 'V', 'F', '72.60'),
+(27, '666', 2, '2019-09-16', 'V', 'R', '72.60'),
+(28, '7777', 2, '2019-09-16', 'V', 'F', '72.60');
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +152,25 @@ CREATE TABLE `items` (
   `cant` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `items`
+--
+
+INSERT INTO `items` (`idItems`, `idComprobante`, `idProducto`, `fecha`, `cant`) VALUES
+(23, 16, 3, '2019-09-16 21:11:07', 5),
+(24, 17, 3, '2019-09-16 21:12:01', 5),
+(25, 18, 3, '2019-09-16 21:13:31', 5),
+(26, 18, 4, '2019-09-16 21:13:31', 5),
+(27, 19, 3, '2019-09-16 21:13:59', 2),
+(28, 19, 4, '2019-09-16 21:13:59', 2),
+(29, 20, 3, '2019-09-16 21:14:36', 1),
+(30, 20, 4, '2019-09-16 21:14:36', 1),
+(31, 24, 3, '2019-09-16 21:37:44', 2),
+(32, 25, 3, '2019-09-16 21:44:00', 4),
+(33, 26, 4, '2019-09-16 21:44:38', 2),
+(34, 27, 3, '2019-09-16 21:46:04', 3),
+(35, 28, 4, '2019-09-16 21:56:03', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -138,7 +187,6 @@ CREATE TABLE `permisos` (
 --
 -- Volcado de datos para la tabla `permisos`
 --
-
 
 INSERT INTO `permisos` (`codPermiso`, `codRol`, `tipoAcceso`, `pagina`) VALUES
 (1, 1, '', 'clientesPHP'),
@@ -205,9 +253,26 @@ CREATE TABLE `precios` (
   `idProducto` int(10) NOT NULL,
   `importe` float(10,2) NOT NULL,
   `porcDesc` float(10,2) NOT NULL,
-  `porcUtil` float(10,2) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `porcUtil` float(10,2) NOT NULL DEFAULT 0.00,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `precios`
+--
+
+INSERT INTO `precios` (`idPrecio`, `idProducto`, `importe`, `porcDesc`, `porcUtil`, `fecha`) VALUES
+(23, 3, 20.00, 0.00, 0.00, '2019-09-17 00:13:31'),
+(24, 4, 30.00, 0.00, 0.00, '2019-09-17 00:13:31'),
+(25, 3, 20.00, 0.00, 0.00, '2019-09-17 00:13:59'),
+(26, 4, 30.00, 0.00, 0.00, '2019-09-17 00:13:59'),
+(27, 3, 20.00, 0.00, 0.00, '2019-09-17 00:14:36'),
+(28, 4, 30.00, 0.00, 0.00, '2019-09-17 00:14:36'),
+(29, 3, 20.00, 0.00, 0.00, '2019-09-17 00:37:44'),
+(30, 3, 20.00, 0.00, 0.00, '2019-09-17 00:44:00'),
+(31, 4, 30.00, 0.00, 0.00, '2019-09-17 00:44:38'),
+(32, 3, 20.00, 0.00, 0.00, '2019-09-17 00:46:04'),
+(33, 4, 30.00, 0.00, 0.00, '2019-09-17 00:56:03');
 
 -- --------------------------------------------------------
 
@@ -233,8 +298,8 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`idProducto`, `codProducto`, `descripcion`, `material`, `unidadEmbalaje`, `medidas`, `unidadMedida`, `costoUni`) VALUES
 (1, '1231', 'aa', 'plastico', 12, '12', '1', '5.50'),
 (2, '123', 'bb', 'vidrio', 12, '12x34', 'as', '4.50'),
-(3, '105102NR', 'BANDEJA 102 NEGRA REFORZADA', 'PET', 400, '150X115X45', 'Caja', '0.00'),
-(4, '1055102', 'BANDEJA 102 PET (CRISTAL)\r\n', 'PET', 800, '150X115X45', 'Caja', '0.00'),
+(3, '105102NR', 'BANDEJA 102 NEGRA REFORZADA', 'PET', 400, '150X115X45', 'Caja', '20.00'),
+(4, '1055102', 'BANDEJA 102 PET (CRISTAL)\r\n', 'PET', 800, '150X115X45', 'Caja', '30.00'),
 (5, '1066102PP', 'BANDEJA 102 PP (MICROONDAS)\r\n', 'PP', 800, '150X115X45', 'Caja', '0.00'),
 (6, '105102NR', 'BANDEJA 102 NEGRA REFORZADA', 'PET', 400, '150X115X45', 'Caja', '0.00'),
 (7, '1055102', 'BANDEJA 102 PET (CRISTAL)', 'PET', 800, '150X115X45', 'Caja', '0.00'),
@@ -567,6 +632,7 @@ INSERT INTO `proveedores` (`idProveedor`, `nombre`, `cuit`, `condicionIVA`, `dom
 --
 -- Estructura de tabla para la tabla `roles`
 --
+
 CREATE TABLE `roles` (
   `codRol` int(10) UNSIGNED NOT NULL,
   `nombreRol` varchar(50) NOT NULL
@@ -601,7 +667,6 @@ INSERT INTO `usuarios` (`idUsuario`, `usuario`, `contrasenia`, `codRol`) VALUES
 (1, 'Superadmin', 'Superadmin', 1),
 (2, 'admin', 'admin', 2);
 
-
 -- --------------------------------------------------------
 
 --
@@ -619,6 +684,21 @@ CREATE TABLE `utilidad` (
   `fecha` date NOT NULL,
   `cliente` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `utilidad`
+--
+
+INSERT INTO `utilidad` (`idUtilidad`, `tipo`, `comprobante`, `idProducto`, `impVenta`, `impCosto`, `impUtilidad`, `fecha`, `cliente`) VALUES
+(24, 'F', 11111, 3, '40.00', '40.00', '0.00', '2019-09-16', '2'),
+(25, 'F', 11111, 4, '60.00', '60.00', '0.00', '2019-09-16', '2'),
+(26, 'R', 2222, 3, '20.00', '20.00', '0.00', '2019-09-16', '2'),
+(27, 'R', 2222, 4, '30.00', '30.00', '0.00', '2019-09-16', '2'),
+(28, 'F', 3333, 3, '40.00', '40.00', '0.00', '2019-09-16', '2'),
+(29, 'F', 444, 3, '80.00', '80.00', '0.00', '2019-09-16', '2'),
+(30, 'F', 5555, 4, '60.00', '60.00', '0.00', '2019-09-16', '2'),
+(31, 'R', 666, 3, '60.00', '60.00', '0.00', '2019-09-16', '2'),
+(32, 'F', 7777, 4, '60.00', '60.00', '0.00', '2019-09-16', '2');
 
 --
 -- Índices para tablas volcadas
@@ -713,61 +793,73 @@ ALTER TABLE `utilidad`
 --
 ALTER TABLE `caja`
   MODIFY `idCajaTotal` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
 --
 -- AUTO_INCREMENT de la tabla `cajatemporal`
 --
 ALTER TABLE `cajatemporal`
-  MODIFY `idCaja` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `idCaja` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `idCliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `comprobantes`
 --
 ALTER TABLE `comprobantes`
-  MODIFY `idComprobante` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idComprobante` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
 --
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
   MODIFY `idInventario` int(10) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `items`
 --
 ALTER TABLE `items`
-  MODIFY `idItems` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idItems` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
 --
 -- AUTO_INCREMENT de la tabla `precios`
 --
 ALTER TABLE `precios`
-  MODIFY `idPrecio` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idPrecio` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `idProducto` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
+
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
   MODIFY `idProveedor` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `codRol` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codRol` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `utilidad`
 --
 ALTER TABLE `utilidad`
-  MODIFY `idUtilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idUtilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
 --
 -- Restricciones para tablas volcadas
 --
