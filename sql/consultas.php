@@ -20,7 +20,7 @@
   $resultadoCompras = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, p.nombre, p.domicilio FROM comprobantes c, proveedores p WHERE c.tipo='C' AND c.IdCliPro=p.idProveedor")
   or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
 
-  $resultadoCaja = $conexiones->query("SELECT fecha,idCajaTotal,descripcion,tipoMov,importe,nroCaja FROM caja ORDER BY idCajaTotal")
+  $resultadoCaja = $conexiones->query("SELECT fecha,idCajaTotal,tipo, descripcion,tipoMov,importe,nroCaja FROM caja ORDER BY idCajaTotal")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
   $resultadoCajaInd = $conexiones->query("SELECT DISTINCT nroCaja FROM caja ORDER BY idCajaTotal") //Consulta los nro de caja para que no se repitan en el select.
@@ -32,7 +32,7 @@
   $resultadoUtilidad = $conexiones->query("SELECT DISTINCT comprobante, tipo FROM utilidad where tipo='F' ORDER BY idUtilidad") //Consulta los nro de comprobante para que no se repitan en el select. solo factura
   or die ('No se puede traer listado Utilidad'.mysqli_error($conexiones));
 
-  $resultadoCajaTemporal = $conexiones->query("SELECT fecha,idCaja,descripcion,tipoMov,importe FROM cajatemporal ORDER BY idCaja")
+  $resultadoCajaTemporal = $conexiones->query("SELECT fecha,idCaja,tipo, descripcion,tipoMov,importe FROM cajatemporal ORDER BY idCaja")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
   $resultadoCajaTemporalAdmin = $conexiones->query("SELECT cj.fecha, cj.idCaja,cj.descripcion,cj.tipoMov,cj.importe FROM cajatemporal as cj inner JOIN comprobantes as c on cj.descripcion=c.nroComprobante where c.justificante='F' ORDER BY idCaja")
