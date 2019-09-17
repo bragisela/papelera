@@ -47,7 +47,28 @@ $Fecha = Date("Y-m-d H:i:s");
                         <input type="date" class="form-control" name="fecha" value="<?php echo $fech; ?>">
                       </div>
                     </div>
-                    <div class="col-md-4 mb-4">
+
+                    <?php
+                    if($codRol==1) { ?>
+                      <div class="col-md-1 mb-2">
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" required>
+                          <option value="" disabled selected>Tipo</option>
+                          <option value="C">Compra</option>
+                          <option value="F">Factura</option>
+                        </select>
+                      </div>
+                    <?php }  ?>
+
+                    <?php
+                    if($codRol==2) { ?>
+                      <div class="col-md-1 mb-2">
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante">
+                          <option value="F" selected>Factura</option>
+                        </select>
+                      </div>
+                    <?php }  ?>
+
+                    <div class="col-md-3 mb-2">
                       <div class="md-form">
                         <input type="number" id="form3" class="form-control" name="Nro">
                         <label for="form3" class="">Nro Comprobante</label>
@@ -164,7 +185,7 @@ $Fecha = Date("Y-m-d H:i:s");
               $proveedor = $_POST['proveedor'];
               $fecha = $_POST['fecha'];
               $nro = $_POST['Nro'];
-              $justificante = "F";
+              $justificante = $_POST['justificante'];
               $totalComprado = $_POST['importebruto'];
               $tipo = "C";
               $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado);
@@ -205,6 +226,16 @@ $Fecha = Date("Y-m-d H:i:s");
                    ':importe'  => $_POST["importe"][$count]
 
                  )
+                );
+
+                $queryStock = "INSERT INTO inventario(idProducto,fecha,totalComprado) VALUES (:idProducto, :fecha, :totalComprado)";
+                $iStock = $conexiones->prepare($queryStock);
+                $iStock->execute(
+                  array(
+                    ':idProducto'  => $_POST["sele"][$count],
+                    ':fecha' => $Fecha,
+                    ':totalComprado'  => $_POST["cantidad"][$count]
+                  )
                 );
 
 
