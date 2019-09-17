@@ -50,10 +50,11 @@ $Fecha = Date("Y-m-d H:i:s");
 
                     <?php
                     if($codRol==1) { ?>
-                      <div class="col-md-1 mb-2">
-                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" required>
+                      <div class="col-md-2 mb-2">
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" required>
                           <option value="" disabled selected>Tipo</option>
-                          <option value="C">Compra</option>
+                          <option value="C1">Compra Iva 10.5</option>
+                          <option value="C2">Compra Sin Iva</option>
                           <option value="F">Factura</option>
                         </select>
                       </div>
@@ -68,7 +69,7 @@ $Fecha = Date("Y-m-d H:i:s");
                       </div>
                     <?php }  ?>
 
-                    <div class="col-md-3 mb-2">
+                    <div class="col-md-2 mb-2">
                       <div class="md-form">
                         <input type="number" id="form3" class="form-control" name="Nro">
                         <label for="form3" class="">Nro Comprobante</label>
@@ -297,8 +298,28 @@ $Fecha = Date("Y-m-d H:i:s");
     }else{
       retencion.value =  rete.toFixed(2);
     }
+
+
     var iva = document.getElementById("iva");
+    var condi = condicion;
+    console.log(condi);
+
+    switch (condi) {
+  case 'C1':
+    var iv = parseFloat(iva.value) - parseFloat(((totalEli * 10.5)/100));
+    break;
+  case 'C2':
+    var iv = parseFloat(iva.value) - parseFloat(((totalEli * 0)/100));
+    break;
+
+  case 'F':
     var iv = parseFloat(iva.value) - parseFloat(((totalEli * 21)/100));
+    break;
+  default:
+    var iv = 1;
+    break;
+}
+
     if (iv.toFixed(2)<=0) {
       iva.value = 0;
     }else{
@@ -339,6 +360,17 @@ $Fecha = Date("Y-m-d H:i:s");
       }
     }
   }
+
+  var condicion;
+  var select = document.getElementById('justificante');
+  select.addEventListener('change',
+  function condicionIva2 (){
+    var selectedOption = this.options[select.selectedIndex];
+    var opcion = selectedOption.value;
+    condicion=opcion;
+    console.log(condicion);
+  });
+
   function calcularCantidad(ele) {
     var cantidad = 0 ,precio = 0, descuento = 0, total = 0;
     var tr = ele.parentNode.parentNode;
@@ -373,14 +405,38 @@ $Fecha = Date("Y-m-d H:i:s");
     var retencion = (totalI*2.5)/100;
     retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
     document.getElementById("retencion").value = retencion.toFixed(2);
+
+    var condi = condicion;
+    console.log(condi);
+
+    switch (condi) {
+  case 'C1':
+    var iva = (totalI*10.5)/100;
+    break;
+  case 'C2':
+    var iva = 0;
+    break;
+
+  case 'F':
     var iva = (totalI*21)/100;
+    break;
+  default:
+    var iva = 1;
+    break;
+}
+
+
+
     iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
     document.getElementById("iva").value = iva.toFixed(2);
+
     var totalfactu = parseFloat(totalI) + parseFloat(retencion) + parseFloat(iva);
     totalfactu = isNaN(parseFloat(totalfactu)) ? 0 : parseFloat(totalfactu);
     document.getElementById("totalfac").value = totalfactu.toFixed(2);
 
   }
+
+
 
 </script>
 </body>
