@@ -42,7 +42,7 @@
   $resultadoCajaTemporal = $conexiones->query("SELECT fecha,idCaja,tipo, descripcion,tipoMov,importe FROM cajatemporal ORDER BY idCaja")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
-  $resultadoCajaTemporalAdmin = $conexiones->query("SELECT cj.fecha, cj.idCaja,cj.descripcion,cj.tipoMov,cj.importe FROM cajatemporal as cj where cj.tipo='F' ORDER BY cj.idCaja")
+  $resultadoCajaTemporalAdmin = $conexiones->query("SELECT fecha, idCaja,descripcion,tipoMov,tipo,importe FROM cajatemporal as cj where tipo='F' ORDER BY idCaja")
   or die ('No se puede traer listado Caja'.mysqli_error($conexiones));
 
 
