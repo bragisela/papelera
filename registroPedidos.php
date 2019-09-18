@@ -260,7 +260,7 @@ include('sql/selectProductos.php');
 
             echo "<script language='javascript'>";
             echo "alert('El pedido fue realizado correctamente');";
-            echo "window.location='pedidosBuscar.php';";
+            echo "window.location='pedidoPago.php?idComprobante=$idComprobante';";
             echo "</script>";
 
         }

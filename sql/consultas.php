@@ -63,4 +63,7 @@
 
   $totalUtilidad = $conexiones->query("SELECT SUM(impUtilidad) as totalUtilidad FROM utilidad GROUP BY comprobante")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
+
+  $pedidoPago = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes")
+  or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 ?>
