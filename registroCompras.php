@@ -63,8 +63,9 @@ $Fecha = Date("Y-m-d H:i:s");
                     <?php
                     if($codRol==2) { ?>
                       <div class="col-md-1 mb-2">
-                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante">
-                          <option value="F" selected>Factura</option>
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" required>
+                          <option value="" disabled selected>Tipo</option>
+                          <option value="F">Factura</option>
                         </select>
                       </div>
                     <?php }  ?>
@@ -298,27 +299,24 @@ $Fecha = Date("Y-m-d H:i:s");
     }else{
       retencion.value =  rete.toFixed(2);
     }
-
-
+    // comienzo iva segun select
     var iva = document.getElementById("iva");
-    var condi = condicion;
-    console.log(condi);
-
+    var condi = condicion; //
     switch (condi) {
-  case 'C1':
-    var iv = parseFloat(iva.value) - parseFloat(((totalEli * 10.5)/100));
-    break;
-  case 'C2':
-    var iv = parseFloat(iva.value) - parseFloat(((totalEli * 0)/100));
-    break;
+      case 'C1':
+          var iv = parseFloat(iva.value) - parseFloat(((totalEli * 10.5)/100));
+          break;
+      case 'C2':
+          var iv = parseFloat(iva.value) - parseFloat(((totalEli * 0)/100));
+          break;
 
-  case 'F':
-    var iv = parseFloat(iva.value) - parseFloat(((totalEli * 21)/100));
-    break;
-  default:
-    var iv = 1;
-    break;
-}
+      case 'F':
+          var iv = parseFloat(iva.value) - parseFloat(((totalEli * 21)/100));
+          break;
+      default:
+          var iv = 1;
+          break;
+        }
 
     if (iv.toFixed(2)<=0) {
       iva.value = 0;
@@ -360,7 +358,7 @@ $Fecha = Date("Y-m-d H:i:s");
       }
     }
   }
-
+  // comienzo iva segun select
   var condicion;
   var select = document.getElementById('justificante');
   select.addEventListener('change',
@@ -368,7 +366,6 @@ $Fecha = Date("Y-m-d H:i:s");
     var selectedOption = this.options[select.selectedIndex];
     var opcion = selectedOption.value;
     condicion=opcion;
-    console.log(condicion);
   });
 
   function calcularCantidad(ele) {
@@ -407,25 +404,20 @@ $Fecha = Date("Y-m-d H:i:s");
     document.getElementById("retencion").value = retencion.toFixed(2);
 
     var condi = condicion;
-    console.log(condi);
-
     switch (condi) {
-  case 'C1':
-    var iva = (totalI*10.5)/100;
-    break;
-  case 'C2':
-    var iva = 0;
-    break;
-
-  case 'F':
-    var iva = (totalI*21)/100;
-    break;
-  default:
-    var iva = 1;
-    break;
-}
-
-
+      case 'C1':
+        var iva = (totalI*10.5)/100;
+        break;
+      case 'C2':
+        var iva = 0;
+        break;
+      case 'F':
+        var iva = (totalI*21)/100;
+        break;
+      default:
+        var iva = 1;
+        break;
+    }
 
     iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
     document.getElementById("iva").value = iva.toFixed(2);

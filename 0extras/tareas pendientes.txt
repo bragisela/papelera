@@ -30,14 +30,16 @@ tomi)
 registrocompras)
   agregar factura o negro (listo)
   hacer stock de compras (listo)
-  n con iva 10,5 o sin iva
-  f como esta con iva
+  n con iva 10,5 o sin iva (listo)
+  f como esta con iva (listo)
 
 
 regisrtopedido
-  negro sin iva
+  negro sin iva (listo)
   revisar decimales (listo)
   traer stock (listo)
   hacer stock de venta (listo)
+
+Armar inventario (listo)
 
 forma de pago en pedidos y Compras

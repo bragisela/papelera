@@ -20,7 +20,13 @@
   $resultadoPedidos = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, cl.nombre, cl.domicilioComercio FROM comprobantes c, clientes cl WHERE c.tipo='V' AND c.IdCliPro=cl.idCliente")
   or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
 
+  $resultadoPedidosAdmin = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, cl.nombre, cl.domicilioComercio FROM comprobantes c, clientes cl WHERE c.tipo='V' AND c.justificante='F' AND c.IdCliPro=cl.idCliente")
+  or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
+
   $resultadoCompras = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, p.nombre, p.domicilio FROM comprobantes c, proveedores p WHERE c.tipo='C' AND c.IdCliPro=p.idProveedor")
+  or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
+
+  $resultadoComprasAdmin = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, p.nombre, p.domicilio FROM comprobantes c, proveedores p WHERE c.tipo='C' AND c.justificante='F' AND c.IdCliPro=p.idProveedor")
   or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
 
   $resultadoCaja = $conexiones->query("SELECT fecha,idCajaTotal,tipo, descripcion,tipoMov,importe,nroCaja FROM caja ORDER BY idCajaTotal")

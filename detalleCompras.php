@@ -56,7 +56,22 @@ $totalCompra=0;
                       $retib = bcdiv($retib, '1', 2);
                       $totalCompra=$totalCompra+($importeDesc*$cant);
                       $totalCompra = bcdiv($totalCompra, '1', 2);
-                      $iva=((21*$totalCompra)/100);
+                      $justi = $rowCompras['justificante'];
+
+                      switch ($justi) {
+                            case 'C1':
+                                $iva=((10.5*$totalCompra)/100);
+                                break;
+                            case 'C2':
+                                $iva=((0*$totalCompra)/100);
+                                break;
+                            case 'F':
+                                $iva=((21*$totalCompra)/100);
+                                break;
+                      }
+
+
+
                       $iva = bcdiv($iva, '1', 2);
                       $Totalfacturado=$iva+$totalCompra+$retib;
                       $Totalfacturado = bcdiv($Totalfacturado, '1', 2);
