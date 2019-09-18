@@ -50,7 +50,7 @@
   $totalCajaTemporal = $conexiones->query("SELECT SUM(importe) as totalCajaTemporal FROM cajatemporal")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 
-  $totalCajaTemporalAdmin = $conexiones->query("SELECT SUM(cj.importe) as totalCajaTemporal FROM cajatemporal as cj inner JOIN comprobantes as c on cj.descripcion=c.nroComprobante where c.justificante='F' ORDER BY idCaja")
+  $totalCajaTemporalAdmin = $conexiones->query("SELECT SUM(importe) as totalCajaTemporal FROM cajatemporal where tipo='F' ")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 
 
