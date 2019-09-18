@@ -35,7 +35,6 @@ $html= '
               </tr>';
             $i=1;
             $subtotal=0;
-            $iva=0.21;
             $import=0;
             $cantidad=0;
             while($rowImprimir = $mostrarPedidoImprimirCalculos->fetch(PDO::FETCH_ASSOC)) {
@@ -50,11 +49,19 @@ $html= '
           $i=$i+1;
           $rowImprimir['importe']=0;
           $rowImprimir['cant']=0;
-
+          $justi= $rowImprimir['justificante'];
+          }
+          switch ($justi) {
+            case 'F':
+              $iva = 0.21;
+              break;
+            case 'R':
+              $iva = 0;
+              break;
           }
           $iva= $subtotal*$iva;
           $total= $subtotal+$iva;
-          
+
 
         $html.= '
         <tr>

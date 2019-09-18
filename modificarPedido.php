@@ -64,7 +64,16 @@ $totalCompra=0;
                           <?php
                           $totalCompra=$totalCompra+($importeUtil*$cant);
                           $totalCompra = bcdiv($totalCompra, '1', 2);
-                          $iva=((21*$totalCompra)/100);
+                          $justi  = $rowPedidos['justificante'];
+
+                          switch ($justi) {
+                                case 'R':
+                                    $iva=0;
+                                    break;
+                                case 'F':
+                                    $iva=((21*$totalCompra)/100);
+                                    break;
+                          }
                           $iva = bcdiv($iva, '1', 2);
                           $Totalfacturado=$iva+$totalCompra;
                           $Totalfacturado = bcdiv($Totalfacturado, '1', 2);

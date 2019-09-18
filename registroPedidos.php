@@ -49,10 +49,10 @@ include('sql/selectProductos.php');
                     </div>
                     <?php
                     if($codRol==1) { ?>
-                      <div class="col-md-1 mb-2">
-                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" required>
+                      <div class="col-md-2 mb-2">
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" required>
                           <option value="" disabled selected>Tipo</option>
-                          <option value="R">Pedido</option>
+                          <option value="R">Pedido Sin iva</option>
                           <option value="F">Factura</option>
                         </select>
                       </div>
@@ -60,14 +60,15 @@ include('sql/selectProductos.php');
 
                     <?php
                     if($codRol==2) { ?>
-                      <div class="col-md-1 mb-2">
-                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante">
-                          <option value="F" selected>Factura</option>
+                      <div class="col-md-2 mb-2">
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" required>
+                          <option value="" disabled selected>Tipo</option>
+                          <option value="F">Factura</option>
                         </select>
                       </div>
                     <?php }  ?>
 
-                    <div class="col-md-3 mb-2">
+                    <div class="col-md-2 mb-2">
                       <div class="md-form">
                         <input type="number" id="form3" class="form-control" name="Nro">
                         <label for="form3" class="">Nro Comprobante</label>
@@ -312,8 +313,22 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
     $(document).on('click', '.remove', function(){
       var totalEli = this.parentNode.parentNode.childNodes[6].childNodes[0].value;
       var rete =  parseFloat(retencion.value) - parseFloat(((totalEli * 2.5)/100));
+
+      // comienzo iva segun select
       var iva = document.getElementById("iva");
-      var iv = parseFloat(iva.value) - parseFloat(((totalEli * 21)/100));
+      var condi = condicion; //
+      switch (condi) {
+        case 'R':
+            var iv = parseFloat(iva.value) - parseFloat(((totalEli * 0)/100));
+            break;
+        case 'F':
+            var iv = parseFloat(iva.value) - parseFloat(((totalEli * 21)/100));
+            break;
+        default:
+            var iv = 1;
+            break;
+          }
+
       if (iv.toFixed(2)<=0) {
         iva.value = 0;
       }else{
@@ -354,6 +369,17 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
         }
       }
     }
+
+    // comienzo iva segun select
+    var condicion;
+    var select = document.getElementById('justificante');
+    select.addEventListener('change',
+    function condicionIva2 (){
+      var selectedOption = this.options[select.selectedIndex];
+      var opcion = selectedOption.value;
+      condicion=opcion;
+    });
+
     function calcularCantidad(ele) {
       var cantidad = 0 ,precio = 0, descuento = 0, total = 0;
       var tr = ele.parentNode.parentNode;
@@ -385,7 +411,20 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
       var h = totalI +tot - anterior;
       totalI = h.toFixed(2);
       document.getElementById("totalImporte").value = totalI;
-      var iva = (totalI*21)/100;
+
+      var condi = condicion;
+      switch (condi) {
+        case 'R':
+          var iva = 0;
+          break;
+        case 'F':
+          var iva = (totalI*21)/100;
+          break;
+        default:
+          var iva = 1;
+          break;
+      }
+
       iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
       document.getElementById("iva").value = iva.toFixed(2);
       var totalfactu = parseFloat(totalI) + parseFloat(iva);

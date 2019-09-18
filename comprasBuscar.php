@@ -65,6 +65,7 @@ include('sql/consultas.php');
                 </thead>
                 <tbody>
                   <?php
+                  if ($codRol==1){
                   while($rowCompras = $resultadoCompras->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
@@ -79,10 +80,25 @@ include('sql/consultas.php');
                     </tr>
                     <?php
                   }
-                  // <a href='pdf/PDFcompra.php?idProveedor=$idProveedor' title='Imprimir' class='btn-primary btn-sm'><i class='fas fa-print'></i></a>
-                  // <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Remito' class='btn-primary btn-sm'><i class='fas fa-sticky-note'></i></a>
-                  // <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Factura' class='btn-primary btn-sm'><i class='fas fa-file-invoice-dollar'></i></a>
-                  // <a href='proveedoresModificar.php?idProveedor=$idProveedor' title='Historial' class='btn-primary btn-sm'><i class='fas fa-history'></i></a>
+                }
+
+                if ($codRol==2){
+                while($rowCompras = $resultadoComprasAdmin->fetch(PDO::FETCH_ASSOC)) {
+                  ?>
+                  <tr>
+                    <td><?php echo $rowCompras['nroComprobante'];  $idCompra = $rowCompras['idComprobante']; ?></td>
+                    <td><?php $date = new DateTime($rowCompras['fecha']); echo $date->format('d/m/Y'); ?></td>
+                    <td><?php echo $rowCompras['nombre']; ?></td>
+                    <td><?php echo $rowCompras['domicilio']; ?></td>
+                    <td><?php echo "
+                    <a href='detalleCompras.php?idCompra=$idCompra' title='Ver Detalles'><i class='fas fa-asterisk'></i></a>
+                    <a onClick='pDelete(this);' id='$idCompra'><i class='far fa-trash-alt'></i></a>
+                    "; ?></td>
+                  </tr>
+                  <?php
+                }
+              }
+
                   ?>
                 </tbody>
               </table>

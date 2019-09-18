@@ -65,6 +65,7 @@ include('sql/consultas.php');
                 </thead>
                 <tbody>
                   <?php
+                  if ($codRol==1) {
                   while($rowComprobante= $resultadoPedidos->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
@@ -83,7 +84,29 @@ include('sql/consultas.php');
                     </tr>
                     <?php
                   }
+                  }
+                  if ($codRol==2) {
+                    while($rowComprobante= $resultadoPedidosAdmin->fetch(PDO::FETCH_ASSOC)) {
+                      ?>
+                      <tr>
+                        <td><?php $idComprobante = $rowComprobante['idComprobante']; echo $rowComprobante['nroComprobante']; ?></td>
+                      <td><?php $date = new DateTime($rowComprobante['fecha']); echo $date->format('d/m/Y'); ?></td>
+                        <td><?php echo $rowComprobante['nombre']; ?></td>
+                        <td><?php echo $rowComprobante['domicilioComercio']; ?></td>
+                        <td><?php echo "
+                        <a href='modificarPedido.php?idPedido=$idComprobante' title='Editar'><i class='far fa-edit fa-lg'></i></a>
+                        <a href='detallePedidos.php?idPedido=$idComprobante' title='Ver Detalles'><i class='fas fa-asterisk'></i></a>
+                        <a target='_blank' href='imprimir.php?idComprobante=$idComprobante' title='Pedido'><i class='fas fa-print fa-lg'></i></a>
+                        <a target='_blank' href='imprimirRemito.php?idComprobante=$idComprobante' title='Remito'><i class='fas fa-sticky-note fa-lg'></i></a>
+                        <a onClick='pDelete(this);' id='$idComprobante'><i class='far fa-trash-alt'></i></a>
+                        " ; ?></td>
+
+                      </tr>
+                      <?php
+                    }
+                  }
                   ?>
+
                 </tbody>
               </table>
 
