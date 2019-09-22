@@ -56,7 +56,7 @@
 
     $sqlCierreCaja = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','E', 'Cierre de Caja','-' '$importe', '0')";
+    VALUES ('$fecha','E', 'Cierre de Caja','-' '$importe', '0' )";
 
     return $sqlCierreCaja;
   }

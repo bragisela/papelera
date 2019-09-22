@@ -48,10 +48,7 @@
                   </li>
                   <li>
                     <a href="reporteVentas.php" class="waves-effect"><i class="fas fa-money-bill"></i>IVA Ventas</a>
-                  </li>
-                  <li>
-                    <a href="reportesCaja.php" class="waves-effect"><i class="fas fa-cash-register"></i>Caja</a>
-                  </li>
+                  </li>                  
                   <li>
                     <a href="reportesUtilidad.php" class="waves-effect"><i class="fas fa-cash-register"></i>Utilidad</a>
                   </li>
