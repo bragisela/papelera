@@ -250,13 +250,15 @@ include('sql/consultas.php');
                 if ($codRol==2) {
                   while($rowCajaTotal = $totalCajaTemporalAdmin->fetch(PDO::FETCH_ASSOC)) {
 
-                     $cierreTotal = ($rowCajaTotal['totalCajaTemporal']);
-                     echo '$' . number_format ($cierreTotal,2,",",".");
+                     $cierreTotalTemporal = ($rowCajaTotal['totalCajaTemporal']);
+                     echo '$' . number_format ($cierreTotalTemporal,2,",",".");
 
                      }
 
                 }
                     ?>
+              <?php
+                if ($codRol==1) {?>
                </td></button>
                <button type="button" data-toggle="modal" name="cierreCaja" data-target="#cierreCaja" class="btn btn-dark-green"><i class="fas fa-money-check-alt fa-1.5x"></i>    Cierre de Caja</button></td>
 
@@ -264,6 +266,7 @@ include('sql/consultas.php');
 
 
               <!-- Inicio Modal Cierre de Caja -->
+
               <div class="modal fade" id="cierreCaja" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -296,6 +299,7 @@ include('sql/consultas.php');
                                 </div>
                               </div>
                             </div> -->
+
                             <div class="row">
                               <div class="col-md-12 mb-4">
                                 <div class="md-form">
@@ -304,7 +308,7 @@ include('sql/consultas.php');
                                 </div>
                               </div>
                             </div>
-
+                            <!--Cierre de Caja: Hacerlo sólo el SuperAdmin o borrar el importe y que haga un cierre total. -->
 
                             <input type="submit" name="GuardarCierreCaja" value="Guardar" class="btn btn-success">
                             <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='caja.php'">
@@ -339,6 +343,8 @@ include('sql/consultas.php');
       </div>
     </section>
   </div>
+<?php }
+    ?>
 </main>
 
 <?php
