@@ -49,7 +49,7 @@ $idComprobante = $_REQUEST['idComprobante'];
                   </div>
                   <div class="col-md-4 mb-4">
                     <div class="md-form">
-                      <input  class="form-control" type="number" id="efectivo" name="efectivo" oninput="calcularCheque(this);" min="0" required>
+                      <input  class="form-control" type="text" id="efectivo" name="efectivo" oninput="calcularCheque(this);" min="0" required>
                       <label>Pago en efectivo $</label>
                     </div>
                   </div>
@@ -61,30 +61,108 @@ $idComprobante = $_REQUEST['idComprobante'];
                       <label>Importe a pagar con cheques</label>
                     </div>
                   </div>
-                  <div class="col-md-4 mb-4">
-                    <div class="md-form">
-                      <input type="number" id="form3" class="form-control" name="cantCheque" required>
-                      <label for="form3" class="">Cantidad de cheques</label>
-                    </div>
-                  </div>
                 </div>
               </div>
           </div>
           <br>
-   </form>
-    <?php
+          <br>
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <div class="text-left header">
+                <h5>Listado de Cheques</h5>
+              </div>
+            </div>
+            <div class="col-md-2 mb-2">
+              <button type="button" class="btn btn-primary btn-md" onclick="agregarCheque();" id="resetear">Ingresar Cheque</button>
+            </div>
+
+          </div>
+
+          <div class="table-responsive text-nowrap">
+            <table class="table table-bordered table-hover table-striped text-left " cellspacing="0" width="100%" id="item_table">
+              <thead>
+               <tr>
+                 <th class="th-sm" style="width:65px;">Pago</th>
+                 <th class="th-sm" style="width:65px;">Banco</th>
+                 <th class="th-sm" style="width:65px;">Numero</th>
+                 <th class="th-sm" style="width:65px;">Importe</th>
+                 <th class="th-sm" style="width:35px;">Plazo</th>
+                 <th class="th-sm" style="width:65px;">Acciones<!--<button type="button" name="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#basicExampleModal"><i class="fas fa-plus fa-l"></i></button>--></th>
+               </tr>
+             </thead>
+             <tbody id="lista">
+             </tbody>
+             <!--<tfoot>
+               <tr>
+               <td colspan="4"></td>
+                <td>Resto a pagar</td>
+                <td>
+                  <input class="form-control" type="number" id="totalImporte"  name="importebruto"  value="2" readonly>
+                </td>
+                <td></td>
+               </tr>
+               <tr>
+                 <td colspan="4"></td>
+                 <td>Pago con cheques</td>
+                 <td><input class="form-control" type="number" id="iva"  name="iva" value="2"readonly></td>
+                 <td></td>
+               </tr>
+               <tr>
+                 <td colspan="4"></td>
+                 <td>Total Pagado</td>
+                 <td><input class="form-control" type="number" id="totalfac"  name="totalfacturado" value="2" readonly></td>
+                 <td></td>
+               </tr>
+             </tfoot>  -->
+           </table>
+          </div>
+
+          <div class="row">
+            <div class="col-md-8 mb-8"> </div>
+            <div class="col-md-4 mb-4">
+              <input type="submit" name="insertar" value="Guardar" class="btn btn-success">
+              <input type="reset" name="" value="Cancelar" class="btn btn-info">
+            </div>
+          </div>
+      </form>
+      <?php
+      if (isset($_POST['insertar'])) {
 
 
-     ?>
-   </div>
- </div>
+          for($count = 0; $count < count($_POST["sele"]);$count++)
+          {
+            $queryItems = "INSERT INTO Cheques(banco, importe, numero, plazo, idComprobante) VALUES (:banco, :importe, :numero, :plazo, :idComprobante)";
+            $iItems = $conexiones->prepare($queryItems);
+            $iItems->execute(
+              array(
+                ':banco'  => $_POST["banco"][$count],
+                ':importe'  => $_POST["importe"][$count],
+                ':numero'  => $_POST["numero"][$count],
+                ':plazo'  => $_POST["plazo"][$count],
+                ':idComprobante'   => $idComprobante
+              )
+            );
+
+
+
+
+          }
+
+          echo "<script language='javascript'>";
+          echo "alert('El pedido fue realizado correctamente');";
+          //echo "window.location='pedidoPago.php?idComprobante=$idComprobante';";
+          echo "</script>";
+
+      }
+      ?>
+    </div>
+  </div>
 </section>
 </div>
 </main>
 <?php
 include("pie.php");
 ?>
-<script type="text/javascript" src="scripts/getCliente.js"></script>
 <script>
 // SideNav Button Initialization
 $(".button-collapse").sideNav();
@@ -106,6 +184,29 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
   document.getElementById('cheque').value = cheque2;
   });
 }
+
+/*function cantidadCheques(ele) {
+let cantCheque = document.getElementById('cantCheque');
+cantCheque.addEventListener("keyup", function(){
+var cantCheque= this.value;
+document.getElementById('filas').value = cantCheque;
+});
+} */
+function agregarCheque() {
+
+  var sel = "Cheque";
+
+  var item = '<tr>';
+  item = item +'<td>'+sel+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
+  item = item +'<td><input class="form-control" type="text" id="banco[]"  name="banco[]" required></td>';
+  item = item +'<td><input class="form-control" type="text" id="numero[]"  name="numero[]" required></td>';
+  item = item +'<td><input class="form-control" type="number" id="importe[]"  name="importe[]" min="0" required></td>';
+  item = item +'<td><input class="form-control" type="number" id="plazo[]"  name="plazo[]" min="0" required></td>';
+  item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><i class="fas fa-minus"></i></button></div></td></tr>';
+  if (sel !='') {
+    $("#lista").append(item);
+  }
+  }
 
 
 
