@@ -312,7 +312,6 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
     }
     $(document).on('click', '.remove', function(){
       var totalEli = this.parentNode.parentNode.childNodes[6].childNodes[0].value;
-      var rete =  parseFloat(retencion.value) - parseFloat(((totalEli * 2.5)/100));
 
       // comienzo iva segun select
       var iva = document.getElementById("iva");
@@ -335,7 +334,7 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
         iva.value =  iv.toFixed(2);
       }
       var totalFac= document.getElementById("totalfac");
-      var fac = parseFloat(totalFac.value) - (parseFloat(totalEli)  + parseFloat(((totalEli * 2.5)/100)) + parseFloat(((totalEli * 21)/100)));
+      var fac = parseFloat(totalFac.value) - (parseFloat(totalEli)  + parseFloat(((totalEli * 21)/100)));
       var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
       if (totafac.toFixed(2)<=0) {
         totalFac.value = 0;
