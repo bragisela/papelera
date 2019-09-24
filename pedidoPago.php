@@ -82,38 +82,24 @@ $idComprobante = $_REQUEST['idComprobante'];
             <table class="table table-bordered table-hover table-striped text-left " cellspacing="0" width="100%" id="item_table">
               <thead>
                <tr>
-                 <th class="th-sm" style="width:65px;">Pago</th>
-                 <th class="th-sm" style="width:65px;">Banco</th>
-                 <th class="th-sm" style="width:65px;">Numero</th>
-                 <th class="th-sm" style="width:65px;">Importe</th>
-                 <th class="th-sm" style="width:35px;">Plazo</th>
-                 <th class="th-sm" style="width:65px;">Acciones<!--<button type="button" name="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#basicExampleModal"><i class="fas fa-plus fa-l"></i></button>--></th>
+                 <th class="th-sm" >Pago</th>
+                 <th class="th-sm" >Banco</th>
+                 <th class="th-sm" >Numero</th>
+                 <th class="th-sm" >Importe</th>
+                 <th class="th-sm" >Plazo</th>
+                 <th class="th-sm" >Acciones</th>
                </tr>
              </thead>
              <tbody id="lista">
              </tbody>
-             <!--<tfoot>
+             <tfoot>
                <tr>
-               <td colspan="4"></td>
-                <td>Resto a pagar</td>
-                <td>
-                  <input class="form-control" type="number" id="totalImporte"  name="importebruto"  value="2" readonly>
-                </td>
-                <td></td>
-               </tr>
-               <tr>
-                 <td colspan="4"></td>
-                 <td>Pago con cheques</td>
-                 <td><input class="form-control" type="number" id="iva"  name="iva" value="2"readonly></td>
+                 <td colspan="3"></td>
+                 <td style="font-size: 18px;">Resto a pagar</td>
+                 <td><input class="form-control" type="number" id="restoCheque"  name="restoCheque" value="0" readonly></td>
                  <td></td>
                </tr>
-               <tr>
-                 <td colspan="4"></td>
-                 <td>Total Pagado</td>
-                 <td><input class="form-control" type="number" id="totalfac"  name="totalfacturado" value="2" readonly></td>
-                 <td></td>
-               </tr>
-             </tfoot>  -->
+             </tfoot>
            </table>
           </div>
 
@@ -179,6 +165,7 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
     $('.mdb-select').materialSelect();
   });
 
+  var cheque2 = 0;
   function calcularCheque(ele) {
   var importe2 = document.getElementById("importe").value;
   let efectivo = document.getElementById('efectivo');
@@ -205,12 +192,33 @@ function agregarCheque() {
   item = item +'<td>'+sel+'<input hidden class="form-control" type="number" id="sele[]" name="sele[]" value="'+sel+'"></td>';
   item = item +'<td><input class="form-control" type="text" id="banco[]"  name="banco[]" required></td>';
   item = item +'<td><input class="form-control" type="number" id="numero[]"  name="numero[]" required></td>';
-  item = item +'<td><input class="form-control" type="text" id="importe[]"  name="importe[]" min="0" required></td>';
+  item = item +'<td><input class="form-control" type="text" id="importe[]"  name="importe[]" oninput="calcularCantidad(this);" min="0" required></td>';
   item = item +'<td><input class="form-control" type="number" id="plazo[]"  name="plazo[]" min="0" required></td>';
   item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><i class="fas fa-minus"></i></button></div></td></tr>';
   if (sel !='') {
     $("#lista").append(item);
   }
+  }
+  var acum = 0;
+  function calcularCantidad(ele) {
+    var importe = 0, resto = 0, resto2= 0;
+    var tr = ele.parentNode.parentNode;
+    var nodes = tr.childNodes;
+    var cheque = document.getElementById("cheque").value;
+    document.getElementById("restoCheque").value = cheque;
+
+    for (var x = 0; x<nodes.length;x++) {
+      console.log(nodes.length);
+      if (nodes[x].firstChild.id == 'importe[]') {
+        importe = parseFloat(nodes[x].firstChild.value,10);
+        var imp = isNaN(parseFloat(importe)) ? 0 : parseFloat(importe);
+      }
+    }
+
+    resto = parseFloat(cheque) - parseFloat(imp);
+    resto2 = isNaN(parseFloat(resto)) ? 0 : parseFloat(resto);
+    document.getElementById("restoCheque").value = resto2.toFixed(2);
+
   }
 
 

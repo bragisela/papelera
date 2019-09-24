@@ -43,3 +43,7 @@ regisrtopedido
 Armar inventario (listo)
 
 forma de pago en pedidos y Compras
+
+
+--------------------------------------------------
+pedido pago cliente, falta ver cuanto falta pagar con cheque, boton eliminar funcionamiento
