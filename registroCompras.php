@@ -195,7 +195,9 @@ $Fecha = Date("Y-m-d H:i:s");
               $idComprobante = $conexiones->lastInsertId();
               $sqlCaja = insertCajaEgreso ($fecha,"E",$justificante,$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
               $conexiones->exec($sqlCaja);
-
+              //insert pago porque da error al relacionar pagos con comprobantes para calcular deudas
+              $pagos = $conexiones->query("INSERT INTO pagos (idPago,modoPago,banco,importe,numero,plazo,idComprobante,activo)
+              VALUES ('','-','-',0,'-','-',$idComprobante,0)");
               for($count = 0; $count < count($_POST["sele"]); $count++)
               {
                 $queryItems = "INSERT INTO items(idComprobante, idProducto, fecha, cant) VALUES (:idComprobante, :idProducto, :fecha, :cant)";

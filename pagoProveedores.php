@@ -1,6 +1,6 @@
 <?php
 include("sesion.php");
-$pagina='ProveedoresPHP';
+$pagina='pagoProveedoresPHP';
 include("encabezado.php");
 include("seguridad.php");
 include("sql/conexion.php");

@@ -194,6 +194,8 @@ INSERT INTO `permisos` (`codPermiso`, `codRol`, `tipoAcceso`, `pagina`) VALUES
 (313, 2, '', 'reporteComprasPHP'),
 (314, 2, '', 'reporteVentasPHP'),
 (315, 2, '', 'modificarPedidoPHP'),
+(317, 1, '', 'pagoProveedoresPHP'),
+(318, 1, '', 'proveedoresComprobantesPHP'),
 (316, 2, '', 'modificarCompraPHP');
 
 -- --------------------------------------------------------
