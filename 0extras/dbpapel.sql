@@ -622,14 +622,19 @@ CREATE TABLE `utilidad` (
   `cliente` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `Cheques` (
-  `idCheque` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `Pagos` (
+  `idPago` int(10) UNSIGNED NOT NULL,
+  `modoPago` varchar(50) NOT NULL,
   `banco` varchar(50) NOT NULL,
-  `importe` varchar(50) NOT NULL,
-  `numero` varchar(50) NOT NULL,
-  `plazo` varchar(50) NOT NULL,
-  `idComprobante` int(10) NOT NULL
+  `importe` decimal(10,2) NOT NULL,
+  `numero` varchar(25) NOT NULL,
+  `plazo` varchar(5) NOT NULL,
+  `idComprobante` int(10) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `activo` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 
 --
@@ -642,8 +647,8 @@ CREATE TABLE `Cheques` (
 ALTER TABLE `caja`
   ADD PRIMARY KEY (`idCajaTotal`);
 
-  ALTER TABLE `Cheques`
-    ADD PRIMARY KEY (`idCheque`);
+  ALTER TABLE `Pagos`
+    ADD PRIMARY KEY (`idPago`);
 
 --
 -- Indices de la tabla `cajatemporal`
@@ -745,8 +750,8 @@ ALTER TABLE `comprobantes`
   MODIFY `idComprobante` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `inventario`
-ALTER TABLE `Cheques`
-  MODIFY `idCheque` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Pagos`
+  MODIFY `idPago` int(10) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `inventario`
   MODIFY `idInventario` int(10) NOT NULL AUTO_INCREMENT;
 --
@@ -792,8 +797,8 @@ ALTER TABLE `utilidad`
 -- Filtros para la tabla `permisos`
 --
 
-ALTER TABLE `Cheques`
-  ADD CONSTRAINT `cheques_ibfk_1` FOREIGN KEY (`idComprobante`) REFERENCES `Comprobantes` (`idComprobante`);
+ALTER TABLE `Pagos`
+  ADD CONSTRAINT `Pagos_ibfk_1` FOREIGN KEY (`idComprobante`) REFERENCES `Comprobantes` (`idComprobante`);
 
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`codRol`) REFERENCES `roles` (`codRol`);

@@ -82,5 +82,14 @@
     return $sqlincNroCaja;
   }
 
+  function insertPagos($modoPago,$banco,$importe,$numero,$plazo,$idComprobante,$activo){
+
+    $sqlPagos="INSERT INTO pagos(modoPago,banco,importe,numero,plazo,idComprobante,activo)
+
+    VALUES ('$modoPago','$banco','$importe','$numero','$plazo','$idComprobante','$activo')";
+
+    return $sqlPagos;
+  }
+
 
 ?>

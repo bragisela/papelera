@@ -126,31 +126,36 @@ $idComprobante = $_REQUEST['idComprobante'];
           </div>
       </form>
       <?php
+      $activo = 0;
       if (isset($_POST['insertar'])) {
 
 
           for($count = 0; $count < count($_POST["sele"]);$count++)
           {
-            $queryItems = "INSERT INTO Cheques(banco, importe, numero, plazo, idComprobante) VALUES (:banco, :importe, :numero, :plazo, :idComprobante)";
+            $queryItems = "INSERT INTO Pagos(modoPago, banco, importe, numero, plazo, idComprobante, activo) VALUES (:modoPago, :banco, :importe, :numero, :plazo, :idComprobante, :activo)";
             $iItems = $conexiones->prepare($queryItems);
             $iItems->execute(
               array(
+                ':modoPago'  => 'Cheque',
                 ':banco'  => $_POST["banco"][$count],
                 ':importe'  => $_POST["importe"][$count],
                 ':numero'  => $_POST["numero"][$count],
                 ':plazo'  => $_POST["plazo"][$count],
-                ':idComprobante'   => $idComprobante
+                ':idComprobante'   => $idComprobante,
+                ':activo'   => $activo
               )
             );
-
-
-
-
           }
+
+          $sql = insertPagos('efectivo','-',$_POST['efectivo'],'-','-',$idComprobante,0);
+          $conexiones->exec($sql);
+
+
+
 
           echo "<script language='javascript'>";
           echo "alert('El pedido fue realizado correctamente');";
-          //echo "window.location='pedidoPago.php?idComprobante=$idComprobante';";
+          echo "window.location='comprasBuscar.php?';";
           echo "</script>";
 
       }
@@ -197,10 +202,10 @@ function agregarCheque() {
   var sel = "Cheque";
 
   var item = '<tr>';
-  item = item +'<td>'+sel+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
+  item = item +'<td>'+sel+'<input hidden class="form-control" type="number" id="sele[]" name="sele[]" value="'+sel+'"></td>';
   item = item +'<td><input class="form-control" type="text" id="banco[]"  name="banco[]" required></td>';
-  item = item +'<td><input class="form-control" type="text" id="numero[]"  name="numero[]" required></td>';
-  item = item +'<td><input class="form-control" type="number" id="importe[]"  name="importe[]" min="0" required></td>';
+  item = item +'<td><input class="form-control" type="number" id="numero[]"  name="numero[]" required></td>';
+  item = item +'<td><input class="form-control" type="text" id="importe[]"  name="importe[]" min="0" required></td>';
   item = item +'<td><input class="form-control" type="number" id="plazo[]"  name="plazo[]" min="0" required></td>';
   item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><i class="fas fa-minus"></i></button></div></td></tr>';
   if (sel !='') {
