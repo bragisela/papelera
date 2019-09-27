@@ -87,6 +87,7 @@ $idComprobante = $_REQUEST['idComprobante'];
                  <th class="th-sm" >Numero</th>
                  <th class="th-sm" >Importe</th>
                  <th class="th-sm" >Plazo</th>
+                 <th class="th-sm" >Total</th>
                  <th class="th-sm" >Acciones</th>
                </tr>
              </thead>
@@ -94,7 +95,13 @@ $idComprobante = $_REQUEST['idComprobante'];
              </tbody>
              <tfoot>
                <tr>
-                 <td colspan="3"></td>
+                 <td colspan="4"></td>
+                 <td style="font-size: 18px;">Total pagado</td>
+                 <td><input class="form-control" type="number" id="totalPagado"  name="totalPagado" value="0" readonly></td>
+                 <td></td>
+               </tr>
+               <tr>
+                 <td colspan="4"></td>
                  <td style="font-size: 18px;">Resto a pagar</td>
                  <td><input class="form-control" type="number" id="restoCheque"  name="restoCheque" value="0" readonly></td>
                  <td></td>
@@ -141,7 +148,7 @@ $idComprobante = $_REQUEST['idComprobante'];
 
           echo "<script language='javascript'>";
           echo "alert('El pedido fue realizado correctamente');";
-          echo "window.location='comprasBuscar.php?';";
+          echo "window.location='pedidosBuscar.php?';";
           echo "</script>";
 
       }
@@ -194,30 +201,40 @@ function agregarCheque() {
   item = item +'<td><input class="form-control" type="number" id="numero[]"  name="numero[]" required></td>';
   item = item +'<td><input class="form-control" type="text" id="importe[]"  name="importe[]" oninput="calcularCantidad(this);" min="0" required></td>';
   item = item +'<td><input class="form-control" type="number" id="plazo[]"  name="plazo[]" min="0" required></td>';
+  item = item +'<td><input class="form-control" type="number" id="total[]"  name="total[]" min="0" readonly></td>';
   item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><i class="fas fa-minus"></i></button></div></td></tr>';
   if (sel !='') {
     $("#lista").append(item);
   }
   }
-  var acum = 0;
   function calcularCantidad(ele) {
     var importe = 0, resto = 0, resto2= 0;
     var tr = ele.parentNode.parentNode;
     var nodes = tr.childNodes;
-    var cheque = document.getElementById("cheque").value;
-    document.getElementById("restoCheque").value = cheque;
 
     for (var x = 0; x<nodes.length;x++) {
-      console.log(nodes.length);
       if (nodes[x].firstChild.id == 'importe[]') {
         importe = parseFloat(nodes[x].firstChild.value,10);
         var imp = isNaN(parseFloat(importe)) ? 0 : parseFloat(importe);
       }
+      if (nodes[x].firstChild.id == 'total[]') {
+        anterior = nodes[x].firstChild.value;
+        total = parseFloat(imp,10);
+        var tot= isNaN(parseFloat(total)) ? 0 : parseFloat(total);
+        var bb = tot.toFixed(2);
+        nodes[x].firstChild.value = bb;
+      }
     }
 
-    resto = parseFloat(cheque) - parseFloat(imp);
-    resto2 = isNaN(parseFloat(resto)) ? 0 : parseFloat(resto);
-    document.getElementById("restoCheque").value = resto2.toFixed(2);
+    var totalPagado = document.getElementById("totalPagado").value;
+    totalPagado= isNaN(parseFloat(totalPagado)) ? 0 : parseFloat(totalPagado);
+    var h = totalPagado + tot - anterior;
+    totalPagado = h.toFixed(2);
+    document.getElementById("totalPagado").value = totalPagado;
+
+    var cheque = document.getElementById("cheque").value;
+    resto2 = cheque-totalPagado;
+    document.getElementById("restoCheque").value = resto2;
 
   }
 
