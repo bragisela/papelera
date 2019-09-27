@@ -96,14 +96,20 @@ $idComprobante = $_REQUEST['idComprobante'];
              <tfoot>
                <tr>
                  <td colspan="4"></td>
-                 <td style="font-size: 18px;">Total pagado</td>
-                 <td><input class="form-control" type="number" id="totalPagado"  name="totalPagado" value="0" readonly></td>
+                 <td style="font-size: 18px;">Resto a pagar</td>
+                 <td><input class="form-control" type="number" id="restoCheque"  name="restoCheque" value="0" readonly></td>
                  <td></td>
                </tr>
                <tr>
                  <td colspan="4"></td>
-                 <td style="font-size: 18px;">Resto a pagar</td>
-                 <td><input class="form-control" type="number" id="restoCheque"  name="restoCheque" value="0" readonly></td>
+                 <td style="font-size: 18px;">Pagado con cheque</td>
+                 <td><input class="form-control" type="number" id="totalCheque"  name="totalCheque" value="0" readonly></td>
+                 <td></td>
+               </tr>
+               <tr>
+                 <td colspan="4"></td>
+                 <td style="font-size: 18px;">Total pagado</td>
+                 <td><input class="form-control" type="number" id="totalPagado"  name="totalPagado" value="0" readonly></td>
                  <td></td>
                </tr>
              </tfoot>
@@ -202,11 +208,30 @@ function agregarCheque() {
   item = item +'<td><input class="form-control" type="text" id="importe[]"  name="importe[]" oninput="calcularCantidad(this);" min="0" required></td>';
   item = item +'<td><input class="form-control" type="number" id="plazo[]"  name="plazo[]" min="0" required></td>';
   item = item +'<td><input class="form-control" type="number" id="total[]"  name="total[]" min="0" readonly></td>';
-  item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><i class="fas fa-minus"></i></button></div></td></tr>';
+  item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">X</div></td></tr>';
   if (sel !='') {
     $("#lista").append(item);
   }
   }
+
+
+  //funcion eliminar
+  //restoCheque totalCheque totalPagado
+  $(document).on('click', '.remove', function(){
+    var totalEli = this.parentNode.parentNode.childNodes[5].childNodes[0].value;
+    var totalPagado= document.getElementById("totalPagado");
+    var pag = parseFloat(totalPagado.value) - (parseFloat(totalEli));
+    console.log(totalEli);
+    var totafac = isNaN(parseFloat(pag)) ? 0 : parseFloat(pag);
+    var totalCheque = document.getElementById("totalCheque");
+    totalCheque.value = parseFloat(totalCheque.value) - parseFloat(totalEli);
+    totalPagado= document.getElementById("totalPagado");
+    totalPagado.value = pag.toFixed(2);
+    var restoCheque= document.getElementById("restoCheque");
+    restoCheque.value = parseFloat(restoCheque.value) + parseFloat(totalEli);
+    $(this).closest('tr').remove();
+  });
+
   function calcularCantidad(ele) {
     var importe = 0, resto = 0, resto2= 0;
     var tr = ele.parentNode.parentNode;
@@ -226,15 +251,25 @@ function agregarCheque() {
       }
     }
 
-    var totalPagado = document.getElementById("totalPagado").value;
-    totalPagado= isNaN(parseFloat(totalPagado)) ? 0 : parseFloat(totalPagado);
-    var h = totalPagado + tot - anterior;
-    totalPagado = h.toFixed(2);
-    document.getElementById("totalPagado").value = totalPagado;
+    // calcular pagado con cheque
+    var totalCheque = document.getElementById("totalCheque").value;
+    totalCheque= isNaN(parseFloat(totalCheque)) ? 0 : parseFloat(totalCheque);
+    var h = totalCheque + tot - anterior;
+    totalCheque = h.toFixed(2);
+    document.getElementById("totalCheque").value = totalCheque;
 
+    //calcular resto pagar cheque
     var cheque = document.getElementById("cheque").value;
-    resto2 = cheque-totalPagado;
+    resto2 = cheque-totalCheque;
     document.getElementById("restoCheque").value = resto2;
+
+    //calcular total pagado
+    var efect = 0;
+    efect= document.getElementById("efectivo").value;
+    var efect2= isNaN(parseFloat(efect)) ? 0 : parseFloat(efect);
+    var totalCheque2 = isNaN(parseFloat(totalCheque)) ? 0 : parseFloat(totalCheque);
+    var totalPagado = totalCheque2+efect2;
+    document.getElementById("totalPagado").value = totalPagado;
 
   }
 
