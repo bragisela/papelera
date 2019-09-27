@@ -47,3 +47,15 @@ forma de pago en pedidos y Compras
 
 --------------------------------------------------
 pedido pago cliente, falta ver cuanto falta pagar con cheque, boton eliminar funcionamiento
+---------------------------------------------------
+27/09
+1) Pantalla pedidoPago.php el campo Resto a pagar aparecen muchos decimales
+2) Pantalla modificarPedido.php los botones actualizar y volver que sean de color celeste y verde como los demas y alineados en la misma FidLocalidad
+en esta misma pantalla si bien se puede editar las cantidades no se actualizan las cuentas.
+3) Pantalla precioUltimaCompra.php falta el boton volver
+4) Cuando la facturacion es en negro, el numero de pedido es automatico comenzando en el numero 5000.
+5) Cuando se termina el pedido, antes de la pantalla pago deberia mostrar si quiere pagar por si ir a la pantalla pedidoPago y por no ir a la pantalla pedidobucar.
+6) en acciones de pedido buscar tendria que aparecer la opcion pagar, y llevar a la misma pantalla pedidoPago por si quiere pagar mas tarde.
+7) Revisar los botones cancelar porque vi varios que no funcionan. Por ejemplo pedidoPAgo.php
+8) Verificar caja que al cargar un ingreso o un ingreso no vuelve a mostrar la pantalla. (coordinarlo con Matias si no es tuyo)
+9) los reportes de caja no funcionan pero lo hablamos con matias tambien.
