@@ -6,6 +6,7 @@ include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
+include('sql/numPedido.php');
 include('sql/selectProductos.php');
   $fech = Date("Y-m-d");
   $Fecha = Date("Y-m-d H:i:s");
@@ -50,7 +51,7 @@ include('sql/selectProductos.php');
                     <?php
                     if($codRol==1) { ?>
                       <div class="col-md-2 mb-2">
-                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" required>
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante"  onchange="calcularNumero(this);" required>
                           <option value="" disabled selected>Tipo</option>
                           <option value="R">Pedido Sin iva</option>
                           <option value="F">Factura</option>
@@ -61,16 +62,18 @@ include('sql/selectProductos.php');
                     <?php
                     if($codRol==2) { ?>
                       <div class="col-md-2 mb-2">
-                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" required>
+                        <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" onchange="calcularNumero(this);" required>
                           <option value="" disabled selected>Tipo</option>
                           <option value="F">Factura</option>
                         </select>
                       </div>
                     <?php }  ?>
 
+
                     <div class="col-md-2 mb-2">
                       <div class="md-form">
-                        <input type="number" id="form3" class="form-control" name="Nro">
+                        <input hidden  id="numero"   name="numero" oninput="calcularNumero(this);" value="<?php echo $numero; ?>">
+                        <input class="form-control"  type="number" id="numeromod" name="Nro" value="0">
                         <label for="form3" class="">Nro Comprobante</label>
                       </div>
                     </div>
@@ -430,6 +433,19 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
       totalfactu = isNaN(parseFloat(totalfactu)) ? 0 : parseFloat(totalfactu);
       document.getElementById("totalfac").value = totalfactu.toFixed(2);
 
+    }
+
+    function calcularNumero(ele) {
+      var numero = document.getElementById("numero").value;
+      var justificante = document.getElementById("justificante").value;
+      if (numero==0 && justificante=='R'){
+        numero = 5000;
+        document.getElementById("numeromod").value = numero;
+      } else if (justificante=='R') {
+        numero++;
+        document.getElementById("numeromod").value = numero;
+      }
+      console.log(numero);
     }
 
 </script>
