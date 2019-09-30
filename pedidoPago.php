@@ -120,7 +120,7 @@ $idComprobante = $_REQUEST['idComprobante'];
             <div class="col-md-8 mb-8"> </div>
             <div class="col-md-4 mb-4">
               <input type="submit" name="insertar" value="Guardar" class="btn btn-success">
-              <input type="reset" name="" value="Cancelar" class="btn btn-info">
+              <input type="reset" name="Cancelar" value="Volver" class="btn btn-info" onClick="location.href='pedidosBuscar.php'">
             </div>
           </div>
       </form>
@@ -261,6 +261,7 @@ function agregarCheque() {
     //calcular resto pagar cheque
     var cheque = document.getElementById("cheque").value;
     resto2 = cheque-totalCheque;
+    resto2 = resto2.toFixed(2);
     document.getElementById("restoCheque").value = resto2;
 
     //calcular total pagado

@@ -175,7 +175,7 @@ include('sql/selectProductos.php');
        <div class="col-md-8 mb-8"> </div>
        <div class="col-md-4 mb-4">
          <input type="submit" name="insertar" value="Guardar" class="btn btn-success">
-         <input type="reset" name="" value="Cancelar" class="btn btn-info">
+         <input type="reset" name="Cancelar" value="Volver" class="btn btn-info" onClick="location.href='pedidosBuscar.php'">
        </div>
      </div>
    </form>

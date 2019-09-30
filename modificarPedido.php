@@ -62,7 +62,7 @@ $totalCompra=0;
                             <a onClick='pDelete(this);' id='$idItems'><i class='far fa-trash-alt'></i></a>";?></td>
                           </tr>
                           <?php
-                          $totalCompra=$totalCompra+($importeUtil*$cant);
+                          /*$totalCompra=$totalCompra+($importeUtil*$cant);
                           $totalCompra = bcdiv($totalCompra, '1', 2);
                           $justi  = $rowPedidos['justificante'];
 
@@ -76,11 +76,11 @@ $totalCompra=0;
                           }
                           $iva = bcdiv($iva, '1', 2);
                           $Totalfacturado=$iva+$totalCompra;
-                          $Totalfacturado = bcdiv($Totalfacturado, '1', 2);
+                          $Totalfacturado = bcdiv($Totalfacturado, '1', 2); */
                         }
                     ?>
                   </tbody>
-                  <tfoot>
+                <!--  <tfoot>
                     <tr>
                       <td colspan="4"></td>
                       <td style="font-weight: bold; font-size:16px;">Importe</td>
@@ -96,9 +96,10 @@ $totalCompra=0;
                       <td style="font-weight: bold; font-size:16px;">Total Facturado</td>
                       <td style="font-weight: bold; font-size:16px;"> $    <?php echo $Totalfacturado; ?></td>
                     </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
-                <input type="submit" name="actualizar" value="Actualizar pedido"   class="btn btn-danger  col-md-offset-10.9"> </input>
+                <input type="submit" name="actualizar" value="Modificar Pedido"   aria-hidden="true" class="btn btn-success  col-md-offset-10.9"> </input>
+                <a href="pedidosBuscar.php" class="btn btn-info"><i class="fas fa-undo">Volver</i></a>
 
                 <?php
                 if(isset($_POST['actualizar'])){
@@ -126,8 +127,6 @@ $totalCompra=0;
 
                 ?>
                 </form>
-                <button class="btn btn-rounded btn-deep-purple" role="link" onclick="window.location='pedidosbuscar.php'"><i class="fas fa-undo" aria-hidden="true">Volver</i></button>
-
               </div>
             </div>
         </div>

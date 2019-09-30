@@ -76,6 +76,7 @@ include('sql/consultas.php');
                       <td><?php echo "
                       <a href='modificarPedido.php?idPedido=$idComprobante' title='Editar'><i class='far fa-edit fa-lg'></i></a>
                       <a href='detallePedidos.php?idPedido=$idComprobante' title='Ver Detalles'><i class='fas fa-asterisk'></i></a>
+                      <a href='pedidoPago.php?idComprobante=$idComprobante' title='Pagar'><i class='far fa-credit-card'></i></a>
                       <a target='_blank' href='imprimir.php?idComprobante=$idComprobante' title='Pedido'><i class='fas fa-print fa-lg'></i></a>
                       <a target='_blank' href='imprimirRemito.php?idComprobante=$idComprobante' title='Remito'><i class='fas fa-sticky-note fa-lg'></i></a>
                       <a onClick='pDelete(this);' id='$idComprobante'><i class='far fa-trash-alt'></i></a>

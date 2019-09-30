@@ -87,7 +87,9 @@ $Fecha = Date("Y-m-d H:i:s");
               </table>
             </div>
             <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-success">
-            <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='comprasBuscar.php'">
+            <input type="reset" name="Cancelar" value="Volver" class="btn btn-info" onClick="location.href='comprasBuscar.php'">
+            <!--<a href="comprasBuscar.php" class="btn btn-info"><i class="fas fa-undo">Volver</i></a> -->
+
           </form>
             <!--FIN -->
             <?php
