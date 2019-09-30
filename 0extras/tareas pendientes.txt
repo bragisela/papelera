@@ -64,7 +64,11 @@ pedidoPago y por no ir a la pantalla pedidobucar.
 
 //mati
 linea 233 error numerico no entendi, pasa ese error sino redireccionamos despues de guardar el pedido en registroPedidos.php
+<<<<<<< HEAD
 eso pasa sin comentar lo de utilidad, comento lo de utilidad y anda bien
+=======
+
+>>>>>>> 4bd282b17306be66625ff61dcdb338033da4eb33
 
 
 
