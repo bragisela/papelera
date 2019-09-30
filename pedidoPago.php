@@ -25,6 +25,7 @@ $idComprobante = $_REQUEST['idComprobante'];
 <body class="hidden-sn mdb-skin">
 <!--Main Layout-->
 <main>
+
   <div class="container-fluid mt-3 col col-md-11">
     <section class="pb-5">
       <div class="card text-center">

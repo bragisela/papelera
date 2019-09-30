@@ -224,7 +224,8 @@ include('sql/selectProductos.php');
                 )
               );
 
-              $queryUtilidad = "INSERT INTO utilidad(Comprobante,idProducto, impVenta, impCosto, impUtilidad, fecha, cliente, tipo) VALUES (:Comprobante, :idProducto, :impVenta, ((SELECT costoUni FROM productos WHERE idProducto=(:idProducto))*:cant), ((:impVenta) - ((SELECT costoUni FROM productos WHERE idProducto=(:idProducto))*:cant)),:fecha,:cliente,:justificante)";
+
+             $queryUtilidad = "INSERT INTO utilidad(Comprobante,idProducto, impVenta, impCosto, impUtilidad, fecha, cliente, tipo) VALUES (:Comprobante, :idProducto, :impVenta, ((SELECT costoUni FROM productos WHERE idProducto=(:idProducto))*:cant), ((:impVenta) - ((SELECT costoUni FROM productos WHERE idProducto=(:idProducto))*:cant)),:fecha,:cliente,:justificante)";
               $iUtilidad = $conexiones->prepare($queryUtilidad);
               $iUtilidad->execute(
                 array(
@@ -249,22 +250,25 @@ include('sql/selectProductos.php');
                 )
               );
 
-              // $queryInventario = "INSERT INTO inventario(idProducto,fecha,totalComprado) VALUES (:idProducto,:fecha, :totalComprado)";
-              // $iInventario = $conexiones->prepare($queryInventario);
-              // $iInventario->execute(
-              //   array(
-              //     ':idProducto'   => $_POST["sele"][$count],
-              //     ':fecha'  => $Fecha,
-              //     ':totalComprado'  => $_POST["precio"][$count]
-              //   )
-              // );
 
             }
-
             echo "<script language='javascript'>";
             echo "alert('El pedido fue realizado correctamente');";
-            echo "window.location='pedidoPago.php?idComprobante=$idComprobante';";
+            echo "window.location='pedidosBuscar.php';";
             echo "</script>";
+            ?>
+<!--
+            <div class="modal">
+            	<div class="contenido">
+            		<br>
+            	  <h2 align="center">¿Desea realizar el pago?</h2>
+            			<br>
+                  <input hidden id="comprobante4" name="comprobante" value="<?php// echo $idComprobante; ?>">
+                  <input class="btn btn-success btn-md btn-mar" type="text" name="aceptar" id="aceptar" onclick="accion(this);" value="Aceptar">
+                  <input class="btn btn-info btn-md" type="text" name="cancelar" id="cancelar" onclick="accionn(this);" value="Cancelar">
+              </div>
+            </div> -->
+            <?php
 
         }
      ?>
@@ -448,6 +452,25 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
       console.log(numero);
     }
 
+    function accion(ele) {
+      var comprobante = document.getElementById("comprobante4").value;
+      var float = parseFloat(comprobante);
+      var accion = document.getElementById("aceptar").value;
+      switch (accion) {
+          case 'Aceptar':
+                      window.location='pedidoPago.php?idComprobante='+float;
+          break;
+      }
+    }
+
+    function accionn(ele) {
+      var accion = document.getElementById("cancelar").value;
+      switch (accion) {
+          case 'Cancelar':
+                         window.location='pedidosBuscar.php';
+          break;
+      }
+    }
 </script>
 </body>
 </html>
