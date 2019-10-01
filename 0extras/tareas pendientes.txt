@@ -74,3 +74,7 @@ eso pasa sin comentar lo de utilidad, comento lo de utilidad y anda bien
 
 8) Verificar caja que al cargar un ingreso o un ingreso no vuelve a mostrar la pantalla. (coordinarlo con Matias si no es tuyo)
 9) los reportes de caja no funcionan pero lo hablamos con matias tambien.
+-----------------------------------------
+01/10
+
+10) modificar pedido no recalcula el importe, sacar la columna porcutilidad
