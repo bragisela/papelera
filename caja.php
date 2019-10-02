@@ -260,7 +260,7 @@ include('sql/consultas.php');
               <?php
                 if ($codRol==1) {?>
                </td></button>
-               <button type="button" data-toggle="modal" name="cierreCaja" data-target="#cierreCaja" class="btn btn-dark-green"><i class="fas fa-money-check-alt fa-1.5x"></i>    Cierre de Caja</button></td>
+               <button type="button" data-toggle="modal" name="cierreCaja" data-target="#cierreCaja" class="btn btn-dark-green"><i class="fas fa-money-check-alt fa-1.5x"></i> Cierre de Caja</button></td>
 
 
 
