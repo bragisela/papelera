@@ -40,7 +40,7 @@ CREATE TABLE `caja` (
   `tipo` varchar(2) COLLATE utf8_spanish_ci DEFAULT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
   `importe` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE `cajatemporal` (
   `tipo` varchar(2) COLLATE utf8_spanish_ci DEFAULT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
   `importe` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -622,9 +622,9 @@ CREATE TABLE `utilidad` (
   `impUtilidad` decimal(10,2) NOT NULL,
   `fecha` date NOT NULL,
   `cliente` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `Pagos` (
+CREATE TABLE `pagos` (
   `idPago` int(10) UNSIGNED NOT NULL,
   `modoPago` varchar(50) NOT NULL,
   `banco` varchar(50) NOT NULL,
@@ -649,7 +649,7 @@ CREATE TABLE `Pagos` (
 ALTER TABLE `caja`
   ADD PRIMARY KEY (`idCajaTotal`);
 
-  ALTER TABLE `Pagos`
+  ALTER TABLE `pagos`
     ADD PRIMARY KEY (`idPago`);
 
 --
@@ -752,7 +752,7 @@ ALTER TABLE `comprobantes`
   MODIFY `idComprobante` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `inventario`
-ALTER TABLE `Pagos`
+ALTER TABLE `pagos`
   MODIFY `idPago` int(10) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `inventario`
   MODIFY `idInventario` int(10) NOT NULL AUTO_INCREMENT;
@@ -799,8 +799,8 @@ ALTER TABLE `utilidad`
 -- Filtros para la tabla `permisos`
 --
 
-ALTER TABLE `Pagos`
-  ADD CONSTRAINT `Pagos_ibfk_1` FOREIGN KEY (`idComprobante`) REFERENCES `Comprobantes` (`idComprobante`);
+ALTER TABLE `pagos`
+  ADD CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`idComprobante`) REFERENCES `comprobantes` (`idComprobante`);
 
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`codRol`) REFERENCES `roles` (`codRol`);
