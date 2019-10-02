@@ -17,7 +17,6 @@
 		<!-- DataTables Select CSS -->
 		<link href="css/addons/datatables-select.min.css" rel="stylesheet">
 
-		<link href="css/modal.css" rel="stylesheet">
 
 		<link rel="icon" type="image/png" href="img/logonatbra.png">
 </head>

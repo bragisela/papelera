@@ -13,6 +13,9 @@ include('sql/selectProductos.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
+<head>
+  <link href="css/modal.css" rel="stylesheet">
+</head>
 <style>
 /* <!-- ACA IRIA EL CSS --> */
 
