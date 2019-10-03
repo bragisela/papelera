@@ -11,7 +11,7 @@ while($rowProv = $proveedor->fetch(PDO::FETCH_ASSOC)) {
   $domicilio = $rowProv['domicilio'];
 }
 
-$comprobantes = $conexiones->query("SELECT co.idComprobante,co.nroComprobante, co.totalcomprado, co.fecha, pa.activo from comprobantes as co
+$comprobantes = $conexiones->query("SELECT co.idComprobante,co.tipo,co.nroComprobante, co.totalcomprado, co.fecha, pa.activo from comprobantes as co
 inner join pagos as pa on co.idComprobante=pa.idComprobante
 WHERE co.idCliPro=$idProveedor")
 or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));

@@ -257,20 +257,19 @@ include('sql/selectProductos.php');
             }
             echo "<script language='javascript'>";
             echo "alert('El pedido fue realizado correctamente');";
-            echo "window.location='pedidosBuscar.php';";
             echo "</script>";
             ?>
-<!--
+
             <div class="modal">
             	<div class="contenido">
             		<br>
             	  <h2 align="center">¿Desea realizar el pago?</h2>
             			<br>
-                  <input hidden id="comprobante4" name="comprobante" value="<?php// echo $idComprobante; ?>">
+                  <input hidden id="comprobante4" name="comprobante" value="<?php echo $idComprobante; ?>">
                   <input class="btn btn-success btn-md btn-mar" type="text" name="aceptar" id="aceptar" onclick="accion(this);" value="Aceptar">
                   <input class="btn btn-info btn-md" type="text" name="cancelar" id="cancelar" onclick="accionn(this);" value="Cancelar">
               </div>
-            </div> -->
+            </div>
             <?php
 
         }
