@@ -93,7 +93,9 @@ CREATE TABLE `comprobantes` (
   `fecha` date NOT NULL,
   `tipo` varchar(2) DEFAULT NULL,
   `justificante` varchar(2) DEFAULT NULL,
-  `totalcomprado` varchar(100) NOT NULL
+  `totalcomprado` varchar(100) NOT NULL,
+  `activo` int(1) NOT NULL,
+  `tempPago` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

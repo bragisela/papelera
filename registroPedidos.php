@@ -197,7 +197,7 @@ include('sql/selectProductos.php');
             $justificante = $_POST['justificante'];
             $totalComprado = $_POST['totalfacturado'];
             $tipo = "V";
-            $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado);
+            $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado,0,0);
             $conexiones->exec($sqlCompro);
             $idComprobante = $conexiones->lastInsertId();
             $sqlCaja = insertCajaIngreso($fecha,"I",$justificante,$nro,$totalComprado,"0");

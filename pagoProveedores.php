@@ -38,7 +38,12 @@ include('sql/pagoProveedores.php');
                     <tr>
                       <td><?php echo $rowProveedores['nombre'];  $idProveedor = $rowProveedores['idProveedor']; ?></td>
                       <td><?php echo $rowProveedores['domicilio']; ?></td>
-                      <td>$ <?php echo $rowProveedores['deuda']; ?></td>
+                      <td> <?php
+                      if ($deuda!=0){
+                        echo $deuda;
+                      } else {
+                        echo "Sin deuda";
+                      }?></td>
                       <td><?php echo $rowProveedores['fecha'];  ?></td>
                       <td><?php echo "
                       <a href='proveedoresComprobantes.php?idProveedor=$idProveedor' title='Ver comprobantes'><i class='fas fa-asterisk'></i></a>

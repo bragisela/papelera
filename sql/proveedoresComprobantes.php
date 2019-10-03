@@ -11,8 +11,21 @@ while($rowProv = $proveedor->fetch(PDO::FETCH_ASSOC)) {
   $domicilio = $rowProv['domicilio'];
 }
 
-$comprobantes = $conexiones->query("SELECT co.idComprobante,co.tipo,co.nroComprobante, co.totalcomprado, co.fecha, pa.activo from comprobantes as co
+$comprobantes = $conexiones->query("SELECT co.idComprobante,co.justificante,co.tipo,co.nroComprobante, co.totalcomprado, co.fecha, pa.activo from comprobantes as co
 inner join pagos as pa on co.idComprobante=pa.idComprobante
 WHERE co.idCliPro=$idProveedor")
+or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
+
+$saldoAcumulado = $conexiones->query("SELECT sum(co.totalcomprado) as saldo from comprobantes as co
+inner join pagos as pa on co.idComprobante=pa.idComprobante
+WHERE tempPago=1 and co.idCliPro=$idProveedor")
+or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
+
+while($rowSA = $saldoAcumulado->fetch(PDO::FETCH_ASSOC)) {
+  $saldo = $rowSA['saldo'];
+}
+
+$cheques = $conexiones->query("SELECT pa.modoPago,pa.idPago, pa.banco, pa.importe, pa.numero, pa.plazo from pagos as pa
+where pa.activo=0  AND pa.modoPago='Cheque'")
 or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
 ?>

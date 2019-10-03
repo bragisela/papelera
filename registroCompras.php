@@ -191,7 +191,7 @@ $Fecha = Date("Y-m-d H:i:s");
               $justificante = $_POST['justificante'];
               $totalComprado = $_POST['importebruto'];
               $tipo = "C";
-              $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado);
+              $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado,0,0);
               $conexiones->exec($sqlCompro);
               $idComprobante = $conexiones->lastInsertId();
               $sqlCaja = insertCajaEgreso ($fecha,"E",$justificante,$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.

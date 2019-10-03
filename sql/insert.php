@@ -28,11 +28,11 @@
     return $sqlProveedores;
   }
 
-  function insertComprobantes($nroComprobante, $IdCliPro, $fecha, $tipo,$justificante, $totalComprado){
+  function insertComprobantes($nroComprobante, $IdCliPro, $fecha, $tipo,$justificante, $totalComprado, $activo ,$tempPago){
 
-    $sqlComprobantes = "INSERT INTO comprobantes(nroComprobante, IdCliPro, fecha, tipo, justificante, totalComprado)
+    $sqlComprobantes = "INSERT INTO comprobantes(nroComprobante, IdCliPro, fecha, tipo, justificante, totalComprado, activo, tempPago)
 
-    VALUES ('$nroComprobante', '$IdCliPro', '$fecha', '$tipo','$justificante','$totalComprado')";
+    VALUES ('$nroComprobante', '$IdCliPro', '$fecha', '$tipo','$justificante','$totalComprado','$activo','$tempPago')";
 
     return $sqlComprobantes;
   }
