@@ -78,3 +78,9 @@ eso pasa sin comentar lo de utilidad, comento lo de utilidad y anda bien
 01/10
 
 10) modificar pedido no recalcula el importe, sacar la columna porcutilidad
+
+-----------------------------------
+11) Si pago el cliente habria que deshabilitarle el boton en pedidosBuscar
+12) pago me cuesta un monton que agarre el input del efectivo
+13) pago a proveedores habria que tener un campo que te diga cuanto queda pagar
+14) los comprobantes pagados del proveedor siguen apareciendo en la pantalla proveedorComprobantes
