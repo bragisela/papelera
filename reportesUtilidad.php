@@ -6,6 +6,7 @@ include("seguridad.php");
 include("sql/conexion.php");
 include("sql/consultas.php");
 include("sql/listados.php");
+$fech = Date("Y-m-d");
 
 //INICIO EXCEL
 
@@ -13,7 +14,7 @@ $total_rows = $getRepUtil->rowCount();
 
 $download_filelink = '<ul class="list-unstyled">';
 
-if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
+if(isset($_POST["export"]) && isset($_POST["desdeU"])!="" && isset($_POST["hastaU"])!="")
 {
 	require_once 'class/PHPExcel.php';
 	$last_page = ceil($total_rows/10000);
@@ -35,7 +36,8 @@ if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
 		$query = "
     SELECT idUtilidad, tipo, fecha, comprobante, (SUM(impUtilidad))
     from utilidad
-		WHERE comprobante=".$_POST["comprobante"]."
+		WHERE fecha
+		BETWEEN CAST('".$_POST["desdeU"]."' AS DATE) AND CAST('".$_POST["hastaU"]."' AS DATE)
     GROUP by comprobante
 		";
 		$statement = $conexiones->prepare($query);
@@ -54,7 +56,7 @@ if(isset($_POST["export"]) && isset($_POST["comprobante"])!="")
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
-		$file_name = 'ReporteUtilidad-'.$sub_row["tipo"]."-".($_POST["comprobante"]).'.xls';
+		$file_name = 'ReporteUtilidad-'.($_POST["desdeU"])."-"."a"."-".($_POST["hastaU"]).'.xls';
 		$object_writer->save($file_name);
     // nombre archivo exceñ
 		$download_filelink .= '<li><label><a href="download.php?filename='.$file_name.'" target="_blank">Descargar - '.$file_name.'</a></label></li>';
@@ -80,6 +82,7 @@ else {
    <section id="margen2">
       <form class=" text-left border border-light p-5" method="post">
          <div class="form-row mb-4">
+					 <!--
            <div class="col-md-3 col-sm-6" >
                <select name="comprobante"  class="mdb-select md-form" searchable="Nro de comprobantes..">
                  <option value="" disabled selected>Elija el número de comprobante</option>
@@ -101,7 +104,22 @@ else {
                    ?>
                </select>
                <label class="mdb-main-label">Comprobantes</label>
-           </div>
+           </div> -->
+
+					 <div class="col-md-3 col-sm-6">
+						 <label>Desde</label>
+						 <div class="md-form" style="margin-top: -10px;">
+							 <input type="date" class="form-control" name="desdeU" value="<?php echo $fech; ?>">
+						 </div>
+					 </div>
+
+
+					 <div class="col-md-3 col-sm-6" >
+						 <label>Hasta</label>
+						 <div class="md-form" style="margin-top: -10px;">
+							 <input type="date" class="form-control" name="hastaU" value="<?php echo $fech; ?>">
+						 </div>
+					 </div>
 
            <div class="md-form col-lg-3 col-md-4  col-sm-6  margen7 ">
              <input type="submit" name="export" class="btn btn-success" value="Seleccionar" />
@@ -126,9 +144,9 @@ else {
         </thead>
       	<tbody>
           <?php
-					if (isset($_POST["export"]) && isset($_POST["comprobante"])!=""){
+					if (isset($_POST["export"]) && isset($_POST["desdeU"])!="" && isset($_POST["hastaU"])!=""){
           	while(($rowUtilidad = $getRepUtil->fetch(PDO::FETCH_ASSOC)) && ($rowUtilidadTotal = $totalUtilidad->fetch(PDO::FETCH_ASSOC))) {
-							if(($_POST["comprobante"])==($rowUtilidad['comprobante']) ) {
+							if(($_POST["desdeU"])<=($rowUtilidad['fecha']) && ($_POST["hastaU"])>=($rowUtilidad['fecha'])) {
 								echo "<tr>";
 								echo "<th>" . $rowUtilidad['fecha'] . "</th>";
 								echo "<th>" . $rowUtilidad['tipo'] . "-" . $rowUtilidad['comprobante'] . "</th>";
