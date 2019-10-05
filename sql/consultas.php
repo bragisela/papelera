@@ -17,10 +17,10 @@
   GROUP by inv.idProducto")
   or die ('No se puede traer listado Productos'.mysqli_error($conexiones));
 
-  $resultadoPedidos = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, cl.nombre, cl.domicilioComercio FROM comprobantes c, clientes cl WHERE c.tipo='V' AND c.IdCliPro=cl.idCliente")
+  $resultadoPedidos = $conexiones ->query("SELECT c.idComprobante, c.activo,c.nroComprobante, c.fecha, cl.nombre, cl.domicilioComercio FROM comprobantes c, clientes cl WHERE c.tipo='V' AND c.IdCliPro=cl.idCliente")
   or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
 
-  $resultadoPedidosAdmin = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, cl.nombre, cl.domicilioComercio FROM comprobantes c, clientes cl WHERE c.tipo='V' AND c.justificante='F' AND c.IdCliPro=cl.idCliente")
+  $resultadoPedidosAdmin = $conexiones ->query("SELECT c.idComprobante,c.activo, c.nroComprobante, c.fecha, cl.nombre, cl.domicilioComercio FROM comprobantes c, clientes cl WHERE c.tipo='V' AND c.justificante='F' AND c.IdCliPro=cl.idCliente")
   or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
 
   $resultadoCompras = $conexiones ->query("SELECT c.idComprobante, c.nroComprobante, c.fecha, p.nombre, p.domicilio FROM comprobantes c, proveedores p WHERE c.tipo='C' AND c.IdCliPro=p.idProveedor")

@@ -145,7 +145,20 @@ $idComprobante = $_REQUEST['idComprobante'];
                 ':activo'   => $activo
               )
             );
+
+            $activo = 1;
+            $queryComprobantes = "UPDATE comprobantes SET activo =  (:activo) WHERE idComprobante=(:idComprobante)";
+            $iComprobante = $conexiones->prepare($queryComprobantes);
+            $iComprobante->execute(
+              array(
+               ':idComprobante'   => $idComprobante,
+               ':activo'  => $activo
+
+             )
+            );
           }
+
+
 
           $sql = insertPagos('efectivo','-',$_POST['efectivo'],'-','-',$idComprobante,0);
           $conexiones->exec($sql);

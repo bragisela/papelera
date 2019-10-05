@@ -107,6 +107,12 @@ include('sql/proveedoresComprobantes.php');
                    <tfoot>
                      <tr>
                        <td colspan="3"></td>
+                       <td style="font-size: 18px;">Resto a pagar</td>
+                       <td><input class="form-control" type="number" id="totalResto"  name="totalResto" value="0" readonly></td>
+                       <td></td>
+                     </tr>
+                     <tr>
+                       <td colspan="3"></td>
                        <td style="font-size: 18px;">Cheques</td>
                        <td><input class="form-control" type="number" id="totalCheque"  name="totalCheque" value="0" readonly></td>
                        <td></td>
@@ -167,6 +173,10 @@ include('sql/proveedoresComprobantes.php');
                )
               );
             }
+
+            $sql = insertPagos('efectivo','-',$_POST['totalEfectivo'],'-','-',$idCom,0);
+            $conexiones->exec($sql);
+
               echo "<script language='javascript'>";
               echo "alert('El pedido fue realizado correctamente');";
               echo "window.location='pagoProveedores.php';";
@@ -248,6 +258,9 @@ function agregarCheque() {
     totalCheque = totalCheque + preci;
     document.getElementById("totalCheque").value = totalCheque;
 
+    // resto pagar
+    var restoPagar = saldoPagar-totalCheque;
+    document.getElementById("totalResto").value = restoPagar;
 
 
     //totalcancelado
@@ -269,6 +282,11 @@ function agregarCheque() {
     var totalPagado = efect + totalCheque;
     document.getElementById("totalPagado").value = totalPagado;
 
+    var totalResto= document.getElementById("totalResto").value;
+    totalResto  = isNaN(parseFloat(totalResto)) ? 0 : parseFloat(totalResto);
+    var totalResto = totalResto - efect;
+    console.log(totalResto);
+    document.getElementById("totalResto").value = totalResto;
   }
 
 
