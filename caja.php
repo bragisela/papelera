@@ -74,7 +74,7 @@ include('sql/consultas.php');
                           <!--FIN -->
                           <?php //Acción al presionar GuardarIngreso
                             if (isset($_POST['GuardarIngreso'])){
-                              $sqlCajaIngreso = insertCajaIngreso($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
+                              $sqlCajaIngreso = insertCajaIngreso($_POST['fecha'],$_POST['tipoMov'],"",$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
                               $conexiones->exec($sqlCajaIngreso);
 
                               echo "<script language='javascript'>";
@@ -139,7 +139,7 @@ include('sql/consultas.php');
                           <!--FIN -->
                           <?php //Acción al presionar GuardarEgreso
                             if (isset($_POST['GuardarEgreso'])){
-                              $sqlCajaEgreso = insertCajaEgreso($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
+                              $sqlCajaEgreso = insertCajaEgreso($_POST['fecha'],$_POST['tipoMov'],"",$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
                               $conexiones->exec($sqlCajaEgreso);
 
                               echo "<script language='javascript'>";
