@@ -228,7 +228,6 @@ function agregarCheque() {
   }
   }
 
-
   $(document).on('click', '.remove', function(){
     var totalEli = this.parentNode.parentNode.childNodes[4].childNodes[0].value;
     console.log(totalEli);
@@ -237,8 +236,6 @@ function agregarCheque() {
     var totalCheque= document.getElementById("totalCheque");
     var efect = document.getElementById("totalEfectivo").value;
     var efec2= isNaN(parseFloat(efect)) ? 0 : parseFloat(efect);
-
-
     var fac = parseFloat(saldoAcumulado.value) - (parseFloat(totalEli));
     var fac2 = parseFloat(totalResto.value) + (parseFloat(totalEli)) - (parseFloat(efec2));
     var fac3 = parseFloat(totalCheque.value) - (parseFloat(totalEli));
@@ -249,66 +246,43 @@ function agregarCheque() {
     document.getElementById("totalResto").value = totafac2.toFixed(2);
     document.getElementById("totalCheque").value = totafac3.toFixed(2);
 
-
-
-
     $(this).closest('tr').remove();
   });
-
 
   function calcularCantidad(ele) {
     var tr = ele.parentNode.parentNode;
     var nodes = tr.childNodes;
 
     for (var x = 0; x<nodes.length;x++) {
-
       if (nodes[x].firstChild.id == 'importe[]') {
         precio = parseFloat(nodes[x].firstChild.value,10);
         var preci= isNaN(parseFloat(precio)) ? 0 : parseFloat(precio);
       }
     }
-
-    //saldo a pagar
     var saldoPagar = document.getElementById("pagar").value;
     saldoPagar = isNaN(parseFloat(saldoPagar)) ? 0 : parseFloat(saldoPagar);
-
-    // pagado con cheque
     var totalCheque = document.getElementById("totalCheque").value;
     totalCheque  = isNaN(parseFloat(totalCheque )) ? 0 : parseFloat(totalCheque);
     totalCheque = totalCheque + preci;
     document.getElementById("totalCheque").value = totalCheque;
-
-    // resto pagar
     var restoPagar = saldoPagar-totalCheque;
     document.getElementById("totalResto").value = restoPagar;
-
-
-    //totalcancelado
     document.getElementById("totalPagado").value = totalCheque;
   }
-
-
 
 
   function calcularTotal(ele) {
 
     var totalCheque = document.getElementById("totalCheque").value;
     totalCheque  = isNaN(parseFloat(totalCheque )) ? 0 : parseFloat(totalCheque);
-
-
     var efect = document.getElementById("totalEfectivo").value;
     efect = isNaN(parseFloat(efect)) ? 0 : parseFloat(efect);
-
-
     var totalPagado = efect + totalCheque;
     document.getElementById("totalPagado").value = totalPagado;
-
     var totalResto= document.getElementById("totalResto").value;
     totalResto  = isNaN(parseFloat(totalResto)) ? 0 : parseFloat(totalResto);
-
     var saldoPagar = document.getElementById("pagar").value;
     saldoPagar = isNaN(parseFloat(saldoPagar)) ? 0 : parseFloat(saldoPagar);
-
     if (totalCheque==0){
         totalResto = saldoPagar-efect;
         document.getElementById("totalResto").value = totalResto;
@@ -316,7 +290,6 @@ function agregarCheque() {
       var totalResto = totalResto;
       document.getElementById("totalResto").value = totalResto;
     }
-
   }
 
 
