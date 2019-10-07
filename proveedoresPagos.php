@@ -229,10 +229,30 @@ function agregarCheque() {
   }
 
 
-  //funcion eliminar
-  //restoCheque totalCheque totalPagado
   $(document).on('click', '.remove', function(){
+    var totalEli = this.parentNode.parentNode.childNodes[4].childNodes[0].value;
+    console.log(totalEli);
+    var saldoAcumulado= document.getElementById("totalPagado");
+    var totalResto= document.getElementById("totalResto");
+    var totalCheque= document.getElementById("totalCheque");
+    var efect = document.getElementById("totalEfectivo").value;
+    var efec2= isNaN(parseFloat(efect)) ? 0 : parseFloat(efect);
 
+
+    var fac = parseFloat(saldoAcumulado.value) - (parseFloat(totalEli));
+    var fac2 = parseFloat(totalResto.value) + (parseFloat(totalEli)) - (parseFloat(efec2));
+    var fac3 = parseFloat(totalCheque.value) - (parseFloat(totalEli));
+    var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+    var totafac2 = isNaN(parseFloat(fac2)) ? 0 : parseFloat(fac2);
+    var totafac3 = isNaN(parseFloat(fac3)) ? 0 : parseFloat(fac3);
+    document.getElementById("totalPagado").value = totafac.toFixed(2);
+    document.getElementById("totalResto").value = totafac2.toFixed(2);
+    document.getElementById("totalCheque").value = totafac3.toFixed(2);
+
+
+
+
+    $(this).closest('tr').remove();
   });
 
 
