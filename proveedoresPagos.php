@@ -107,7 +107,7 @@ include('sql/proveedoresComprobantes.php');
                    <tfoot>
                      <tr>
                        <td colspan="3"></td>
-                       <td style="font-size: 18px;">Resto a pagar</td>
+                       <td style="font-size: 18px;">Resto a pagar en efectivo</td>
                        <td><input class="form-control" type="number" id="totalResto"  name="totalResto" value="0" readonly></td>
                        <td></td>
                      </tr>
@@ -269,6 +269,7 @@ function agregarCheque() {
 
 
 
+
   function calcularTotal(ele) {
 
     var totalCheque = document.getElementById("totalCheque").value;
@@ -284,9 +285,18 @@ function agregarCheque() {
 
     var totalResto= document.getElementById("totalResto").value;
     totalResto  = isNaN(parseFloat(totalResto)) ? 0 : parseFloat(totalResto);
-    var totalResto = totalResto - efect;
-    console.log(totalResto);
-    document.getElementById("totalResto").value = totalResto;
+
+    var saldoPagar = document.getElementById("pagar").value;
+    saldoPagar = isNaN(parseFloat(saldoPagar)) ? 0 : parseFloat(saldoPagar);
+
+    if (totalCheque==0){
+        totalResto = saldoPagar-efect;
+        document.getElementById("totalResto").value = totalResto;
+    } else if (totalCheque!=0){
+      var totalResto = totalResto;
+      document.getElementById("totalResto").value = totalResto;
+    }
+
   }
 
 
