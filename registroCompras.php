@@ -72,7 +72,7 @@ $Fecha = Date("Y-m-d H:i:s");
 
                     <div class="col-md-2 mb-2">
                       <div class="md-form">
-                        <input type="number" id="form3" class="form-control" name="Nro">
+                        <input type="text" id="form3" class="form-control" name="Nro">
                         <label for="form3" class="">Nro Comprobante</label>
                       </div>
                     </div>

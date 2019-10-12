@@ -79,9 +79,17 @@ eso pasa sin comentar lo de utilidad, comento lo de utilidad y anda bien
 
 10) modificar pedido no recalcula el importe, sacar la columna porcutilidad
 
------------------------------------
+
 11) Si pago el cliente habria que deshabilitarle el boton en pedidosBuscar (listo)
 12) pago me cuesta un monton que agarre el input del efectivo (listo)
 14) los comprobantes pagados del proveedor siguen apareciendo en la pantalla proveedorComprobantes (listo)
 
 13) pago a proveedores habria que tener un campo que te diga cuanto queda pagar
+-----------------------------------------------------
+12/10
+
+14) registroscompras. php cuando elijo sin iva o con iva 10,5 no calcula ingresos brutos
+15) si se cambia el select a otra opcion que se resete
+16) cambiar el ingreso de efectivo por coma ahora solo lo toma con punto los decimales
+
+17) MAtias cerre la caja pero no me muestra el reporte

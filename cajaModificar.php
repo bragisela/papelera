@@ -9,7 +9,7 @@ include('sql/consultas.php');
 include('sql/mostrarCaja.php');
 include('sql/update.php');
 $idCaja = $_REQUEST['idCaja'];
-include("menu.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
