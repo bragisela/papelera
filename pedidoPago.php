@@ -132,7 +132,7 @@ $idComprobante = $_REQUEST['idComprobante'];
 
           for($count = 0; $count < count($_POST["sele"]);$count++)
           {
-            $queryItems = "INSERT INTO Pagos(modoPago, banco, importe, numero, plazo, idComprobante, activo) VALUES (:modoPago, :banco, :importe, :numero, :plazo, :idComprobante, :activo)";
+            $queryItems = "INSERT INTO pagos(modoPago, banco, importe, numero, plazo, idComprobante, activo) VALUES (:modoPago, :banco, :importe, :numero, :plazo, :idComprobante, :activo)";
             $iItems = $conexiones->prepare($queryItems);
             $iItems->execute(
               array(
