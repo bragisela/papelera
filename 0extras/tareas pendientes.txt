@@ -92,6 +92,11 @@ eso pasa sin comentar lo de utilidad, comento lo de utilidad y anda bien
 15) si se cambia el select a otra opcion que se resete
 16) cambiar el ingreso de efectivo por coma ahora solo lo toma con punto los decimales. Revisar todo que todo los ingresos sean con coma y no punto
 17) Faltan reporte de clientes deudores similar a estado deudas de bandex (haceme acordar que te paso foto)
+18) Cuando se borra un pedido se tiene que restar el stock del producotto
+19) Pago a proveedores los dos proveedores que cargue traen el mismo valor de deuda
+20) Si pago en efectivo no se desabilita el boton de pagar en el formulario pedidosBuscar
+21) pedidoPago todos los valores son iguales en los diferentes comprobantes
+22) El plazo resta dias, yo coloco 30 y me muestra 26
+23) No funciona el ventas borrar.
 
-18) MAtias cerre la caja pero no me muestra el reporte
-18)
+24) MAtias cerre la caja pero no me muestra el reporte

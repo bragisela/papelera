@@ -44,11 +44,12 @@ $Fecha = Date("Y-m-d H:i:s");
               <table class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
                 <thead>
                   <tr>
+				   <th class="th-sm">Fecha</th>
                     <th class="th-sm">Costo</th>
                     <th class="th-sm">% Utilidad</th>
                     <th class="th-sm">Venta</th>
                     <th class="th-sm">Ganancia</th>
-                    <th class="th-sm">Fecha</th>
+                   
                     <th class="th-sm" style="width: 20px;">Acciones</th>
                   </tr>
                 </thead>
@@ -64,12 +65,13 @@ $Fecha = Date("Y-m-d H:i:s");
                     $costo=$importe-(($desc*$importe)/100);
                     $venta=(($util/100)*$costo)+$costo; ?>
 
+					 <td><?php $date = new DateTime($rowMPrecio['fecha']);
+                      echo $date->format('d/m/Y H:i:s');?></td>
                     <td>$ <?php echo $costo; ?></td>
                     <td> <?php  echo  $util; ?>%</td>
                     <td>$<?php echo $venta ?></td>
                     <td>$<?php echo $venta=($util/100)*$costo; ?></td>
-                    <td><?php $date = new DateTime($rowMPrecio['fecha']);
-                      echo $date->format('d/m/Y H:i:s');?></td>
+                   
                     <td><?php echo " <a href='precioModificar.php?idPrecio=$idPrecio&idProducto=$idProducto' ><i class='far fa-edit'></i></a>"; ?></td>
                   </tr>
                 <?php
