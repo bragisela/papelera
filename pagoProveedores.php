@@ -33,14 +33,14 @@ include('sql/pagoProveedores.php');
                 </thead>
                 <tbody>
                   <?php
-                  while($rowProveedores = $resultadoProveedor->fetch(PDO::FETCH_ASSOC)) {
+                  while($rowProveedores = $resultadoDeuda->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
                       <td><?php echo $rowProveedores['nombre'];  $idProveedor = $rowProveedores['idProveedor']; ?></td>
                       <td><?php echo $rowProveedores['domicilio']; ?></td>
                       <td> <?php
-                      if ($deuda!=0){
-                        echo $deuda;
+                      if ($rowProveedores['deuda']!=0){
+                        echo $rowProveedores['deuda'];
                       } else {
                         echo "Sin deuda";
                       }?></td>

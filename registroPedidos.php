@@ -243,13 +243,14 @@ include('sql/selectProductos.php');
                 )
               );
 
-              $queryStock = "INSERT INTO inventario(idProducto,fecha,totalVendido) VALUES (:idProducto, :fecha, :totalVendido)";
+              $queryStock = "INSERT INTO inventario(idProducto,fecha,totalVendido,idComprobante) VALUES (:idProducto, :fecha, :totalVendido, :idComprobante)";
               $iStock = $conexiones->prepare($queryStock);
               $iStock->execute(
                 array(
                   ':idProducto'  => $_POST["sele"][$count],
                   ':fecha' => $Fecha,
-                  ':totalVendido'  => $_POST["cantidad"][$count]
+                  ':totalVendido'  => $_POST["cantidad"][$count],
+                  ':idComprobante'   => $idComprobante
                 )
               );
 
