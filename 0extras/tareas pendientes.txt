@@ -101,9 +101,3 @@ eso pasa sin comentar lo de utilidad, comento lo de utilidad y anda bien
 23) No funciona el ventas borrar.
 
 24) MAtias cerre la caja pero no me muestra el reporte
-=======
-19) Pago a proveedores los dos proveedores que cargue traen el mismo valor de deuda 
-
-19) MAtias cerre la caja pero no me muestra el reporte
-18)
->>>>>>> d455875bc613baad8b0b8d4f671a27e25c9b0073
