@@ -2,7 +2,7 @@
 
 require('conexion.php');
 
-$getRepCaja = $conexiones->query("SELECT idCajaTotal,fecha, descripcion, importe, nroCaja
+$getRepCaja = $conexiones->query("SELECT idCajaTotal,fecha, tipoMov,descripcion, importe, nroCaja
 from caja
 GROUP by idCajaTotal");
 

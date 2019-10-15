@@ -24,7 +24,7 @@ if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
 		$file_number++;
 		$object = new PHPExcel();
 		$object->setActiveSheetIndex(0);
-		$table_columns = array("Fecha","Descripcion","Importe");
+		$table_columns = array("Fecha","Operacion","Descripcion","Importe");
 		$column = 0;
 		foreach($table_columns as $field)
 		{
@@ -33,7 +33,7 @@ if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
 		}
 
 		$query = "
-    SELECT idCajaTotal,fecha, descripcion, importe, nroCaja
+    SELECT idCajaTotal,fecha, tipoMov, descripcion, importe, nroCaja
     from caja
 		WHERE nroCaja=".$_POST["caja_no"]."
     GROUP by idCajaTotal
@@ -47,8 +47,14 @@ if(isset($_POST["export"]) && isset($_POST["caja_no"])!="")
 		foreach($excel_result as $sub_row)
 		{
 			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["fecha"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["descripcion"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["importe"]);
+			If($sub_row["tipoMov"]=="I"){
+				$tipoMov="Venta";
+			} else{
+				$tipoMov="Compra";
+			}
+			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $tipoMov);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["descripcion"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $sub_row["importe"]);
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
@@ -109,6 +115,7 @@ else {
       	<thead>
         	<tr>
           	<th class="th-sm">Fecha</th>
+			<th class="th-sm">Operacion</th>
             <th class="th-sm">Descripcion</th>
             <th class="th-sm">Importe</th>
           </tr>
@@ -120,6 +127,14 @@ else {
 							if(($_POST["caja_no"])==($rowCaja['nroCaja']) ) {
 								echo "<tr>";
 								echo "<th>" . $rowCaja['fecha'] . "</th>";
+							
+									If($rowCaja['tipoMov']=="I"){
+										$tipoMov="Venta";
+										
+									} else{
+										$tipoMov="Compra";
+									}
+								echo "<th>" . $tipoMov . "</th>";
 								echo "<th>" . $rowCaja['descripcion'] . "</th>";
 								echo "<th>" . $rowCaja['importe'] . "</th>";
 								 		}
