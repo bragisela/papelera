@@ -109,7 +109,8 @@ CREATE TABLE `inventario` (
   `idProducto` int(10) NOT NULL,
   `fecha` datetime NOT NULL,
   `totalComprado` int(10) NOT NULL,
-  `totalVendido` int(10) NOT NULL
+  `totalVendido` int(10) NOT NULL,
+  `idComprobante` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -801,6 +802,8 @@ ALTER TABLE `utilidad`
 --
 -- Filtros para la tabla `permisos`
 --
+ALTER TABLE `inventario`
+  ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`idComprobante`) REFERENCES `comprobantes` (`idComprobante`);
 
 ALTER TABLE `pagos`
   ADD CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`idComprobante`) REFERENCES `comprobantes` (`idComprobante`);

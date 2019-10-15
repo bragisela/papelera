@@ -233,13 +233,14 @@ $Fecha = Date("Y-m-d H:i:s");
                  )
                 );
 
-                $queryStock = "INSERT INTO inventario(idProducto,fecha,totalComprado) VALUES (:idProducto, :fecha, :totalComprado)";
+                $queryStock = "INSERT INTO inventario(idProducto,fecha,totalComprado,idComprobante) VALUES (:idProducto, :fecha, :totalComprado, :idComprobante)";
                 $iStock = $conexiones->prepare($queryStock);
                 $iStock->execute(
                   array(
                     ':idProducto'  => $_POST["sele"][$count],
                     ':fecha' => $Fecha,
-                    ':totalComprado'  => $_POST["cantidad"][$count]
+                    ':totalComprado'  => $_POST["cantidad"][$count],
+                    ':idComprobante'   => $idComprobante
                   )
                 );
 
@@ -293,42 +294,66 @@ $Fecha = Date("Y-m-d H:i:s");
       $('#producto').val($('#producto > option:first').val());
     }
   }
+
   $(document).on('click', '.remove', function(){
     var totalEli = this.parentNode.parentNode.childNodes[6].childNodes[0].value;
-    var retencion = document.getElementById("retencion");
-    var rete =  parseFloat(retencion.value) - parseFloat(((totalEli * 2.5)/100));
-    if (rete.toFixed(2)<=0) {
-      retencion.value = 0;
-    }else{
-      retencion.value =  rete.toFixed(2);
-    }
-    // comienzo iva segun select
     var iva = document.getElementById("iva");
+    var soyiva= isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
+    console.log(soyiva);
     var condi = condicion; //
     switch (condi) {
       case 'C1':
-          var iv = parseFloat(iva.value) - parseFloat(((totalEli * 10.5)/100));
+          var iv = 0;
+          var retencion = document.getElementById("retencion");
+          var rete = 0;
           break;
       case 'C2':
-          var iv = parseFloat(iva.value) - parseFloat(((totalEli * 0)/100));
+          var iv = 0;
+          var retencion = document.getElementById("retencion");
+          var rete = 0;
           break;
-
       case 'F':
           var iv = parseFloat(iva.value) - parseFloat(((totalEli * 21)/100));
+          var retencion = document.getElementById("retencion");
+          var rete =  parseFloat(retencion.value) - parseFloat(((totalEli * 2.5)/100));
           break;
       default:
-          var iv = 1;
+          var iv = 0;
           break;
         }
-
     if (iv.toFixed(2)<=0) {
       iva.value = 0;
     }else{
       iva.value =  iv.toFixed(2);
     }
-    var totalFac= document.getElementById("totalfac");
-    var fac = parseFloat(totalFac.value) - (parseFloat(totalEli)  + parseFloat(((totalEli * 2.5)/100)) + parseFloat(((totalEli * 21)/100)));
-    var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+    if (rete.toFixed(2)<=0) {
+      retencion.value = 0;
+    }else{
+      retencion.value =  rete.toFixed(2);
+    }
+
+    switch (condi) {
+      case 'C1':
+          var totalFac= document.getElementById("totalfac");
+          var fac = parseFloat(totalFac.value) - (parseFloat(totalEli));
+          var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+          break;
+      case 'C2':
+          var totalFac= document.getElementById("totalfac");
+          var fac = parseFloat(totalFac.value) - (parseFloat(totalEli));
+          var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+          break;
+      case 'F':
+              var totalFac= document.getElementById("totalfac");
+              var fac = parseFloat(totalFac.value) - (parseFloat(totalEli)  + parseFloat(((totalEli * 2.5)/100)) + parseFloat(((totalEli * 21)/100)));
+              var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+          break;
+      default:
+          var totafac = 0;
+          break;
+        }
+
+
     if (totafac.toFixed(2)<=0) {
       totalFac.value = 0;
     }else{
@@ -338,6 +363,7 @@ $Fecha = Date("Y-m-d H:i:s");
     totalImporte.value = parseFloat(totalImporte.value) - parseFloat(totalEli);
     $(this).closest('tr').remove();
   });
+
 
   function Calcular(ele) {
     var precio = 0, descuento = 0, importe = 0 ;
@@ -361,6 +387,7 @@ $Fecha = Date("Y-m-d H:i:s");
       }
     }
   }
+
   // comienzo iva segun select
   var condicion;
   var select = document.getElementById('justificante');
@@ -370,6 +397,7 @@ $Fecha = Date("Y-m-d H:i:s");
     var opcion = selectedOption.value;
     condicion=opcion;
   });
+
 
   function calcularCantidad(ele) {
     var cantidad = 0 ,precio = 0, descuento = 0, total = 0;
@@ -402,23 +430,28 @@ $Fecha = Date("Y-m-d H:i:s");
     var h = totalI +tot - anterior;
     totalI = h.toFixed(2);
     document.getElementById("totalImporte").value = totalI;
-    var retencion = (totalI*2.5)/100;
-    retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-    document.getElementById("retencion").value = retencion.toFixed(2);
 
-    var condi = condicion;
-    switch (condi) {
+    switch (condicion) {
       case 'C1':
-        var iva = (totalI*10.5)/100;
+        var iva = 0;
+        var retencion = 0;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       case 'C2':
         var iva = 0;
+        var retencion = 0;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       case 'F':
         var iva = (totalI*21)/100;
+        var retencion = (totalI*2.5)/100;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       default:
-        var iva = 1;
+        var iva = 0;
         break;
     }
 
@@ -428,7 +461,6 @@ $Fecha = Date("Y-m-d H:i:s");
     var totalfactu = parseFloat(totalI) + parseFloat(retencion) + parseFloat(iva);
     totalfactu = isNaN(parseFloat(totalfactu)) ? 0 : parseFloat(totalfactu);
     document.getElementById("totalfac").value = totalfactu.toFixed(2);
-
   }
 
 

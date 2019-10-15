@@ -158,9 +158,17 @@ $idComprobante = $_REQUEST['idComprobante'];
             );
           }
 
+          $activo = 1;
+          $queryComprobantes2 = "UPDATE comprobantes SET activo =  (:activo) WHERE idComprobante=(:idComprobante)";
+          $iComprobante2 = $conexiones->prepare($queryComprobantes2);
+          $iComprobante2->execute(
+            array(
+             ':idComprobante'   => $idComprobante,
+             ':activo'  => $activo
 
-
-          $sql = insertPagos('efectivo','-',$_POST['efectivo'],'-','-',$idComprobante,0);
+           )
+          );
+          $sql = insertPagos('efectivo','-',$_POST['efectivo'],'-','-',$idComprobante,1);
           $conexiones->exec($sql);
 
 
@@ -168,7 +176,7 @@ $idComprobante = $_REQUEST['idComprobante'];
 
           echo "<script language='javascript'>";
           echo "alert('El pedido fue realizado correctamente');";
-          echo "window.location='pedidosBuscar.php?';";
+          echo "window.location='pedidosBuscar.php';";
           echo "</script>";
 
       }
