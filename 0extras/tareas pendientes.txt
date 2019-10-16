@@ -64,12 +64,6 @@ pedidoPago y por no ir a la pantalla pedidobucar.
 
 //mati
 linea 233 error numerico no entendi, pasa ese error sino redireccionamos despues de guardar el pedido en registroPedidos.php
-<<<<<<< HEAD
-eso pasa sin comentar lo de utilidad, comento lo de utilidad y anda bien
-=======
-
->>>>>>> 4bd282b17306be66625ff61dcdb338033da4eb33
-
 
 
 8) Verificar caja que al cargar un ingreso o un ingreso no vuelve a mostrar la pantalla. (coordinarlo con Matias si no es tuyo)
@@ -100,8 +94,6 @@ tomi 14/10
 
 17) Faltan reporte de clientes deudores similar a estado deudas de bandex (haceme acordar que te paso foto)
 22) El plazo resta dias, yo coloco 30 y me muestra 26 (no entendi)
-21) pedidoPago todos los valores son iguales en los diferentes comprobantes (no entendi)
-
-
-
-24) MAtias cerre la caja pero no me muestra el reporte
+21) pedidoPago todos los valores son iguales en los diferentes comprobantes (listo)
+22) modificarpedido al modificar la cantidad que se modifique en el momento
+23) al seleccionar ingresar que actualice el total y no es necesario el boton v
