@@ -142,29 +142,29 @@ $idComprobante = $_REQUEST['idComprobante'];
                 ':numero'  => $_POST["numero"][$count],
                 ':plazo'  => $_POST["plazo"][$count],
                 ':idComprobante'   => $idComprobante,
-                ':activo'   => $activo
+                ':activo'   => 0
               )
             );
 
-            $activo = 1;
+
             $queryComprobantes = "UPDATE comprobantes SET activo =  (:activo) WHERE idComprobante=(:idComprobante)";
             $iComprobante = $conexiones->prepare($queryComprobantes);
             $iComprobante->execute(
               array(
                ':idComprobante'   => $idComprobante,
-               ':activo'  => $activo
+               ':activo'  => 1
 
              )
             );
           }
 
-          $activo = 1;
+
           $queryComprobantes2 = "UPDATE comprobantes SET activo =  (:activo) WHERE idComprobante=(:idComprobante)";
           $iComprobante2 = $conexiones->prepare($queryComprobantes2);
           $iComprobante2->execute(
             array(
              ':idComprobante'   => $idComprobante,
-             ':activo'  => $activo
+             ':activo'  => 1
 
            )
           );
