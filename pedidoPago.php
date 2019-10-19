@@ -50,7 +50,7 @@ $idComprobante = $_REQUEST['idComprobante'];
                   </div>
                   <div class="col-md-4 mb-4">
                     <div class="md-form">
-                      <input  class="form-control" type="text" id="efectivo" name="efectivo" oninput="calcularCheque(this);" min="0" required>
+                      <input  class="form-control" type="number" id="efectivo" name="efectivo"  min="0" required>
                       <label>Pago en efectivo $</label>
                     </div>
                   </div>
@@ -58,7 +58,7 @@ $idComprobante = $_REQUEST['idComprobante'];
                 <div class="row">
                   <div class="col-md-4 mb-4">
                     <div class="md-form">
-                      <input class="form-control" type="number" id="cheque"  name="cheque" oninput="calcularCheque(this);" value="0" disabled>
+                      <input class="form-control" type="number" id="cheque"  name="cheque"  value="0" disabled>
                       <label>Importe a pagar con cheques</label>
                     </div>
                   </div>
@@ -196,29 +196,29 @@ $(".button-collapse").sideNav();
 var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 var ps = new PerfectScrollbar(sideNavScrollbar);
 
-  $(document).ready(function() {
-    $('.mdb-select').materialSelect();
-  });
-
-  var cheque2 = 0;
-  function calcularCheque(ele) {
-  var importe2 = document.getElementById("importe").value;
-  let efectivo = document.getElementById('efectivo');
-  efectivo.addEventListener("keyup", function(){
-  var efectivo = this.value;
-  var cheque = importe2-efectivo;
-  var cheque2 = cheque.toFixed(2);
-  document.getElementById('cheque').value = cheque2;
-  });
-}
-
-/*function cantidadCheques(ele) {
-let cantCheque = document.getElementById('cantCheque');
-cantCheque.addEventListener("keyup", function(){
-var cantCheque= this.value;
-document.getElementById('filas').value = cantCheque;
+$(document).ready(function() {
+  $('.mdb-select').materialSelect();
 });
-} */
+
+//calcular resto a pagar con cheque
+$(document).on('input', '#efectivo', function(){
+  var newID = this.id;
+  var importe = document.getElementById("importe").value;
+  var totalCheque = document.getElementById("totalCheque").value;
+  var restoCheque = document.getElementById("restoCheque").value;
+
+  importe = isNaN(parseFloat(importe)) ? 0 : parseFloat(importe);
+  totalCheque = isNaN(parseFloat(totalCheque)) ? 0 : parseFloat(totalCheque);
+  var efec = isNaN(parseFloat(this.value)) ? 0 : parseFloat(this.value); //pagado efec
+  var resto = importe - this.value; // importe - efectivo
+  var pagado = efec + totalCheque; // efectivo + total cheques
+  var restoPagar = importe - pagado; // resto pagar = importe - efec + cheques
+
+  document.getElementById("cheque").value = resto.toFixed(2);
+  document.getElementById("restoCheque").value = restoPagar.toFixed(2);
+  document.getElementById("totalPagado").value = pagado.toFixed(2);
+});
+
 function agregarCheque() {
 
   var sel = "Cheque";

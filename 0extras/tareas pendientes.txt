@@ -97,8 +97,8 @@ tomi 14/10
 23) al seleccionar ingresar que actualice el total y no es necesario el boton v (listo)
 22) modificarpedido al modificar la cantidad que se modifique en el momento (listo)
 24) Index.php ver form de iniciar sesion superposicion de palabras (listo)
+16) cambiar el ingreso de efectivo por coma ahora solo lo toma con punto los decimales (listo).
+Revisar todo que todo los ingresos sean con coma y no punto ()
 
-Falta
-16) cambiar el ingreso de efectivo por coma ahora solo lo toma con punto los decimales.
-Revisar todo que todo los ingresos sean con coma y no punto (ver)
+falta
 17) Faltan reporte de clientes deudores similar a estado deudas de bandex (haceme acordar que te paso foto) (hacer)
