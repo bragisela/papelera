@@ -33,6 +33,7 @@ include('sql/pagoProveedores.php');
                 </thead>
                 <tbody>
                   <?php
+                                    
                   while($rowProveedores = $resultadoDeuda->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
@@ -51,6 +52,7 @@ include('sql/pagoProveedores.php');
                     </tr>
                     <?php
                   }
+
                   ?>
                 </tbody>
               </table>

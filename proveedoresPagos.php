@@ -216,15 +216,16 @@ function agregarCheque() {
   var plazo = text.split(separador)[4];
   importe = isNaN(parseFloat(importe)) ? 0 : parseFloat(importe);
 
-  var item = '<tr>';
+  var item = '<tr id="' + sel + '">';
   item = item +'<td>'+cod+'<input hidden class="form-control" type="number" id="sele[]" name="sele[]" value="'+sel+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="banco[]"  name="banco[]" value="'+banco+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="numero[]"  name="numero[]" value="'+numero+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="plazo[]"  name="plazo[]" min="0" value="'+plazo+' Dias'+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="importe[]"  name="importe[]"  value="'+importe+'" readonly></td>';
-  item = item +'<td><button onclick="calcularCantidad(this);" type="button" name="verificar"  class="btn btn-success btn-sm">V</button><button type="button" name="remove" class="btn btn-danger btn-sm remove">X</div></td></tr>';
+  item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">X</div></td></tr>';
   if (sel !='') {
     $("#lista").append(item);
+    calcularCantidad(document.getElementById(sel));
   }
   }
 
@@ -250,7 +251,7 @@ function agregarCheque() {
   });
 
   function calcularCantidad(ele) {
-    var tr = ele.parentNode.parentNode;
+    var tr = ele;
     var nodes = tr.childNodes;
 
     for (var x = 0; x<nodes.length;x++) {

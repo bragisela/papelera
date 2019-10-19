@@ -93,11 +93,12 @@ tomi 14/10
 22) El plazo resta dias, yo coloco 30 y me muestra 26 (Listo)
 21) pedidoPago todos los valores son iguales en los diferentes comprobantes (listo)
 
+15) si se cambia el select a otra opcion que se resete(listo)
+23) al seleccionar ingresar que actualice el total y no es necesario el boton v (listo)
+22) modificarpedido al modificar la cantidad que se modifique en el momento (listo)
+24) Index.php ver form de iniciar sesion superposicion de palabras (listo)
 
-15) si se cambia el select a otra opcion que se resete(ver)
+Falta
 16) cambiar el ingreso de efectivo por coma ahora solo lo toma con punto los decimales.
 Revisar todo que todo los ingresos sean con coma y no punto (ver)
-
 17) Faltan reporte de clientes deudores similar a estado deudas de bandex (haceme acordar que te paso foto) (hacer)
-23) al seleccionar ingresar que actualice el total y no es necesario el boton v (no anda con el evento onclick error de id con los nodos)
-22) modificarpedido al modificar la cantidad que se modifique en el momento (consultar)

@@ -179,18 +179,17 @@ if(isset($_POST['login'])) {
 		                            <div class="md-form">
 		                              <i class="fas fa-user prefix white-text"></i>
 		                                <input type="text" id="orangeForm-name"  autocomplete="off" name="usuario" class="form-control" value="<?php if(isset($_POST['usuario'])) echo $_POST['usuario'] ?>">
-		                                <label for="orangeForm-name">Usuario  user:admin</label>
+		                                <label for="orangeForm-name">Usuario</label>
 		                            </div>
 
 		                            <div class="md-form">
 		                              <i class="fas fa-lock prefix white-text"></i>
 		                                <input type="password" id="orangeForm-pass" name="contrasenia" class="form-control" value="<?php if(isset($_POST['contrasenia'])) echo $_POST['contrasenia'] ?>">
-		                                <label for="orangeForm-pass">Contraseña pw:admin</label>
+		                                <label for="orangeForm-pass">Contraseña</label>
 		                            </div>
 
 		                            <div class="text-center">
 		                              <input class="btn btn-lg btn-success"  type="submit" name="login" value="Iniciar Sesion"></input>
-		                                <hr>
 		                                <div class="inline-ul text-center d-flex justify-content-center">
 		                                  <a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-facebook white-text"></i></a>
 		                                </div>
@@ -213,7 +212,7 @@ if(isset($_POST['login'])) {
 
     <!--  SCRIPTS  -->
     <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
