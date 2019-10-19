@@ -51,13 +51,14 @@ $totalCompra=0;
                             $idItems=$rowPedidos ['idItems'];
                             ?>
                             <input type="hidden" name="idItems[]" value="<?php echo $idItems; ?>">
+                            <input type="hidden" id="imp<?php echo $idItems; ?>" value="<?php echo $importeUtil; ?>">
                             <td><?php echo $rowPedidos ['codProducto'];  ?></td>
                             <td><?php echo $rowPedidos ['descripcion']; ?></td>
-                            <td> <input name="cant[]" class="form-control" value="<?php echo $cant;?>"></td>
+                            <td> <input id="cant<?php echo $idItems; ?>" class="plzChange" name="cant[]" class="form-control" value="<?php echo $cant;?>"></td>
                             <td>$ <?php echo $rowPedidos ['importe']; ?></td>
                             <!--<td> <input name="importe[]" class="form-control" value="<?php //echo $importe; ?>"></td> -->
                             <td>% <?php echo $porcUtil; ?></td>
-                            <td>$ <?php echo $importeUtil*$cant ?></td>
+                            <td id="total<?php echo $idItems; ?>">$ <?php echo $importeUtil*$cant ?></td>
                             <td><?php echo "
                             <a onClick='pDelete(this);' id='$idItems'><i class='far fa-trash-alt'></i></a>";?></td>
                           </tr>
@@ -143,12 +144,20 @@ include("pie.php");
 $(".button-collapse").sideNav();
 // SideNav Scrollbar Initialization
 var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-Ps.initialize(sideNavScrollbar);
+//Ps.initialize(sideNavScrollbar);
+const ps = new PerfectScrollbar(sideNavScrollbar);
 
 function pDelete(element) {
   if(confirm('Esta seguro que quiere eliminar el producto?'))
     window.location.href = "sql/DetallePedidosBorrar.php? idItems=" + element.id;
 }
+
+$(document).on('input', '.plzChange', function(){
+  var newID = this.id.replace("cant", "");
+  var total = document.getElementById("total" + newID);
+  var imp = document.getElementById("imp" + newID).value;
+  total.innerHTML = this.value * imp;
+});
 
 
 </script>

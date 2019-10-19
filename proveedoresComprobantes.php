@@ -74,7 +74,7 @@ $Fecha = Date("Y-m-d H:i:s");
                 </div>
                 <div class="col-md-2 mb-2">
                 <br>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="agregarProducto();" id="resetear">Seleccionar</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="resetear">Seleccionar</button>
                 </div>
               </div>
 
@@ -160,7 +160,7 @@ $Fecha = Date("Y-m-d H:i:s");
     $('.mdb-select').materialSelect();
   });
 
-  function agregarProducto() {
+  $(document).on('click', '#resetear', function(){
     var sel = $('#producto').find(':selected').val();
     var text = $('#producto').find(':selected').text();
     var separador = "-";
@@ -174,8 +174,7 @@ $Fecha = Date("Y-m-d H:i:s");
     var fecha = f1+'-'+f2+'-'+f3;
     var totalComprado= isNaN(parseFloat(f4)) ? 0 : parseFloat(f4);
 
-    var item = '<tr>';
-
+    var item = '<tr id="' + sel + '">';
     item = item +'<td>'+cod+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
     item = item +'<td><input class="form-control" type="text"    value="'+nro+'"  readonly></td>';
     item = item +'<td><input class="form-control" type="text"    value="'+fecha+'"  readonly></td>';
@@ -184,12 +183,41 @@ $Fecha = Date("Y-m-d H:i:s");
     if (sel !='') {
       $("#lista").append(item);
       $('#producto').val($('#producto > option:first').val());
+      calcularCantidad(document.getElementById(sel));
     }
+  });
+
+  /*function agregarProducto() {
+    var sel = $('#producto').find(':selected').val();
+    var text = $('#producto').find(':selected').text();
+    var separador = "-";
+    var limite = 1;
+    var cod = text.split(separador, limite);
+    var nro = text.split(separador)[1];
+    var f1 = text.split(separador)[2];
+    var f2 = text.split(separador)[3];
+    var f3 = text.split(separador)[4];
+    var f4 = text.split(separador)[5];
+    var fecha = f1+'-'+f2+'-'+f3;
+    var totalComprado= isNaN(parseFloat(f4)) ? 0 : parseFloat(f4);
+
+    var item = '<tr id="' + sel + '">';
+    item = item +'<td>'+cod+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
+    item = item +'<td><input class="form-control" type="text"    value="'+nro+'"  readonly></td>';
+    item = item +'<td><input class="form-control" type="text"    value="'+fecha+'"  readonly></td>';
+    item = item +'<td><input class="form-control" type="number" id="importe[]"  name="importe[]"   value="'+totalComprado+'" min="0" readonly></td>';
+    item = item +'<th><button onclick="calcularCantidad(this);" type="button" name="verificar"  class="btn btn-success btn-sm">V</button><button type="button" name="remove" class="btn btn-danger btn-sm remove"><i class="fas fa-minus"></i></button></div></td></tr>';
+    if (sel !='') {
+      $("#lista").append(item);
+      $('#producto').val($('#producto > option:first').val());
+      calcularCantidad(document.getElementById(sel));
     }
+  }*/
 
     function calcularCantidad(ele) {
       var cantidad = 0 ,precio = 0, descuento = 0, total = 0;
-      var tr = ele.parentNode.parentNode;
+      //var tr = ele.parentNode.parentNode;
+      var tr = ele;
       var nodes = tr.childNodes;
       for (var x = 0; x<nodes.length;x++) {
         if (nodes[x].firstChild.id == 'importe[]') {

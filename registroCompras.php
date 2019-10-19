@@ -396,6 +396,7 @@ $Fecha = Date("Y-m-d H:i:s");
     var selectedOption = this.options[select.selectedIndex];
     var opcion = selectedOption.value;
     condicion=opcion;
+    recalcular();
   });
 
 
@@ -430,6 +431,41 @@ $Fecha = Date("Y-m-d H:i:s");
     var h = totalI +tot - anterior;
     totalI = h.toFixed(2);
     document.getElementById("totalImporte").value = totalI;
+
+    switch (condicion) {
+      case 'C1':
+        var iva = 0;
+        var retencion = 0;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+        document.getElementById("retencion").value = retencion.toFixed(2);
+        break;
+      case 'C2':
+        var iva = 0;
+        var retencion = 0;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+        document.getElementById("retencion").value = retencion.toFixed(2);
+        break;
+      case 'F':
+        var iva = (totalI*21)/100;
+        var retencion = (totalI*2.5)/100;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+        document.getElementById("retencion").value = retencion.toFixed(2);
+        break;
+      default:
+        var iva = 0;
+        break;
+    }
+
+    iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
+    document.getElementById("iva").value = iva.toFixed(2);
+
+    var totalfactu = parseFloat(totalI) + parseFloat(retencion) + parseFloat(iva);
+    totalfactu = isNaN(parseFloat(totalfactu)) ? 0 : parseFloat(totalfactu);
+    document.getElementById("totalfac").value = totalfactu.toFixed(2);
+  }
+
+  function recalcular() {
+    var totalI = document.getElementById("totalImporte").value;
 
     switch (condicion) {
       case 'C1':
