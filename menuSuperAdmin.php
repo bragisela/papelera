@@ -38,6 +38,9 @@
           <li>
             <a href="pagoProveedores.php" class="collapsible-header waves-effect"><i class="fas fa-shopping-basket"></i>Pago Proveedores</a>
           </li>
+          <li>
+            <a href="deudasClientes.php" class="collapsible-header waves-effect"><i class="fas fa-shopping-basket"></i>Deuda de clientes</a>
+          </li>
            <li>
              <a class="collapsible-header waves-effect arrow-r">
                <i class="fas fa-chart-line"></i>
