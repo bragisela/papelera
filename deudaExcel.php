@@ -35,16 +35,16 @@ if(isset($_POST["export"]) && isset($_POST["desde"])!="" && isset($_POST["hasta"
 		$column = 0;
     $object->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "Apellido y Nombre:");
     $object->getActiveSheet()->getColumnDimension('A')->setWidth("21");
-    $object->getActiveSheet()->setCellValueByColumnAndRow(1, 1, "Tomas Tenaglia");
+    $object->getActiveSheet()->setCellValueByColumnAndRow(1, 1,  $nombre);
     $object->getActiveSheet()->getColumnDimension('B')->setWidth("18");
     $object->getActiveSheet()->setCellValueByColumnAndRow(0, 2, "Domicilio Comercial: ");
-    $object->getActiveSheet()->setCellValueByColumnAndRow(1,2, "Rivadavia");
+    $object->getActiveSheet()->setCellValueByColumnAndRow(1,2, $domComercio);
     $object->getActiveSheet()->setCellValueByColumnAndRow(2, 1, "Condicion IVA: ");
     $object->getActiveSheet()->getColumnDimension('C')->setWidth("15");
-    $object->getActiveSheet()->setCellValueByColumnAndRow(3, 1, "responsable");
+    $object->getActiveSheet()->setCellValueByColumnAndRow(3, 1, $iva);
     $object->getActiveSheet()->getColumnDimension('D')->setWidth("15");
     $object->getActiveSheet()->setCellValueByColumnAndRow(2, 2, "Cuit: ");
-    $object->getActiveSheet()->setCellValueByColumnAndRow(3, 2, "20-42294806-8");
+    $object->getActiveSheet()->setCellValueByColumnAndRow(3, 2,  $cuit);
 
 
     $object->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
