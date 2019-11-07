@@ -102,3 +102,11 @@ Revisar todo que todo los ingresos sean con coma y no punto ()
 
 falta
 17) Faltan reporte de clientes deudores similar a estado deudas de bandex (haceme acordar que te paso foto) (hacer)
+----------------------------------------------------------------
+06/11
+18) Agregar un campo checkbox que avisa si es retensor de ingresos brutos. En base a eso calcularlo en la factura.
+19) En los cheques cambiar plazo por fecha.
+20) Falta agregar en algun lado los cheques que son proprios de la papelera.
+21) listado de todos los clientes deudores
+22) agregar en Pago a proveedores el total de lo que se debe a todos.
+23) Modificar pantalla pedido, te envio la foto
