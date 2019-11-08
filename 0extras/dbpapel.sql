@@ -636,7 +636,7 @@ CREATE TABLE `pagos` (
   `banco` varchar(50) NOT NULL,
   `importe` decimal(10,2) NOT NULL,
   `numero` varchar(25) NOT NULL,
-  `plazo` varchar(5) NOT NULL,
+  `plazo` date(20) NOT NULL,
   `idComprobante` int(10) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `activo` int(1) NOT NULL

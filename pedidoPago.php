@@ -5,11 +5,11 @@ include("encabezado.php");
 include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
-include('sql/consultas.php');
 $idComprobante = $_REQUEST['idComprobante'];
+include('sql/consultas.php');
   $fech = Date("Y-m-d");
   $Fecha = Date("Y-m-d H:i:s");
-  while($rowPago = $pedidoPago->fetch(PDO::FETCH_ASSOC)) {
+  while($rowPago = $pedidoPago2->fetch(PDO::FETCH_ASSOC)) {
     $nroComprobante = $rowPago['nroComprobante'];
     $importe = $rowPago['totalcomprado'];
 
@@ -228,7 +228,7 @@ function agregarCheque() {
   item = item +'<td><input class="form-control" type="text" id="banco[]"  name="banco[]" required></td>';
   item = item +'<td><input class="form-control" type="number" id="numero[]"  name="numero[]" required></td>';
   item = item +'<td><input class="form-control" type="text" id="importe[]"  name="importe[]" oninput="calcularCantidad(this);" min="0" required></td>';
-  item = item +'<td><input class="form-control" type="number" id="plazo[]"  name="plazo[]" min="0" required></td>';
+  item = item +'<td><input class="form-control" type="date" id="plazo[]"  name="plazo[]" min="0" required></td>';
   item = item +'<td><input class="form-control" type="number" id="total[]"  name="total[]" min="0" readonly></td>';
   item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">X</div></td></tr>';
   if (sel !='') {

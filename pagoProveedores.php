@@ -26,35 +26,42 @@ include('sql/pagoProveedores.php');
                   <tr>
                     <th class="th-sm">Nombre</th>
                     <th class="th-sm">Domicilio</th>
-                    <th class="th-sm">Deuda</th>
                     <th class="th-sm">Ultimo pago</th>
+                    <th class="th-sm">Deuda</th>
                     <th class="th-sm">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                                    
+                  $deudaTotal=0;    
                   while($rowProveedores = $resultadoDeuda->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
                       <td><?php echo $rowProveedores['nombre'];  $idProveedor = $rowProveedores['idProveedor']; ?></td>
                       <td><?php echo $rowProveedores['domicilio']; ?></td>
+                      <td><?php echo $rowProveedores['fecha'];  ?></td>
                       <td> <?php
                       if ($rowProveedores['deuda']!=0){
                         echo $rowProveedores['deuda'];
                       } else {
                         echo "Sin deuda";
                       }?></td>
-                      <td><?php echo $rowProveedores['fecha'];  ?></td>
                       <td><?php echo "
                       <a href='proveedoresComprobantes.php?idProveedor=$idProveedor' title='Ver comprobantes'><i class='fas fa-asterisk'></i></a>
                       "; ?></td>
                     </tr>
                     <?php
+                    $deudaTotal = $deudaTotal + $rowProveedores['deuda'];
                   }
 
                   ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                      <td colspan="3"></td>
+                      <td style="font-weight: bold; font-size:18px; "> Deuda total  $ <?php echo $deudaTotal;  ?>  </td>
+                    </tr>
+                  </tfoot>
               </table>
             </div>
           </div>

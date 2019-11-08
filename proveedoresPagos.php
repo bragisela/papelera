@@ -213,14 +213,17 @@ function agregarCheque() {
   var banco = text.split(separador)[1];
   var numero = text.split(separador)[2];
   var importe = text.split(separador)[3];
-  var plazo = text.split(separador)[4];
+  var f1 = text.split(separador)[4];
+  var f2 = text.split(separador)[5];
+  var f3 = text.split(separador)[6];
+  var fecha = f3+'-'+f2+'-'+f1;
   importe = isNaN(parseFloat(importe)) ? 0 : parseFloat(importe);
 
   var item = '<tr id="' + sel + '">';
   item = item +'<td>'+cod+'<input hidden class="form-control" type="number" id="sele[]" name="sele[]" value="'+sel+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="banco[]"  name="banco[]" value="'+banco+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="numero[]"  name="numero[]" value="'+numero+'" readonly></td>';
-  item = item +'<td><input class="form-control" type="text" id="plazo[]"  name="plazo[]" min="0" value="'+plazo+' Dias'+'" readonly></td>';
+  item = item +'<td><input class="form-control" type="text" id="plazo[]"  name="plazo[]" min="0" value="'+fecha+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="importe[]"  name="importe[]"  value="'+importe+'" readonly></td>';
   item = item +'<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">X</div></td></tr>';
   if (sel !='') {

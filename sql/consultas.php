@@ -66,4 +66,8 @@
 
   $pedidoPago = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
+
+  
+  $pedidoPago2 = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes where idComprobante='$idComprobante'")
+  or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 ?>
