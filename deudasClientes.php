@@ -6,38 +6,101 @@ include("seguridad.php");
 include("sql/conexion.php");
 include('sql/deudaClientes.php');
 
+
+//INICIO EXCEL
+
+$total_rows = 2;
+
+$download_filelink = '<ul class="list-unstyled">';
+
+
+if(isset($_POST["export"]) && isset($_POST["desde"])!="" && isset($_POST["hasta"])!="")
+{
+	require_once 'class/PHPExcel.php';
+
+
+	$last_page = ceil($total_rows/10000);
+	$start = 0;
+	$file_number = 0;
+
+	for($count = 0; $count < $last_page; $count++)
+	{
+
+
+		$file_number++;
+		$object = new PHPExcel();
+		$object->setActiveSheetIndex(0);
+		$table_columns = array("Cliente","Domicilio Comercio","Domicilio Fiscal", "Deuda por cliente");
+		$column = 0;
+    $object->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+    $object->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $object->getActiveSheet()->getStyle('C')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $object->getActiveSheet()->getStyle('D')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $object->getActiveSheet()->getStyle('E')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+		foreach($table_columns as $field)
+		{
+			$object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
+
+			$column++;
+		}
+
+		$query = "
+    SELECT co.fecha, co.nroComprobante, cli.idCliente, cli.nombre, cli.domicilioComercio, cli.domicilioFiscal, SUM(co.totalcomprado) as deuda from clientes as cli
+    inner join comprobantes as co on cli.idCliente=co.IdCliPro
+    where co.fecha BETWEEN CAST('".$_POST["desde"]."' AS DATE) AND CAST('".$_POST["hasta"]."' AS DATE)
+    and co.tipo='v' and co.activo=0 group by cli.idCliente order by deuda ASC
+		";
+		$statement = $conexiones->prepare($query);
+		$statement->execute();
+		$excel_result = $statement->fetchAll();
+
+    //recorrer array con los datos filtrados por campaña para descargar
+
+    $excel_row = 2;
+    $totalImporte=0;
+		foreach($excel_result as $sub_row)
+		{
+
+
+      $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["nombre"]);
+      $object->getActiveSheet()->getColumnDimension('A')->setWidth("21");
+      $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["domicilioComercio"]);
+      $object->getActiveSheet()->getColumnDimension('B')->setWidth("21");
+			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["domicilioFiscal"]);
+      $object->getActiveSheet()->getColumnDimension('C')->setWidth("21");
+			$deuda = $sub_row["deuda"];
+			$object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, "$ $deuda");
+      $object->getActiveSheet()->getColumnDimension('D')->setWidth("21");
+      $object->getActiveSheet()->getColumnDimension('E')->setWidth("21");
+      $totalImporte=$totalImporte+$sub_row["deuda"];
+      $totalImporte = bcdiv($totalImporte, '1', 2);
+			$excel_row++;
+		}
+      $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row+1, "Deuda Total:");
+      $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row+1, "$ $totalImporte");
+
+
+			// FALTA DESC, EXENTOS, NETO GRAVADO
+
+		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
+		$file_name = 'Estado deuda '.$_POST["desde"].' a '.$_POST["hasta"].'.xls';
+		$object_writer->save($file_name);
+    // nombre archivo exceñ
+		$download_filelink .= '<li><label><a href="download.php?filename='.$file_name.'" target="_blank">Descargar - '.$file_name.'</a></label></li>';
+	}
+	$download_filelink .= '</ul>';
+}
+else {
+	echo "Seleccione una campaña";
+}
+// FIN EXCEL
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <style type="text/css">
-  @media only screen and (min-width: 1200px) {
-    #huggibuton{
-      position: absolute;
-      margin-left: 390%;
-      z-index: 3;
-    }
-  }
-  @media only screen and (min-width: 1000px) and (max-width: 1199px){
-    #huggibuton{
-      position: absolute;
-      margin-left: 43%;
-      z-index: 3;
-    }
-  }
-  @media only screen and (min-width: 980px) and (max-width: 999px){
-    #huggibuton{
-      position: absolute;
-      margin-left: 43%;
-      z-index: 3;
-    }
-  }
-  @media only screen and (min-width: 900px) and (max-width: 980px){
-    #huggibuton{
-      position: absolute;
-      margin-left: 40%;
-      z-index: 3;
-    }
-  }
+
 </style>
 <body class="hidden-sn mdb-skin">
 <!--Main Layout-->
@@ -45,13 +108,36 @@ include('sql/deudaClientes.php');
   <div class="container-fluid mt-5">
     <section class="pb-5">
       <div class="card text-center">
+        <h3 class="card-header primary-color white-text">Descargar listado de deudas</h3>
+          <form class=" text-left border border-light p-5" method="post">
+            <div class="form-row mb-4">
+              <div class="col-md-3 col-sm-6">
+                <label>Desde</label>
+                <div class="md-form" style="margin-top: -10px;">
+                  <input type="date" class="form-control" name="desde" value="">
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6" >
+                <label>Hasta</label>
+                <div class="md-form" style="margin-top: -10px;">
+                  <input type="date" class="form-control" name="hasta" value="">
+                </div>
+              </div>
+              <div class="md-form col-lg-2 col-md-2 col-sm-3" style="margin-top: 8px;">
+                <input  type="submit" name="export" class="btn btn-success" value="Seleccionar" />
+              </div>
+              <div class="md-form col-lg-3 col-md-4 col-sm-12 margen7" style="margin-top: -2px;" >
+                <?php echo $download_filelink; ?>
+              </div>
+            </div>
+          </form>
+      </div>
+    </section>
+    <section class="pb-5">
+      <div class="card text-center">
         <h3 class="card-header primary-color-dark white-text">Estado de deudas</h3>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
-              <div class="col-lg-2">
-              <a href="registroPedidos.php" id="huggibuton"><button type="button" class="btn btn-success btn-sm" ><i class="fas fa-plus"></i></button></a>
-
-              </div>
               <table class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
                 <thead>
                   <tr>
