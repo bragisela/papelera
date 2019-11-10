@@ -53,6 +53,24 @@ include('sql/mostrarProveedor.php');
                   <label for="form3" class="">Domicilio</label>
                 </div>
               </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="md-form">
+                  <div class="custom-control custom-checkbox">
+                    <?php
+                    if ($Prete == 1){
+                      echo "<input type='checkbox' class='custom-control-input' id='defaultUnchecked' name='rete' checked>
+                      <label class='custom-control-label' for='defaultUnchecked'>¿ Es retensor ?</label>";
+                     }
+                    else {
+                      echo "<input type='checkbox' class='custom-control-input' id='defaultUnchecked' name='rete' >
+                      <label class='custom-control-label' for='defaultUnchecked'>¿ Es retensor ?</label>";
+                    }
+                    ?>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-success">
             <input type="reset" name="" value="Cancelar" class="btn btn-info" onClick="location.href='proveedores.php'">
@@ -60,7 +78,13 @@ include('sql/mostrarProveedor.php');
             <!--FIN -->
             <?php
               if (isset($_POST['Actualizar'])){
-                $sqlMProveedor = updateProveedores($_POST['Nombre'],$_POST['Cuit'],$_POST['CondicionIVA'],$_POST['Domicilio'],$idProveedor);
+                $rete = filter_input(INPUT_POST, 'rete', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+                if($rete){
+                  $rete = 1;
+                } else {
+                  $rete = 0;
+                }
+                $sqlMProveedor = updateProveedores($_POST['Nombre'],$_POST['Cuit'],$_POST['CondicionIVA'],$_POST['Domicilio'],$idProveedor,$rete);
                 $conexiones->exec($sqlMProveedor);
                 echo "<script language='javascript'>";
                 echo "alert('El Proveedor se actualizo');";

@@ -19,11 +19,11 @@
     return $sqlProductos;
   }
 
-  function insertProveedores($nombre,$cuit,$condicionIVA,$domicilio){
+  function insertProveedores($nombre,$cuit,$condicionIVA,$domicilio,$rete){
 
-    $sqlProveedores = "INSERT INTO proveedores(nombre,cuit,condicionIVA,domicilio)
+    $sqlProveedores = "INSERT INTO proveedores(nombre,cuit,condicionIVA,domicilio,rete)
 
-    VALUES('$nombre','$cuit','$condicionIVA','$domicilio')";
+    VALUES('$nombre','$cuit','$condicionIVA','$domicilio','$rete')";
 
     return $sqlProveedores;
   }

@@ -30,13 +30,14 @@
     return $sqlProductosModificar;
   }
 
-  function updateProveedores($nombre,$cuit,$condicionIVA,$domicilio,$idProveedor){
+  function updateProveedores($nombre,$cuit,$condicionIVA,$domicilio,$idProveedor,$rete){
 
     $sqlProveedoresModificar = "UPDATE proveedores SET
     nombre = '$nombre',
     cuit = '$cuit',
     condicionIVA = '$condicionIVA',
-    domicilio = '$domicilio'
+    domicilio = '$domicilio',
+    rete = '$rete'
 
     WHERE idProveedor = '$idProveedor' ";
 

@@ -13,10 +13,13 @@ $(document).ready(function(){
           var cuit = dataProveedores.cuit;
           var condi = dataProveedores.condicionIVA;
           var domi = dataProveedores.domicilio;
+					var retee = dataProveedores.rete;
+
 
           document.getElementById('cuit').value = cuit ;
           document.getElementById('domicilio').value = domi ;
-          document.getElementById('condiIVA').value = condi;
+          document.getElementById('condiIVA').value = condi ;
+					document.getElementById('rete2').value = retee ;
           // $("#cuit").text(dataProveedores.cuit);
 					// $("#condicionIVA").text(dataProveedores.condicionIVA);
 					// $("#domicilio").text(dataProveedores.domicilio).val();

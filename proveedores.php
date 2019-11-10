@@ -51,14 +51,29 @@ include('sql/consultas.php');
                   <label for="form3" class="">Domicilio</label>
                 </div>
               </div>
+              <div class="col-md-4 mb-4">
+                <div class="md-form">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="rete">
+                    <label class="custom-control-label" for="defaultUnchecked">¿ Es retensor ?</label>
+                  </div>
+                </div>
+              </div>
             </div>
             <input type="submit" name="Guardar" value="Guardar" class="btn btn-success">
             <input type="reset" name="Guardar" value="Cancelar" class="btn btn-info">
           </form>
             <!--FIN -->
             <?php
+              $rete = filter_input(INPUT_POST, 'rete', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+              if($rete){
+                $rete = 1;
+              } else {
+                $rete = 0;
+              }
               if (isset($_POST['Guardar'])){
-                $sqlProveedor = insertProveedores($_POST['Nombre'],$_POST['Cuit'],$_POST['CondicionIVA'],$_POST['Domicilio']);
+
+                $sqlProveedor = insertProveedores($_POST['Nombre'],$_POST['Cuit'],$_POST['CondicionIVA'],$_POST['Domicilio'],$rete);
                 $conexiones->exec($sqlProveedor);
                 echo "<script language='javascript'>";
                 echo "alert('El Proveedor se ingreso correctamente');";
@@ -80,6 +95,7 @@ include('sql/consultas.php');
                     <th class="th-sm">domicilio</th>
                     <th class="th-sm">cuit</th>
                     <th class="th-sm">condicionIVA</th>
+                    <th class="th-sm">Retensor </th>
                     <th class="th-sm">Acciones</th>
                   </tr>
                 </thead>
@@ -88,10 +104,15 @@ include('sql/consultas.php');
                   while($rowProveedores = $resultadoProveedor->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
+
                       <td><?php echo $rowProveedores['nombre'];  $idProveedor = $rowProveedores['idProveedor']; ?></td>
                       <td><?php echo $rowProveedores['domicilio']; ?></td>
                       <td><?php echo $rowProveedores['cuit']; ?></td>
                       <td><?php echo $rowProveedores['condicionIVA']; ?></td>
+                      <td><?php if($rowProveedores['rete'] == 1){
+                        echo "Si";
+                      } else {
+                        echo "No";}  ?></td>
                       <td><?php echo "
                       <a href='proveedoresModificar.php?idProveedor=$idProveedor'><i class='far fa-edit'></i></i></a>
                       <a onClick='pDelete(this);' id='$idProveedor'><i class='far fa-trash-alt'></i></a>"; ?></td>

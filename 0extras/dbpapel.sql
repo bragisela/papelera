@@ -78,7 +78,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`idCliente`, `nombre`, `cuit`, `condicionIVA`, `domicilioComercio`, `domicilioFiscal`) VALUES
-(2, 'gisela', '23424324', 'responsable', 'homero', 'cabral');
+(2, 'gisela', '23424324', 'responsable', 'homero', 'cabral'),
+(3, 'julio', '23424324', 'responsable', 'suquia', 'cabral');
 
 -- --------------------------------------------------------
 
@@ -562,15 +563,17 @@ CREATE TABLE `proveedores` (
   `nombre` varchar(100) NOT NULL,
   `cuit` varchar(13) NOT NULL,
   `condicionIVA` varchar(150) NOT NULL,
-  `domicilio` varchar(30) NOT NULL
+  `domicilio` varchar(30) NOT NULL,
+  `rete` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `proveedores`
 --
 
-INSERT INTO `proveedores` (`idProveedor`, `nombre`, `cuit`, `condicionIVA`, `domicilio`) VALUES
-(3, 'nehuen', '324', '243', 'rivadavia');
+INSERT INTO `proveedores` (`idProveedor`, `nombre`, `cuit`, `condicionIVA`, `domicilio`,`rete`) VALUES
+(3, 'nehuen', '324', '243', 'rivadavia',1),
+(4, 'tomito', '324', '243', 'suquia',0);
 
 -- --------------------------------------------------------
 
@@ -636,7 +639,7 @@ CREATE TABLE `pagos` (
   `banco` varchar(50) NOT NULL,
   `importe` decimal(10,2) NOT NULL,
   `numero` varchar(25) NOT NULL,
-  `plazo` date(20) NOT NULL,
+  `plazo` datetime(6) NOT NULL,
   `idComprobante` int(10) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `activo` int(1) NOT NULL
