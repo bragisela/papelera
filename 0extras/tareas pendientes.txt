@@ -84,29 +84,30 @@ linea 233 error numerico no entendi, pasa ese error sino redireccionamos despues
 tomi 14/10
 
 14) registroscompras. php cuando elijo sin iva o con iva 10,5 no calcula ingresos brutos (listo) 14 10
-19) Pago a proveedores los dos proveedores que cargue traen el mismo valor de deuda (listo) 14 10
-20) Si pago en efectivo no se desabilita el boton de pagar en el formulario pedidosBuscar (listo) 14 10
-23) No funciona el ventas borrar. (listo) 14 10
-18) Cuando se borra un pedido se tiene que restar el stock del producto (listo) 14 10
-
-17-10
-22) El plazo resta dias, yo coloco 30 y me muestra 26 (Listo)
-21) pedidoPago todos los valores son iguales en los diferentes comprobantes (listo)
-
 15) si se cambia el select a otra opcion que se resete(listo)
-23) al seleccionar ingresar que actualice el total y no es necesario el boton v (listo)
-22) modificarpedido al modificar la cantidad que se modifique en el momento (listo)
-24) Index.php ver form de iniciar sesion superposicion de palabras (listo)
 16) cambiar el ingreso de efectivo por coma ahora solo lo toma con punto los decimales (listo).
 Revisar todo que todo los ingresos sean con coma y no punto ()
+18) Cuando se borra un pedido se tiene que restar el stock del producto (listo) 14 10
+17) Faltan reporte de clientes deudores similar a estado deudas de bandex (haceme acordar que te paso foto) (Listo tomi)
+19) Pago a proveedores los dos proveedores que cargue traen el mismo valor de deuda (listo) 14 10
+20) Si pago en efectivo no se desabilita el boton de pagar en el formulario pedidosBuscar (listo) 14 10
+21) pedidoPago todos los valores son iguales en los diferentes comprobantes (listo)
+22) El plazo resta dias, yo coloco 30 y me muestra 26 (Listo)
+23) modificarpedido al modificar la cantidad que se modifique en el momento (listo)
+24) al seleccionar ingresar que actualice el total y no es necesario el boton v (listo)
+25) No funciona el ventas borrar. (listo) 14 10
+26) Index.php ver form de iniciar sesion superposicion de palabras (listo)
 
-falta
-17) Faltan reporte de clientes deudores similar a estado deudas de bandex (haceme acordar que te paso foto) (hacer)
+
+
 ----------------------------------------------------------------
 06/11
-18) Agregar un campo checkbox que avisa si es retensor de ingresos brutos. En base a eso calcularlo en la factura.
-19) En los cheques cambiar plazo por fecha.
-20) Falta agregar en algun lado los cheques que son proprios de la papelera.
-21) listado de todos los clientes deudores
-22) agregar en Pago a proveedores el total de lo que se debe a todos.
-23) Modificar pantalla pedido, te envio la foto
+28) En los cheques cambiar plazo por fecha(listo)
+30) listado de todos los clientes deudores (LISTO)
+31) agregar en Pago a proveedores el total de lo que se debe a todos.(LISTO)
+
+27) Agregar un campo checkbox a proveedoresque avisa si es retensor de ingresos brutos (listo).
+En base a eso calcularlo en la factura retencion iibb.(falta)
+
+29) Falta agregar en algun lado los cheques que son proprios de la papelera. (falta)
+32) Modificar pantalla pedido, te envio la foto(falta)

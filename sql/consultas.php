@@ -4,7 +4,7 @@
   $resultadoClientes = $conexiones->query("SELECT idCliente,nombre,cuit,condicionIVA,domicilioComercio,domicilioFiscal FROM clientes ORDER BY nombre")
   or die ('No se puede traer listado Clientes'.mysqli_error($conexiones));
 
-  $resultadoProveedor = $conexiones->query("SELECT idProveedor,nombre,cuit,condicionIVA,domicilio FROM proveedores ORDER BY nombre")
+  $resultadoProveedor = $conexiones->query("SELECT idProveedor,nombre,cuit,condicionIVA,domicilio,rete FROM proveedores ORDER BY nombre")
   or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
 
   $resultadoProductos = $conexiones->query("SELECT pro.idProducto,pro.codProducto,pro.descripcion,pro.material,pro.unidadEmbalaje,pro.medidas,pro.unidadMedida FROM productos as pro
@@ -65,5 +65,9 @@
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 
   $pedidoPago = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes")
+  or die ('No se puede traer listado Total'.mysqli_error($conexiones));
+
+
+  $pedidoPago2 = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes where idComprobante='$idComprobante'")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 ?>

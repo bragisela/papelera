@@ -97,6 +97,12 @@ $Fecha = Date("Y-m-d H:i:s");
                         <label for="form3" class="">Condicion IVA</label>
                       </div>
                     </div>
+                    <div class="col-md-4 mb-4">
+                      <div class="md-form">
+                        <input type="hidden" class="form-control" name="rete" id="rete2" placeholder=" " readonly>
+                        <label for="form3" class="">Retensor</label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -264,6 +270,14 @@ $Fecha = Date("Y-m-d H:i:s");
   ?>
   <script type="text/javascript" src="scripts/getProveedores.js"></script>
   <script>
+
+  function esRetensor(){
+    var retensorr= document.getElementById("rete2").value;
+    return retensorr;
+  }
+
+
+
   // SideNav Button Initialization
   $(".button-collapse").sideNav();
   // SideNav Scrollbar Initialization
@@ -293,8 +307,10 @@ $Fecha = Date("Y-m-d H:i:s");
       $("#lista").append(item);
       $('#producto').val($('#producto > option:first').val());
     }
+    var retensor = esRetensor();
   }
 
+  //eliminar
   $(document).on('click', '.remove', function(){
     var totalEli = this.parentNode.parentNode.childNodes[6].childNodes[0].value;
     var iva = document.getElementById("iva");
@@ -304,23 +320,26 @@ $Fecha = Date("Y-m-d H:i:s");
     switch (condi) {
       case 'C1':
           var iv = 0;
-          var retencion = document.getElementById("retencion");
-          var rete = 0;
           break;
       case 'C2':
           var iv = 0;
-          var retencion = document.getElementById("retencion");
-          var rete = 0;
           break;
       case 'F':
           var iv = parseFloat(iva.value) - parseFloat(((totalEli * 21)/100));
-          var retencion = document.getElementById("retencion");
-          var rete =  parseFloat(retencion.value) - parseFloat(((totalEli * 2.5)/100));
           break;
       default:
           var iv = 0;
           break;
         }
+
+    var retensor = esRetensor();
+    if(retensor==0){
+      var retencion = document.getElementById("retencion");
+      var rete = 0;
+    }else{
+      var retencion = document.getElementById("retencion");
+      var rete =  parseFloat(retencion.value) - parseFloat(((totalEli * 2.5)/100));
+    }
     if (iv.toFixed(2)<=0) {
       iva.value = 0;
     }else{
@@ -336,21 +355,26 @@ $Fecha = Date("Y-m-d H:i:s");
       case 'C1':
           var totalFac= document.getElementById("totalfac");
           var fac = parseFloat(totalFac.value) - (parseFloat(totalEli));
-          var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+
           break;
       case 'C2':
           var totalFac= document.getElementById("totalfac");
           var fac = parseFloat(totalFac.value) - (parseFloat(totalEli));
-          var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
           break;
       case 'F':
               var totalFac= document.getElementById("totalfac");
-              var fac = parseFloat(totalFac.value) - (parseFloat(totalEli)  + parseFloat(((totalEli * 2.5)/100)) + parseFloat(((totalEli * 21)/100)));
-              var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+              var fac = parseFloat(totalFac.value) - (parseFloat(totalEli)  + parseFloat(((totalEli * 21)/100)));
           break;
       default:
           var totafac = 0;
           break;
+        }
+
+        if(retensor==0){
+          var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
+        }else{
+          var fac = fac -  parseFloat(((totalEli * 2.5)/100));
+          var totafac = isNaN(parseFloat(fac)) ? 0 : parseFloat(fac);
         }
 
 
@@ -363,9 +387,10 @@ $Fecha = Date("Y-m-d H:i:s");
     totalImporte.value = parseFloat(totalImporte.value) - parseFloat(totalEli);
     $(this).closest('tr').remove();
   });
-
+  //fin eliminar
 
   function Calcular(ele) {
+    var retensor = esRetensor();
     var precio = 0, descuento = 0, importe = 0 ;
     var tr = ele.parentNode.parentNode;
     var nodes = tr.childNodes;
@@ -388,6 +413,8 @@ $Fecha = Date("Y-m-d H:i:s");
     }
   }
 
+
+
   // comienzo iva segun select
   var condicion;
   var select = document.getElementById('justificante');
@@ -397,7 +424,10 @@ $Fecha = Date("Y-m-d H:i:s");
     var opcion = selectedOption.value;
     condicion=opcion;
     recalcular();
+    var retensor = esRetensor();
   });
+  //fin select
+
 
 
   function calcularCantidad(ele) {
@@ -425,7 +455,9 @@ $Fecha = Date("Y-m-d H:i:s");
         var bb = tot.toFixed(2);
         nodes[x].firstChild.value = bb;
       }
+
     }
+
     var totalI = document.getElementById("totalImporte").value;
     totalI= isNaN(parseFloat(totalI)) ? 0 : parseFloat(totalI);
     var h = totalI +tot - anterior;
@@ -435,26 +467,28 @@ $Fecha = Date("Y-m-d H:i:s");
     switch (condicion) {
       case 'C1':
         var iva = 0;
-        var retencion = 0;
-        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       case 'C2':
         var iva = 0;
-        var retencion = 0;
-        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       case 'F':
         var iva = (totalI*21)/100;
-        var retencion = (totalI*2.5)/100;
-        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       default:
         var iva = 0;
         break;
     }
+
+    //traer retensor de la base de dato por proveedor
+
+    var retensor = esRetensor();
+    if (retensor==0){
+      var retencion = 0;
+    } else {
+        var retencion = (totalI*2.5)/100;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+      }
+    document.getElementById("retencion").value = retencion.toFixed(2);
 
     iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
     document.getElementById("iva").value = iva.toFixed(2);
@@ -470,26 +504,26 @@ $Fecha = Date("Y-m-d H:i:s");
     switch (condicion) {
       case 'C1':
         var iva = 0;
-        var retencion = 0;
-        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       case 'C2':
         var iva = 0;
-        var retencion = 0;
-        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       case 'F':
         var iva = (totalI*21)/100;
-        var retencion = (totalI*2.5)/100;
-        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-        document.getElementById("retencion").value = retencion.toFixed(2);
         break;
       default:
         var iva = 0;
         break;
     }
+
+    var retensor = esRetensor();
+    if (retensor==0){
+      var retencion = 0;
+    } else {
+        var retencion = (totalI*2.5)/100;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+      }
+    document.getElementById("retencion").value = retencion.toFixed(2);
 
     iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
     document.getElementById("iva").value = iva.toFixed(2);
@@ -498,7 +532,6 @@ $Fecha = Date("Y-m-d H:i:s");
     totalfactu = isNaN(parseFloat(totalfactu)) ? 0 : parseFloat(totalfactu);
     document.getElementById("totalfac").value = totalfactu.toFixed(2);
   }
-
 
 
 </script>
