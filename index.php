@@ -65,7 +65,7 @@ if(isset($_POST['login'])) {
     <style>
 
         .intro-2 {
-            background: url("0extras/asd.jpg")no-repeat center center;
+            background: url("img/asd.jpg")no-repeat center center;
             background-size: cover;
         }
         .top-nav-collapse {
