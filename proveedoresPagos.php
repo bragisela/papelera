@@ -76,9 +76,9 @@ include('sql/proveedoresComprobantes.php');
                       <option value="" disabled selected="selected">Buscar Cheques</option>
                       <?php
                         while($rowCheq = $cheques->fetch(PDO::FETCH_ASSOC)) {
-
+                        $pplazo  = substr($rowCheq['plazo'], 0, -15);
                       ?>
-                      <option value="<?php echo $rowCheq ['idPago']; ?>"><?php echo $rowCheq ['modoPago']; echo " - "; echo $rowCheq ['banco']; echo " - ";echo $rowCheq ['numero']; echo " - "; echo $rowCheq ['importe']; echo " - ";echo $rowCheq['plazo'];; ?></option>
+                      <option value="<?php echo $rowCheq ['idPago']; ?>"><?php echo $rowCheq ['modoPago']; echo " - "; echo $rowCheq ['banco']; echo " - ";echo $rowCheq ['numero']; echo " - "; echo $rowCheq ['importe']; echo " - "; echo $pplazo; ; ?></option>
                       <?php
                       }
                       ?>
