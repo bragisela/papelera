@@ -99,6 +99,10 @@ CREATE TABLE `comprobantes` (
   `tempPago` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+
+
 -- --------------------------------------------------------
 
 --
@@ -203,6 +207,7 @@ INSERT INTO `permisos` (`codPermiso`, `codRol`, `tipoAcceso`, `pagina`) VALUES
 (319, 1, '', 'proveedoresPagosPHP'),
 (320, 1, '', 'deudaClientesSAPHP'),
 (321, 2, '', 'deudaClientesPHP'),
+(322, 1, '', 'chequesPHP'),
 (316, 2, '', 'modificarCompraPHP');
 
 -- --------------------------------------------------------
@@ -640,11 +645,21 @@ CREATE TABLE `pagos` (
   `importe` decimal(10,2) NOT NULL,
   `numero` varchar(25) NOT NULL,
   `plazo` datetime(6) NOT NULL,
-  `idComprobante` int(10) NOT NULL,
+  `idComprobante` int(10) NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `activo` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `cheques` (
+  `idCheque` int(10) UNSIGNED NOT NULL,
+  `modoPago` varchar(50) NOT NULL,
+  `banco` varchar(50) NOT NULL,
+  `importe` decimal(10,2) NOT NULL,
+  `numero` varchar(25) NOT NULL,
+  `plazo` datetime(6) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `activo` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -660,6 +675,9 @@ ALTER TABLE `caja`
 
   ALTER TABLE `pagos`
     ADD PRIMARY KEY (`idPago`);
+
+    ALTER TABLE `cheques`
+      ADD PRIMARY KEY (`idCheque`);
 
 --
 -- Indices de la tabla `cajatemporal`
@@ -763,6 +781,9 @@ ALTER TABLE `comprobantes`
 -- AUTO_INCREMENT de la tabla `inventario`
 ALTER TABLE `pagos`
   MODIFY `idPago` int(10) NOT NULL AUTO_INCREMENT;
+
+  ALTER TABLE `cheques`
+    MODIFY `idCheque` int(10) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `inventario`
   MODIFY `idInventario` int(10) NOT NULL AUTO_INCREMENT;
 --

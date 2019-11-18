@@ -29,6 +29,10 @@ $cheques = $conexiones->query("SELECT pa.modoPago,pa.idPago, pa.banco, pa.import
 where pa.activo=0  AND pa.modoPago='Cheque'")
 or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
 
+$cheques2 = $conexiones->query("SELECT ch.modoPago,ch.idCheque, ch.banco, ch.importe, ch.numero, ch.plazo from cheques as ch
+where ch.activo=0  AND ch.modoPago='Propio'")
+or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
+
 $comprobante2 = $conexiones->query("SELECT co.idComprobante  from comprobantes as co
 inner join pagos as pa on co.idComprobante=pa.idComprobante
 WHERE tempPago=1 and co.idCliPro=$idProveedor group by co.idComprobante")

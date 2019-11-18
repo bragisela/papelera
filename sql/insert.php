@@ -91,5 +91,16 @@
     return $sqlPagos;
   }
 
+  function insertcheque($modoPago,$banco,$importe,$numero,$plazo,$activo){
+
+    $sqlPagos="INSERT INTO cheques(modoPago,banco,importe,numero,plazo,activo)
+
+    VALUES ('$modoPago','$banco','$importe','$numero','$plazo','$activo')";
+
+    return $sqlPagos;
+  }
+
+
+
 
 ?>

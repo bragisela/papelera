@@ -70,4 +70,8 @@
 
   $pedidoPago2 = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes where idComprobante='$idComprobante'")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
+
+
+  $resultadoCheques = $conexiones->query("SELECT idCheque,banco,numero,importe,plazo,activo FROM cheques where modoPago='Propio'")
+  or die ('No se puede traer listado Clientes'.mysqli_error($conexiones));
 ?>

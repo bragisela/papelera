@@ -17,13 +17,97 @@ include('sql/selectProductos.php');
   <link href="css/modal.css" rel="stylesheet">
 </head>
 <style>
-/* <!-- ACA IRIA EL CSS --> */
+
+.sidebarTomi {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  height: 86%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #243A51 !important;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebarTomi a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebarTomi a:hover {
+  color: #f1f1f1;
+}
+
+
+.sidebarTomi .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+.blan {
+  color: #f1f1f1;
+}
+#main {
+  transition: margin-right .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
 
 </style>
 
 <body class="hidden-sn mdb-skin">
 <!--Main Layout-->
 <main>
+
+  <div id="mySidebar" class="sidebarTomi">
+    <!-- contenido menu -->
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <table>
+      <thead>
+        <tr>
+          <th class="th-sm blan">Producto</th>
+          <th class="th-sm blan">Cantidad</th>
+          <th class="th-sm blan">Precio</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" class="form-control"  id="idComprobantee" placeholder=" " value="" readonly> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<div id="main" align="right">
+
   <div class="container-fluid mt-3 col col-md-11">
     <section class="pb-5">
       <div class="card text-center">
@@ -34,7 +118,7 @@ include('sql/selectProductos.php');
             <div class="card-header bg-light">Datos del Cliente</div>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-4 mb-4">
+                  <div class="col-md-3 mb-3">
                     <select class="mdb-select md-form" searchable="Buscar.." id="cliente" name="cliente">
                       <option value="" disabled selected>Cliente</option>
                       <?php
@@ -46,14 +130,14 @@ include('sql/selectProductos.php');
                       ?>
                     </select>
                   </div>
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-3">
                       <div class="md-form">
                         <input type="date" class="form-control" name="fecha" value="<?php echo $fech; ?>">
                       </div>
                     </div>
                     <?php
                     if($codRol==1) { ?>
-                      <div class="col-md-2 mb-2">
+                      <div class="col-md-3 mb-3">
                         <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante"  onchange="calcularNumero(this);" required>
                           <option value="" disabled selected>Tipo</option>
                           <option value="R">Pedido Sin iva</option>
@@ -64,7 +148,7 @@ include('sql/selectProductos.php');
 
                     <?php
                     if($codRol==2) { ?>
-                      <div class="col-md-2 mb-2">
+                      <div class="col-md-3 mb-3">
                         <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" onchange="calcularNumero(this);" required>
                           <option value="" disabled selected>Tipo</option>
                           <option value="F">Factura</option>
@@ -73,7 +157,7 @@ include('sql/selectProductos.php');
                     <?php }  ?>
 
 
-                    <div class="col-md-2 mb-2">
+                    <div class="col-md-3 mb-3">
                       <div class="md-form">
                         <input hidden  id="numero"   name="numero" oninput="calcularNumero(this);" value="<?php echo $numero; ?>">
                         <input class="form-control"  type="number" id="numeromod" name="Nro" value="0">
@@ -106,9 +190,17 @@ include('sql/selectProductos.php');
               </div>
           </div>
           <br>
-          <div class="text-left header">
-               <h5>Listado de Productos</h5>
-             </div>
+          <div class="row">
+            <div class="text-left header col-md-4 mb-4">
+                 <h5>Listado de Productos</h5>
+            </div>
+            <div class="text-left header col-md-4 mb-4">
+            </div>
+            <div class="col-md-4 mb-4 text-right">
+              <button  class="openbtn" onclick="openNav()">☰ Ultimos pedidos</button>
+            </div>
+          </div>
+
        <div class="row">
 
          <div class="col-md-6 mb-6">
@@ -279,11 +371,24 @@ include('sql/selectProductos.php');
  </div>
 </section>
 </div>
+</div>
 </main>
 <?php
 include("pie.php");
 ?>
 <script type="text/javascript" src="scripts/getCliente.js"></script>
+<script type="text/javascript" src="scripts/getCompro.js"></script>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "300px";
+  document.getElementById("main").style.marginRight = "300px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginRight= "0";
+}
+</script>
 <script>
 // SideNav Button Initialization
 $(".button-collapse").sideNav();

@@ -81,6 +81,12 @@ include('sql/proveedoresComprobantes.php');
                       <option value="<?php echo $rowCheq ['idPago']; ?>"><?php echo $rowCheq ['modoPago']; echo " - "; echo $rowCheq ['banco']; echo " - ";echo $rowCheq ['numero']; echo " - "; echo $rowCheq ['importe']; echo " - "; echo $pplazo; ; ?></option>
                       <?php
                       }
+                        while($rowCheq2 = $cheques2->fetch(PDO::FETCH_ASSOC)) {
+                        $pplazo  = substr($rowCheq2['plazo'], 0, -15);
+                      ?>
+                      <option value="<?php echo $rowCheq2 ['idCheque']; ?>"><?php echo $rowCheq2 ['modoPago']; echo " - "; echo $rowCheq2 ['banco']; echo " - ";echo $rowCheq2 ['numero']; echo " - "; echo $rowCheq2 ['importe']; echo " - "; echo $pplazo; ; ?></option>
+                      <?php
+                      }
                       ?>
                     </select>
                   </div>
@@ -94,6 +100,7 @@ include('sql/proveedoresComprobantes.php');
                   <table class="table table-bordered table-hover table-striped text-left " cellspacing="0" width="100%" id="item_table">
                     <thead>
                      <tr>
+                       <th class="th-sm" >Id Cheque</th>
                        <th class="th-sm" >Pago</th>
                        <th class="th-sm" >Banco</th>
                        <th class="th-sm" >Numero</th>
@@ -163,18 +170,30 @@ include('sql/proveedoresComprobantes.php');
               );
 
               $activo = 1;
-              $queryPagos = "UPDATE pagos SET  activo = (:activo)  WHERE idPago=(:idPago)";
+              $queryPagos = "UPDATE pagos SET  activo = (:activo)  WHERE idPago=(:idPago) AND modoPago=(:modoPago) ";
               $iPagos = $conexiones->prepare($queryPagos);
               $iPagos->execute(
                 array(
+                 ':modoPago'   => $_POST["codi"][$count],
                  ':idPago'   => $_POST["sele"][$count],
                  ':activo'  => $activo
 
                )
               );
+
+              $queryCheque = "UPDATE cheques SET  activo = (:activo2)  WHERE idCheque=(:idCheque) AND modoPago=(:modoPago) ";
+              $iChe = $conexiones->prepare($queryCheque );
+              $iChe->execute(
+                array(
+                 ':modoPago'   => $_POST["codi"][$count],
+                 ':idCheque'   => $_POST["sele"][$count],
+                 ':activo2'  => $activo
+               )
+              );
+
             }
 
-            $sql = insertPagos('efectivo','-',$_POST['totalEfectivo'],'-','-',$idCom,0);
+            $sql = insertPagos('efectivo','-',$_POST['totalEfectivo'],'-','-',$idCom,1);
             $conexiones->exec($sql);
 
               echo "<script language='javascript'>";
@@ -220,6 +239,7 @@ function agregarCheque() {
   importe = isNaN(parseFloat(importe)) ? 0 : parseFloat(importe);
 
   var item = '<tr id="' + sel + '">';
+  item = item +'<td>'+sel+'<input hidden class="form-control" type="text" id="codi[]" name="codi[]" value="'+cod+'" readonly></td>';
   item = item +'<td>'+cod+'<input hidden class="form-control" type="number" id="sele[]" name="sele[]" value="'+sel+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="banco[]"  name="banco[]" value="'+banco+'" readonly></td>';
   item = item +'<td><input class="form-control" type="text" id="numero[]"  name="numero[]" value="'+numero+'" readonly></td>';
@@ -233,7 +253,7 @@ function agregarCheque() {
   }
 
   $(document).on('click', '.remove', function(){
-    var totalEli = this.parentNode.parentNode.childNodes[4].childNodes[0].value;
+    var totalEli = this.parentNode.parentNode.childNodes[5].childNodes[0].value;
     console.log(totalEli);
     var saldoAcumulado= document.getElementById("totalPagado");
     var totalResto= document.getElementById("totalResto");

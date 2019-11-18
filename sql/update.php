@@ -90,4 +90,16 @@
     return $sqlCajaModificar;
   }
 
+  function updateCheques($idCheque,$banco,$numero,$importe,$plazo,$activo){
+
+    $sqlChequesModificar="UPDATE cheques SET
+    banco = '$banco',
+    numero = '$numero',
+    importe = '$importe',
+    plazo = '$plazo'
+    WHERE idCheque= '$idCheque'";
+
+    return $sqlChequesModificar;
+  }
+
 ?>
