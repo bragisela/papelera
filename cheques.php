@@ -24,29 +24,28 @@ include('sql/consultas.php');
         <div class="card-body">
           <form method="post">
             <div class="row">
-              <div class="col-md-4 mb-4">
+              <div class="col-md-3 mb-3">
                 <div class="md-form">
                   <input type="text" id="form1" class="form-control" name="banco">
                   <label for="form1" class="">Banco</label>
                 </div>
               </div>
 
-              <div class="col-md-4 mb-4">
+                            <div class="col-md-3 mb-3">
+                              <div class="md-form">
+                                <input type="text" id="form3" class="form-control" name="numero">
+                                <label for="form3" class="">Numero</label>
+                              </div>
+                            </div>
+              <div class="col-md-3 mb-3">
                 <div class="md-form">
                   <input type="text" id="form2" class="form-control" name="importe">
                   <label for="form2" class="">Importe</label>
                 </div>
               </div>
 
-              <div class="col-md-4 mb-4">
-                <div class="md-form">
-                  <input type="number" id="form3" class="form-control" name="numero">
-                  <label for="form3" class="">Numero</label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 mb-4">
+
+              <div class="col-md-3 mb-3">
                 <div class="md-form">
                   <input type="date" id="form3" class="form-control" name="plazo">
                   <label for="form3" class="">Plazo</label>
@@ -80,7 +79,7 @@ include('sql/consultas.php');
                 <th class="th-sm">Banco</th>
                 <th class="th-sm">Numero</th>
                 <th class="th-sm">Importe</th>
-                <th class="th-sm">Plazo</th>
+                <th class="th-sm">Fecha</th>
                 <th class="th-sm">Disponible</th>
                 <th class="th-sm">Acciones</th>
               </tr>
@@ -88,7 +87,8 @@ include('sql/consultas.php');
             <tbody>
               <?php
               while($rowChe = $resultadoCheques->fetch(PDO::FETCH_ASSOC)) {
-                $pplazo  = substr($rowChe['plazo'], 0, -15);
+            
+                	$pplazo=date("d/m/Y", strtotime($rowChe['plazo']));
                 $activo = $rowChe['activo'];
               ?>
               <tr>
