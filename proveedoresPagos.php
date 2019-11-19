@@ -196,6 +196,9 @@ include('sql/proveedoresComprobantes.php');
             $sql = insertPagos('efectivo','-',$_POST['totalEfectivo'],'-','-',$idCom,1);
             $conexiones->exec($sql);
 
+            $quer = "UPDATE comprobantes SET  activo = 1 , tempPago =  0 WHERE tempPago=1";
+            $conexiones->exec($quer);
+
               echo "<script language='javascript'>";
               echo "alert('El pedido fue realizado correctamente');";
               echo "window.location='pagoProveedores.php';";
