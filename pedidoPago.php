@@ -50,7 +50,7 @@ include('sql/consultas.php');
                   </div>
                   <div class="col-md-4 mb-4">
                     <div class="md-form">
-                      <input  class="form-control" type="number" id="efectivo" name="efectivo"  min="0" required>
+                      <input  class="form-control" type="number" id="efectivo" name="efectivo" step="any" min="0" required>
                       <label>Pago en efectivo $</label>
                     </div>
                   </div>

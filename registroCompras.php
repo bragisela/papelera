@@ -298,7 +298,7 @@ $Fecha = Date("Y-m-d H:i:s");
     item = item +'<td>'+cod+'<input hidden class="form-control" type="number" name="sele[]" value="'+sel+'"></td>';
     item = item +'<td>'+cadena+'</td>';
     item = item +'<td><input class="form-control" type="number" id="cantidad[]" name="cantidad[]" oninput="calcularCantidad(this);" min="0"></td>';
-    item = item +'<td><input class="form-control" type="text" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" min="0"></td>';
+    item = item +'<td><input class="form-control" type="number" step="any" id="precio[]"  name="precio[]" oninput="Calcular(this);calcularCantidad(this);" min="0"></td>';
     item = item +'<td><input class="form-control" type="number" id="descuento[]" name="desc[]" oninput="Calcular(this);calcularCantidad(this);" value="0" min="0" max="100"></td>';
     item = item +'<td><input class="form-control" type="number" id="importe[]"  name="importe[]" readonly></td>';
     item = item +'<td><input class="form-control" type="number" id="total[]"  name="total[]" readonly></td>';
