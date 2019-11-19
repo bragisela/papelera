@@ -91,19 +91,8 @@ include('sql/selectProductos.php');
   <div id="mySidebar" class="sidebarTomi">
     <!-- contenido menu -->
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <table>
-      <thead>
-        <tr>
-          <th class="th-sm blan">Producto</th>
-          <th class="th-sm blan">Cantidad</th>
-          <th class="th-sm blan">Precio</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" class="form-control"  id="idComprobantee" placeholder=" " value="" readonly> </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="filter" align="center">
+    </div>
   </div>
 <div class="container-fluid mt-3 col col-md-11">
 
@@ -119,7 +108,7 @@ include('sql/selectProductos.php');
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-3 mb-3">
-                    <select class="mdb-select md-form" searchable="Buscar.." id="cliente" name="cliente">
+                    <select class="mdb-select md-form listado" searchable="Buscar.." id="cliente" name="cliente">
                       <option value="" disabled selected>Cliente</option>
                       <?php
                       while($rowCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) {
@@ -579,6 +568,23 @@ function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
   document.getElementById("main").style.marginRight= "0";
 }
+
+$('.listado').change(function() {
+  var listado = $('#cliente').val();
+	$.ajax({
+			type: 'post',
+			url: 'scripts/getCompro.php',
+			data: {
+				listado: listado,
+			},
+			beforeSend: function() {
+				$('.filter').html('Cargando...');
+			},
+			success: function(response) {
+				$('.filter').html(response);
+			},
+	});
+});
 </script>
 </body>
 </html>
