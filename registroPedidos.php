@@ -105,10 +105,10 @@ include('sql/selectProductos.php');
       </tbody>
     </table>
   </div>
+<div class="container-fluid mt-3 col col-md-11">
 
-<div id="main" align="right">
+  <div id="main" align="right">
 
-  <div class="container-fluid mt-3 col col-md-11">
     <section class="pb-5">
       <div class="card text-center">
         <h3 class="card-header primary-color white-text">Registro de Ventas</h3>
@@ -197,7 +197,7 @@ include('sql/selectProductos.php');
             <div class="text-left header col-md-4 mb-4">
             </div>
             <div class="col-md-4 mb-4 text-right">
-              <button  class="openbtn" onclick="openNav()">☰ Ultimos pedidos</button>
+              <button  type="button" class="openbtn" onclick="openNav()">☰ Ultimos pedidos</button>
             </div>
           </div>
 
@@ -378,17 +378,6 @@ include("pie.php");
 ?>
 <script type="text/javascript" src="scripts/getCliente.js"></script>
 <script type="text/javascript" src="scripts/getCompro.js"></script>
-<script>
-function openNav() {
-  document.getElementById("mySidebar").style.width = "300px";
-  document.getElementById("main").style.marginRight = "300px";
-}
-
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginRight= "0";
-}
-</script>
 <script>
 // SideNav Button Initialization
 $(".button-collapse").sideNav();
@@ -579,6 +568,17 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
           break;
       }
     }
+</script>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "300px";
+  document.getElementById("main").style.marginRight = "300px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginRight= "0";
+}
 </script>
 </body>
 </html>

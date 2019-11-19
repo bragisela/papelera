@@ -2,9 +2,9 @@
 include_once("../sql/conexion.php");
 
   if($_REQUEST['idCliente']) {
-    $sqlCompro = $conexiones->query("SELECT co.idComprobante from comprobantes as co
+    $sqlCompro = $conexiones->query(" SELECT co.idComprobante from comprobantes as co
     inner join clientes as cli on cli.idCliente=co.IdCliPro
-    where cli.idCliente='".$_REQUEST['idCliente']."'")
+    where cli.idCliente='".$_REQUEST['idCliente']."' AND co.tipo='V' ")
     or die ('No se puede traer listado de este Cliente'.mysqli_error($conexiones));
 
     $data = array();
