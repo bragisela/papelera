@@ -1,11 +1,17 @@
 <style>
 .bla{
-  color: #f1f1f1;
+  color: black;
   font-size: 16px;
+
 }
 
 table {
-	width: 110%;
+	width: 100%;
+}
+
+.bo{
+  border-top: 1px solid;
+  border-color: black;
 }
 
 </style>
@@ -16,7 +22,7 @@ include_once("../sql/conexion.php");
 
 
   if(isset($buscar)) {
-
+    //traer ultimos 3 comprobantes
     $sql2= $conexiones->query("SELECT co.idComprobante from comprobantes as co
     inner join clientes as cli on co.IdCliPro=cli.idCliente
     where cli.idCliente= ".$buscar." AND co.tipo='V' ORDER BY co.idComprobante DESC LIMIT 3 ")
@@ -34,6 +40,7 @@ include_once("../sql/conexion.php");
             </thead>";
       echo "<tbody> ";
       while($rowCO = $sql2->fetch()) {
+        //recorrer cada detalle de comprobante
         $pre = $rowCO["idComprobante"];
 
         $sql= $conexiones->query("SELECT pro.descripcion, pre.importe, i.cant from items as i
@@ -51,10 +58,11 @@ include_once("../sql/conexion.php");
                     $pre = $row["importe"];
                     $cant = $row["cant"];
                     $des = $row["descripcion"];
+                    $pre = bcdiv($pre, '1', 1);
                    echo "<tr>
-                    <td class='bla' style='width:33%;'>".$des."</td>
-                    <td class='bla' style='width:33%;'>".$cant."</td>
-                    <td class='bla' style='width:33%;'>$ ".$pre."</td>
+                    <td class='bla bo'  style='width:50%;'>".$des."</td>
+                    <td class='bla bo' align='center' style='width:25%;'>".$cant."</td>
+                    <td class='bla bo'  style='width:25%;'>$ ".$pre."</td>
                   </tr>";
                 }
 

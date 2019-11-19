@@ -19,18 +19,19 @@ include('sql/selectProductos.php');
 <style>
 
 .sidebarTomi {
-  margin-top: 40px;
-  margin-bottom: 10px;
-  height: 86%;
+  margin-top: 70px;
+  height: 78%;
   width: 0;
   position: fixed;
   z-index: 1;
   top: 0;
+  bottom: 50;
   right: 0;
-  background-color: #243A51 !important;
+  background-color: #f1f1f1 !important;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  border: 1px solid;
 }
 
 .sidebarTomi a {
@@ -90,7 +91,7 @@ include('sql/selectProductos.php');
 
   <div id="mySidebar" class="sidebarTomi">
     <!-- contenido menu -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
     <div class="filter" align="center">
     </div>
   </div>
