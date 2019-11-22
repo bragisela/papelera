@@ -150,7 +150,7 @@ include('sql/selectProductos.php');
                     <div class="col-md-3 mb-3">
                       <div class="md-form">
                         <input hidden  id="numero"   name="numero" oninput="calcularNumero(this);" value="<?php echo $numero; ?>">
-                        <input class="form-control"  type="number" id="numeromod" name="Nro" value="0">
+                        <input class="form-control"  type="text" id="numeromod" name="Nro" value="0">
                         <label for="form3" class="">Nro Comprobante</label>
                       </div>
                     </div>
