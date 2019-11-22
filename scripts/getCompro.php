@@ -58,7 +58,7 @@ include_once("../sql/conexion.php");
                     $pre = $row["importe"];
                     $cant = $row["cant"];
                     $des = $row["descripcion"];
-                    $pre = bcdiv($pre, '1', 1);
+                    $pre = bcdiv($pre, '1', 2);
                    echo "<tr>
                     <td class='bla bo'  style='width:50%;'>".$des."</td>
                     <td class='bla bo' align='center' style='width:25%;'>".$cant."</td>
