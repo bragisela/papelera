@@ -88,17 +88,14 @@ include('sql/selectProductos.php');
 <body class="hidden-sn mdb-skin">
 <!--Main Layout-->
 <main>
-
-  <div id="mySidebar" class="sidebarTomi">
-    <!-- contenido menu -->
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
+<div id="mySidebar" class="sidebarTomi">
+  <!-- contenido menu -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
     <div class="filter" align="center">
-    </div>
   </div>
-<div class="container-fluid mt-3 col col-md-11">
-
+</div>
+<div class="container-fluid mt-0">
   <div id="main" align="right">
-
     <section class="pb-5">
       <div class="card text-center">
         <h3 class="card-header primary-color white-text">Registro de Ventas</h3>
