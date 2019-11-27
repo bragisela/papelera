@@ -31,7 +31,9 @@ include('sql/selectProductos.php');
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
-  border: 1px solid;
+  border-style:solid;
+    border-width:1px;
+  border-color:rgba(122,122,122,0.5);
 }
 
 .sidebarTomi a {

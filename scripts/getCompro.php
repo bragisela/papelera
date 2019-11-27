@@ -11,7 +11,7 @@ table {
 
 .bo{
   border-top: 1px solid;
-  border-color: black;
+  border-color:rgba(122,122,122,0.5);
 }
 
 </style>
