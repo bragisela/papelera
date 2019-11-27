@@ -151,7 +151,6 @@ else {
                 <tbody>
                   <?php
                   $deudaTotal=0;
-
                   while($rowProveedores = $resultadoDeuda->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
@@ -171,8 +170,6 @@ else {
                     <?php
                     $deudaTotal = $deudaTotal + $rowProveedores['deuda'];
                   }
-								
-
                   ?>
                 </tbody>
                 <tfoot>

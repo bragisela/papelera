@@ -260,8 +260,8 @@ include('sql/selectProductos.php');
        </table>
      </div>
      <div class="row">
-       <div class="col-md-8 mb-8"> </div>
-       <div class="col-md-4 mb-4">
+       <div class="col-md-6 mb-6"> </div>
+       <div class="col-md-6 mb-6">
          <input type="submit" name="insertar" value="Guardar" class="btn btn-success">
          <input type="reset" name="Cancelar" value="Volver" class="btn btn-info" onClick="location.href='pedidosBuscar.php'">
        </div>
@@ -561,8 +561,8 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
 </script>
 <script>
 function openNav() {
-  document.getElementById("mySidebar").style.width = "300px";
-  document.getElementById("main").style.marginRight = "300px";
+  document.getElementById("mySidebar").style.width = "370px";
+  document.getElementById("main").style.marginRight = "370px";
 }
 
 function closeNav() {

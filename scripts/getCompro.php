@@ -33,6 +33,7 @@ include_once("../sql/conexion.php");
           <table class'table-bordered table-striped mb-0'>
             <thead>
               <tr>
+                <th class='bla'>Fecha</th>
                 <th class='bla'>Producto</th>
                 <th class='bla'>Cantidad</th>
                 <th class='bla'>Precio</th>
@@ -43,7 +44,7 @@ include_once("../sql/conexion.php");
         //recorrer cada detalle de comprobante
         $pre = $rowCO["idComprobante"];
 
-        $sql= $conexiones->query("SELECT pro.descripcion, pre.importe, i.cant from items as i
+        $sql= $conexiones->query("SELECT pro.descripcion,co.fecha, pre.importe, i.cant from items as i
         inner join productos as pro on i.idProducto=pro.idProducto
         inner join precios as pre on i.idItems=pre.idPrecio
         inner join comprobantes as co on co.idComprobante=i.idComprobante
@@ -57,12 +58,15 @@ include_once("../sql/conexion.php");
                   while($row = $sql->fetch()) {
                     $pre = $row["importe"];
                     $cant = $row["cant"];
+                    $fec = $row["fecha"];
+                    $fec2 = date("d/m/Y", strtotime($fec));
                     $des = $row["descripcion"];
                     $pre = bcdiv($pre, '1', 2);
                    echo "<tr>
-                    <td class='bla bo'  style='width:50%;'>".$des."</td>
-                    <td class='bla bo' align='center' style='width:25%;'>".$cant."</td>
-                    <td class='bla bo'  style='width:25%;'>$ ".$pre."</td>
+                   <td class='bla bo'  style='width:24%;'>".$fec2."</td>
+                    <td class='bla bo'  style='width:34%;'>".$des."</td>
+                    <td class='bla bo' align='center' style='width:18%;'>".$cant."</td>
+                    <td class='bla bo'  style='width:26%;'>$ ".$pre."</td>
                   </tr>";
                 }
 

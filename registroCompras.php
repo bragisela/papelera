@@ -53,7 +53,7 @@ $Fecha = Date("Y-m-d H:i:s");
                       <div class="col-md-2 mb-2">
                         <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante" required>
                           <option value="" disabled selected>Tipo</option>
-                          <option value="C1">Compra Iva 10.5</option>
+                          <option value="C1">Compra</option>
                           <option value="C2">Compra Sin Iva</option>
                           <option value="F">Factura</option>
                         </select>
