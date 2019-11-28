@@ -117,7 +117,7 @@ else {
     <div class="container-fluid mt-5">
       <section class="pb-5">
       <div class="card text-center">
-        <h3 class="card-header primary-color white-text">Descargar estado deuda de <?php echo $nombre; ?></h3>
+        <h3 class="card-header primary-color white-text">Descargar Estado Deuda de <?php echo $nombre; ?></h3>
         <form class=" text-left border border-light p-5" method="post">
 
           <div class="form-row mb-4">

@@ -108,7 +108,7 @@ else {
   <div class="container-fluid mt-5">
     <section class="pb-5">
       <div class="card text-center">
-        <h3 class="card-header primary-color white-text">Descargar listado de deudas</h3>
+        <h3 class="card-header primary-color white-text">Descargar listado de deudas de todos los clientes</h3>
           <form class=" text-left border border-light p-5" method="post">
             <div class="form-row mb-4">
               <div class="col-md-3 col-sm-6">
