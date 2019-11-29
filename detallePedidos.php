@@ -42,6 +42,7 @@ $totalCompra=0;
                       ?>
                       <tr>
                         <?php
+                        $totalcomprado=$rowPedidos ['totalcomprado'];
                         $cant=$rowPedidos ['cant'];$importe=$rowPedidos ['importe']; $porcUtil=$rowPedidos ['porcUtil'];
                         $importeUtil=$importe+(($porcUtil*$importe)/100);
                         ?>
@@ -69,6 +70,7 @@ $totalCompra=0;
                       $iva = bcdiv($iva, '1', 2);
                       $Totalfacturado=$iva+$totalCompra;
                       $Totalfacturado = bcdiv($Totalfacturado, '1', 2);
+                      $desc = $Totalfacturado - $totalcomprado;
 }
                     ?>
                   </tbody>
@@ -80,13 +82,18 @@ $totalCompra=0;
                     </tr>
                     <tr>
                       <td colspan="4"></td>
+                      <td style="font-weight: bold; font-size:16px;">Descuentos aplicados</td>
+                      <td style="font-weight: bold; font-size:16px;"> $    <?php echo $desc; ?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="4"></td>
                       <td style="font-weight: bold; font-size:16px;">IVA </td>
                       <td style="font-weight: bold; font-size:16px;"> $    <?php echo $iva; ?></td>
                     </tr>
                     <tr>
                       <td colspan="4"></td>
                       <td style="font-weight: bold; font-size:16px;">Total Facturado</td>
-                      <td style="font-weight: bold; font-size:16px;"> $    <?php echo $Totalfacturado; ?></td>
+                      <td style="font-weight: bold; font-size:16px;"> $    <?php echo $Totalfacturado-$desc; ?></td>
                     </tr>
                   </tfoot>
                 </table>
