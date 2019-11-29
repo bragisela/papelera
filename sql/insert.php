@@ -10,11 +10,11 @@
     return $sqlClientes;
   }
 
-  function insertProductos($codProducto,$descripcion,$material,$unidadEmbalaje,$medidas,$unidadMedida){
+  function insertProductos($codProducto,$descripcion,$material,$unidadEmbalaje,$medidas,$unidadMedida,$prov){
 
-    $sqlProductos="INSERT INTO productos(codProducto,descripcion,material,unidadEmbalaje,medidas,unidadMedida)
+    $sqlProductos="INSERT INTO productos(codProducto,descripcion,material,unidadEmbalaje,medidas,unidadMedida,idProveedor)
 
-    VALUES('$codProducto','$descripcion','$material','$unidadEmbalaje','$medidas','$unidadMedida')";
+    VALUES('$codProducto','$descripcion','$material','$unidadEmbalaje','$medidas','$unidadMedida','$prov')";
 
     return $sqlProductos;
   }

@@ -129,7 +129,7 @@ include('sql/selectProductos.php');
                       <div class="col-md-3 mb-3">
                         <select class="mdb-select md-form" searchable="Buscar.."  name="justificante" id="justificante"  onchange="calcularNumero(this);" required>
                           <option value="" disabled selected>Tipo</option>
-                          <option value="R">Pedido Sin iva</option>
+                          <option value="R">Venta Sin iva</option>
                           <option value="F">Factura</option>
                         </select>
                       </div>

@@ -15,7 +15,7 @@
     return $sqlClientesModificar;
   }
 
-  function updateProductos($codProducto,$descripcion,$material,$unidadEmbalaje,$medidas,$unidadMedida,$idProducto){
+  function updateProductos($codProducto,$descripcion,$material,$unidadEmbalaje,$medidas,$unidadMedida,$idProducto,$prov){
 
     $sqlProductosModificar="UPDATE productos SET
     codProducto = '$codProducto',
@@ -23,9 +23,19 @@
     material = '$material',
     unidadEmbalaje = '$unidadEmbalaje',
     medidas = '$medidas',
-    unidadMedida = '$unidadMedida'
-
+    unidadMedida = '$unidadMedida',
+    idProveedor = '$prov'
     WHERE idProducto='$idProducto'";
+
+    return $sqlProductosModificar;
+  }
+  //update aumento
+
+  function updateProductosAumento($producto,$prov,$aumento){
+
+    $sqlProductosModificar="UPDATE productos SET
+    costoUni = '$aumento'
+    WHERE idProveedor='$prov' AND idProducto='$producto'";
 
     return $sqlProductosModificar;
   }

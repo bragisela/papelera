@@ -55,7 +55,7 @@ include('sql/consultas.php');
                 <div class="md-form">
                   <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="rete">
-                    <label class="custom-control-label" for="defaultUnchecked">¿ Es retensor ?</label>
+                    <label class="custom-control-label" for="defaultUnchecked">¿ Agente retensor ?</label>
                   </div>
                 </div>
               </div>

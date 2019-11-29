@@ -30,7 +30,7 @@
               <a href="" class="collapsible-header waves-effect"><i class="fas fa-cart-arrow-down"></i>Ventas</a>
             </li> -->
              <li>
-              <a href="pedidosBuscar.php" class="collapsible-header waves-effect"><i class="fas fa-cart-plus"></i>Pedidos</a>
+              <a href="pedidosBuscar.php" class="collapsible-header waves-effect"><i class="fas fa-cart-plus"></i>Ventas</a>
             </li>
             <li>
               <a href="caja.php" class="collapsible-header waves-effect"><i class="fas fa-calculator"></i>Caja</a>
@@ -48,7 +48,7 @@
                   </li>
                   <li>
                     <a href="reporteVentas.php" class="waves-effect"><i class="fas fa-money-bill"></i>IVA Ventas</a>
-                  </li>                  
+                  </li>
                   <li>
                     <a href="reportesUtilidad.php" class="waves-effect"><i class="fas fa-cash-register"></i>Utilidad</a>
                   </li>

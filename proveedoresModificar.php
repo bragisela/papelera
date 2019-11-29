@@ -9,6 +9,9 @@ include('sql/consultas.php');
 include('sql/update.php');
 $idProveedor = $_REQUEST['idProveedor'];
 include('sql/mostrarProveedor.php');
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -53,7 +56,6 @@ include('sql/mostrarProveedor.php');
                   <label for="form3" class="">Domicilio</label>
                 </div>
               </div>
-
               <div class="col-md-4 mb-4">
                 <div class="md-form">
                   <div class="custom-control custom-checkbox">
@@ -70,8 +72,14 @@ include('sql/mostrarProveedor.php');
                   </div>
                 </div>
               </div>
-
+              <div class="col-md-4 mb-4">
+                <div class="md-form">
+                  <input type="number" id="form3"  step="any"  min="0" class="form-control" name="aumento">
+                  <label for="form3" class="">Agregar % de aumento</label>
+                </div>
+              </div>
             </div>
+
             <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-success">
             <input type="reset" name="" value="Cancelar" class="btn btn-info" onClick="location.href='proveedores.php'">
           </form>
@@ -82,7 +90,15 @@ include('sql/mostrarProveedor.php');
                 if($rete){
                   $rete = 1;
                 } else {
-                  $rete = 0;
+                    $rete = 0;
+                  }
+                $aumento = $_POST['aumento'];
+                while($rowPro= $mostrarProductos->fetch(PDO::FETCH_ASSOC)) {
+                  $costoUni = $rowPro['costoUni'];
+                  $prod = $rowPro['idProducto'];
+                  $costoUni = (($aumento/100)*$costoUni)+$costoUni;
+                  $productoAumento = updateProductosAumento($prod,$idProveedor,$costoUni);
+                  $conexiones->exec($productoAumento);
                 }
                 $sqlMProveedor = updateProveedores($_POST['Nombre'],$_POST['Cuit'],$_POST['CondicionIVA'],$_POST['Domicilio'],$idProveedor,$rete);
                 $conexiones->exec($sqlMProveedor);

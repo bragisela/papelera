@@ -6,6 +6,11 @@ include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
+
+$resultadoprove = $conexiones->query("SELECT * FROM proveedores ORDER BY nombre")
+or die ('No se puede traer listado de revendedoras'.mysqli_error($conexiones));
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -61,7 +66,20 @@ include('sql/consultas.php');
                   <label for="form6" class="">Unidad Medida</label>
                 </div>
               </div>
-              
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                  <select name="proveedor"  class="mdb-select colorful-select dropdown-primary md-form"  searchable="Buscar..">
+                      <option value="" disabled selected>Seleccionar proveedor</option>
+                      <?php
+                      while($rowProv = $resultadoprove->fetch(PDO::FETCH_ASSOC)) {
+                      ?>
+                      <option value="<?php echo $rowProv['idProveedor']; ?>"> <?php echo  $rowProv['nombre']; ?></option>
+                      <?php
+                      }
+                      ?>
+                  </select>
+              </div>
             </div>
             <input type="submit" name="Guardar" value="Guardar" class="btn btn-success">
             <input type="reset" name="Guardar" value="Cancelar" class="btn btn-info">
@@ -69,7 +87,7 @@ include('sql/consultas.php');
             <!--FIN -->
             <?php
               if (isset($_POST['Guardar'])){
-                $sqlProducto = insertProductos($_POST['codProducto'],$_POST['descripcion'],$_POST['material'],$_POST['unidadEmbalaje'],$_POST['medidas'],$_POST['unidadMedida']);
+                $sqlProducto = insertProductos($_POST['codProducto'],$_POST['descripcion'],$_POST['material'],$_POST['unidadEmbalaje'],$_POST['medidas'],$_POST['unidadMedida'],$_POST['proveedor']);
                 $conexiones->exec($sqlProducto);
 
                 echo "<script language='javascript'>";
@@ -131,6 +149,12 @@ include('sql/consultas.php');
 include("pie.php");
 ?>
 <script>
+
+// Material Select Initialization
+$(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
+
   // SideNav Button Initialization
   $(".button-collapse").sideNav();
   // SideNav Scrollbar Initialization

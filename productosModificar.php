@@ -7,6 +7,8 @@ include("sql/conexion.php");
 $idProducto = $_REQUEST['idProducto'];
 include('sql/mostrarProductos.php');
 include('sql/update.php');
+$resultadoprove = $conexiones->query("SELECT * FROM proveedores ORDER BY nombre")
+or die ('No se puede traer listado de revendedoras'.mysqli_error($conexiones));
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -64,13 +66,27 @@ include('sql/update.php');
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <select name="proveedor" class="mdb-select">
+                  <option value="<?php echo $Pprov ?>"><?php echo$Pnom?></option>
+                  <?php
+                  while($rowRol = $resultadoprove->fetch(PDO::FETCH_ASSOC)) {
+                  ?>
+                    <option value="<?php echo $rowRol['idProveedor']; ?>"><?php echo  $rowRol['nombre']; ?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
+              </div>
+            </div>
             <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-success">
             <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='productos.php'">
           </form>
             <!--FIN -->
             <?php
               if (isset($_POST['Actualizar'])){
-                $sqlMProducto = updateProductos($_POST['codProducto'],$_POST['descripcion'],$_POST['material'],$_POST['unidadEmbalaje'],$_POST['medidas'],$_POST['unidadMedida'],$idProducto);
+                $sqlMProducto = updateProductos($_POST['codProducto'],$_POST['descripcion'],$_POST['material'],$_POST['unidadEmbalaje'],$_POST['medidas'],$_POST['unidadMedida'],$idProducto,$_POST['proveedor']);
                 $conexiones->exec($sqlMProducto);
 
                 echo "<script language='javascript'>";
@@ -90,6 +106,10 @@ include('sql/update.php');
 include("pie.php");
 ?>
 <script>
+$(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
+
   // SideNav Button Initialization
   $(".button-collapse").sideNav();
   // SideNav Scrollbar Initialization
