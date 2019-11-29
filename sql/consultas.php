@@ -11,7 +11,7 @@
 ")
   or die ('No se puede traer listado Productos'.mysqli_error($conexiones));
 
-  $resultadoProductosPedidos = $conexiones->query("SELECT sum(inv.totalComprado)-sum(inv.totalVendido) as Stock, pro.descripcion, pro.codProducto, t1.idPrecio,t1.idProducto,t1.importe, (t1.importe+(t1.porcUtil*t1.importe/100)) as importe2 FROM precios as t1
+  $resultadoProductosPedidos = $conexiones->query("SELECT sum(inv.totalComprado)-sum(inv.totalVendido) as Stock,pro.costoUni, pro.descripcion, pro.codProducto, t1.idPrecio,t1.idProducto,t1.importe, (t1.importe+(t1.porcUtil*t1.importe/100)) as importe2 FROM precios as t1
   INNER JOIN ( SELECT idProducto,max(idPrecio) as fecha FROM precios GROUP BY idProducto) as t2 ON t1.idPrecio = t2.fecha AND t1.idProducto = t2.idProducto
    inner join productos as pro on t1.idProducto=pro.idProducto inner join inventario as inv on inv.idProducto=pro.idProducto
   GROUP by inv.idProducto")

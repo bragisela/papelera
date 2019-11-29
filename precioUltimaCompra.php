@@ -94,6 +94,15 @@ $Fecha = Date("Y-m-d H:i:s");
             <!--FIN -->
             <?php
                if (isset($_POST['Actualizar'])){
+                 $aumento=$_POST['porcUtil'];
+                 while($rowMPrecio2 = $MostrarUltCompra2->fetch(PDO::FETCH_ASSOC)) {
+                   $costoUni = $rowMPrecio2['costoUni'];
+                   $prod = $rowMPrecio2['idProducto'];
+                   $costoUni = (($aumento/100)*$costoUni)+$costoUni;
+                   $productoAumento2 = updateProductosAumento2($prod,$costoUni);
+                   $conexiones->exec($productoAumento2);
+                 }
+
                  $sqlPrec = updatePrecios($_POST['porcUtil'],$idComprobante);
                  $conexiones->exec($sqlPrec);
 

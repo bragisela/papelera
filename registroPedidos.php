@@ -197,7 +197,7 @@ include('sql/selectProductos.php');
              <option value="" disabled selected="selected">Buscar Productos</option>
              <?php
                while($rowProductos = $resultadoProductosPedidos->fetch(PDO::FETCH_ASSOC)) {
-                 $importe3 = bcdiv($rowProductos['importe2'], '1', 2);
+                 $importe3 = bcdiv($rowProductos['costoUni'], '1', 2);
                  $stock = $rowProductos['Stock'];
                  if ( $stock <= 0) {
                    $stock = "Sin stock";

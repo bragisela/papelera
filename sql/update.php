@@ -40,6 +40,15 @@
     return $sqlProductosModificar;
   }
 
+  function updateProductosAumento2($producto,$aumento){
+
+    $sqlProductosModificar2="UPDATE productos SET
+    costoUni = '$aumento'
+    WHERE  idProducto='$producto'";
+
+    return $sqlProductosModificar2;
+  }
+
   function updateProveedores($nombre,$cuit,$condicionIVA,$domicilio,$idProveedor,$rete){
 
     $sqlProveedoresModificar = "UPDATE proveedores SET

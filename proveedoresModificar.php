@@ -79,7 +79,6 @@ include('sql/mostrarProveedor.php');
                 </div>
               </div>
             </div>
-
             <input type="submit" name="Actualizar" value="Actualizar" class="btn btn-success">
             <input type="reset" name="" value="Cancelar" class="btn btn-info" onClick="location.href='proveedores.php'">
           </form>
