@@ -115,3 +115,5 @@ En base a eso calcularlo en la factura retencion iibb.(listo)
 33) De registrocompras sacar iva 10,5 en el selected
 34) En pedido ordenar por producto y no por fecha de pedido, agregar el campo fecha.
 35) Modificar costo del producto y que se actualice toda la lista.
+------------------------------------------------
+36) archivo detallePedidos en lugar del idPedido deberia ir el nroPedido

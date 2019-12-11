@@ -187,7 +187,7 @@ include('sql/consultas.php');
                       </td>
                       <td><?php
                         if ($rowCaja['importe']<0){
-                          echo "$", number_format (($rowCaja['importe']),2,",",".");
+                          echo "$", number_format (($rowCaja['importe']*(-1)),2,",",".");
                         } else {
                           echo "-";
                         }

@@ -46,7 +46,7 @@ include('sql/consultas.php');
   <div class="container-fluid mt-5">
     <section class="pb-5">
       <div class="card text-center">
-        <h3 class="card-header primary-color-dark white-text">Pedidos</h3>
+        <h3 class="card-header primary-color-dark white-text">Ventas</h3>
           <div class="card-body">
             <div class="table-responsive text-nowrap">
               <div class="col-lg-2">
