@@ -463,12 +463,22 @@ $Fecha = Date("Y-m-d H:i:s");
     totalI = h.toFixed(2);
     document.getElementById("totalImporte").value = totalI;
 
+    var retensor = esRetensor();
+    if (retensor==0){
+      var retencion = 0;
+    } else {
+        var retencion = (totalI*2.5)/100;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+      }
+
     switch (condicion) {
       case 'C1':
         var iva = 0;
+        retencion = 0;
         break;
       case 'C2':
         var iva = 0;
+        retencion = 0;
         break;
       case 'F':
         var iva = (totalI*21)/100;
@@ -480,13 +490,7 @@ $Fecha = Date("Y-m-d H:i:s");
 
     //traer retensor de la base de dato por proveedor
 
-    var retensor = esRetensor();
-    if (retensor==0){
-      var retencion = 0;
-    } else {
-        var retencion = (totalI*2.5)/100;
-        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-      }
+
     document.getElementById("retencion").value = retencion.toFixed(2);
 
     iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
@@ -500,12 +504,22 @@ $Fecha = Date("Y-m-d H:i:s");
   function recalcular() {
     var totalI = document.getElementById("totalImporte").value;
 
+    var retensor = esRetensor();
+    if (retensor==0){
+      var retencion = 0;
+    } else {
+        var retencion = (totalI*2.5)/100;
+        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
+      }
+
     switch (condicion) {
       case 'C1':
         var iva = 0;
+        var retencion = 0;
         break;
       case 'C2':
         var iva = 0;
+        var retencion = 0;
         break;
       case 'F':
         var iva = (totalI*21)/100;
@@ -515,13 +529,6 @@ $Fecha = Date("Y-m-d H:i:s");
         break;
     }
 
-    var retensor = esRetensor();
-    if (retensor==0){
-      var retencion = 0;
-    } else {
-        var retencion = (totalI*2.5)/100;
-        retencion = isNaN(parseFloat(retencion)) ? 0 : parseFloat(retencion);
-      }
     document.getElementById("retencion").value = retencion.toFixed(2);
 
     iva =  isNaN(parseFloat(iva)) ? 0 : parseFloat(iva);
