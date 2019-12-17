@@ -13,6 +13,9 @@
   $conexiones->exec("DELETE FROM comprobantes WHERE idComprobante='$idCompra'")or die ('Problemas en la Baja del comprobante'.mysqli_error($conexiones));
 
 
+  $conexiones->exec("DELETE FROM cajaTemporal WHERE idComprobante='$idCompra'")or die ('Problemas en la Baja de la caja'.mysqli_error($conexiones));
+
+
 //me falta eliminar precio
 
 

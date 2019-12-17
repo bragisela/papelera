@@ -7,6 +7,7 @@ include("seguridad.php");
 $idPedido = $_REQUEST['idPedido'];
 include("sql/detallePedidos.php");
 $totalCompra=0;
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

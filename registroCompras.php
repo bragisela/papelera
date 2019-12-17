@@ -196,11 +196,14 @@ $Fecha = Date("Y-m-d H:i:s");
               $justificante = $_POST['justificante'];
               $totalComprado = $_POST['importebruto'];
               $tipo = "C";
+
               $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado,0,0);
               $conexiones->exec($sqlCompro);
               $idComprobante = $conexiones->lastInsertId();
-              $sqlCaja = insertCajaEgreso ($fecha,"E",$justificante,$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
+
+              $sqlCaja = insertCajaEgreso ($fecha,"E",$justificante,$idComprobante,$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
               $conexiones->exec($sqlCaja);
+              
               //insert pago porque da error al relacionar pagos con comprobantes para calcular deudas
               $pagos = $conexiones->query("INSERT INTO pagos (modoPago,banco,importe,numero,plazo,idComprobante,activo)
               VALUES ('-','-',0,'-','-',$idComprobante,0)");

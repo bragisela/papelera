@@ -44,11 +44,12 @@
 
     return $sqlCajaIngreso;
   }
-  function insertCajaEgreso($fecha,$tipoMov, $tipo, $descripcion, $importe,$nroCaja){
+  // no incerta el id del comprobante
+  function insertCajaEgreso($fecha,$tipoMov, $tipo, $idComprobante, $descripcion, $importe,$nroCaja){
 
-    $sqlCajaEgreso = "INSERT INTO cajatemporal(fecha,tipoMov, tipo, descripcion, importe, nroCaja)
+    $sqlCajaEgreso = "INSERT INTO cajatemporal(fecha,tipoMov, tipo, idComprobante,descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','E', '$tipo', '$descripcion','-' '$importe', '0')";
+    VALUES ('$fecha','E', '$tipo','$idComprobante' ,'$descripcion','-' '$importe', '0')";
 
     return $sqlCajaEgreso;
   }
