@@ -93,7 +93,7 @@ include('sql/mostrarProveedor.php');
                   }
                 $aumento = $_POST['aumento'];
                 while($rowPro= $mostrarProductos->fetch(PDO::FETCH_ASSOC)) {
-                  $costoUni = $rowPro['costoUni'];
+                  $costoUni = $rowPro['costoV'];
                   $prod = $rowPro['idProducto'];
                   $costoUni = (($aumento/100)*$costoUni)+$costoUni;
                   $productoAumento = updateProductosAumento($prod,$idProveedor,$costoUni);

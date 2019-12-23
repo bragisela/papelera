@@ -259,6 +259,7 @@ CREATE TABLE `productos` (
   `medidas` varchar(20) NOT NULL,
   `unidadMedida` varchar(10) NOT NULL,
   `costoUni` decimal(10,2) NOT NULL,
+  `costoV` decimal(10,2) NOT NULL,
   `idProveedor` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -266,19 +267,19 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`idProducto`, `codProducto`, `descripcion`, `material`, `unidadEmbalaje`, `medidas`, `unidadMedida`, `costoUni`, `idProveedor`) VALUES
-(1, '1231', 'aa', 'plastico', 12, '12', '1', '5.50',3),
-(2, '123', 'bb', 'vidrio', 12, '12x34', 'as', '4.50',3),
-(3, '105102NR', 'BANDEJA 102 NEGRA REFORZADA', 'PET', 400, '150X115X45', 'Caja', '0.00',3),
-(4, '1055102', 'BANDEJA 102 PET (CRISTAL)\r\n', 'PET', 800, '150X115X45', 'Caja', '0.00',3),
-(5, '1066102PP', 'BANDEJA 102 PP (MICROONDAS)\r\n', 'PP', 800, '150X115X45', 'Caja', '0.00',3),
-(6, '105102NR', 'BANDEJA 102 NEGRA REFORZADA', 'PET', 400, '150X115X45', 'Caja', '0.00',3),
-(7, '1055102', 'BANDEJA 102 PET (CRISTAL)', 'PET', 800, '150X115X45', 'Caja', '0.00',4),
-(8, '1066102PP', 'BANDEJA 102 PP (MICROONDAS)', 'PP', 800, '150X115X45', 'Caja', '0.00',4),
-(9, '106102C', 'BANDEJA 102 PP LIVIANA', 'PP', 800, '150X115X45', 'Caja', '0.00',4),
-(10, '105103NR', 'BANDEJA 103 NEGRA REFORZADA', 'PET', 600, '138X178X45', 'Caja', '0.00',4),
-(11, '1055103', 'BANDEJA 103 PET (CRISTAL)', 'PET', 800, '178X140X45', 'Caja', '0.00',4),
-(12, '2', '222222', '', 0, '', '', '0.00',4);
+INSERT INTO `productos` (`idProducto`, `codProducto`, `descripcion`, `material`, `unidadEmbalaje`, `medidas`, `unidadMedida`, `costoUni`,`costoV`, `idProveedor`) VALUES
+(1, '1231', 'aa', 'plastico', 12, '12', '1', '5.50','5.50',3),
+(2, '123', 'bb', 'vidrio', 12, '12x34', 'as', '4.50','5.50',3),
+(3, '105102NR', 'BANDEJA 102 NEGRA REFORZADA', 'PET', 400, '150X115X45', 'Caja', '0.00','5.50',3),
+(4, '1055102', 'BANDEJA 102 PET (CRISTAL)\r\n', 'PET', 800, '150X115X45', 'Caja', '0.00','5.50',3),
+(5, '1066102PP', 'BANDEJA 102 PP (MICROONDAS)\r\n', 'PP', 800, '150X115X45', 'Caja', '0.00','5.50',3),
+(6, '105102NR', 'BANDEJA 102 NEGRA REFORZADA', 'PET', 400, '150X115X45', 'Caja', '0.00','5.50',3),
+(7, '1055102', 'BANDEJA 102 PET (CRISTAL)', 'PET', 800, '150X115X45', 'Caja', '0.00','5.50',4),
+(8, '1066102PP', 'BANDEJA 102 PP (MICROONDAS)', 'PP', 800, '150X115X45', 'Caja', '0.00','5.50',4),
+(9, '106102C', 'BANDEJA 102 PP LIVIANA', 'PP', 800, '150X115X45', 'Caja', '0.00','5.50',4),
+(10, '105103NR', 'BANDEJA 103 NEGRA REFORZADA', 'PET', 600, '138X178X45', 'Caja', '0.00','5.50',4),
+(11, '1055103', 'BANDEJA 103 PET (CRISTAL)', 'PET', 800, '178X140X45', 'Caja', '0.00','5.50',4),
+(12, '2', '222222', '', 0, '', '', '0.00','5.50',4);
 
 -- --------------------------------------------------------
 

@@ -34,7 +34,7 @@
   function updateProductosAumento($producto,$prov,$aumento){
 
     $sqlProductosModificar="UPDATE productos SET
-    costoUni = '$aumento'
+    costoV = '$aumento'
     WHERE idProveedor='$prov' AND idProducto='$producto'";
 
     return $sqlProductosModificar;
@@ -43,7 +43,7 @@
   function updateProductosAumento2($producto,$aumento){
 
     $sqlProductosModificar2="UPDATE productos SET
-    costoUni = '$aumento'
+    costoV = '$aumento'
     WHERE  idProducto='$producto'";
 
     return $sqlProductosModificar2;

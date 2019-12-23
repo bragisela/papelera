@@ -203,7 +203,7 @@ $Fecha = Date("Y-m-d H:i:s");
 
               $sqlCaja = insertCajaEgreso ($fecha,"E",$justificante,$idComprobante,$nro,$totalComprado,"0"); //Migrar total comprado a cajatemporal.
               $conexiones->exec($sqlCaja);
-              
+
               //insert pago porque da error al relacionar pagos con comprobantes para calcular deudas
               $pagos = $conexiones->query("INSERT INTO pagos (modoPago,banco,importe,numero,plazo,idComprobante,activo)
               VALUES ('-','-',0,'-','-',$idComprobante,0)");
@@ -231,7 +231,7 @@ $Fecha = Date("Y-m-d H:i:s");
                   )
                 );
 
-                $queryProducto = "UPDATE productos SET costoUni =  (:importe) WHERE idProducto=(:idProducto)";
+                $queryProducto = "UPDATE productos SET costoUni =  (:importe), costoV =  (:importe)  WHERE idProducto=(:idProducto)";
                 $iProducto = $conexiones->prepare($queryProducto);
                 $iProducto->execute(
                   array(

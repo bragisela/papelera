@@ -16,7 +16,7 @@
   $Prete = $rowMProveedor['rete'];
   $cant = $rowMProveedor['cant'];
 
-  $mostrarProductos = $conexiones->query("SELECT pro.idProducto,pro.costoUni FROM proveedores as prov
+  $mostrarProductos = $conexiones->query("SELECT pro.idProducto,pro.costoV FROM proveedores as prov
   inner join productos as pro on prov.idProveedor=pro.idProveedor
   WHERE prov.idProveedor = $idProveedor")
   or die ('No se puede traer listado Productos'.mysqli_error($conexiones));

@@ -71,7 +71,7 @@ $Fecha = Date("Y-m-d H:i:s");
                     $ganancia2=($util/100)*$costo;
                     $ganancia2 = bcdiv($ganancia2, '1', 2);?>
 
-                    <td>$ <?php echo $descripcion; ?></td>
+                    <td> <?php echo $descripcion; ?></td>
                     <td>$ <?php echo $costo; ?></td>
                     <td>% <?php  echo  $util; ?></td>
                     <td>$<?php echo $venta ?></td>
