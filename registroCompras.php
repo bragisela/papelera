@@ -206,7 +206,7 @@ $Fecha = Date("Y-m-d H:i:s");
 
               //insert pago porque da error al relacionar pagos con comprobantes para calcular deudas
               $pagos = $conexiones->query("INSERT INTO pagos (modoPago,banco,importe,numero,plazo,idComprobante,activo)
-              VALUES ('-','-',0,'-','-',$idComprobante,0)");
+              VALUES ('-','-',0,'-','1000-01-01 00:00:00',$idComprobante,0)");
               for($count = 0; $count < count($_POST["sele"]); $count++)
               {
                 $queryItems = "INSERT INTO items(idComprobante, idProducto, fecha, cant) VALUES (:idComprobante, :idProducto, :fecha, :cant)";

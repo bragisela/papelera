@@ -38,6 +38,7 @@ CREATE TABLE `caja` (
   `fecha` date NOT NULL,
   `tipoMov` tinytext CHARACTER SET latin1 NOT NULL,
   `tipo` varchar(2) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `idComprobante` int(15) NOT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
   `importe` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -54,6 +55,7 @@ CREATE TABLE `cajatemporal` (
   `fecha` date NOT NULL,
   `tipoMov` tinytext CHARACTER SET latin1 NOT NULL,
   `tipo` varchar(2) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `idComprobante` int(15) NOT NULL,
   `descripcion` varchar(100) CHARACTER SET latin1 NOT NULL,
   `importe` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
