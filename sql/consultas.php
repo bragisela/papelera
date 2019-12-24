@@ -17,6 +17,8 @@
   GROUP by inv.idProducto")
   or die ('No se puede traer listado Productos'.mysqli_error($conexiones));
 
+
+
   $resultadoPedidos = $conexiones ->query("SELECT c.idComprobante, c.activo,c.nroComprobante, c.fecha, cl.nombre, cl.domicilioComercio FROM comprobantes c, clientes cl WHERE c.tipo='V' AND c.IdCliPro=cl.idCliente")
   or die ('No se puede traer listado Compras'.mysqli_error($conexiones));
 
@@ -73,9 +75,6 @@
   $pedidoPago = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes")
   or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 
-
-  $pedidoPago2 = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes where idComprobante='$idComprobante'")
-  or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 
 
   $resultadoCheques = $conexiones->query("SELECT idCheque,banco,numero,importe,plazo,activo FROM cheques where modoPago='Propio'")

@@ -5,8 +5,12 @@ include("encabezado.php");
 include("seguridad.php");
 include("sql/conexion.php");
 include("sql/insert.php");
+
+
+
 $idComprobante = $_REQUEST['idComprobante'];
-include('sql/consultas.php');
+$pedidoPago2 = $conexiones->query("SELECT nroComprobante, totalcomprado FROM comprobantes where idComprobante='$idComprobante'")
+or die ('No se puede traer listado Total'.mysqli_error($conexiones));
   $fech = Date("Y-m-d");
   $Fecha = Date("Y-m-d H:i:s");
   while($rowPago = $pedidoPago2->fetch(PDO::FETCH_ASSOC)) {
