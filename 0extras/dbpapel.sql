@@ -115,8 +115,8 @@ CREATE TABLE `inventario` (
   `idInventario` int(10) NOT NULL,
   `idProducto` int(10) NOT NULL,
   `fecha` datetime NOT NULL,
-  `totalComprado` int(10) NOT NULL,
-  `totalVendido` int(10) NOT NULL,
+  `totalComprado` int(10) NOT NULL DEFAULT 0,
+  `totalVendido` int(10) NOT NULL DEFAULT 0,
   `idComprobante` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -223,7 +223,7 @@ CREATE TABLE `precios` (
   `idProducto` int(10) NOT NULL,
   `importe` float(10,2) NOT NULL,
   `porcDesc` float(10,2) NOT NULL,
-  `porcUtil` float(10,2) NOT NULL,
+  `porcUtil` float(10,2) NOT NULL DEFAULT 0.00,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -344,7 +344,8 @@ CREATE TABLE `utilidad` (
   `impCosto` decimal(10,2) NOT NULL,
   `impUtilidad` decimal(10,2) NOT NULL,
   `fecha` date NOT NULL,
-  `cliente` varchar(100) DEFAULT NULL
+  `cliente` varchar(100) DEFAULT NULL,
+  `idComprobante` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pagos` (

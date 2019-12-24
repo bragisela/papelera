@@ -27,12 +27,15 @@ $totalCompra=0;
                 <table class="table table-bordered table-hover table-striped display AllDataTables" cellspacing="0" width="100%">
                   <thead>
                     <tr>
+                      <th class="th-sm">Cantidad</th>
                       <th class="th-sm">Codigo Producto</th>
                       <th class="th-sm">Descripcion</th>
-                      <th class="th-sm">Cantidad</th>
-                      <th class="th-sm">Importe</th>
+                      <th class="th-sm">P. Unitario</th>
                       <th class="th-sm">PorcUtil</th>
                       <th class="th-sm">Subtotal</th>
+                      <th class="th-sm">C. Unitario</th>
+                      <th class="th-sm">U. Unitaria</th>
+                      <th class="th-sm">U. Total</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -47,9 +50,9 @@ $totalCompra=0;
                         $cant=$rowPedidos ['cant'];$importe=$rowPedidos ['importe']; $porcUtil=$rowPedidos ['porcUtil'];
                         $importeUtil=$importe+(($porcUtil*$importe)/100);
                         ?>
+                        <td><?php echo $cant; ?></td>
                         <td><?php echo $rowPedidos ['codProducto']; ?></td>
                         <td><?php echo $rowPedidos ['descripcion']; ?></td>
-                        <td><?php echo $cant; ?></td>
                         <td><?php echo $importe; ?></td>
                         <td>% <?php echo $porcUtil; ?></td>
                         <td>$ <?php echo $importeUtil*$cant ?></td>

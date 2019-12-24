@@ -36,11 +36,11 @@
 
     return $sqlComprobantes;
   }
-  function insertCajaIngreso($fecha,$tipoMov,$tipo, $descripcion, $importe,$nroCaja){
+  function insertCajaIngreso($fecha,$tipoMov,$tipo, $idComprobante, $descripcion, $importe,$nroCaja){
 
-    $sqlCajaIngreso = "INSERT INTO cajatemporal(fecha,tipoMov, tipo, descripcion, importe, nroCaja)
+    $sqlCajaIngreso = "INSERT INTO cajatemporal(fecha,tipoMov, tipo, idComprobante, descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','I', '$tipo','$descripcion', '$importe', '0')";
+    VALUES ('$fecha','I', '$tipo', '$idComprobante','$descripcion', '$importe', '0')";
 
     return $sqlCajaIngreso;
   }

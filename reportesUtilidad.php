@@ -34,7 +34,7 @@ if(isset($_POST["export"]) && isset($_POST["desdeU"])!="" && isset($_POST["hasta
 		}
 
 		$query = "
-    SELECT idUtilidad, tipo, fecha, comprobante, (SUM(impUtilidad))
+    SELECT idUtilidad, tipo, fecha, comprobante, (SUM(impUtilidad)), (SUM(impVenta)), (SUM(impCosto))
     from utilidad
 		WHERE fecha
 		BETWEEN CAST('".$_POST["desdeU"]."' AS DATE) AND CAST('".$_POST["hastaU"]."' AS DATE)
@@ -52,7 +52,9 @@ if(isset($_POST["export"]) && isset($_POST["desdeU"])!="" && isset($_POST["hasta
 			$object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $sub_row["fecha"]);
 			$object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $sub_row["tipo"] );
 			$object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $sub_row["comprobante"]);
-			$object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $sub_row["(SUM(impUtilidad))"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $sub_row["(SUM(impVenta))"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $sub_row["(SUM(impUtilidad))"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $sub_row["(SUM(impCosto))"]);
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
@@ -139,18 +141,24 @@ else {
         	<tr>
 						<th class="th-sm">Fecha</th>
             <th class="th-sm">Comprobante Nº</th>
-            <th class="th-sm">Utilidad Total</th>
+            <th class="th-sm">Ingreso</th>
+						<th class="th-sm">Utilidad</th>
+						<th class="th-sm">Costo</th>
+						<th class="th-sm">%Utilidad</th>
           </tr>
         </thead>
       	<tbody>
           <?php
 					if (isset($_POST["export"]) && isset($_POST["desdeU"])!="" && isset($_POST["hastaU"])!=""){
-          	while(($rowUtilidad = $getRepUtil->fetch(PDO::FETCH_ASSOC)) && ($rowUtilidadTotal = $totalUtilidad->fetch(PDO::FETCH_ASSOC))) {
+          	while(($rowUtilidad = $getRepUtil->fetch(PDO::FETCH_ASSOC)) && ($rowUtilidadTotal = $totalUtilidad->fetch(PDO::FETCH_ASSOC)) && ($rowVentaTotal = $totalVenta->fetch(PDO::FETCH_ASSOC)) && ($rowCostoTotal = $totalCosto->fetch(PDO::FETCH_ASSOC))) {
 							if(($_POST["desdeU"])<=($rowUtilidad['fecha']) && ($_POST["hastaU"])>=($rowUtilidad['fecha'])) {
 								echo "<tr>";
 								echo "<th>" . $rowUtilidad['fecha'] . "</th>";
 								echo "<th>" . $rowUtilidad['tipo'] . "-" . $rowUtilidad['comprobante'] . "</th>";
+								echo "<th>" . $rowVentaTotal['totalVenta'] . "</th>";
 								echo "<th>" . $rowUtilidadTotal['totalUtilidad'] . "</th>";
+								echo "<th>" . $rowCostoTotal['totalCosto'] . "</th>";
+								echo "<th>" . ($rowUtilidadTotal['totalUtilidad']/$rowCostoTotal['totalCosto'] ). "</th>";
 								 		}
 							 		}
 						 		}
