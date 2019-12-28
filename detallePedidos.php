@@ -7,7 +7,7 @@ include("seguridad.php");
 $idPedido = $_REQUEST['idPedido'];
 include("sql/detallePedidos.php");
 $totalCompra=0;
-
+$totalUtil=0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,11 +31,11 @@ $totalCompra=0;
                       <th class="th-sm">Codigo Producto</th>
                       <th class="th-sm">Descripcion</th>
                       <th class="th-sm">P. Unitario</th>
-                      <th class="th-sm">PorcUtil</th>
+                      <!--<th class="th-sm">PorcUtil</th>-->
                       <th class="th-sm">Subtotal</th>
                       <th class="th-sm">C. Unitario</th>
-                      <th class="th-sm">U. Unitaria</th>
-                      <th class="th-sm">U. Total</th>
+                      <th class="th-sm">Util. Unitaria</th>
+                      <th class="th-sm">Util. Total</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -53,15 +53,19 @@ $totalCompra=0;
                         <td><?php echo $cant; ?></td>
                         <td><?php echo $rowPedidos ['codProducto']; ?></td>
                         <td><?php echo $rowPedidos ['descripcion']; ?></td>
-                        <td><?php echo $importe; ?></td>
-                        <td>% <?php echo $porcUtil; ?></td>
+                        <td>$ <?php echo $importe; ?></td>
+                        <!--<td>% <?php echo $porcUtil; ?></td>-->
                         <td>$ <?php echo $importeUtil*$cant ?></td>
+                        <td>$ <?php echo $rowPedidos ['costoUni']; ?></td>
+                        <td>$ <?php echo $importe-($rowPedidos ['costoUni']); ?></td>
+                        <td>$ <?php echo ($importe-($rowPedidos ['costoUni']))*$cant; ?></td>
                       </tr>
                       <?php
                       $totalCompra=$totalCompra+($importeUtil*$cant);
                       $totalCompra = bcdiv($totalCompra, '1', 2);
                       $justi  = $rowPedidos['justificante'];
-
+                      $totalUtil=$totalUtil+(($importe-($rowPedidos ['costoUni']))*$cant);
+                      $totalUtil = bcdiv($totalUtil, '1', 2);
                       switch ($justi) {
                             case 'R':
                                 $iva=0;
@@ -80,26 +84,33 @@ $totalCompra=0;
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td colspan="4"></td>
+                      <td colspan="3"></td>
                       <td style="font-weight: bold; font-size:16px;">Importe</td>
                       <td style="font-weight: bold; font-size:16px;"> $    <?php echo $totalCompra; ?></td>
                     </tr>
                     <tr>
-                      <td colspan="4"></td>
+                      <td colspan="3"></td>
                       <td style="font-weight: bold; font-size:16px;">Descuentos aplicados</td>
                       <td style="font-weight: bold; font-size:16px;"> $    <?php echo $desc; ?></td>
                     </tr>
                     <tr>
-                      <td colspan="4"></td>
+                      <td colspan="3"></td>
                       <td style="font-weight: bold; font-size:16px;">IVA </td>
                       <td style="font-weight: bold; font-size:16px;"> $    <?php echo $iva; ?></td>
                     </tr>
                     <tr>
-                      <td colspan="4"></td>
+                      <td colspan="3"></td>
                       <td style="font-weight: bold; font-size:16px;">Total Facturado</td>
                       <td style="font-weight: bold; font-size:16px;"> $    <?php echo $Totalfacturado-$desc; ?></td>
                     </tr>
+
+                    <tr>
+                      <td colspan="6"></td>
+                      <td style="font-weight: bold; font-size:16px;">Utilidad Total</td>
+                      <td style="font-weight: bold; font-size:16px;"> $    <?php echo $totalUtil; ?></td>
+                    </tr>
                   </tfoot>
+
                 </table>
                 <button class="btn btn-rounded btn-deep-purple" role="link" onclick="window.location='pedidosbuscar.php'"><i class="fas fa-undo" aria-hidden="true">Volver</i></button>
 
