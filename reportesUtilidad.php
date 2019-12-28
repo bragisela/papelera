@@ -25,7 +25,7 @@ if(isset($_POST["export"]) && isset($_POST["desdeU"])!="" && isset($_POST["hasta
 		$file_number++;
 		$object = new PHPExcel();
 		$object->setActiveSheetIndex(0);
-		$table_columns = array("Fecha","Tipo","Comprobante","Utilidad");
+		$table_columns = array("Fecha","Tipo","Comprobante","Ingreso","Utilidad","Costo","% Utilidad" );
 		$column = 0;
 		foreach($table_columns as $field)
 		{
@@ -55,6 +55,7 @@ if(isset($_POST["export"]) && isset($_POST["desdeU"])!="" && isset($_POST["hasta
 			$object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $sub_row["(SUM(impVenta))"]);
 			$object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $sub_row["(SUM(impUtilidad))"]);
 			$object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $sub_row["(SUM(impCosto))"]);
+			$object->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row, $sub_row["(SUM(impUtilidad))"]/$sub_row["(SUM(impCosto))"]);
 			$excel_row++;
 		}
 		$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
