@@ -33,6 +33,7 @@ $totalUtil=0;
                       <th class="th-sm">P. Unitario</th>
                       <!--<th class="th-sm">PorcUtil</th>-->
                       <th class="th-sm">Subtotal</th>
+                      <th class="th-sm">Precio con descuento</th>
                       <th class="th-sm">C. Unitario</th>
                       <th class="th-sm">Util. Unitaria</th>
                       <th class="th-sm">Util. Total</th>
@@ -47,7 +48,7 @@ $totalUtil=0;
                       <tr>
                         <?php
                         $totalcomprado=$rowPedidos ['totalcomprado'];
-                        $cant=$rowPedidos ['cant'];$importe=$rowPedidos ['importe']; $porcUtil=$rowPedidos ['porcUtil'];
+                        $cant=$rowPedidos ['cant'];$importe=$rowPedidos ['importe']; $impDesc=($importe-($importe*($rowPedidos ['porcDesc'])/100));$porcUtil=$rowPedidos ['porcUtil'];
                         $importeUtil=$importe+(($porcUtil*$importe)/100);
                         ?>
                         <td><?php echo $cant; ?></td>
@@ -56,15 +57,16 @@ $totalUtil=0;
                         <td>$ <?php echo $importe; ?></td>
                         <!--<td>% <?php echo $porcUtil; ?></td>-->
                         <td>$ <?php echo $importeUtil*$cant ?></td>
+                        <td>$ <?php echo $impDesc; ?></td>
                         <td>$ <?php echo $rowPedidos ['costoUni']; ?></td>
-                        <td>$ <?php echo $importe-($rowPedidos ['costoUni']); ?></td>
-                        <td>$ <?php echo ($importe-($rowPedidos ['costoUni']))*$cant; ?></td>
+                        <td>$ <?php echo $impDesc-($rowPedidos ['costoUni']); ?></td>
+                        <td>$ <?php echo ($impDesc-($rowPedidos ['costoUni']))*$cant; ?></td>
                       </tr>
                       <?php
                       $totalCompra=$totalCompra+($importeUtil*$cant);
                       $totalCompra = bcdiv($totalCompra, '1', 2);
                       $justi  = $rowPedidos['justificante'];
-                      $totalUtil=$totalUtil+(($importe-($rowPedidos ['costoUni']))*$cant);
+                      $totalUtil=$totalUtil+(($impDesc-($rowPedidos ['costoUni']))*$cant);
                       $totalUtil = bcdiv($totalUtil, '1', 2);
                       switch ($justi) {
                             case 'R':
@@ -105,7 +107,7 @@ $totalUtil=0;
                     </tr>
 
                     <tr>
-                      <td colspan="6"></td>
+                      <td colspan="7"></td>
                       <td style="font-weight: bold; font-size:16px;">Utilidad Total</td>
                       <td style="font-weight: bold; font-size:16px;"> $    <?php echo $totalUtil; ?></td>
                     </tr>
