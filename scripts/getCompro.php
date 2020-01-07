@@ -44,7 +44,7 @@ include_once("../sql/conexion.php");
         //recorrer cada detalle de comprobante
         $pre = $rowCO["idComprobante"];
 
-        $sql= $conexiones->query("SELECT pro.descripcion,co.fecha, pre.importe, i.cant from items as i
+        $sql= $conexiones->query("SELECT pro.descripcion,co.fecha, pre.porcDesc,pre.importe, i.cant from items as i
         inner join productos as pro on i.idProducto=pro.idProducto
         inner join precios as pre on i.idItems=pre.idPrecio
         inner join comprobantes as co on co.idComprobante=i.idComprobante
@@ -57,6 +57,9 @@ include_once("../sql/conexion.php");
         }
                   while($row = $sql->fetch()) {
                     $pre = $row["importe"];
+                    $desc = $row["porcDesc"];
+                    $descontar=($desc/100)*$pre;
+                    $pre = $pre - $descontar;
                     $cant = $row["cant"];
                     $fec = $row["fecha"];
                     $fec2 = date("d/m/Y", strtotime($fec));
