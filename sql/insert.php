@@ -53,11 +53,11 @@
 
     return $sqlCajaEgreso;
   }
-  function cierreCaja($fecha,$tipoMov, $descripcion, $importe,$nroCaja){
+  function cierreCaja($fecha,$tipoMov,$tipo, $idComprobante,$descripcion, $importe,$nroCaja){
 
-    $sqlCierreCaja = "INSERT INTO cajatemporal(fecha,tipoMov, descripcion, importe, nroCaja)
+    $sqlCierreCaja = "INSERT INTO cajatemporal(fecha,tipoMov,tipo, idComprobante, descripcion, importe, nroCaja)
 
-    VALUES ('$fecha','E', 'Cierre de Caja','-' '$importe', '0' )";
+    VALUES ('$fecha','E', '$tipo', '$idComprobante','Cierre de Caja','-' '$importe', '0' )";
 
     return $sqlCierreCaja;
   }

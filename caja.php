@@ -72,13 +72,12 @@ include('sql/consultas.php');
                           <input type="reset" name="Cancelar" value="Cancelar" class="btn btn-info" onClick="location.href='caja.php'">
                         </form>
                           <!--FIN -->
-                          <?php //Acción al presionar GuardarIngreso
+                          <?php
                             if (isset($_POST['GuardarIngreso'])){
-                              $sqlCajaIngreso = insertCajaIngreso($_POST['fecha'],$_POST['tipoMov'],"",$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
-                              $conexiones->exec($sqlCajaIngreso);
-
+                              $sql = insertCajaIngreso($_POST['fecha'],"I"," ","0",$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
+                              $conexiones->exec($sql);
                               echo "<script language='javascript'>";
-                             echo "window.location='caja.php';";
+                              echo "window.location='caja.php';";
                               echo "</script>";
 
                             }
@@ -139,7 +138,7 @@ include('sql/consultas.php');
                           <!--FIN -->
                           <?php //Acción al presionar GuardarEgreso
                             if (isset($_POST['GuardarEgreso'])){
-                              $sqlCajaEgreso = insertCajaEgreso($_POST['fecha'],$_POST['tipoMov'],"",$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
+                              $sqlCajaEgreso = insertCajaEgreso($_POST['fecha'],"E"," ","0",$_POST['descripcion'],$_POST['importe'],$_POST['$nroCajaCierre']);
                               $conexiones->exec($sqlCajaEgreso);
 
                               echo "<script language='javascript'>";
@@ -317,7 +316,7 @@ include('sql/consultas.php');
                             <?php
                               if (isset($_POST['GuardarCierreCaja'])){
 
-                                $sqlCierreCaja = cierreCaja($_POST['fecha'],$_POST['tipoMov'],$_POST['descripcion'],$_POST['importe'],$_POST['nroCaja']);
+                                $sqlCierreCaja = cierreCaja($_POST['fecha'],"E"," ","0",$_POST['descripcion'],$_POST['importe'],$_POST['nroCaja']);
                                 $sqlincNroCaja = incNroCaja();
                                 $sqlTemporalaCaja = temporalaCaja();
                                 $sqlResetTemporal = resetCajaTemporal();
