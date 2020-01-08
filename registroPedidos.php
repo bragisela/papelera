@@ -108,7 +108,7 @@ include('sql/selectProductos.php');
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-3 mb-3">
-                    <select class="mdb-select md-form listado" searchable="Buscar.." id="cliente" name="cliente">
+                    <select class="mdb-select md-form listado" searchable="Buscar.." id="cliente" name="cliente" required>
                       <option value="" disabled selected>Cliente</option>
                       <?php
                       while($rowCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) {
@@ -403,6 +403,12 @@ var ps = new PerfectScrollbar(sideNavScrollbar);
     if (sel !='') {
       $("#lista").append(item);
       $('#producto').val($('#producto > option:first').val());
+    }
+    var inps = document.getElementsByName('desc[]');
+    for (var i = 0; i <inps.length; i++) {
+      var desc = inps[i];
+      Calcular(desc);
+      calcularCantidad(desc);
     }
     }
     $(document).on('click', '.remove', function(){
