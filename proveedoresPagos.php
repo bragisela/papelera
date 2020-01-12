@@ -7,6 +7,7 @@ include("sql/conexion.php");
 include("sql/insert.php");
 include('sql/consultas.php');
 $idProveedor = $_REQUEST['idProveedor'];
+
 include('sql/proveedoresComprobantes.php');
   $fech = Date("Y-m-d");
   $Fecha = Date("Y-m-d H:i:s");
@@ -151,7 +152,9 @@ include('sql/proveedoresComprobantes.php');
           <?php
           $activo = 0;
           if (isset($_POST['insertar'])) {
-
+            $totalPagado=$_POST['totalPagado'];
+            $sqlCaja = insertCajaEgreso($fech,"E"," ",$idCom,$nroCom,$totalPagado,"0");
+            $conexiones->exec($sqlCaja);
 
             for($count = 0; $count < count($_POST["sele"]); $count++)
             {
@@ -193,7 +196,7 @@ include('sql/proveedoresComprobantes.php');
 
             }
 
-            $sql = insertPagos('efectivo','-',$_POST['totalEfectivo'],'-','-',$idCom,1);
+            $sql = insertPagos('efectivo','-',$_POST['totalEfectivo'],'-','1000-01-01 00:00:00.000000',$idCom,1);
             $conexiones->exec($sql);
 
             $quer = "UPDATE comprobantes SET  activo = 1 , tempPago =  0 WHERE tempPago=1";

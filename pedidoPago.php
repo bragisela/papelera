@@ -18,6 +18,7 @@ or die ('No se puede traer listado Total'.mysqli_error($conexiones));
     $importe = $rowPago['totalcomprado'];
 
   }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -121,6 +122,8 @@ or die ('No se puede traer listado Total'.mysqli_error($conexiones));
            </table>
           </div>
 
+
+
           <div class="row">
             <div class="col-md-8 mb-8"> </div>
             <div class="col-md-4 mb-4">
@@ -132,7 +135,9 @@ or die ('No se puede traer listado Total'.mysqli_error($conexiones));
       <?php
       $activo = 0;
       if (isset($_POST['insertar'])) {
-
+        $totalPagado=$_POST['totalPagado'];
+        $sqlCaja = insertCajaIngreso($fech,"I"," ",$idComprobante,$nroComprobante,$totalPagado,"0");
+        $conexiones->exec($sqlCaja);
 
           for($count = 0; $count < count($_POST["sele"]);$count++)
           {
@@ -172,7 +177,7 @@ or die ('No se puede traer listado Total'.mysqli_error($conexiones));
 
            )
           );
-          $sql = insertPagos('efectivo','-',$_POST['efectivo'],'-','-',$idComprobante,1);
+          $sql = insertPagos('efectivo','-',$_POST['efectivo'],'-','1000-01-01 00:00:00.000000',$idComprobante,1);
           $conexiones->exec($sql);
 
 

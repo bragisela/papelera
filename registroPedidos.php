@@ -281,8 +281,8 @@ include('sql/selectProductos.php');
             $sqlCompro = insertComprobantes($nro,$proveedor,$fecha,$tipo,$justificante,$totalComprado,0,0);
             $conexiones->exec($sqlCompro);
             $idComprobante = $conexiones->lastInsertId();
-            $sqlCaja = insertCajaIngreso($fecha,"I",$justificante,$idComprobante,$nro,$totalComprado,"0");
-            $conexiones->exec($sqlCaja);
+            //$sqlCaja = insertCajaIngreso($fecha,"I",$justificante,$idComprobante,$nro,$totalComprado,"0");
+            //$conexiones->exec($sqlCaja);
 
             for($count = 0; $count < count($_POST["sele"]); $count++)
             {

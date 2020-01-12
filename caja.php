@@ -161,7 +161,7 @@ include('sql/consultas.php');
                 <thead>
                   <tr>
                     <th class="th-sm">Fecha</th>
-                    <th class="th-sm">Descripcion</th>
+                    <th class="th-sm">Nro</th>
                     <th class="th-sm">Debe</th>
                     <th class="th-sm">Haber</th>
                     <th class="th-sm">Acciones</th>
@@ -175,7 +175,7 @@ include('sql/consultas.php');
                     ?>
                     <tr>
                       <td><?php echo  date("d/m/Y", strtotime($rowCaja['fecha'])); ?></td>
-                      <td><?php echo $rowCaja['tipo'] . '-' . $rowCaja['descripcion']; $idCaja = $rowCaja['idCaja']; ?></td>
+                      <td><?php echo $rowCaja['descripcion']; $idCaja = $rowCaja['idCaja']; ?></td>
                       <td><?php
                         if ($rowCaja['importe']>0){
                           echo "$", number_format (($rowCaja['importe']),2,",",".") ;
@@ -205,7 +205,8 @@ include('sql/consultas.php');
                     ?>
                     <tr>
                       <td><?php echo  date("d/m/Y", strtotime($rowCaja['fecha'])); ?></td>
-                      <td><?php echo $rowCaja['tipo'] . '-' . $rowCaja['descripcion']; $idCaja = $rowCaja['idCaja']; ?></td>
+                    <!--  <td><?php echo $rowCaja['tipo'] . '-' . $rowCaja['descripcion']; $idCaja = $rowCaja['idCaja']; ?></td> -->
+                      <td><?php echo $rowCaja['descripcion']; $idCaja = $rowCaja['idCaja']; ?></td>
                       <td><?php
                         if ($rowCaja['importe']>0){
                           echo "$", number_format (($rowCaja['importe']),2,",",".") ;
