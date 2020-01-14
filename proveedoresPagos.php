@@ -64,7 +64,7 @@ include('sql/proveedoresComprobantes.php');
                       <input type="text" id="pagar" class="form-control" name="pagar" value="<?php echo $saldo; ?>" disabled>
                       <label  class="">Saldo a pagar</label>
                     </div>
-                  </div>
+                  </div>                
                 </div>
 
                 <br>

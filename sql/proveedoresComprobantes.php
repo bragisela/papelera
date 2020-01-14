@@ -33,7 +33,7 @@ $cheques2 = $conexiones->query("SELECT ch.modoPago,ch.idCheque, ch.banco, ch.imp
 where ch.activo=0  AND ch.modoPago='Propio'")
 or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
 
-$comprobante2 = $conexiones->query("SELECT co.idComprobante  from comprobantes as co
+$comprobante2 = $conexiones->query("SELECT co.idComprobante, co.nroComprobante  from comprobantes as co
 inner join pagos as pa on co.idComprobante=pa.idComprobante
 WHERE tempPago=1 and co.idCliPro=$idProveedor group by co.idComprobante")
 or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
@@ -41,5 +41,13 @@ or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
 while($rowco3 = $comprobante2->fetch(PDO::FETCH_ASSOC))
   $idCom = $rowco3['idComprobante'];
 
+  $comprobante3 = $conexiones->query("SELECT *  from comprobantes
+  WHERE idCliPro=$idProveedor group by idComprobante")
+  or die ('No se puede traer listado Proveedores'.mysqli_error($conexiones));
+
+
+while($rowco4 = $comprobante3->fetch(PDO::FETCH_ASSOC)){
+  $nroCom = $rowco4['nroComprobante'];
+}
 
 ?>
